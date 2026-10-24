@@ -1,0 +1,21 @@
+{
+  "enabledPlugins": {
+    "codex@openai-codex": true,
+    "grill-me@grill-me": true,
+    "andrej-karpathy-skills@karpathy-skills": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "caveman@caveman": false,
+    "ponytail@ponytail": false,
+    "claude-mem@thedotmack": false,
+    "superpowers@claude-plugins-official": false,
+    "frontend-stack@frontend-stack": false,
+    "frontend-design@frontend-stack": false,
+    "impeccable@frontend-stack": false,
+    "emil-design-eng@frontend-stack": false,
+    "ui-ux-pro-max@frontend-stack": false,
+    "taste@frontend-stack": false,
+    "imagegen-skills@imagegen-skills": false,
+    "antislop@anti-ai-slop": false,
+    "headroom@headroom-marketplace": false
+  }
+}
