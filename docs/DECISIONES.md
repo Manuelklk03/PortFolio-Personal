@@ -22,7 +22,7 @@
 
 | Decisión | Motivo | Consecuencias |
 | --- | --- | --- |
-| Se parte de un repositorio de GitHub vacío ya clonado. | Situación real indicada por Manuel. | La base Next.js se crea dentro de esa carpeta, sin crear otro repositorio. |
+| Se parte de un repositorio de GitHub ya clonado, sin código de aplicación (solo un README creado desde GitHub). | Situación real indicada por Manuel. | La base Next.js se crea dentro de esa carpeta, sin crear otro repositorio. |
 | El desarrollo principal se hará con Claude Code usando los plugins de Manuel. | Indicado por Manuel. | `CLAUDE.md` define cómo revisar, activar y documentar plugins; inventario en `docs/HERRAMIENTAS.md`. |
 | Librerías para la fase de diseño: shadcn/ui, React Bits, GSAP y Lenis. | Elegidas por Manuel. | Se instalan al llegar a esa fase, no antes. Las animaciones pasan de ampliación a parte del plan. |
 | La documentación se mejora conforme avanza el proyecto. | Indicado por Manuel. | Sección «Documentación viva» en `AGENTS.md`. |
@@ -42,7 +42,7 @@
 | Propuesta | Estado |
 | --- | --- |
 | Gestor de paquetes: npm. | Propuesto (viene con Node); `AGENTS.md` ya lo da por hecho. Confirmar al crear el proyecto. |
-| Campos de los proyectos con identificadores en inglés (`title`, `description`, `personalContribution`…), como exige `AGENTS.md`. | Propuesto; los nombres en español de `docs/CONTEXTO.md` son conceptuales. |
+| Nombres concretos de los campos de proyectos (`title`, `description`, `personalContribution`…). | Propuesto. Que vayan en inglés no es opcional (lo exige `AGENTS.md`); los nombres en español de `docs/CONTEXTO.md` son conceptuales. |
 | Paleta: fondo `#0B0F14`, superficie `#121821`, borde `#1F2937`, texto `#E6EDF3`, texto secundario `#8B949E`, acento `#22D3EE`. | Propuesta; revisar al verla aplicada. |
 | Tipografía: Geist (texto) y Geist Mono (detalles técnicos), vía `next/font`. | Propuesta; no añade dependencias. |
 | Solo tema oscuro en la primera versión. | Propuesta; tema claro queda como ampliación. |
