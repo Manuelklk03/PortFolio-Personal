@@ -13,16 +13,15 @@
 
 | Decisión | Motivo | Consecuencias |
 | --- | --- | --- |
-| El proyecto empieza de cero (no había código previo). | Confirmado por Manuel. | Se crea con `create-next-app`. |
-| Stack: Next.js (App Router) + React + TypeScript. | Coherente con su aprendizaje y con Cerrajería NOA; permite datos locales sin backend. Manuel eligió los estilos sobre esta base. | Código en `src/`, alias `@/*`. |
-| Estilos con Tailwind CSS. | Elegido por Manuel (en ValveDex usa CSS Modules + BEM; aquí eligió Tailwind). | No usar BEM ni CSS propio en paralelo salvo en `globals.css` para variables y estilos base. |
+| El proyecto empieza de cero (no había código previo). | Confirmado por Manuel. | Se crea con un generador oficial (ver stack del 25 oct). |
+| Estilos con Tailwind CSS. | Elegido por Manuel (en ValveDex usa CSS Modules + BEM; aquí eligió Tailwind). | No usar BEM ni CSS propio en paralelo salvo en `src/styles/global.css` para variables y estilos base. |
 | Dirección visual: oscuro y técnico. | Elegido por Manuel. | Ver propuesta de paleta y tipografía abajo. |
 
 ## Confirmado — 24 de octubre de 2026 (sesión con Claude)
 
 | Decisión | Motivo | Consecuencias |
 | --- | --- | --- |
-| Se parte de un repositorio de GitHub ya clonado, sin código de aplicación (solo un README creado desde GitHub). | Situación real indicada por Manuel. | La base Next.js se crea dentro de esa carpeta, sin crear otro repositorio. |
+| Se parte de un repositorio de GitHub ya clonado, sin código de aplicación (solo un README creado desde GitHub). | Situación real indicada por Manuel. | La base se crea en una carpeta temporal y se copia al repositorio, sin crear otro. |
 | El desarrollo principal se hará con Claude Code usando los plugins de Manuel. | Indicado por Manuel. | `CLAUDE.md` define cómo revisar, activar y documentar plugins; inventario en `docs/HERRAMIENTAS.md`. |
 | Librerías para la fase de diseño: shadcn/ui, React Bits, GSAP y Lenis. | Elegidas por Manuel. | Se instalan al llegar a esa fase, no antes. Las animaciones pasan de ampliación a parte del plan. |
 | La documentación se mejora conforme avanza el proyecto. | Indicado por Manuel. | Sección «Documentación viva» en `AGENTS.md`. |
@@ -30,21 +29,29 @@
 | Flujo de GitHub igual que ValveDex: GitHub Flow, ramas con prefijo, PR a `main` con merge commit, Conventional Commits en español redactados por la IA y escritos por Manuel. | Indicado por Manuel. | Sección «Flujo de GitHub» en `AGENTS.md`. La IA no hace commits, push ni PR salvo petición expresa. |
 | `CHANGELOG.md` con formato Keep a Changelog. | Mismo sistema que ValveDex. | Cambios completados en «Sin publicar». |
 | Claude Code decide y crea `.claude/settings.json` tras revisar el proyecto y los plugins instalados; no se copia la configuración de otros proyectos. | Indicado por Manuel. | Criterios en `CLAUDE.md`; requiere aprobación de Manuel. |
-| Plugins del proyecto: activos codex, grill-me, karpathy-skills y claude-code-setup; desactivados caveman, ponytail, claude-mem y superpowers; los de diseño y antislop, desactivados hasta su fase. | Aprobado por Manuel tras el inventario. caveman y ponytail recortan explicaciones, claude-mem compite con `docs/`, superpowers impone otro flujo. | `.claude/settings.json`; detalle y reparto de diseño en `docs/HERRAMIENTAS.md`. |
+| Plugins del proyecto: activos codex, grill-me (cuestionario sobre el código, ver `docs/HERRAMIENTAS.md`), karpathy-skills y claude-code-setup; desactivados caveman, ponytail, claude-mem y superpowers; los de diseño y antislop, desactivados hasta su fase. | Aprobado por Manuel tras el inventario. caveman y ponytail recortan explicaciones, claude-mem compite con `docs/`, superpowers impone otro flujo. | `.claude/settings.json`; detalle y reparto de diseño en `docs/HERRAMIENTAS.md`. |
 | Codex colabora en paralelo con el plugin `codex`, revisando en solo lectura. | Pedido por Manuel. | Revisión independiente antes de cada PR; no implementa por su cuenta. |
 | Terminal: Git Bash. | Confirmado por Manuel. | Los comandos se dan en sintaxis de Bash. |
 | La documentación entra por la rama `docs/initial-docs` y PR, no directa a `main`. | `main` ya tenía tres commits hechos desde GitHub. | Se elimina la excepción del primer commit. |
 | El README se corrige en la rama de la base, no en la de documentación. | Decidido por Manuel. | Tarea en `docs/TAREAS.md`. |
 | Para esta entrega de documentación, Claude hace commit, push, PR y merge. | Autorización expresa de Manuel para esta entrega. | No se extiende a las siguientes ramas sin nueva autorización. |
 
+## Confirmado — 25 de octubre de 2026 (sesión con Claude Code)
+
+| Decisión | Motivo | Consecuencias |
+| --- | --- | --- |
+| Stack: Astro (sobre Vite) + React para las islas interactivas + TypeScript estricto + Tailwind. Sustituye a Next.js. | Manuel quería estrenar algo nuevo sin dejar React; Astro genera HTML estático (buen SEO y vista previa al compartir) y encaja con una web de contenido. shadcn/ui, React Bits, GSAP y Lenis siguen siendo compatibles. | Reglas de código de `AGENTS.md` adaptadas a Astro. Comprobaciones: `npm run check` y `npm run build`; sin ESLint por ahora. |
+| Gestor de paquetes: npm. | Confirmado por Manuel. | Se conserva `package-lock.json`. |
+| Identificadores en inglés, también los campos de los proyectos (`title`, `description`, `personalContribution`…). | Confirmado por Manuel. | Los nombres en español de `docs/CONTEXTO.md` son conceptuales. |
+| No se configura la protección de `main` ni `pull.ff only`; se sigue el flujo de ramas y PR. | Decidido por Manuel: basta con seguir el flujo. | Tarea retirada de `docs/TAREAS.md`. |
+| Coordinación de Claude y Codex: cada encargo a Codex indica qué skills usar (`token-efficient-workflow` siempre), se separan planificación, implementación y revisión, y no editan los mismos archivos a la vez. | Pedido por Manuel. | Sección en `CLAUDE.md`; skills en `docs/HERRAMIENTAS.md`. |
+
 ## Propuestas pendientes
 
 | Propuesta | Estado |
 | --- | --- |
-| Gestor de paquetes: npm. | Propuesto (viene con Node); `AGENTS.md` ya lo da por hecho. Confirmar al crear el proyecto. |
-| Nombres concretos de los campos de proyectos (`title`, `description`, `personalContribution`…). | Propuesto. Que vayan en inglés no es opcional (lo exige `AGENTS.md`); los nombres en español de `docs/CONTEXTO.md` son conceptuales. |
 | Paleta: fondo `#0B0F14`, superficie `#121821`, borde `#1F2937`, texto `#E6EDF3`, texto secundario `#8B949E`, acento `#22D3EE`. | Propuesta; revisar al verla aplicada. |
-| Tipografía: Geist (texto) y Geist Mono (detalles técnicos), vía `next/font`. | Propuesta; no añade dependencias. |
+| Tipografía: Geist (texto) y Geist Mono (detalles técnicos). | Propuesta; la forma de cargarla en Astro se decide al aplicarla. |
 | Solo tema oscuro en la primera versión. | Propuesta; tema claro queda como ampliación. |
 | Primera versión con una página y secciones. | Pendiente de acordar. |
 | Proyectos en un archivo de datos local, sin backend. | Pendiente de acordar. |
@@ -59,6 +66,8 @@
 | Animaciones discretas como ampliación fuera de la primera versión. | Fase de diseño con shadcn/ui, React Bits, GSAP y Lenis (24 oct 2026). |
 | Crear el repositorio desde `create-next-app` y conectarlo después a GitHub. | Repositorio ya creado y clonado (24 oct 2026). |
 | CSS propio con BEM o Tailwind. | Tailwind (octubre de 2026). |
+| Stack Next.js (App Router) + React + TypeScript. | Astro + React + TypeScript (25 oct 2026), antes de escribir código. |
+| Proteger `main` en GitHub y configurar `pull.ff only`. | Sin protección: solo se sigue el flujo de ramas y PR (25 oct 2026). |
 
 ## Cómo registrar nuevas decisiones
 

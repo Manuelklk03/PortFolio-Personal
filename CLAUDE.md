@@ -33,6 +33,16 @@ Recordatorio de `AGENTS.md`: en **modo plan** explicas cada paso o bloque grande
 
 Al empezar una fase nueva de `docs/TAREAS.md`, revisa de nuevo: propone activar lo que esa fase necesita y desactivar lo que ya no aporta. Usa por iniciativa propia los plugins activos cuando encajen con la tarea. Registra cada cambio en `docs/HERRAMIENTAS.md` y `docs/DECISIONES.md`.
 
+### Coordinación con Codex
+
+Regla de Manuel (25 de octubre de 2026):
+
+- Claude y Codex trabajan coordinados mediante el plugin `codex`. En cada encargo a Codex, indica qué skills suyas debe usar: `token-efficient-workflow` siempre, y solo las demás que la tarea necesite (lista en `docs/HERRAMIENTAS.md`).
+- `token-efficient-workflow`: contexto mínimo, sin análisis repetidos ni llamadas innecesarias, sin sacrificar calidad, seguridad ni pruebas, y sin recortar las explicaciones que Manuel necesita.
+- En tareas complejas, separa planificación, implementación y revisión. Por defecto Codex revisa en solo lectura (planes y diffs antes de cada PR).
+- Si varios agentes trabajan a la vez, nunca editan los mismos archivos (ver «Continuidad entre IA» en `AGENTS.md`).
+- Se respetan las instrucciones, el diseño, la arquitectura y el GitHub Flow del proyecto. Antes de cambios importantes, se explica el plan a Manuel.
+
 ### Librerías de diseño
 
 GSAP, Lenis, React Bits y shadcn/ui están previstas (detalle en `docs/HERRAMIENTAS.md`). Cada una se instala en el paso en que se usa por primera vez, consultando antes su documentación oficial actual y explicando para qué sirve.

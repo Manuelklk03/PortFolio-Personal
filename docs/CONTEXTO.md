@@ -19,9 +19,9 @@ Esta estructura es una propuesta inicial, no un diseño aprobado. Se puede resol
 
 ## Base técnica acordada
 
-Next.js (App Router) + React + TypeScript, con Tailwind CSS para los estilos. El proyecto se crea desde cero con `create-next-app` (código en `src/`, alias `@/*`, ESLint) dentro de un repositorio de GitHub ya creado y clonado, que solo contiene el README y la documentación. Ver `docs/DECISIONES.md`.
+Astro (sobre Vite) + React para las partes interactivas + TypeScript estricto, con Tailwind CSS para los estilos. Creado con `create-astro` (plantilla `minimal`) e integraciones añadidas con `astro add react` y `astro add tailwind`. La web se genera como HTML estático. Ver `docs/DECISIONES.md`.
 
-Gestor de paquetes propuesto: npm. Las versiones de las dependencias se toman de las que instale `create-next-app` y se registran tras revisar `package.json`. No copiar versiones de otros proyectos por suposición. Alojamiento y dominio: sin elegir.
+Gestor de paquetes: npm. Las versiones reales instaladas están en `docs/HERRAMIENTAS.md` («Integraciones realizadas»). No copiar versiones de otros proyectos por suposición. Alojamiento y dominio: sin elegir.
 
 Para la primera versión se propone un contenido estático, sin login, base de datos ni panel de administración. Los proyectos podrían mantenerse en un archivo de datos con estos campos:
 
@@ -39,7 +39,7 @@ Propuesta pendiente de aprobar al verla aplicada:
 
 - Fondo `#0B0F14`, superficies `#121821`, bordes `#1F2937`.
 - Texto `#E6EDF3`, texto secundario `#8B949E`, acento `#22D3EE`.
-- Tipografía Geist para el texto y Geist Mono para detalles técnicos (etiquetas, estados), cargadas con `next/font`.
+- Tipografía Geist para el texto y Geist Mono para detalles técnicos (etiquetas, estados). La forma de cargarlas en Astro se decide al aplicarlas, consultando su documentación.
 - Solo tema oscuro en la primera versión.
 
 En la fase de diseño, Manuel quiere usar shadcn/ui, React Bits, GSAP y Lenis para componentes, animaciones y scroll suave. Detalles y criterios en `docs/HERRAMIENTAS.md`.

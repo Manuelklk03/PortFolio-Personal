@@ -41,7 +41,7 @@ Empezamos mi portfolio. Lee CLAUDE.md, AGENTS.md y todos los documentos de docs/
 
 Trabajamos en modo plan: antes de cada paso o bloque grande, explícame en texto qué vamos a hacer, por qué, qué archivos se tocan y cómo lo comprobamos. Yo escribo el código guiado y no avanzas sin que te lo confirme. El modo auto es solo para actualizar documentación o hacer lo que te pida expresamente.
 
-Primero revisa el proyecto y los plugins, skills y MCP que tengo instalados. Analiza cuáles sirven para este portfolio y cuáles no, siguiendo los criterios de CLAUDE.md, rellena docs/HERRAMIENTAS.md y explícame tu propuesta. Cuando la apruebe, crea tú el .claude/settings.json del proyecto. Después guíame para configurar GitHub y Git como en ValveDex, y explícame el plan para crear la base Next.js en una rama chore/.
+Primero revisa el proyecto y los plugins, skills y MCP que tengo instalados. Analiza cuáles sirven para este portfolio y cuáles no, siguiendo los criterios de CLAUDE.md, rellena docs/HERRAMIENTAS.md y explícame tu propuesta. Cuando la apruebe, crea tú el .claude/settings.json del proyecto. Después guíame para configurar GitHub y Git como en ValveDex, y explícame el plan para crear la base del proyecto en una rama chore/.
 
 Al terminar, actualiza la documentación y dame el mensaje de commit y los comandos de la PR.
 ```

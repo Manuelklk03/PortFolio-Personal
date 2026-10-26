@@ -8,20 +8,21 @@
 - [x] Crear el repositorio en GitHub y clonarlo (con README creado desde GitHub).
 - [x] Subir la documentación por la rama `docs/initial-docs` y PR a `main`.
 - [x] `gh` instalado y autenticado (comprobado: 2.96.0, cuenta `Manuelklk03`).
-- [ ] Configurar Git y GitHub como en ValveDex: proteger `main` (solo PR, sin force push ni borrado), borrar ramas al mergear, merge commits habilitados, `pull.rebase=false`, `pull.ff only`.
 - [x] Inventariar y analizar plugins y skills, rellenar `docs/HERRAMIENTAS.md` y crear `.claude/settings.json` con lo que apruebe Manuel.
 - [x] Añadir `.claude/settings.local.json` al `.gitignore`.
 
 ## 1. Base y diseño
 
 - [x] Comprobar si ya hay código (confirmado: se empieza de cero).
-- [x] Acordar stack: Next.js + React + TypeScript + Tailwind.
-- [ ] Confirmar gestor de paquetes (propuesto: npm) y estructura de páginas.
+- [x] Acordar stack: Astro + React + TypeScript + Tailwind (sustituye a Next.js, 25 oct 2026).
+- [x] Confirmar gestor de paquetes: npm.
+- [ ] Acordar estructura de páginas (propuesta: una página con secciones).
 - [x] Acordar dirección visual: oscura y técnica.
 - [ ] Aprobar paleta y tipografía propuestas al verlas aplicadas.
-- [ ] Crear la base Next.js en una rama `chore/` dentro del repositorio, con PR a `main`, combinando el `.gitignore` existente.
-- [ ] Corregir `README.md` en esa misma rama (restos de chat, formato, enlaces, stack acordado).
-- [ ] Registrar comandos reales y decisiones acordadas.
+- [x] Crear la base Astro + React + Tailwind en `chore/project-setup`, combinando el `.gitignore` (verificado: `astro check` y `build` sin errores).
+- [x] Corregir `README.md` en esa misma rama (restos de chat, formato, enlaces, stack acordado).
+- [ ] Crear el layout base (`src/layouts/Layout.astro`) con `lang="es"`, metadatos y la importación de `global.css`.
+- [x] Registrar comandos reales y decisiones acordadas.
 
 ## 2. Contenido
 
@@ -45,7 +46,7 @@
 - [ ] Revisar el inventario de herramientas y activar las de diseño.
 - [ ] Instalar e integrar shadcn/ui adaptando su tema a la paleta.
 - [ ] Integrar Lenis (scroll suave) respetando `prefers-reduced-motion`.
-- [ ] Integrar GSAP con `@gsap/react` para animaciones de secciones.
+- [ ] Integrar GSAP para animaciones de secciones (en `<script>` de Astro o en islas de React, según el caso).
 - [ ] Elegir y adaptar componentes de React Bits con intención.
 - [ ] Comprobar rendimiento, accesibilidad y enlaces internos tras las animaciones.
 
