@@ -22,7 +22,7 @@ Manuel quiere entender cada paso. Hay dos modos:
 
 - Antes de cada paso o bloque grande, explica en texto qué se va a hacer, por qué y para qué, qué archivos se crean o cambian y cómo se comprobará. Como un plan que Manuel puede leer y aprobar.
 - Manuel escribe el código guiado. Para archivos nuevos, entrega el contenido completo con su ruta relativa. Para archivos existentes, indica las líneas exactas que cambian y el motivo de cada cambio.
-- Explica brevemente el concepto que se practica y distingue React de Next.js cuando corresponda.
+- Explica brevemente el concepto que se practica y distingue Astro de React cuando corresponda.
 - Indica qué parte hace Manuel y cuál es la comprobación final del paso.
 - No avances al siguiente paso hasta que Manuel lo confirme.
 - Si Manuel pide expresamente que implementes algo tú, hazlo y explica después lo esencial.
@@ -49,11 +49,11 @@ Una respuesta con instrucciones no demuestra que Manuel las haya aplicado. Disti
 
 ## Reglas de código y contenido
 
-- Next.js App Router, React y TypeScript estricto. Respeta las fronteras servidor/cliente: `"use client"` solo en los componentes que lo necesiten, nunca en el layout raíz para resolver una interacción local.
-- `src/app` compone páginas y layouts; los componentes compartidos van en `src/components`; los datos (proyectos, tecnologías) en `src/data` con sus tipos. Separa datos y presentación.
-- Identificadores en inglés; interfaz, explicaciones y documentación en español. Componentes en PascalCase, funciones y variables en camelCase, archivos y carpetas en kebab-case (respetando los nombres especiales de Next.js).
+- Astro con React para las partes interactivas, y TypeScript estricto (`astro/tsconfigs/strict`). Por defecto todo es HTML estático en componentes `.astro`; un componente de React (`.tsx`) solo se hidrata con una directiva `client:*` cuando necesita interacción, y se elige la más tardía que funcione (`client:visible` o `client:idle` antes que `client:load`). No conviertas una sección entera en isla para resolver una interacción local.
+- `src/pages` define las rutas, `src/layouts` los layouts, los componentes compartidos van en `src/components` y los datos (proyectos, tecnologías) en `src/data` con sus tipos. Separa datos y presentación.
+- Identificadores en inglés; interfaz, explicaciones y documentación en español. Componentes en PascalCase (también sus archivos `.astro` y `.tsx`), funciones y variables en camelCase, el resto de archivos y carpetas en kebab-case.
 - Sin `any`, conversiones forzadas ni desactivación de reglas para ocultar errores.
-- Los estilos se hacen con Tailwind. No introduzcas otra convención de CSS en paralelo; `globals.css` queda para variables del tema y estilos base. Los componentes de shadcn/ui conservan sus utilidades y toman los colores de las variables del tema.
+- Los estilos se hacen con Tailwind. No introduzcas otra convención de CSS en paralelo; `src/styles/global.css` queda para variables del tema y estilos base. Los componentes de shadcn/ui conservan sus utilidades y toman los colores de las variables del tema.
 - HTML semántico, accesibilidad (etiquetas, foco visible, teclado, textos alternativos) y diseño responsive.
 - Las animaciones respetan `prefers-reduced-motion`, no bloquean la lectura ni la navegación y no empeoran el rendimiento en móvil.
 - No inventes experiencia, dominio de tecnologías, métricas, testimonios ni enlaces. Un proyecto en desarrollo aparece como tal.
@@ -79,14 +79,14 @@ Mensajes de commit:
 
 Otras reglas:
 
-- `main` protegida en GitHub (solo cambios por PR, sin force push ni borrado) una vez exista el primer commit. Ver la tarea en `docs/TAREAS.md`.
+- `main` no tiene protección configurada en GitHub (decisión de Manuel): el flujo de ramas y PR se respeta por disciplina, no porque GitHub lo imponga.
 - Para continuar una rama en otro equipo: `git push` en el primero; en el segundo, `git fetch`, `git switch <rama>` y `git pull --ff-only`. Antes de cambiar de equipo, el árbol debe estar limpio y la rama al día.
 - Si se edita algo directamente en GitHub, hacer `git switch main && git pull --ff-only` antes de seguir.
 - Versionado semántico con tags anotados y GitHub Releases, solo cuando `main` esté estable y Manuel lo indique. Avisa cuando veas un buen momento, pero no crees el tag. Criterios en `docs/DECISIONES.md`.
 
 ## Comprobaciones
 
-Confirma primero que existe `package.json` y consulta sus scripts. Para código: lint, tipos y pruebas configuradas; build al cerrar una entrega o tocar rutas, configuración o límites servidor/cliente. Para cambios visuales: móvil, escritorio, teclado y enlaces. No inventes resultados: distingue ejecutado, pendiente y no disponible.
+Confirma primero que existe `package.json` y consulta sus scripts. Para código: `npm run check` (tipos de `.astro` y TypeScript) y las pruebas configuradas; `npm run build` al cerrar una entrega o tocar rutas, configuración o islas de React. No hay ESLint configurado. Para cambios visuales: móvil, escritorio, teclado y enlaces. No inventes resultados: distingue ejecutado, pendiente y no disponible.
 
 ## Documentación viva
 

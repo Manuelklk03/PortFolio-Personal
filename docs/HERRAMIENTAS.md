@@ -9,7 +9,7 @@ Inventario del 24 de octubre de 2026, aprobado por Manuel. Se aplica en `.claude
 | Nombre | Tipo | Para qué sirve aquí y cuándo usarlo | Fase | Estado |
 | --- | --- | --- | --- | --- |
 | codex (`openai-codex`) | plugin + agente | Segunda opinión de Codex: `/codex:review` o `/codex:adversarial-review` sobre planes y diffs antes de cada PR; `/codex:rescue` para diagnósticos. Solo revisa o investiga; no implementa por su cuenta. | Todas | activo |
-| grill-me | skill | Preguntas antes de decidir estructura o datos (una página o varias, campos de proyectos). | Todas | activo |
+| grill-me | skill | Cuestionario que pregunta a Manuel cómo funciona el código del repositorio, para comprobar que lo entiende. No sirve para tomar decisiones. Ofrecerlo después de cada paso con código. | Desde la base | activo |
 | andrej-karpathy-skills | skill | Cambios pequeños, sin extras ni refactorizaciones no pedidas. | Todas | activo |
 | claude-code-setup | skill | Revisar esta configuración de Claude Code. Sus propuestas requieren aprobación. | Al cambiar de fase | activo |
 | caveman | plugin (hooks) | Recorta las explicaciones; choca con el modo plan. | — | desactivado |
@@ -30,7 +30,9 @@ Estados posibles: activo, desactivado, desactivado hasta esa fase, por instalar,
 
 Reparto en la fase de diseño: frontend-stack decide quién lidera cada parte; frontend-design lleva la dirección visual y la tipografía, emil-design-eng el movimiento, ui-ux-pro-max apoya con shadcn/ui y el color, e impeccable audita.
 
-Skills de Codex útiles para revisar (en `~/.agents/skills`, las usa Codex): `vercel-react-best-practices` (Next.js), `web-design-guidelines` (accesibilidad y UX), `playwright` y `agent-browser` (comprobar en el navegador). Codex: CLI 0.164.0, sesión con ChatGPT; la «review gate» de `/codex:setup` está desactivada.
+Skills de Codex útiles para revisar (en `~/.agents/skills`, las usa Codex): `vercel-react-best-practices` (solo para las islas de React; sus reglas de Next.js no aplican), `web-design-guidelines` (accesibilidad y UX), `playwright` y `agent-browser` (comprobar en el navegador). `token-efficient-workflow` en todos los encargos. Codex: CLI 0.164.0, sesión con ChatGPT; la «review gate» de `/codex:setup` está desactivada.
+
+Claudex (`BeamoINT/Claudex` 1.6.4, instalado por Manuel fuera del proyecto) lanza Claude Code a través de un proxy local con modelos de ChatGPT y expone las skills de Codex. Es una herramienta de terceros: copia la sesión de ChatGPT a su carpeta, se actualiza sola y arranca con permisos en modo `auto`. Las sesiones normales de Claude Code no lo usan; la coordinación con Codex se hace con el plugin `codex`.
 
 ## Librerías previstas para la fase de diseño
 
@@ -38,11 +40,11 @@ Manuel quiere usar estas librerías cuando se llegue a la fase de diseño y anim
 
 | Librería | Para qué | Notas de integración |
 | --- | --- | --- |
-| shadcn/ui | Componentes accesibles (botones, diálogos, menús…) que se copian al proyecto y se estilan con Tailwind. | Se inicializa con su CLI. Su tema usa variables CSS: adaptarlas a la paleta del portfolio en lugar de mantener dos sistemas de colores. Añadir solo los componentes que se usen. |
+| shadcn/ui | Componentes accesibles (botones, diálogos, menús…) que se copian al proyecto y se estilan con Tailwind. | Tiene guía de instalación para Astro: sus componentes son de React y se usan como islas solo si son interactivos. Se inicializa con su CLI. Su tema usa variables CSS: adaptarlas a la paleta del portfolio en lugar de mantener dos sistemas de colores. Añadir solo los componentes que se usen. |
 | React Bits | Componentes animados y efectos de texto/fondo para dar personalidad. | Elegir la variante TypeScript + Tailwind. Se copian componentes concretos (se pueden añadir con el CLI de shadcn). Usar pocos y con intención; revisar sus dependencias antes de añadir cada uno. |
-| GSAP | Animaciones (entrada de secciones, scroll con ScrollTrigger, texto). | En React usar el paquete `@gsap/react` y su hook `useGSAP` para limpiar animaciones. Los componentes con GSAP son de cliente (`"use client"`). Registrar los plugins de GSAP que se usen. |
+| GSAP | Animaciones (entrada de secciones, scroll con ScrollTrigger, texto). | En Astro, para animar HTML estático basta un `<script>` en el componente `.astro`. Dentro de islas de React, usar `@gsap/react` y su hook `useGSAP` para limpiar las animaciones. Registrar los plugins de GSAP que se usen. |
 | Three.js + React Three Fiber (+ drei) | Escenas 3D. Su uso en ValveDex está pendiente de confirmar; aquí solo si Manuel lo decide. | Pesadas: cargar solo donde se usen. |
-| Lenis | Scroll suave. | Integración React disponible en el propio paquete. Si se usa con GSAP ScrollTrigger, sincronizarlos (Lenis debe avisar a ScrollTrigger en cada scroll). Comprobar que los enlaces a secciones (`#proyectos`…) siguen funcionando. |
+| Lenis | Scroll suave. | En Astro se inicia en un `<script>` del layout (no necesita React). Si se usa con GSAP ScrollTrigger, sincronizarlos (Lenis debe avisar a ScrollTrigger en cada scroll). Comprobar que los enlaces a secciones (`#proyectos`…) siguen funcionando. |
 
 Criterios comunes:
 
@@ -53,4 +55,13 @@ Criterios comunes:
 
 ## Integraciones realizadas
 
-_(Vacío. Al instalar algo, anotar aquí la versión, archivos donde se configura y cualquier detalle o problema que la siguiente IA deba conocer.)_
+Base creada el 25 de octubre de 2026 (rama `chore/project-setup`). Versiones reales de `package.json`:
+
+| Paquete | Versión | Dónde se configura | Notas |
+| --- | --- | --- | --- |
+| astro | ^7.4.2 | `astro.config.mjs` | Creado con `npm create astro@latest portfolio-base -- --template minimal --no-install --no-git --no-ai --skip-houston --yes` en una carpeta temporal y copiado al repositorio. `--no-ai` evita que cree su propio `AGENTS.md`. Requiere Node >= 22.23.4. Servidor de desarrollo en el puerto 4321. |
+| @astrojs/react + react / react-dom | ^7.1.1 / ^19.3.1 | `astro.config.mjs` (`integrations`), `tsconfig.json` (`jsx`) | Añadido con `npx astro add react`. |
+| tailwindcss + @tailwindcss/vite | ^4.3.3 | `astro.config.mjs` (`vite.plugins`), `src/styles/global.css` | Añadido con `npx astro add tailwind`. Tailwind 4: sin `tailwind.config`; el tema se define en CSS. `global.css` aún no se importa en ninguna página: se hará al crear el layout. |
+| @astrojs/check + typescript | ^0.9.12 / ^6.0.3 | script `check` | Comprobación de tipos de `.astro` (`npm run check`). |
+
+`astro add` instaló `@types/react` y `@types/react-dom` en `dependencies` en vez de `devDependencies`; no afecta a la web generada. Astro recoge telemetría anónima; se desactiva con `npx astro telemetry disable` si Manuel quiere.
