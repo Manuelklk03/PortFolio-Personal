@@ -46,11 +46,18 @@
 | No se configura la protección de `main` ni `pull.ff only`; se sigue el flujo de ramas y PR. | Decidido por Manuel: basta con seguir el flujo. | Tarea retirada de `docs/TAREAS.md`. |
 | Coordinación de Claude y Codex: cada encargo a Codex indica qué skills usar (`token-efficient-workflow` siempre), se separan planificación, implementación y revisión, y no editan los mismos archivos a la vez. | Pedido por Manuel. | Sección en `CLAUDE.md`; skills en `docs/HERRAMIENTAS.md`. |
 
+## Confirmado — 27 de octubre de 2026 (sesión con Claude Code)
+
+| Decisión | Motivo | Consecuencias |
+| --- | --- | --- |
+| Objetivo visual: diseño profesional que destaque, no una plantilla genérica. | Pedido por Manuel. | En la fase de diseño (3b) se activan las skills de diseño y las decisiones visuales (dirección, tipografía, color, movimiento, cursor) se preguntan a Manuel una a una con opciones, en el paso que las necesita. grill-me sigue siendo el cuestionario sobre el código. |
+| Cursor de ratón personalizado. | Pedido por Manuel. | Solo en dispositivos con puntero fino (`pointer: fine`); se desactiva en táctil y con `prefers-reduced-motion`; no oculta el foco ni dificulta clicar. Tarea en la fase 3b. |
+
 ## Propuestas pendientes
 
 | Propuesta | Estado |
 | --- | --- |
-| Paleta: fondo `#0B0F14`, superficie `#121821`, borde `#1F2937`, texto `#E6EDF3`, texto secundario `#8B949E`, acento `#22D3EE`. | Propuesta; revisar al verla aplicada. |
+| Paleta: fondo `#0B0F14`, superficie `#121821`, borde `#1F2937`, texto `#E6EDF3`, texto secundario `#8B949E`, acento `#22D3EE`. | Propuesta base; se aplica ya como tema y se revisa en la fase de diseño. |
 | Tipografía: Geist (texto) y Geist Mono (detalles técnicos). | Propuesta; la forma de cargarla en Astro se decide al aplicarla. |
 | Solo tema oscuro en la primera versión. | Propuesta; tema claro queda como ampliación. |
 | Primera versión con una página y secciones. | Pendiente de acordar. |

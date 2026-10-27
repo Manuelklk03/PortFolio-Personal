@@ -48,6 +48,7 @@
 - [ ] Integrar Lenis (scroll suave) respetando `prefers-reduced-motion`.
 - [ ] Integrar GSAP para animaciones de secciones (en `<script>` de Astro o en islas de React, según el caso).
 - [ ] Elegir y adaptar componentes de React Bits con intención.
+- [ ] Cursor personalizado (solo `pointer: fine`, sin él en táctil ni con `prefers-reduced-motion`).
 - [ ] Comprobar rendimiento, accesibilidad y enlaces internos tras las animaciones.
 
 ## 4. Revisión y publicación
