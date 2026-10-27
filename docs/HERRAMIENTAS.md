@@ -32,6 +32,8 @@ Reparto en la fase de diseño: frontend-stack decide quién lidera cada parte; f
 
 Skills de Codex útiles para revisar (en `~/.agents/skills`, las usa Codex): `vercel-react-best-practices` (solo para las islas de React; sus reglas de Next.js no aplican), `web-design-guidelines` (accesibilidad y UX), `playwright` y `agent-browser` (comprobar en el navegador). `token-efficient-workflow` en todos los encargos. Codex: CLI 0.164.0, sesión con ChatGPT; la «review gate» de `/codex:setup` está desactivada.
 
+Claude usa su skill `token-efficiency` (global, en `~/.claude/skills`) en todas las sesiones, y en cada encargo pide a Codex `token-efficient-workflow`. Formato de cada paso en modo plan: explicación, archivos, qué hace Manuel, comprobación y, al final del mismo paso, el mensaje de commit y los comandos de GitHub Flow; no se repiten después (petición de Manuel, 27 oct 2026).
+
 Claudex (`BeamoINT/Claudex` 1.6.4, instalado por Manuel fuera del proyecto) lanza Claude Code a través de un proxy local con modelos de ChatGPT y expone las skills de Codex. Es una herramienta de terceros: copia la sesión de ChatGPT a su carpeta, se actualiza sola y arranca con permisos en modo `auto`. Las sesiones normales de Claude Code no lo usan; la coordinación con Codex se hace con el plugin `codex`.
 
 ## Librerías previstas para la fase de diseño
@@ -61,7 +63,7 @@ Base creada el 25 de octubre de 2026 (rama `chore/project-setup`). Versiones rea
 | --- | --- | --- | --- |
 | astro | ^7.4.2 | `astro.config.mjs` | Creado con `npm create astro@latest portfolio-base -- --template minimal --no-install --no-git --no-ai --skip-houston --yes` en una carpeta temporal y copiado al repositorio. `--no-ai` evita que cree su propio `AGENTS.md`. Requiere Node >= 22.23.4. Servidor de desarrollo en el puerto 4321. |
 | @astrojs/react + react / react-dom | ^7.1.1 / ^19.3.1 | `astro.config.mjs` (`integrations`), `tsconfig.json` (`jsx`) | Añadido con `npx astro add react`. |
-| tailwindcss + @tailwindcss/vite | ^4.3.3 | `astro.config.mjs` (`vite.plugins`), `src/styles/global.css` | Añadido con `npx astro add tailwind`. Tailwind 4: sin `tailwind.config`; el tema se define en CSS. `global.css` aún no se importa en ninguna página: se hará al crear el layout. |
+| tailwindcss + @tailwindcss/vite | ^4.3.3 | `astro.config.mjs` (`vite.plugins`), `src/styles/global.css` | Añadido con `npx astro add tailwind`. Tailwind 4: sin `tailwind.config`; el tema se define en CSS. `global.css` se importa en el frontmatter de `src/layouts/Layout.astro`, así que llega a toda página que use el layout. |
 | @astrojs/check + typescript | ^0.9.12 / ^6.0.3 | script `check` | Comprobación de tipos de `.astro` (`npm run check`). |
 
 `astro add` instaló `@types/react` y `@types/react-dom` en `dependencies` en vez de `devDependencies`; no afecta a la web generada. Astro recoge telemetría anónima; se desactiva con `npx astro telemetry disable` si Manuel quiere.

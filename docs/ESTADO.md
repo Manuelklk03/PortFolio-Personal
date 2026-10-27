@@ -1,11 +1,11 @@
 # Estado actual y relevo
 
-Última actualización: 25 de octubre de 2026.
+Última actualización: 27 de octubre de 2026.
 Última sesión: Claude Code, con revisión de Codex (plugin `codex`).
 
 ## Resumen del estado real
 
-El repositorio tiene la documentación en `main` (PR #1) y, en la rama `chore/project-setup`, la base del proyecto con **Astro + React + Tailwind + TypeScript estricto**. Astro sustituye a Next.js: Manuel quería estrenar algo nuevo sin dejar React (motivo en `docs/DECISIONES.md`). La página actual es la de la plantilla `minimal` (solo «Astro»); todavía no hay layout, secciones ni contenido. Paleta y tipografía siguen propuestas.
+`main` tiene la documentación (PR #1) y la base **Astro + React + Tailwind + TypeScript estricto** (PR #2). Astro sustituye a Next.js: Manuel quería estrenar algo nuevo sin dejar React (motivo en `docs/DECISIONES.md`). En la rama `feature/base-layout` ya hay layout base; la página de inicio solo muestra el nombre en cian como prueba de que Tailwind funciona. Todavía no hay secciones ni contenido. Paleta y tipografía siguen propuestas.
 
 ## Modo de trabajo
 
@@ -18,23 +18,23 @@ El repositorio tiene la documentación en `main` (PR #1) y, en la rama `chore/pr
 
 ## Git
 
-- `chore/project-setup` mergeada en `main` (PR #2). Commit, PR y merge hechos por Claude por petición expresa de Manuel.
+- Rama actual: `feature/base-layout` (sin commit todavía; pendiente de commit, PR y merge).
 - Sin protección de `main` en GitHub (decisión de Manuel); se sigue el flujo de ramas y PR.
 
-## Cambios de esta sesión (rama `chore/project-setup`)
+## Cambios de esta sesión (rama `feature/base-layout`)
 
-- Base creada por Manuel: `astro.config.mjs`, `tsconfig.json`, `package.json`, `package-lock.json`, `src/pages/index.astro`, `src/styles/global.css`, `public/`, `.vscode/` (recomienda la extensión de Astro) y `.gitignore` combinado.
-- Documentación: reglas de código de `AGENTS.md` adaptadas a Astro; `CLAUDE.md` con la coordinación Claude + Codex; `DECISIONES.md`, `CONTEXTO.md`, `TAREAS.md`, `HERRAMIENTAS.md` (versiones reales, grill-me corregido, Claudex), `CHANGELOG.md`, `LEEME.md` y `README.md` corregido.
+- Escritos por Manuel: `src/layouts/Layout.astro` (frontmatter con `import` de `global.css` e `interface Props` con `title` y `description`; `<html lang="es">`, metas, favicon y `<slot />`) y `src/pages/index.astro` (usa `<Layout>` con un `<h1>` de prueba con `text-cyan-400`).
+- Documentación: `TAREAS.md`, `HERRAMIENTAS.md`, `CHANGELOG.md` y este archivo.
 
 ## Comprobaciones
 
-- Ejecutadas por Claude: `npm run check` → 0 errores, 0 avisos; `npm run build` → `/index.html` generado; `npm run dev` → HTTP 200 en http://localhost:4321; `node_modules/`, `dist/` y `.astro/` ignorados.
-- `package.json`: `name` = `portfolio` y script `check` añadidos. `.gitignore`: `.env.*` ignorado salvo `.env.example` (aviso de Codex).
+- Ejecutadas por Claude: `npm run check` → 0 errores, 0 avisos, 0 hints (4 archivos); `npm run build` → 1 página; `dist/index.html` contiene `lang="es"`, la meta `description` y el título; el CSS generado incluye `.text-cyan-400`.
+- Manuel confirmó que la página se ve bien en el navegador.
 
 ## Problemas conocidos
 
 - `create-astro` no crea el proyecto en una carpeta con archivos: se creó en `../portfolio-base` y se copió (ver `docs/HERRAMIENTAS.md`).
-- `src/pages/index.astro` tiene `lang="en"` y título «Astro»: se corrige al crear el layout.
+- Si un `.astro` sale sin colores en VS Code, comprobar primero que el código del frontmatter está entre las dos líneas `---` (fuera de ellas es texto HTML). La extensión de Astro está instalada pero no aparece en `code --list-extensions`: probablemente está en otro perfil de VS Code.
 
 ## Datos o decisiones pendientes de Manuel
 
@@ -45,4 +45,5 @@ El repositorio tiene la documentación en `main` (PR #1) y, en la rama `chore/pr
 
 ## Próximo paso concreto (modo plan)
 
-1. Nueva rama `feature/base-layout`: explicar layouts de Astro y crear `src/layouts/Layout.astro` (`lang="es"`, título y descripción, importación de `global.css`), y usarlo en `index.astro`. Comprobar que Tailwind aplica estilos.
+1. Cerrar `feature/base-layout`: commit, PR y merge.
+2. Siguiente paso propuesto: aplicar la paleta y la tipografía como tema de Tailwind en `src/styles/global.css` (variables con `@theme`), el fondo y el texto base en el layout, y quitar el `text-cyan-400` de prueba. Así Manuel puede aprobar o ajustar la paleta al verla aplicada.
