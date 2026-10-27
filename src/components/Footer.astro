@@ -1,0 +1,31 @@
+---
+const year = new Date().getFullYear();
+
+const socialLinks = [
+  { href: "https://github.com/Manuelklk03", label: "GitHub" },
+  {
+    href: "https://www.linkedin.com/in/manuel-casinos-perez/",
+    label: "LinkedIn",
+  },
+];
+---
+
+<footer class="border-t border-border">
+  <div class="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
+    <p>© {year} Manuel Casinos Pérez</p>
+    <ul class="flex gap-5">
+      {socialLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="transition-colors hover:text-foreground"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</footer>

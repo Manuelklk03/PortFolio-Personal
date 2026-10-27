@@ -19,4 +19,17 @@
   html {
     color-scheme: dark;
   }
+
+  /* Scroll suave a las anclas, solo si el usuario no pide menos movimiento */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Foco visible al navegar con teclado */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
 }
