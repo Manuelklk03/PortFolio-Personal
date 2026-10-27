@@ -18,7 +18,7 @@
 - [x] Confirmar gestor de paquetes: npm.
 - [ ] Acordar estructura de páginas (propuesta: una página con secciones).
 - [x] Acordar dirección visual: oscura y técnica.
-- [ ] Aprobar paleta y tipografía propuestas al verlas aplicadas.
+- [x] Aplicar paleta y tipografía como base del tema (aceptadas por Manuel; se revisan en la fase de diseño).
 - [x] Crear la base Astro + React + Tailwind en `chore/project-setup`, combinando el `.gitignore` (verificado: `astro check` y `build` sin errores).
 - [x] Corregir `README.md` en esa misma rama (restos de chat, formato, enlaces, stack acordado).
 - [x] Crear el layout base (`src/layouts/Layout.astro`) con `lang="es"`, metadatos y la importación de `global.css` (verificado: `check`, `build` y clase de Tailwind en el CSS generado).

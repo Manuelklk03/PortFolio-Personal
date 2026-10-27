@@ -58,8 +58,8 @@
 
 | Propuesta | Estado |
 | --- | --- |
-| Paleta: fondo `#0B0F14`, superficie `#121821`, borde `#1F2937`, texto `#E6EDF3`, texto secundario `#8B949E`, acento `#22D3EE`. | Propuesta base; se aplica ya como tema y se revisa en la fase de diseño. |
-| Tipografía: Geist (texto) y Geist Mono (detalles técnicos). | Propuesta; la forma de cargarla en Astro se decide al aplicarla. |
+| Paleta: fondo `#0B0F14`, superficie `#121821`, borde `#1F2937`, texto `#E6EDF3`, texto secundario `#8B949E`, acento `#22D3EE`. | Aplicada como base (27 oct 2026, tema `@theme`); se revisa en la fase de diseño. |
+| Tipografía: Geist (texto) y Geist Mono (detalles técnicos). | Aplicada como base (27 oct 2026) con la API de fuentes de Astro y Fontsource; se revisa en la fase de diseño. |
 | Solo tema oscuro en la primera versión. | Propuesta; tema claro queda como ampliación. |
 | Primera versión con una página y secciones. | Pendiente de acordar. |
 | Proyectos en un archivo de datos local, sin backend. | Pendiente de acordar. |

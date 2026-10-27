@@ -5,7 +5,7 @@
 
 ## Resumen del estado real
 
-`main` tiene la documentación (PR #1) y la base **Astro + React + Tailwind + TypeScript estricto** (PR #2). Astro sustituye a Next.js: Manuel quería estrenar algo nuevo sin dejar React (motivo en `docs/DECISIONES.md`). También en `main`: layout base (PR #3), Prettier con el plugin de Astro y la paleta como tema de Tailwind con `@theme` en `src/styles/global.css` (fondo y texto base en el layout). La página de inicio muestra una tarjeta temporal con los seis colores. Todavía no hay secciones ni contenido. Paleta aplicada, pendiente de que Manuel la apruebe; tipografía sin aplicar.
+`main` tiene la documentación, la base **Astro + React + Tailwind + TypeScript estricto** (Astro sustituye a Next.js; motivo en `docs/DECISIONES.md`), el layout base `src/layouts/Layout.astro`, Prettier con el plugin de Astro, la paleta como tema de Tailwind (`@theme` en `src/styles/global.css`) y la tipografía Geist / Geist Mono con la API de fuentes de Astro. Paleta y tipografía son la base aceptada; se revisan en la fase de diseño. La página de inicio solo muestra una tarjeta temporal; todavía no hay secciones ni contenido.
 
 ## Modo de trabajo
 
@@ -19,32 +19,25 @@
 
 ## Git
 
-- Todo mergeado en `main` hasta la PR de `fix/prettier-eol`. Las correcciones pequeñas las hace la IA con su commit, PR y merge (ver `AGENTS.md`).
+- Todo mergeado en `main` (última entrega: tipografía, rama `feature/typography`). Las correcciones pequeñas las hace la IA con su commit, PR y merge (ver `AGENTS.md`).
 - Sin protección de `main` en GitHub (decisión de Manuel); se sigue el flujo de ramas y PR.
 
-## Cambios de esta sesión (rama `feature/base-layout`)
+## Comprobaciones (última entrega)
 
-- Escritos por Manuel: `src/layouts/Layout.astro` (frontmatter con `import` de `global.css` e `interface Props` con `title` y `description`; `<html lang="es">`, metas, favicon y `<slot />`) y `src/pages/index.astro` (usa `<Layout>` con un `<h1>` de prueba con `text-cyan-400`).
-- Documentación: `TAREAS.md`, `HERRAMIENTAS.md`, `CHANGELOG.md` y este archivo.
-
-## Comprobaciones
-
-- Ejecutadas por Claude: `npm run check` → 0 errores, 0 avisos, 0 hints (4 archivos); `npm run build` → 1 página; `dist/index.html` contiene `lang="es"`, la meta `description` y el título; el CSS generado incluye `.text-cyan-400`.
-- Manuel confirmó que la página se ve bien en el navegador.
+- Ejecutadas por Claude: `npm run check` → 0 errores; `npm run build` → 1 página, fuentes `.woff2` en `dist/_astro/fonts/` y `preload` de Geist en `index.html`; `npx prettier --check src` sin avisos.
 
 ## Problemas conocidos
 
 - `create-astro` no crea el proyecto en una carpeta con archivos: se creó en `../portfolio-base` y se copió (ver `docs/HERRAMIENTAS.md`).
 - Si un `.astro` sale sin colores en VS Code, comprobar primero que el código del frontmatter está entre las dos líneas `---` (fuera de ellas es texto HTML). La extensión de Astro está instalada pero no aparece en `code --list-extensions`: probablemente está en otro perfil de VS Code.
+- `npm run check` no detecta clases de Tailwind mal escritas (p. ej. `max-w-3x1`); la extensión Tailwind CSS IntelliSense las marca.
 
 ## Datos o decisiones pendientes de Manuel
 
 - Estructura: una página con secciones (propuesta).
-- Aprobar o ajustar paleta y tipografía al verlas aplicadas.
 - ¿ValveDex usa Three.js / React Three Fiber? (solo afecta a `docs/HERRAMIENTAS.md`).
 - Correo público y CV.
 
 ## Próximo paso concreto (modo plan)
 
-1. Manuel aprueba o ajusta la paleta vista en la tarjeta de muestra.
-2. Tipografía: consultar cómo carga Astro las fuentes (Geist y Geist Mono) y aplicarlas en el tema.
+1. Estructura de la página: componentes `Header` y `Footer` en `src/components`, secciones con sus anclas en `index.astro`, navegación accesible y enlace «Saltar al contenido».
