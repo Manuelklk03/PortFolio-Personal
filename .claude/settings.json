@@ -16,6 +16,11 @@
     "taste@frontend-stack": false,
     "imagegen-skills@imagegen-skills": false,
     "antislop@anti-ai-slop": false,
-    "headroom@headroom-marketplace": false
+    "headroom@headroom-marketplace": false,
+    "chrome-devtools-mcp@claude-plugins-official": true,
+    "oh-my-claudecode@omc": false,
+    "mempalace@mempalace": false,
+    "supabase@claude-plugins-official": false,
+    "vercel@claude-plugins-official": false
   }
 }
