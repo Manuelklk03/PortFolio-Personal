@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+/* Paleta del portfolio: cada --color-x genera bg-x, text-x, border-x... */
+@theme {
+  --color-background: #0b0f14; /* fondo de la página */
+  --color-surface: #121821; /* tarjetas y bloques */
+  --color-border: #1f2937; /* bordes */
+  --color-foreground: #e6edf3; /* texto principal */
+  --color-muted: #8b949e; /* texto secundario */
+  --color-accent: #22d3ee; /* acento: enlaces, detalles */
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+}
