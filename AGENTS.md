@@ -75,7 +75,7 @@ Mensajes de commit:
 
 - Conventional Commits en español: `feat`, `fix`, `refactor`, `docs`, `style`, `test`, `chore`, con ámbito cuando ayude. Ejemplo: `feat(projects): añadir tarjetas de proyectos`.
 - Los redacta la IA y los escribe Manuel. Al final de cada paso, entrega el mensaje completo: título, línea en blanco y descripción en lista con `- `.
-- No hagas commits, push, PR ni merges salvo petición expresa de Manuel. Tampoco ejecutes por tu cuenta cambios de configuración de Git o GitHub: dale los comandos.
+- No hagas commits, push, PR ni merges salvo petición expresa de Manuel. Excepción: las correcciones pequeñas que detectes (erratas, configuración, fixes) las arreglas tú con su commit, push, PR y merge, y luego le dices a Manuel qué cambiaste. Tampoco ejecutes por tu cuenta cambios de configuración de Git o GitHub: dale los comandos.
 
 Otras reglas:
 

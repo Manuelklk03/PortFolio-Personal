@@ -5,7 +5,7 @@
 
 ## Resumen del estado real
 
-`main` tiene la documentación (PR #1) y la base **Astro + React + Tailwind + TypeScript estricto** (PR #2). Astro sustituye a Next.js: Manuel quería estrenar algo nuevo sin dejar React (motivo en `docs/DECISIONES.md`). En la rama `feature/base-layout` ya hay layout base; la página de inicio solo muestra el nombre en cian como prueba de que Tailwind funciona. Todavía no hay secciones ni contenido. Paleta y tipografía siguen propuestas.
+`main` tiene la documentación (PR #1) y la base **Astro + React + Tailwind + TypeScript estricto** (PR #2). Astro sustituye a Next.js: Manuel quería estrenar algo nuevo sin dejar React (motivo en `docs/DECISIONES.md`). También en `main`: layout base (PR #3), Prettier con el plugin de Astro y la paleta como tema de Tailwind con `@theme` en `src/styles/global.css` (fondo y texto base en el layout). La página de inicio muestra una tarjeta temporal con los seis colores. Todavía no hay secciones ni contenido. Paleta aplicada, pendiente de que Manuel la apruebe; tipografía sin aplicar.
 
 ## Modo de trabajo
 
@@ -18,7 +18,7 @@
 
 ## Git
 
-- Rama actual: `feature/base-layout` (sin commit todavía; pendiente de commit, PR y merge).
+- Todo mergeado en `main` hasta la PR de `fix/prettier-eol`. Las correcciones pequeñas las hace la IA con su commit, PR y merge (ver `AGENTS.md`).
 - Sin protección de `main` en GitHub (decisión de Manuel); se sigue el flujo de ramas y PR.
 
 ## Cambios de esta sesión (rama `feature/base-layout`)
@@ -45,5 +45,5 @@
 
 ## Próximo paso concreto (modo plan)
 
-1. Cerrar `feature/base-layout`: commit, PR y merge.
-2. Siguiente paso propuesto: aplicar la paleta y la tipografía como tema de Tailwind en `src/styles/global.css` (variables con `@theme`), el fondo y el texto base en el layout, y quitar el `text-cyan-400` de prueba. Así Manuel puede aprobar o ajustar la paleta al verla aplicada.
+1. Manuel aprueba o ajusta la paleta vista en la tarjeta de muestra.
+2. Tipografía: consultar cómo carga Astro las fuentes (Geist y Geist Mono) y aplicarlas en el tema.
