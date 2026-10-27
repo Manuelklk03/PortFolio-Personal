@@ -15,6 +15,7 @@
 - Terminal: **Git Bash**.
 - Codex colabora según la sección «Coordinación con Codex» de `CLAUDE.md`.
 - grill-me es un cuestionario sobre el código: ofrécelo a Manuel después de cada paso con código, para practicar.
+- Pasos grandes: agrupa cambios relacionados en un mismo paso (p. ej. tipografía + estructura de una sección completa), con el mensaje de commit y los comandos al final del paso. Se presenta el siguiente cuando Manuel lo pide.
 
 ## Git
 
