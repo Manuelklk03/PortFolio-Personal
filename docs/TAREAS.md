@@ -21,7 +21,7 @@
 - [ ] Aprobar paleta y tipografía propuestas al verlas aplicadas.
 - [x] Crear la base Astro + React + Tailwind en `chore/project-setup`, combinando el `.gitignore` (verificado: `astro check` y `build` sin errores).
 - [x] Corregir `README.md` en esa misma rama (restos de chat, formato, enlaces, stack acordado).
-- [ ] Crear el layout base (`src/layouts/Layout.astro`) con `lang="es"`, metadatos y la importación de `global.css`.
+- [x] Crear el layout base (`src/layouts/Layout.astro`) con `lang="es"`, metadatos y la importación de `global.css` (verificado: `check`, `build` y clase de Tailwind en el CSS generado).
 - [x] Registrar comandos reales y decisiones acordadas.
 
 ## 2. Contenido
