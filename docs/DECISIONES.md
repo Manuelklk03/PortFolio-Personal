@@ -52,6 +52,7 @@
 | --- | --- | --- |
 | Objetivo visual: diseño profesional que destaque, no una plantilla genérica. | Pedido por Manuel. | En la fase de diseño (3b) se activan las skills de diseño y las decisiones visuales (dirección, tipografía, color, movimiento, cursor) se preguntan a Manuel una a una con opciones, en el paso que las necesita. grill-me sigue siendo el cuestionario sobre el código. |
 | Cursor de ratón personalizado. | Pedido por Manuel. | Solo en dispositivos con puntero fino (`pointer: fine`); se desactiva en táctil y con `prefers-reduced-motion`; no oculta el foco ni dificulta clicar. Tarea en la fase 3b. |
+| Las correcciones pequeñas que detecte la IA (erratas, configuración, fixes) las aplica ella sola con su commit, push, PR y merge, y después le dice a Manuel qué arregló. Los pasos con código nuevo siguen en modo plan. | Pedido por Manuel. | Excepción a «no hagas commits salvo petición expresa» de `AGENTS.md`. |
 
 ## Propuestas pendientes
 
