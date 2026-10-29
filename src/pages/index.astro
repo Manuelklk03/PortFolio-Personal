@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects } from "../data/projects";
 ---
 
 <Layout
@@ -19,7 +21,11 @@ import Section from "../components/Section.astro";
     <p class="text-muted">En preparación.</p>
   </Section>
   <Section id="proyectos" title="Proyectos">
-    <p class="text-muted">En preparación.</p>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
   </Section>
   <Section id="tecnologias" title="Tecnologías">
     <p class="text-muted">En preparación.</p>
