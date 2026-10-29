@@ -16,15 +16,13 @@ const links = [
       Manuel Casinos Pérez
     </a>
     <ul class="flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted">
-    {
-        links.map((link) => (
-            <li>
-                <a href={link.href} class="transition-colors hover:text-foreground">
-                    {link.label}
-                </a>
-            </li>
-        ))
-    }
-    <ul/>
+      {links.map((link) => (
+        <li>
+          <a href={link.href} class="transition-colors hover:text-foreground">
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
   </nav>
 </header>
