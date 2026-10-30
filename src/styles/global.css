@@ -15,6 +15,32 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* shadcn/ui variables → mapeadas a tu paleta @theme */
+@layer base {
+  :root {
+    --background: var(--color-background);      /* #0b0f14 */
+    --foreground: var(--color-foreground);      /* #e6edf3 */
+    --card: var(--color-surface);               /* #121821 */
+    --card-foreground: var(--color-foreground); /* #e6edf3 */
+    --popover: var(--color-surface);            /* #121821 */
+    --popover-foreground: var(--color-foreground); /* #e6edf3 */
+    --primary: var(--color-accent);             /* #22d3ee */
+    --primary-foreground: var(--color-background); /* #0b0f14 */
+    --secondary: var(--color-border);           /* #1f2937 */
+    --secondary-foreground: var(--color-foreground); /* #e6edf3 */
+    --muted: var(--color-border);               /* #1f2937 */
+    --muted-foreground: var(--color-muted);     /* #8b949e */
+    --accent: var(--color-border);              /* #1f2937 */
+    --accent-foreground: var(--color-foreground); /* #e6edf3 */
+    --destructive: #ef4444;                     /* rojo estándar */
+    --destructive-foreground: var(--color-foreground); /* #e6edf3 */
+    --border: var(--color-border);              /* #1f2937 */
+    --input: var(--color-border);               /* #1f2937 */
+    --ring: var(--color-accent);                /* #22d3ee */
+    --radius: 0.5rem;                           /* 8px */
+  }
+}
+
 @layer base {
   html {
     color-scheme: dark;
