@@ -3,12 +3,13 @@ import type { Project } from "../data/projects";
 
 interface Props {
   project: Project;
+  className?: string;
 }
 
-const { project } = Astro.props;
+const { project, className } = Astro.props;
 ---
 
-<article class="group relative overflow-hidden rounded-xl border border-border bg-surface transition-shadow hover:shadow-lg hover:border-accent/50">
+<article class={["group relative overflow-hidden rounded-xl border border-border bg-surface transition-shadow hover:shadow-lg hover:border-accent/50 project-card", className].filter(Boolean).join(" ")}>
   {project.image && (
     <div class="relative aspect-video overflow-hidden">
       <img
