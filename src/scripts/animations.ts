@@ -35,7 +35,6 @@ export function animateFadeUp(scope: Element | string, selector = ".animate-fade
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   if (prefersReducedMotion) {
-    // Mostrar elementos directamente sin animación
     container.querySelectorAll(selector).forEach((el) => {
       ;(el as HTMLElement).style.opacity = "1"
       ;(el as HTMLElement).style.transform = "none"
@@ -54,6 +53,7 @@ export function animateFadeUp(scope: Element | string, selector = ".animate-fade
     duration: 0.8,
     ease: "power3.out",
     stagger: 0.1,
+    immediateRender: false,
   })
 }
 
@@ -84,6 +84,7 @@ export function animateProjectCards(scope: Element | string) {
     duration: 0.7,
     ease: "power3.out",
     stagger: 0.08,
+    immediateRender: false,
   })
 }
 
@@ -117,5 +118,6 @@ export function animateHero(scope: Element | string) {
     duration: 0.8,
     ease: "power3.out",
     stagger: 0.1,
+    immediateRender: false,
   })
 }
