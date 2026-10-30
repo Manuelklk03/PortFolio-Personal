@@ -4,6 +4,8 @@ import Section from "../components/Section.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import { projects } from "../data/projects";
 import { Button } from "@/components/ui/button";
+import { TextReveal } from "@/components/react-bits/TextReveal";
+import { OrbitingBalls } from "@/components/react-bits/OrbitingBalls";
 ---
 
 <Layout
@@ -12,9 +14,14 @@ import { Button } from "@/components/ui/button";
   image="/og-default.jpg"
   url="/"
 >
-  <section id="inicio" class="mx-auto max-w-5xl scroll-mt-24 px-4 py-32">
+  <section id="inicio" class="relative overflow-hidden mx-auto max-w-5xl scroll-mt-24 px-4 py-32">
+    {/* Fondo animado sutil - solo desktop, respeta prefers-reduced-motion */}
+    <OrbitingBalls className="absolute inset-0 -z-10 opacity-20 pointer-events-none" client:visible />
+    
     <p class="font-mono text-sm text-accent hero-element">Portfolio</p>
-    <h1 class="mt-4 text-5xl font-bold tracking-tight hero-element">Manuel Casinos Pérez</h1>
+    <h1 class="mt-4 text-5xl font-bold tracking-tight hero-element">
+      <TextReveal text="Manuel Casinos Pérez" className="inline-block" client:visible />
+    </h1>
     <p class="mt-6 max-w-xl text-lg text-muted hero-element">
       Desarrollador FullStack en Valencia. Creo aplicaciones web modernas,
       accesibles y performantes.
