@@ -176,10 +176,13 @@ import { OrbitingBalls } from "@/components/react-bits/OrbitingBalls";
   </Section>
   <script type="module">
     import { animateHero, animateFadeUp, animateProjectCards } from "@/scripts/animations"
+    import { ScrollTrigger } from "gsap/ScrollTrigger"
     animateHero("#inicio")
     animateFadeUp("#sobre-mi")
     animateFadeUp("#tecnologias")
     animateFadeUp("#contacto")
     animateProjectCards("#proyectos")
+    // Refrescar ScrollTrigger para asegurar que los triggers se calculan correctamente
+    ScrollTrigger.refresh()
   </script>
 </Layout>
