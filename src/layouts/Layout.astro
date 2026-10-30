@@ -59,5 +59,9 @@ const ogImage = image ? `${siteUrl}${image}` : `${siteUrl}/og-default.jpg`;
       <slot />
     </main>
     <Footer />
+    <script type="module">
+      import { initLenis } from "@/scripts/lenis"
+      initLenis()
+    </script>
   </body>
 </html>
