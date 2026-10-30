@@ -1,9 +1,14 @@
 // GSAP ScrollTrigger setup - solo si el usuario no pide menos movimiento
+import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 if (typeof window !== "undefined") {
-  // Registrar plugin
-  window.gsap?.registerPlugin?.(ScrollTrigger)
+  console.log('[scroll-trigger] Registering GSAP and ScrollTrigger')
+  // Registrar GSAP globalmente
+  ;(window as any).gsap = gsap
+  ;(window as any).ScrollTrigger = ScrollTrigger
+  gsap.registerPlugin(ScrollTrigger)
+  console.log('[scroll-trigger] Registered:', { gsap: !!(window as any).gsap, ScrollTrigger: !!(window as any).ScrollTrigger })
 
   // Sincronizar con Lenis si existe
   const lenis = (window as any).__lenis

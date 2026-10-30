@@ -1,26 +1,26 @@
 // Animaciones GSAP para componentes Astro (HTML estático)
 // Se usa en <script> de cada sección .astro
 
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger)
+  const gsap = (window as any).gsap
+  const ScrollTrigger = (window as any).ScrollTrigger
 
-  // Sincronizar con Lenis
-  const lenis = (window as any).__lenis
-  if (lenis) {
-    lenis.on("scroll", ScrollTrigger.update)
-    ScrollTrigger.scrollerProxy(window, {
-      scrollTop(value: number | undefined) {
-        return arguments.length ? lenis.scrollTo(value, { immediate: true }) : lenis.scroll
-      },
-      getBoundingClientRect() {
-        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight }
-      },
-    })
-    ScrollTrigger.addEventListener("refresh", () => lenis.resize())
-    ScrollTrigger.refresh()
+  if (gsap && ScrollTrigger) {
+    // Sincronizar con Lenis
+    const lenis = (window as any).__lenis
+    if (lenis) {
+      lenis.on("scroll", ScrollTrigger.update)
+      ScrollTrigger.scrollerProxy(window, {
+        scrollTop(value: number | undefined) {
+          return arguments.length ? lenis.scrollTo(value, { immediate: true }) : lenis.scroll
+        },
+        getBoundingClientRect() {
+          return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight }
+        },
+      })
+      ScrollTrigger.addEventListener("refresh", () => lenis.resize())
+      ScrollTrigger.refresh()
+    }
   }
 }
 
@@ -30,6 +30,10 @@ if (typeof window !== "undefined") {
  * @param selector - Selector de los elementos a animar (ej: ".animate-fade-up")
  */
 export function animateFadeUp(scope: Element | string, selector = ".animate-fade-up") {
+  const gsap = (window as any).gsap
+  const ScrollTrigger = (window as any).ScrollTrigger
+  if (!gsap || !ScrollTrigger) return
+
   const container = typeof scope === "string" ? document.querySelector(scope) : scope
   if (!container) return
 
@@ -61,6 +65,10 @@ export function animateFadeUp(scope: Element | string, selector = ".animate-fade
  * Animación para tarjetas de proyectos (stagger horizontal)
  */
 export function animateProjectCards(scope: Element | string) {
+  const gsap = (window as any).gsap
+  const ScrollTrigger = (window as any).ScrollTrigger
+  if (!gsap || !ScrollTrigger) return
+
   const container = typeof scope === "string" ? document.querySelector(scope) : scope
   if (!container) return
 
@@ -92,6 +100,10 @@ export function animateProjectCards(scope: Element | string) {
  * Animación hero (título, descripción, CTAs)
  */
 export function animateHero(scope: Element | string) {
+  const gsap = (window as any).gsap
+  const ScrollTrigger = (window as any).ScrollTrigger
+  if (!gsap || !ScrollTrigger) return
+
   const container = typeof scope === "string" ? document.querySelector(scope) : scope
   if (!container) return
 

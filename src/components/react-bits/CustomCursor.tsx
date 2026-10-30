@@ -99,16 +99,29 @@ export function CustomCursor({ disabled = false }: CustomCursorProps) {
     <>
       <div
         ref={outerRef}
-        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference transition-opacity duration-300"
-        style={{ opacity: visible ? 1 : 0 }}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          pointerEvents: 'none',
+          zIndex: 9999,
+          mixBlendMode: 'difference',
+          opacity: visible ? 1 : 0,
+          transition: 'opacity 0.3s',
+        }}
         aria-hidden="true"
       >
         <div
           ref={innerRef}
-          className="w-6 h-6 rounded-full border-2 border-accent transition-all duration-200 ease-out"
           style={{
-            transformOrigin: "center center",
-            boxShadow: "0 0 20px rgba(34, 211, 238, 0.4), inset 0 0 20px rgba(34, 211, 238, 0.1)",
+            width: '24px',
+            height: '24px',
+            borderRadius: '50%',
+            border: '2px solid #22d3ee',
+            transformOrigin: 'center center',
+            boxShadow: '0 0 20px rgba(34, 211, 238, 0.4), inset 0 0 20px rgba(34, 211, 238, 0.1)',
+            transition: 'transform 0.2s ease-out',
+            backgroundColor: 'rgba(34, 211, 238, 0.1)',
           }}
         />
       </div>
