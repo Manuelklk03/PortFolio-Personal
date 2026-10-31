@@ -1,5 +1,5 @@
 ---
-// Fondo 3D en ASCII. Todo ocurre en el <script>, en el navegador.
+// Fondo 3D en ASCII que gira solo. Todo ocurre en el <script>, en el navegador.
 ---
 
 <div
@@ -7,19 +7,44 @@
   aria-hidden="true"
   class="pointer-events-none absolute inset-0 -z-10 overflow-hidden font-mono text-accent/30 select-none"
 ></div>
+<!-- Las animaciones automáticas de más de 5 s necesitan poder pausarse (WCAG 2.2.2). -->
+<button
+  type="button"
+  data-ascii-toggle
+  aria-pressed="false"
+  class="absolute right-4 bottom-4 hidden rounded border border-border bg-background/70 px-3 py-1.5 font-mono text-xs text-muted backdrop-blur transition hover:border-accent/60 hover:text-accent"
+>
+  [ pausar fondo ]
+</button>
 
 <script>
   const container = document.querySelector<HTMLElement>("[data-ascii-scene]");
+  const toggle = document.querySelector<HTMLButtonElement>("[data-ascii-toggle]");
   // En móvil no se carga: el nombre en ASCII basta y se ahorra batería y datos.
   const isLargeScreen = window.matchMedia("(min-width: 768px)").matches;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  if (container && isLargeScreen) {
+  if (container && toggle && isLargeScreen) {
     // Three.js solo se descarga cuando el inicio entra en pantalla.
     const observer = new IntersectionObserver(async ([entry]) => {
       if (!entry?.isIntersecting) return;
       observer.disconnect();
       const { startAsciiScene } = await import("../../scripts/ascii-scene");
-      startAsciiScene(container);
+      const controls = startAsciiScene(container);
+      if (!controls) return;
+
+      // El botón solo tiene sentido cuando el fondo se mueve.
+      const syncButton = () =>
+        toggle.classList.toggle("hidden", reducedMotion.matches);
+      syncButton();
+      reducedMotion.addEventListener("change", syncButton);
+
+      toggle.addEventListener("click", () => {
+        const paused = toggle.getAttribute("aria-pressed") !== "true";
+        toggle.setAttribute("aria-pressed", String(paused));
+        toggle.textContent = paused ? "[ reanudar fondo ]" : "[ pausar fondo ]";
+        controls.setPaused(paused);
+      });
     });
     observer.observe(container);
   }

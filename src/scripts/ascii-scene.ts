@@ -1,17 +1,20 @@
 import * as THREE from "three";
 import { AsciiEffect } from "three/addons/effects/AsciiEffect.js";
 
-// Duración del giro automático de entrada; después el nudo solo se mueve con el ratón.
-const INTRO_MS = 5000;
+export interface AsciiSceneControls {
+  setPaused: (paused: boolean) => void;
+}
 
-// Dibuja un nudo 3D con caracteres ASCII dentro de `container`.
-export function startAsciiScene(container: HTMLElement): void {
+// Dibuja un nudo 3D con caracteres ASCII que gira solo dentro de `container`.
+export function startAsciiScene(
+  container: HTMLElement,
+): AsciiSceneControls | null {
   let renderer: THREE.WebGLRenderer;
   try {
     renderer = new THREE.WebGLRenderer();
   } catch {
     // Sin WebGL el inicio se queda sin fondo; el contenido no depende de él.
-    return;
+    return null;
   }
 
   const scene = new THREE.Scene();
@@ -51,58 +54,54 @@ export function startAsciiScene(container: HTMLElement): void {
   resize();
   window.addEventListener("resize", resize);
 
-  // El ratón inclina el nudo; `current` lo sigue con suavidad.
-  const target = { x: 0, y: 0 };
-  const current = { x: 0, y: 0 };
-  window.addEventListener("pointermove", (event) => {
-    target.x = (event.clientY / window.innerHeight - 0.5) * 1.2;
-    target.y = (event.clientX / window.innerWidth - 0.5) * 1.2;
-  });
-
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const start = performance.now();
-  const spin = { x: 0.4, y: 0.6 };
-  let frameId: number | null = null;
-  let last = 0;
+  let paused = false;
   let visible = true;
+  let frameId: number | null = null;
+  let time = 0;
+  let last = 0;
 
   const tick = (now: number) => {
     frameId = requestAnimationFrame(tick);
     // Unos 30 fotogramas por segundo bastan y ahorran batería.
-    if (now - last < 33) return;
+    const delta = now - last;
+    if (delta < 33) return;
     last = now;
+    // El tiempo solo avanza mientras se anima, así al reanudar no da saltos.
+    time += Math.min(delta, 100) / 1000;
 
-    // El giro automático se frena hasta pararse a los INTRO_MS.
-    const intro = Math.max(0, 1 - (now - start) / INTRO_MS);
-    spin.x += 0.006 * intro;
-    spin.y += 0.009 * intro;
-    current.x += (target.x - current.x) * 0.05;
-    current.y += (target.y - current.y) * 0.05;
-    knot.rotation.x = spin.x + current.x;
-    knot.rotation.y = spin.y + current.y;
+    // Giro continuo con un ligero balanceo para que no parezca mecánico.
+    knot.rotation.x = 0.4 + time * 0.25;
+    knot.rotation.y = 0.6 + time * 0.35;
+    knot.rotation.z = Math.sin(time * 0.6) * 0.3;
+    knot.position.y = Math.sin(time * 0.8) * 8;
     render();
   };
 
-  const play = () => {
-    if (frameId === null && visible && !reducedMotion.matches) {
+  const update = () => {
+    const shouldRun = visible && !paused && !reducedMotion.matches;
+    if (shouldRun && frameId === null) {
+      last = performance.now();
       frameId = requestAnimationFrame(tick);
+    } else if (!shouldRun && frameId !== null) {
+      cancelAnimationFrame(frameId);
+      frameId = null;
     }
   };
-  const stop = () => {
-    if (frameId !== null) cancelAnimationFrame(frameId);
-    frameId = null;
-  };
 
-  // Fuera de pantalla o con movimiento reducido, el bucle se detiene del todo.
+  // Fuera de pantalla, en pausa o con movimiento reducido, el bucle se detiene del todo.
   new IntersectionObserver(([entry]) => {
     visible = entry?.isIntersecting ?? false;
-    if (visible) play();
-    else stop();
+    update();
   }).observe(container);
-  reducedMotion.addEventListener("change", () => {
-    if (reducedMotion.matches) stop();
-    else play();
-  });
+  reducedMotion.addEventListener("change", update);
 
-  play();
+  update();
+
+  return {
+    setPaused: (value) => {
+      paused = value;
+      update();
+    },
+  };
 }
