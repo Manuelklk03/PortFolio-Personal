@@ -1,28 +1,28 @@
 ---
+// Sección con título de terminal: `~/id $ comando`. El título real queda para lectores de pantalla.
 interface Props {
   id: string;
   title: string;
+  command: string;
 }
 
-const { id, title } = Astro.props;
+const { id, title, command } = Astro.props;
 ---
 
-<section id={id} aria-labelledby={`${id}-title`} class="scroll-mt-24 py-24">
+<section
+  id={id}
+  aria-labelledby={`${id}-title`}
+  class="scroll-mt-20 py-16 sm:py-20"
+>
   <div class="mx-auto max-w-5xl px-4">
     <h2
       id={`${id}-title`}
-      class="flex flex-wrap items-baseline gap-x-3 text-3xl font-semibold tracking-tight"
+      class="font-mono text-2xl tracking-tight sm:text-3xl"
     >
-      <span aria-hidden="true" class="font-mono text-base font-normal text-accent">
-        ~/{id} $
-      </span>
-      {title}
+      <span class="sr-only">{title}</span>
+      <!-- prettier-ignore -->
+      <span aria-hidden="true"><span class="text-accent">~/{id}</span> <span class="text-muted">$</span> <span class="text-foreground">{command}</span></span>
     </h2>
-    <div
-      aria-hidden="true"
-      class="mt-4 h-px bg-gradient-to-r from-accent/70 via-accent-2/30 to-transparent"
-    >
-    </div>
     <div class="mt-8">
       <slot />
     </div>

@@ -48,6 +48,12 @@ export function startAsciiScene(
     const { width, height } = container.getBoundingClientRect();
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
+    // El nudo se coloca en la mitad derecha para dejar libre el texto del inicio.
+    const visibleHeight =
+      2 *
+      camera.position.z *
+      Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+    knot.position.x = visibleHeight * camera.aspect * 0.22;
     effect.setSize(width, height);
     render();
   };

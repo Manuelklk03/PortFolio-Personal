@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
-import ProjectCard from "../components/ProjectCard.astro";
+import ProjectEntry from "../components/ProjectEntry.astro";
 import Cursor from "../components/Cursor.astro";
 import AsciiScene from "../components/ascii/AsciiScene.astro";
 import AsciiName from "../components/ascii/AsciiName.astro";
@@ -39,16 +39,11 @@ const contactLinks = [
 >
   <Cursor />
 
-  <section id="inicio" class="relative isolate scroll-mt-24 overflow-hidden">
+  <section id="inicio" class="relative isolate scroll-mt-20 overflow-hidden">
     <AsciiScene />
-    <div class="mx-auto max-w-5xl px-4 py-28 sm:py-32">
-      <p class="font-mono text-sm text-muted">
-        <!-- prettier-ignore -->
-        <span class="text-accent">~/portfolio</span> $ whoami
-        <span aria-hidden="true" class="animate-blink text-accent">
-          █
-        </span>
-      </p>
+    <div class="mx-auto max-w-5xl px-4 py-24 sm:py-32">
+      <!-- prettier-ignore -->
+      <p class="font-mono text-sm text-muted"><span class="text-accent">~/portfolio</span> $ whoami<span aria-hidden="true" class="animate-blink text-accent">█</span></p>
       <h1 class="sr-only">Manuel Casinos Pérez</h1>
       <div class="mt-6">
         <AsciiName lines={["MANUEL", "CASINOS"]} />
@@ -62,7 +57,7 @@ const contactLinks = [
       <div class="mt-10 flex flex-wrap gap-3">
         <a
           href="#proyectos"
-          class="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 font-mono text-sm font-medium text-background shadow-[0_0_32px_-6px_rgb(62_230_193/0.7)] transition hover:bg-foreground"
+          class="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 font-mono text-sm font-medium text-background transition hover:bg-foreground"
         >
           <span aria-hidden="true">$</span> ls proyectos
         </a>
@@ -77,57 +72,51 @@ const contactLinks = [
     </div>
   </section>
 
-  <Section id="sobre-mi" title="Sobre mí">
-    <div
-      data-reveal
-      class="max-w-3xl space-y-4 text-muted [&_strong]:font-medium [&_strong]:text-foreground"
-    >
-      <p>
-        Desarrollador FullStack autodidacta con base en{" "}
-        <strong>JavaScript/TypeScript</strong>, <strong>React</strong> y{" "}
-        <strong>Node.js</strong>. Me interesa la arquitectura limpia, el
-        rendimiento web y la experiencia de desarrollador.
-      </p>
-      <p>
-        Aprendí programando proyectos reales: <em>Cerrajería NOA</em> (web
-        corporativa), <em>Digital Fit 2.0</em> (plataforma de entrenamiento) y{" "}
-        <em>ValveDex</em> (visualizador 3D de válvulas industriales con
-        Three.js).
-      </p>
-      <p>
-        Actualmente profundizando en <strong>Astro</strong>,{" "}
-        <strong>bases de datos</strong> y <strong>testing automatizado</strong>.
-      </p>
+  <Section id="sobre-mi" title="Sobre mí" command="cat perfil">
+    <div data-reveal class="max-w-3xl">
+      <dl class="grid gap-x-8 gap-y-3 font-mono text-sm sm:grid-cols-[9rem_1fr] sm:text-base">
+        {profile.about.map((row) => (
+          <Fragment>
+            <dt class="text-accent-2">{row.key}</dt>
+            <dd class="text-foreground">{row.value}</dd>
+          </Fragment>
+        ))}
+      </dl>
+      <p class="mt-8 max-w-2xl text-muted">{profile.aboutNote}</p>
     </div>
   </Section>
 
-  <Section id="proyectos" title="Proyectos">
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  <Section id="proyectos" title="Proyectos" command="ls -l">
+    <ul class="border-t border-border">
       {projects.map((project) => (
-        <ProjectCard project={project} />
+        <ProjectEntry project={project} />
       ))}
-    </div>
+    </ul>
   </Section>
 
-  <Section id="tecnologias" title="Tecnologías">
-    <div data-reveal class="space-y-10">
+  <Section id="tecnologias" title="Tecnologías" command="stack --list">
+    <div data-reveal class="grid gap-10 font-mono text-sm sm:grid-cols-2">
       <div>
-        <h3 class="mb-4 font-mono text-sm text-accent">$ stack --base</h3>
-        <ul class="flex flex-wrap gap-2">
+        <h3 class="text-accent">--base</h3>
+        <ul class="mt-4 grid grid-cols-2 gap-x-6 gap-y-2">
           {techStack.base.map((tech) => (
-            <li class="rounded border border-accent/40 bg-accent/10 px-3 py-1 font-mono text-sm text-foreground">
+            <li class="text-foreground">
+              <span aria-hidden="true" class="text-accent">
+                ▸{" "}
+              </span>
               {tech}
             </li>
           ))}
         </ul>
       </div>
       <div>
-        <h3 class="mb-4 font-mono text-sm text-accent-2">
-          $ stack --aprendiendo
-        </h3>
-        <ul class="flex flex-wrap gap-2">
+        <h3 class="text-accent-2">--aprendiendo</h3>
+        <ul class="mt-4 grid grid-cols-2 gap-x-6 gap-y-2">
           {techStack.learning.map((tech) => (
-            <li class="rounded border border-dashed border-accent-2/60 px-3 py-1 font-mono text-sm text-muted">
+            <li class="text-muted">
+              <span aria-hidden="true" class="text-accent-2">
+                ○{" "}
+              </span>
               {tech}
             </li>
           ))}
@@ -137,12 +126,9 @@ const contactLinks = [
   </Section>
 
   {profile.cvUrl && (
-    <Section id="cv" title="Currículum">
-      <div data-reveal class="">
+    <Section id="cv" title="Currículum" command="open curriculum.pdf">
+      <div data-reveal>
         <div class="overflow-hidden rounded-lg border border-border bg-surface/80">
-          <div class="flex items-center gap-3 border-b border-border px-4 py-2.5 font-mono text-xs text-muted">
-            <span class="text-accent">$</span> open curriculum.pdf
-          </div>
           <object
             data={profile.cvUrl}
             type="application/pdf"
@@ -169,8 +155,8 @@ const contactLinks = [
     </Section>
   )}
 
-  <Section id="contacto" title="Contacto">
-    <div data-reveal class="">
+  <Section id="contacto" title="Contacto" command="ping manuel">
+    <div data-reveal>
       <p class="max-w-xl text-muted">
         Escríbeme por correo o revisa mi trabajo en GitHub y LinkedIn.
       </p>
@@ -182,7 +168,7 @@ const contactLinks = [
               {...(link.external
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
-              class="group flex h-full flex-col gap-2 rounded-lg border border-border bg-surface/70 p-5 font-mono transition duration-300 hover:-translate-y-1 hover:border-accent/60 hover:bg-accent/5 hover:shadow-[0_0_40px_-12px_rgb(62_230_193/0.5)]"
+              class="group flex h-full flex-col gap-2 rounded-lg border border-border bg-surface/70 p-5 font-mono transition-colors duration-200 hover:border-accent hover:bg-accent/5"
             >
               <span class="text-xs text-muted">
                 <span class="text-accent-2">$</span> {link.command}

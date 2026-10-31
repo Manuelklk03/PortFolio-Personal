@@ -24,3 +24,4 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 
 - 2026-10-31: imágenes de proyectos (eran SVG con extensión `.jpg`) y paquetes sin uso eliminados.
 - 2026-10-31: revisión de UI: los scripts del layout y de la página ahora se empaquetan (antes `type="module"` los dejaba sin procesar), entradas de sección sin GSAP que ya no ocultan contenido al volver hacia arriba, cabecera no fija y enlaces de 44 px en móvil, CV solo cuando hay PDF, botón de pausa más claro, sin `console.log` ni `window as any`.
+- 2026-10-31: proyectos como listado `ls -l`, «Sobre mí» con datos reales en formato clave-valor, tecnologías como listado, títulos de sección tipo comando, nudo 3D a la derecha y menos brillos.

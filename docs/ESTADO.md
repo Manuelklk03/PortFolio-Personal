@@ -23,7 +23,7 @@ Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abys
 
 ## Git
 
-- `main` al día hasta la PR de `fix/ui-review` (31 oct).
+- `main` al día hasta la PR de `feature/design-refinements` (31 oct).
 - Sin protección de `main` en GitHub (decisión de Manuel); se sigue el flujo de ramas y PR. `git fetch --prune` limpia las ramas remotas borradas.
 
 ## Comprobaciones (31 oct, revisión de UI)
@@ -43,10 +43,8 @@ Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abys
 
 - ¿ValveDex usa Three.js / React Three Fiber? (solo afecta a `docs/HERRAMIENTAS.md`).
 - CV: falta el PDF.
-- Decisiones de diseño de la revisión de UI: posición del nudo, estilo de las tarjetas, variedad de secciones y cantidad de brillos.
 
 ## Próximo paso concreto
 
-1. Aplicar las decisiones de diseño de la revisión de UI que elija Manuel.
-2. Cuando Manuel pase el PDF: copiarlo a `public/cv/` y poner la ruta en `cvUrl` de `src/data/profile.ts`.
-3. Sustituir los datos de prueba por los reales (`src/data/projects.ts`, `src/data/tech.ts`, textos de «Sobre mí»).
+1. Cuando Manuel pase el PDF: copiarlo a `public/cv/` y poner la ruta en `cvUrl` de `src/data/profile.ts`.
+2. Sustituir los datos de prueba por los reales (`src/data/projects.ts`, `src/data/tech.ts`, proyectos y tecnologías; «Sobre mí» ya usa datos confirmados).

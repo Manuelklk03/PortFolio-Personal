@@ -50,7 +50,7 @@
 - [x] Aplicar la paleta Abyss + Jade y el inicio ASCII (nudo 3D + nombre que se descifra).
 - [x] Estilo «terminal elegante» en títulos y tarjetas, cursor en bloque y nombre con partículas.
 - [ ] Añadir el PDF del currículum (`public/cv/…`) y poner su ruta en `cvUrl` de `src/data/profile.ts`.
-- [ ] Elegir y adaptar componentes de React Bits con intención (revisar los actuales frente a la dirección ASCII).
+- [x] Revisar los componentes de React Bits frente a la dirección ASCII (sustituidos por componentes `.astro` propios).
 - [x] Cursor personalizado (solo `pointer: fine`, sin él en táctil ni con `prefers-reduced-motion`).
 - [ ] Comprobar rendimiento, accesibilidad y enlaces internos tras las animaciones.
 
