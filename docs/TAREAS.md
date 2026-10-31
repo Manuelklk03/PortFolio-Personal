@@ -47,7 +47,8 @@
 - [x] Instalar e integrar shadcn/ui adaptando su tema a la paleta.
 - [x] Integrar Lenis (scroll suave) respetando `prefers-reduced-motion`.
 - [x] Integrar GSAP para animaciones de secciones (en `<script>` de Astro o en islas de React, según el caso).
-- [ ] Aplicar la paleta Abyss + Jade y la dirección ASCII interactiva (decisiones una a una).
+- [x] Aplicar la paleta Abyss + Jade y el inicio ASCII (nudo 3D + nombre que se descifra).
+- [ ] Estilo «terminal elegante» en títulos y tarjetas, y cursor en bloque.
 - [ ] Elegir y adaptar componentes de React Bits con intención (revisar los actuales frente a la dirección ASCII).
 - [x] Cursor personalizado (solo `pointer: fine`, sin él en táctil ni con `prefers-reduced-motion`).
 - [ ] Comprobar rendimiento, accesibilidad y enlaces internos tras las animaciones.

@@ -3,8 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import { projects } from "../data/projects";
-import { TextReveal } from "@/components/react-bits/TextReveal";
-import { OrbitingBalls } from "@/components/react-bits/OrbitingBalls";
+import AsciiScene from "../components/ascii/AsciiScene.astro";
+import AsciiName from "../components/ascii/AsciiName.astro";
 import { CustomCursor } from "@/components/react-bits/CustomCursor";
 import { MagneticButton } from "@/components/react-bits/MagneticButton";
 ---
@@ -18,25 +18,28 @@ import { MagneticButton } from "@/components/react-bits/MagneticButton";
   {/* Cursor personalizado - solo desktop, reduced-motion guard interno */}
   <CustomCursor client:load />
   
-  <section id="inicio" class="relative overflow-hidden mx-auto max-w-5xl scroll-mt-24 px-4 py-32">
-    {/* Fondo animado sutil - solo desktop, respeta prefers-reduced-motion */}
-    <OrbitingBalls className="absolute inset-0 -z-10 opacity-20 pointer-events-none" client:visible />
-    
-    <p class="font-mono text-sm text-accent hero-element">Portfolio</p>
-    <h1 class="mt-4 text-5xl font-bold tracking-tight hero-element">
-      <TextReveal text="Manuel Casinos Pérez" className="inline-block" client:visible />
-    </h1>
-    <p class="mt-6 max-w-xl text-lg text-muted hero-element">
-      Desarrollador FullStack en Valencia. Creo aplicaciones web modernas,
-      accesibles y performantes.
-    </p>
-    <div class="mt-8 flex flex-wrap gap-4 hero-element">
-      <MagneticButton asChild className="w-full sm:w-auto magnetic" strength={0.4} client:visible>
-        <a href="#proyectos">Ver proyectos</a>
-      </MagneticButton>
-      <MagneticButton variant="outline" asChild className="w-full sm:w-auto magnetic" strength={0.4} client:visible>
-        <a href="#contacto">Contactar</a>
-      </MagneticButton>
+  <section id="inicio" class="relative isolate scroll-mt-24 overflow-hidden">
+    <AsciiScene />
+    <div class="mx-auto max-w-5xl px-4 py-32">
+      <p class="font-mono text-sm text-accent hero-element">
+        ~/portfolio $ whoami
+      </p>
+      <h1 class="sr-only">Manuel Casinos Pérez</h1>
+      <div class="mt-6 hero-element">
+        <AsciiName lines={["MANUEL", "CASINOS"]} />
+      </div>
+      <p class="mt-8 max-w-xl text-lg text-muted hero-element">
+        Desarrollador FullStack en Valencia. Creo aplicaciones web modernas,
+        accesibles y performantes.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4 hero-element">
+        <MagneticButton asChild className="w-full sm:w-auto magnetic" strength={0.4} client:visible>
+          <a href="#proyectos">Ver proyectos</a>
+        </MagneticButton>
+        <MagneticButton variant="outline" asChild className="w-full sm:w-auto magnetic" strength={0.4} client:visible>
+          <a href="#contacto">Contactar</a>
+        </MagneticButton>
+      </div>
     </div>
   </section>
 
