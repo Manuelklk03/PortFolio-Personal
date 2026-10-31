@@ -16,14 +16,14 @@ Inventario del 24 de octubre de 2026, aprobado por Manuel. Se aplica en `.claude
 | ponytail | plugin (hooks) | Respuestas muy escuetas; karpathy ya cubre «no añadir lo no pedido». | — | desactivado |
 | claude-mem | plugin (memoria) | Memoria propia que compite con `docs/` como punto de relevo. | — | desactivado |
 | superpowers | plugin (skills de proceso) | Impone su flujo (subagentes que implementan, worktrees, TDD, commits); incompatible con el modo plan. | — | desactivado |
-| frontend-stack | skill router | Decide qué skill de diseño lidera cada parte. | 3b (y paleta en 1) | desactivado hasta esa fase |
-| frontend-design | skill | Lidera la dirección visual y la tipografía. | 3b | desactivado hasta esa fase |
-| impeccable | skill + agentes | Auditoría de accesibilidad y pulido de la UI. | 3b y 4 | desactivado hasta esa fase |
-| emil-design-eng | skill | Lidera el movimiento (GSAP, Lenis) y su revisión. | 3b | desactivado hasta esa fase |
-| ui-ux-pro-max | skill | Apoyo para shadcn/ui y tokens de color. | 3b | desactivado hasta esa fase |
+| frontend-stack | skill router | Decide qué skill de diseño lidera cada parte. | 3b (y paleta en 1) | activo (31 oct) |
+| frontend-design | skill | Lidera la dirección visual y la tipografía. | 3b | activo (31 oct) |
+| impeccable | skill + agentes | Auditoría de accesibilidad y pulido de la UI. | 3b y 4 | activo (31 oct) |
+| emil-design-eng | skill | Lidera el movimiento (GSAP, Lenis) y su revisión. | 3b | activo (31 oct) |
+| ui-ux-pro-max | skill | Apoyo para shadcn/ui y tokens de color. | 3b | activo (31 oct) |
 | taste | skill | Se solapa con frontend-design. | — | desactivado |
 | imagegen-skills | skill | No hace falta; si se necesita una imagen, Codex tiene la skill `imagegen`. | — | desactivado |
-| antislop | skill | Revisión de textos visibles y de UI genérica. | 2 y 4 | desactivado hasta esa fase |
+| antislop | skill | Revisión de textos visibles y de UI genérica. | 2 y 4 | activo (31 oct) |
 | headroom | plugin | Ya desactivado globalmente; no aporta aquí. | — | desactivado |
 | chrome-devtools-mcp | plugin (MCP) | Comprobar cada paso en el navegador: móvil, teclado, consola y rendimiento. | Todas | activo |
 | vercel | plugin | Despliegue en Vercel, solo si se elige como alojamiento. | 4 | desactivado hasta esa fase |
@@ -32,6 +32,8 @@ Inventario del 24 de octubre de 2026, aprobado por Manuel. Se aplica en `.claude
 | supabase | plugin | El portfolio no tiene backend ni base de datos. | — | desactivado |
 
 Skills globales sin plugin (27 oct 2026): Task Observer y Graphify no se usan (repositorio pequeño: construir el grafo cuesta más tokens de los que ahorra; reconsiderar si crece). SkillUI y Claudex solo si un paso los necesita, comprobando antes que funcionan.
+
+Skills globales de GSAP (`gsap-core`, `gsap-scrolltrigger`, `gsap-react`, `gsap-performance`…), `make-interfaces-feel-better`, `transitions-dev` y las de Chrome DevTools (`a11y-debugging`, `debug-optimize-lcp`) están disponibles y se usan en la fase de diseño cuando encajen.
 
 Estados posibles: activo, desactivado, desactivado hasta esa fase, por instalar, no aplica.
 
