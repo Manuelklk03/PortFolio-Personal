@@ -7,6 +7,7 @@ import AsciiScene from "../components/ascii/AsciiScene.astro";
 import AsciiName from "../components/ascii/AsciiName.astro";
 import { projects } from "../data/projects";
 import { profile } from "../data/profile";
+import { techStack } from "../data/tech";
 
 const contactLinks = [
   {
@@ -41,23 +42,24 @@ const contactLinks = [
   <section id="inicio" class="relative isolate scroll-mt-24 overflow-hidden">
     <AsciiScene />
     <div class="mx-auto max-w-5xl px-4 py-28 sm:py-32">
-      <p class="font-mono text-sm text-muted hero-element">
-        <span class="text-accent">~/portfolio</span> $ whoami<span
-          aria-hidden="true"
-          class="animate-blink text-accent">█</span
-        >
+      <p class="font-mono text-sm text-muted">
+        <!-- prettier-ignore -->
+        <span class="text-accent">~/portfolio</span> $ whoami
+        <span aria-hidden="true" class="animate-blink text-accent">
+          █
+        </span>
       </p>
       <h1 class="sr-only">Manuel Casinos Pérez</h1>
-      <div class="mt-6 hero-element">
+      <div class="mt-6">
         <AsciiName lines={["MANUEL", "CASINOS"]} />
       </div>
-      <p class="mt-8 max-w-xl text-lg text-foreground hero-element">
+      <p class="mt-8 max-w-xl text-lg text-foreground">
         Desarrollador FullStack en Valencia.
       </p>
-      <p class="mt-2 font-mono text-sm text-accent-2 hero-element">
+      <p class="mt-2 font-mono text-sm text-accent-2">
         Java · Spring Boot · Angular · TypeScript · React
       </p>
-      <div class="mt-10 flex flex-wrap gap-3 hero-element">
+      <div class="mt-10 flex flex-wrap gap-3">
         <a
           href="#proyectos"
           class="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 font-mono text-sm font-medium text-background shadow-[0_0_32px_-6px_rgb(62_230_193/0.7)] transition hover:bg-foreground"
@@ -77,7 +79,8 @@ const contactLinks = [
 
   <Section id="sobre-mi" title="Sobre mí">
     <div
-      class="max-w-3xl space-y-4 text-muted animate-fade-up [&_strong]:font-medium [&_strong]:text-foreground"
+      data-reveal
+      class="max-w-3xl space-y-4 text-muted [&_strong]:font-medium [&_strong]:text-foreground"
     >
       <p>
         Desarrollador FullStack autodidacta con base en{" "}
@@ -88,7 +91,8 @@ const contactLinks = [
       <p>
         Aprendí programando proyectos reales: <em>Cerrajería NOA</em> (web
         corporativa), <em>Digital Fit 2.0</em> (plataforma de entrenamiento) y{" "}
-        <em>ValveDex</em> (visualizador 3D de válvulas industriales con Three.js).
+        <em>ValveDex</em> (visualizador 3D de válvulas industriales con
+        Three.js).
       </p>
       <p>
         Actualmente profundizando en <strong>Astro</strong>,{" "}
@@ -98,135 +102,104 @@ const contactLinks = [
   </Section>
 
   <Section id="proyectos" title="Proyectos">
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 project-cards-container">
-      {projects.map((project) => <ProjectCard project={project} className="project-card" />)}
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project) => (
+        <ProjectCard project={project} />
+      ))}
     </div>
   </Section>
 
   <Section id="tecnologias" title="Tecnologías">
-    <div class="space-y-10 animate-fade-up">
+    <div data-reveal class="space-y-10">
       <div>
         <h3 class="mb-4 font-mono text-sm text-accent">$ stack --base</h3>
         <ul class="flex flex-wrap gap-2">
-          {
-            [
-              "TypeScript",
-              "React",
-              "Node.js",
-              "Astro",
-              "Tailwind CSS",
-              "Git",
-              "PostgreSQL",
-              "REST APIs",
-            ].map((tech) => (
-              <li class="rounded border border-accent/40 bg-accent/10 px-3 py-1 font-mono text-sm text-foreground">
-                {tech}
-              </li>
-            ))
-          }
+          {techStack.base.map((tech) => (
+            <li class="rounded border border-accent/40 bg-accent/10 px-3 py-1 font-mono text-sm text-foreground">
+              {tech}
+            </li>
+          ))}
         </ul>
       </div>
       <div>
-        <h3 class="mb-4 font-mono text-sm text-accent-2">$ stack --aprendiendo</h3>
+        <h3 class="mb-4 font-mono text-sm text-accent-2">
+          $ stack --aprendiendo
+        </h3>
         <ul class="flex flex-wrap gap-2">
-          {
-            [
-              "Three.js / R3F",
-              "Testing (Vitest/Playwright)",
-              "Docker",
-              "CI/CD",
-              "GraphQL",
-              "Next.js",
-            ].map((tech) => (
-              <li class="rounded border border-dashed border-accent-2/60 px-3 py-1 font-mono text-sm text-muted">
-                {tech}
-              </li>
-            ))
-          }
+          {techStack.learning.map((tech) => (
+            <li class="rounded border border-dashed border-accent-2/60 px-3 py-1 font-mono text-sm text-muted">
+              {tech}
+            </li>
+          ))}
         </ul>
       </div>
     </div>
   </Section>
 
-  <Section id="cv" title="Currículum">
-    {
-      profile.cvUrl ? (
-        <div class="animate-fade-up">
-          <div class="overflow-hidden rounded-lg border border-border bg-surface/80">
-            <div class="flex items-center gap-3 border-b border-border px-4 py-2.5 font-mono text-xs text-muted">
-              <span class="text-accent">$</span> open curriculum.pdf
-            </div>
-            <object
-              data={profile.cvUrl}
-              type="application/pdf"
-              class="h-[80vh] w-full"
-              aria-label={`Currículum de ${profile.name} en PDF`}
-            >
-              <p class="p-6 text-muted">
-                Tu navegador no puede mostrar el PDF aquí.{" "}
-                <a href={profile.cvUrl} class="text-accent underline">
-                  Ábrelo o descárgalo
-                </a>
-                .
-              </p>
-            </object>
+  {profile.cvUrl && (
+    <Section id="cv" title="Currículum">
+      <div data-reveal class="">
+        <div class="overflow-hidden rounded-lg border border-border bg-surface/80">
+          <div class="flex items-center gap-3 border-b border-border px-4 py-2.5 font-mono text-xs text-muted">
+            <span class="text-accent">$</span> open curriculum.pdf
           </div>
-          <a
-            href={profile.cvUrl}
-            download
-            class="mt-4 inline-flex items-center gap-2 rounded-md border border-accent/50 px-5 py-3 font-mono text-sm text-accent transition hover:border-accent hover:bg-accent/10"
+          <object
+            data={profile.cvUrl}
+            type="application/pdf"
+            class="h-[80vh] w-full"
+            aria-label={`Currículum de ${profile.name} en PDF`}
           >
-            <span aria-hidden="true">↓</span> descargar PDF
-          </a>
+            <p class="p-6 text-muted">
+              Tu navegador no puede mostrar el PDF aquí.{" "}
+              <a href={profile.cvUrl} class="text-accent underline">
+                Ábrelo o descárgalo
+              </a>
+              .
+            </p>
+          </object>
         </div>
-      ) : (
-        <p class="font-mono text-sm text-muted animate-fade-up">
-          <span class="text-accent">$</span> cat curriculum.pdf
-          <br />
-          <span class="text-accent-2">&gt;</span> Disponible muy pronto.
-        </p>
-      )
-    }
-  </Section>
+        <a
+          href={profile.cvUrl}
+          download
+          class="mt-4 inline-flex items-center gap-2 rounded-md border border-accent/50 px-5 py-3 font-mono text-sm text-accent transition hover:border-accent hover:bg-accent/10"
+        >
+          <span aria-hidden="true">↓</span> descargar PDF
+        </a>
+      </div>
+    </Section>
+  )}
 
   <Section id="contacto" title="Contacto">
-    <div class="animate-fade-up">
+    <div data-reveal class="">
       <p class="max-w-xl text-muted">
         Escríbeme por correo o revisa mi trabajo en GitHub y LinkedIn.
       </p>
       <ul class="mt-8 grid gap-3 sm:grid-cols-3">
-        {
-          contactLinks.map((link) => (
-            <li>
-              <a
-                href={link.href}
-                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                class="group flex h-full flex-col gap-2 rounded-lg border border-border bg-surface/70 p-5 font-mono transition duration-300 hover:-translate-y-1 hover:border-accent/60 hover:bg-accent/5 hover:shadow-[0_0_40px_-12px_rgb(62_230_193/0.5)]"
-              >
-                <span class="text-xs text-muted">
-                  <span class="text-accent-2">$</span> {link.command}
-                </span>
-                <span class="break-all text-accent transition-colors group-hover:text-foreground">
-                  {link.label}
-                </span>
-              </a>
-            </li>
-          ))
-        }
+        {contactLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              {...(link.external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              class="group flex h-full flex-col gap-2 rounded-lg border border-border bg-surface/70 p-5 font-mono transition duration-300 hover:-translate-y-1 hover:border-accent/60 hover:bg-accent/5 hover:shadow-[0_0_40px_-12px_rgb(62_230_193/0.5)]"
+            >
+              <span class="text-xs text-muted">
+                <span class="text-accent-2">$</span> {link.command}
+              </span>
+              <span class="break-all text-accent transition-colors group-hover:text-foreground">
+                {link.label}
+              </span>
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
   </Section>
 
-  <script type="module">
-    import { animateHero, animateFadeUp, animateProjectCards } from "@/scripts/animations";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-    animateHero("#inicio");
-    animateFadeUp("#sobre-mi");
-    animateFadeUp("#tecnologias");
-    animateFadeUp("#cv");
-    animateFadeUp("#contacto");
-    animateProjectCards("#proyectos");
-    // Refrescar ScrollTrigger para asegurar que los triggers se calculan correctamente
-    ScrollTrigger.refresh();
+  <script>
+    import { initReveal } from "@/scripts/reveal";
+    // La entrada del inicio la hacen las partículas del nombre; aquí solo las secciones.
+    initReveal();
   </script>
 </Layout>
