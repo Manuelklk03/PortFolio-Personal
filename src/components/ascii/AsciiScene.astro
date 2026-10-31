@@ -11,15 +11,16 @@
 <button
   type="button"
   data-ascii-toggle
-  aria-pressed="false"
-  class="absolute right-4 bottom-4 hidden rounded border border-border bg-background/70 px-3 py-1.5 font-mono text-xs text-muted backdrop-blur transition hover:border-accent/60 hover:text-accent"
+  class="absolute right-[max(1rem,calc((100%-64rem)/2+1rem))] bottom-4 hidden rounded border border-border bg-background/70 px-3 py-1.5 font-mono text-xs text-muted backdrop-blur transition hover:border-accent/60 hover:text-accent"
 >
   [ pausar fondo ]
 </button>
 
 <script>
   const container = document.querySelector<HTMLElement>("[data-ascii-scene]");
-  const toggle = document.querySelector<HTMLButtonElement>("[data-ascii-toggle]");
+  const toggle = document.querySelector<HTMLButtonElement>(
+    "[data-ascii-toggle]",
+  );
   // En móvil no se carga: el nombre en ASCII basta y se ahorra batería y datos.
   const isLargeScreen = window.matchMedia("(min-width: 768px)").matches;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -39,9 +40,10 @@
       syncButton();
       reducedMotion.addEventListener("change", syncButton);
 
+      // El texto del botón dice la acción que hará; por eso no lleva aria-pressed.
+      let paused = false;
       toggle.addEventListener("click", () => {
-        const paused = toggle.getAttribute("aria-pressed") !== "true";
-        toggle.setAttribute("aria-pressed", String(paused));
+        paused = !paused;
         toggle.textContent = paused ? "[ reanudar fondo ]" : "[ pausar fondo ]";
         controls.setPaused(paused);
       });

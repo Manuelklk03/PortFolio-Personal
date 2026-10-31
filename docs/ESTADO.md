@@ -7,7 +7,7 @@
 
 La web tiene la estructura completa de una página: cabecera, inicio, sobre mí, proyectos (tarjetas desde `src/data/projects.ts`), tecnologías, contacto, pie y página 404, con SEO básico. En la fase de diseño ya se integraron shadcn/ui, Lenis, GSAP con ScrollTrigger, componentes de React Bits y un cursor personalizado. **Todo el contenido es de prueba** (proyectos, enlaces, tecnologías, dominio `manuelcasinos.dev`): hay que sustituirlo por los datos reales de `docs/PROYECTOS.md` antes de publicar.
 
-Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abyss + Jade** (ver `docs/DECISIONES.md`). Aplicado: paleta e inicio (nudo 3D en ASCII con Three.js + nombre ASCII con figlet que se descifra). Después, rediseño «terminal elegante»: nombre con partículas que se apartan del ratón, cursor en bloque (`src/components/Cursor.astro`), títulos con prompt, tarjetas tipo ventana, sección de currículum (falta el PDF) y contacto con correo, GitHub y LinkedIn (`src/data/profile.ts`). Ya no hay islas de React en uso.
+Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abyss + Jade** (ver `docs/DECISIONES.md`). Aplicado: paleta e inicio (nudo 3D en ASCII con Three.js + nombre ASCII con figlet que se descifra). Después, rediseño «terminal elegante»: nombre con partículas que se apartan del ratón, cursor en bloque (`src/components/Cursor.astro`), títulos con prompt, tarjetas tipo ventana, sección de currículum (falta el PDF) y contacto con correo, GitHub y LinkedIn (`src/data/profile.ts`). Ya no hay islas de React en uso, ni GSAP (entradas con `src/scripts/reveal.ts`).
 
 ## Modo de trabajo
 
@@ -23,12 +23,13 @@ Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abys
 
 ## Git
 
-- `main` al día hasta la PR de `fix/cleanup-and-docs`. Las PR #12 a #26 se hicieron sin actualizar la documentación; esta rama la pone al día.
+- `main` al día hasta la PR de `fix/ui-review` (31 oct).
 - Sin protección de `main` en GitHub (decisión de Manuel); se sigue el flujo de ramas y PR. `git fetch --prune` limpia las ramas remotas borradas.
 
-## Comprobaciones (31 oct, rediseño terminal)
+## Comprobaciones (31 oct, revisión de UI)
 
-- Ejecutadas por Claude: `npm run check` → 0 errores; `npm run build` → 2 páginas; Chrome con `astro preview`: escritorio (partículas y cursor funcionando), móvil 375 px sin scroll horizontal y sin cursor personalizado, consola sin errores. Revisión de Codex aplicada (bucles parados fuera de pantalla, cambios de movimiento reducido, parpadeo visible, botón de CV condicional).
+- Revisión con el agente ui-reviewer (antislop + criterios de impeccable): contraste AA correcto con la paleta, foco, semántica y movimiento reducido bien; arreglados los fallos rápidos.
+- Ejecutadas por Claude: `npm run check` → 0 errores; `npm run build` → 2 páginas, sin imports `@/` sin empaquetar; Chrome: Lenis activo, las secciones entran y siguen visibles al volver arriba, consola sin errores; móvil 390 px: cabecera estática, enlaces de 44 px, sin scroll horizontal.
 
 ## Problemas conocidos
 
@@ -41,11 +42,11 @@ Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abys
 ## Datos o decisiones pendientes de Manuel
 
 - ¿ValveDex usa Three.js / React Three Fiber? (solo afecta a `docs/HERRAMIENTAS.md`).
-- Correo público y CV.
+- CV: falta el PDF.
+- Decisiones de diseño de la revisión de UI: posición del nudo, estilo de las tarjetas, variedad de secciones y cantidad de brillos.
 
 ## Próximo paso concreto
 
-1. Cuando Manuel pase el PDF: copiarlo a `public/cv/` y poner la ruta en `cvUrl` de `src/data/profile.ts`.
-2. Recargar los plugins de diseño (`/reload-plugins`) y pasar antislop e impeccable a toda la web.
-3. Revisar `src/scripts/animations.ts` (`window as any`, contra las reglas de `AGENTS.md`).
-4. Sustituir los datos de prueba por los reales.
+1. Aplicar las decisiones de diseño de la revisión de UI que elija Manuel.
+2. Cuando Manuel pase el PDF: copiarlo a `public/cv/` y poner la ruta en `cvUrl` de `src/data/profile.ts`.
+3. Sustituir los datos de prueba por los reales (`src/data/projects.ts`, `src/data/tech.ts`, textos de «Sobre mí»).

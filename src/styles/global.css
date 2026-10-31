@@ -26,29 +26,29 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* shadcn/ui variables → mapeadas a tu paleta @theme */
+/* Variables de shadcn/ui apuntando a la paleta del @theme */
 @layer base {
   :root {
-    --background: var(--color-background);      /* #0b0f14 */
-    --foreground: var(--color-foreground);      /* #e6edf3 */
-    --card: var(--color-surface);               /* #121821 */
-    --card-foreground: var(--color-foreground); /* #e6edf3 */
-    --popover: var(--color-surface);            /* #121821 */
-    --popover-foreground: var(--color-foreground); /* #e6edf3 */
-    --primary: var(--color-accent);             /* #22d3ee */
-    --primary-foreground: var(--color-background); /* #0b0f14 */
-    --secondary: var(--color-border);           /* #1f2937 */
-    --secondary-foreground: var(--color-foreground); /* #e6edf3 */
-    --muted: var(--color-border);               /* #1f2937 */
-    --muted-foreground: var(--color-muted);     /* #8b949e */
-    --accent: var(--color-border);              /* #1f2937 */
-    --accent-foreground: var(--color-foreground); /* #e6edf3 */
-    --destructive: #ef4444;                     /* rojo estándar */
-    --destructive-foreground: var(--color-foreground); /* #e6edf3 */
-    --border: var(--color-border);              /* #1f2937 */
-    --input: var(--color-border);               /* #1f2937 */
-    --ring: var(--color-accent);                /* #22d3ee */
-    --radius: 0.5rem;                           /* 8px */
+    --background: var(--color-background);
+    --foreground: var(--color-foreground);
+    --card: var(--color-surface);
+    --card-foreground: var(--color-foreground);
+    --popover: var(--color-surface);
+    --popover-foreground: var(--color-foreground);
+    --primary: var(--color-accent);
+    --primary-foreground: var(--color-background);
+    --secondary: var(--color-border);
+    --secondary-foreground: var(--color-foreground);
+    --muted: var(--color-border);
+    --muted-foreground: var(--color-muted);
+    --accent: var(--color-border);
+    --accent-foreground: var(--color-foreground);
+    --destructive: #ef4444; /* rojo estándar */
+    --destructive-foreground: var(--color-foreground);
+    --border: var(--color-border);
+    --input: var(--color-border);
+    --ring: var(--color-accent);
+    --radius: 0.5rem; /* 8px */
   }
 }
 
@@ -67,9 +67,21 @@
   /* Brillos jade y teal fijos detrás de todo el contenido */
   body {
     background-image:
-      radial-gradient(60rem 40rem at 85% -10%, rgb(62 230 193 / 0.1), transparent 60%),
-      radial-gradient(50rem 40rem at -10% 35%, rgb(15 157 154 / 0.12), transparent 60%),
-      radial-gradient(40rem 30rem at 100% 90%, rgb(62 230 193 / 0.06), transparent 60%);
+      radial-gradient(
+        60rem 40rem at 85% -10%,
+        rgb(62 230 193 / 0.1),
+        transparent 60%
+      ),
+      radial-gradient(
+        50rem 40rem at -10% 35%,
+        rgb(15 157 154 / 0.12),
+        transparent 60%
+      ),
+      radial-gradient(
+        40rem 30rem at 100% 90%,
+        rgb(62 230 193 / 0.06),
+        transparent 60%
+      );
     background-attachment: fixed;
   }
 
@@ -87,6 +99,22 @@
   @media (prefers-reduced-motion: reduce) {
     .animate-blink {
       animation: none;
+    }
+  }
+
+  /* Entrada de las secciones al hacer scroll (src/scripts/reveal.ts) */
+  @media (prefers-reduced-motion: no-preference) {
+    .js-reveal [data-reveal] {
+      opacity: 0;
+      translate: 0 24px;
+      transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+        translate 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+    }
+
+    .js-reveal [data-reveal].is-visible {
+      opacity: 1;
+      translate: 0 0;
     }
   }
 
