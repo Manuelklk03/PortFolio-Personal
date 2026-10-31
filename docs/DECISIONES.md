@@ -55,6 +55,14 @@
 | Las correcciones pequeñas que detecte la IA (erratas, configuración, fixes) las aplica ella sola con su commit, push, PR y merge, y después le dice a Manuel qué arregló. Los pasos con código nuevo siguen en modo plan. | Pedido por Manuel. | Excepción a «no hagas commits salvo petición expresa» de `AGENTS.md`. |
 | Plugins nuevos: activar chrome-devtools-mcp; vercel desactivado hasta la fase 4; desactivar oh-my-claudecode, mempalace y supabase. | Aprobado por Manuel tras la propuesta de Claude. | `.claude/settings.json` y tabla de `docs/HERRAMIENTAS.md`. |
 
+## Confirmado — 31 de octubre de 2026 (sesión con Claude Code)
+
+| Decisión | Motivo | Consecuencias |
+| --- | --- | --- |
+| Dirección visual: ASCII art interactivo, estilo terminal elegante. Sustituye a «oscuro y técnico» genérico. | Elegido por Manuel: quiere un diseño que destaque. | Los efectos actuales (`OrbitingBalls`, `TextReveal`) se revisan para sustituirlos por efectos ASCII. Las decisiones concretas (efecto del inicio, marcos, cursor) se preguntan una a una. |
+| Paleta «Abyss + Jade»: fondo `#050A14`, superficie `#0A1626`, borde `#15304A`, texto `#DDF7F0`, secundario `#8AA9A6`, acento `#3EE6C1`, acento 2 `#0F9D9A`. | Elegida por Manuel (Midnight Abyss + Aqua Jade). Contraste del texto secundario sobre el fondo ≈ 7,7:1. | Sustituye a la paleta base del 27 oct; se aplica en `@theme` en el paso de diseño. |
+| Los proyectos, enlaces, tecnologías y el dominio `manuelcasinos.dev` que hay ahora en la web son **datos de prueba**. | Indicado por Manuel. | Deben sustituirse por los datos reales de `docs/PROYECTOS.md` antes de publicar. |
+
 ## Propuestas pendientes
 
 | Propuesta | Estado |
@@ -62,7 +70,7 @@
 | Paleta: fondo `#0B0F14`, superficie `#121821`, borde `#1F2937`, texto `#E6EDF3`, texto secundario `#8B949E`, acento `#22D3EE`. | Aplicada como base (27 oct 2026, tema `@theme`); se revisa en la fase de diseño. |
 | Tipografía: Geist (texto) y Geist Mono (detalles técnicos). | Aplicada como base (27 oct 2026) con la API de fuentes de Astro y Fontsource; se revisa en la fase de diseño. |
 | Solo tema oscuro en la primera versión. | Propuesta; tema claro queda como ampliación. |
-| Primera versión con una página y secciones. | Pendiente de acordar. |
+| Primera versión con una página y secciones. | Aplicada (estructura de PR #11 en adelante). |
 | Proyectos en un archivo de datos local, sin backend. | Pendiente de acordar. |
 | Cerrajería NOA y Digital Fit como proyectos principales. | Pendiente de revisar material y selección. |
 | Alojamiento, dominio, correo y CV público. | Sin definir. |

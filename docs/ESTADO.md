@@ -1,11 +1,13 @@
 # Estado actual y relevo
 
-Última actualización: 27 de octubre de 2026.
+Última actualización: 31 de octubre de 2026.
 Última sesión: Claude Code, con revisión de Codex (plugin `codex`).
 
 ## Resumen del estado real
 
-`main` tiene la documentación, la base **Astro + React + Tailwind + TypeScript estricto** (Astro sustituye a Next.js; motivo en `docs/DECISIONES.md`), el layout base `src/layouts/Layout.astro`, Prettier con el plugin de Astro, la paleta como tema de Tailwind (`@theme` en `src/styles/global.css`) y la tipografía Geist / Geist Mono con la API de fuentes de Astro. Paleta y tipografía son la base aceptada; se revisan en la fase de diseño. La página de inicio solo muestra una tarjeta temporal; todavía no hay secciones ni contenido.
+La web tiene la estructura completa de una página: cabecera, inicio, sobre mí, proyectos (tarjetas desde `src/data/projects.ts`), tecnologías, contacto, pie y página 404, con SEO básico. En la fase de diseño ya se integraron shadcn/ui, Lenis, GSAP con ScrollTrigger, componentes de React Bits y un cursor personalizado. **Todo el contenido es de prueba** (proyectos, enlaces, tecnologías, dominio `manuelcasinos.dev`): hay que sustituirlo por los datos reales de `docs/PROYECTOS.md` antes de publicar.
+
+Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abyss + Jade** (ver `docs/DECISIONES.md`); todavía sin aplicar en el código.
 
 ## Modo de trabajo
 
@@ -19,12 +21,12 @@
 
 ## Git
 
-- Todo mergeado en `main` (última entrega: tipografía, rama `feature/typography`). Las correcciones pequeñas las hace la IA con su commit, PR y merge (ver `AGENTS.md`).
-- Sin protección de `main` en GitHub (decisión de Manuel); se sigue el flujo de ramas y PR.
+- `main` al día hasta la PR de `fix/cleanup-and-docs`. Las PR #12 a #26 se hicieron sin actualizar la documentación; esta rama la pone al día.
+- Sin protección de `main` en GitHub (decisión de Manuel); se sigue el flujo de ramas y PR. `git fetch --prune` limpia las ramas remotas borradas.
 
-## Comprobaciones (última entrega)
+## Comprobaciones (31 oct)
 
-- Ejecutadas por Claude: `npm run check` → 0 errores; `npm run build` → 1 página, fuentes `.woff2` en `dist/_astro/fonts/` y `preload` de Geist en `index.html`; `npx prettier --check src` sin avisos.
+- Ejecutadas por Claude: `npm run check` → 0 errores, 0 avisos; `npm run build` → 2 páginas; vista en Chrome (`astro preview`) sin errores en consola.
 
 ## Problemas conocidos
 
@@ -34,10 +36,11 @@
 
 ## Datos o decisiones pendientes de Manuel
 
-- Estructura: una página con secciones (propuesta).
 - ¿ValveDex usa Three.js / React Three Fiber? (solo afecta a `docs/HERRAMIENTAS.md`).
 - Correo público y CV.
 
 ## Próximo paso concreto (modo plan)
 
-1. Estructura de la página: componentes `Header` y `Footer` en `src/components`, secciones con sus anclas en `index.astro`, navegación accesible y enlace «Saltar al contenido».
+1. Preguntar a Manuel el efecto ASCII del inicio (fondo reactivo al ratón, nombre en ASCII que se descifra, marcos de terminal…) y el resto de decisiones de diseño, una a una.
+2. Aplicar la paleta Abyss + Jade en `@theme` y el primer efecto ASCII, sustituyendo `OrbitingBalls` / `TextReveal` si Manuel lo aprueba.
+3. Más adelante: sustituir los datos de prueba por los reales.
