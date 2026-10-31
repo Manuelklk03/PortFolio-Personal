@@ -7,7 +7,7 @@
 
 La web tiene la estructura completa de una página: cabecera, inicio, sobre mí, proyectos (tarjetas desde `src/data/projects.ts`), tecnologías, contacto, pie y página 404, con SEO básico. En la fase de diseño ya se integraron shadcn/ui, Lenis, GSAP con ScrollTrigger, componentes de React Bits y un cursor personalizado. **Todo el contenido es de prueba** (proyectos, enlaces, tecnologías, dominio `manuelcasinos.dev`): hay que sustituirlo por los datos reales de `docs/PROYECTOS.md` antes de publicar.
 
-Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abyss + Jade** (ver `docs/DECISIONES.md`). Aplicado: paleta e inicio (nudo 3D en ASCII con Three.js + nombre ASCII con figlet que se descifra). Pendiente: estilo terminal en títulos y tarjetas, y cursor en bloque.
+Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abyss + Jade** (ver `docs/DECISIONES.md`). Aplicado: paleta e inicio (nudo 3D en ASCII con Three.js + nombre ASCII con figlet que se descifra). Después, rediseño «terminal elegante»: nombre con partículas que se apartan del ratón, cursor en bloque (`src/components/Cursor.astro`), títulos con prompt, tarjetas tipo ventana, sección de currículum (falta el PDF) y contacto con correo, GitHub y LinkedIn (`src/data/profile.ts`). Ya no hay islas de React en uso.
 
 ## Modo de trabajo
 
@@ -26,9 +26,9 @@ Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abys
 - `main` al día hasta la PR de `fix/cleanup-and-docs`. Las PR #12 a #26 se hicieron sin actualizar la documentación; esta rama la pone al día.
 - Sin protección de `main` en GitHub (decisión de Manuel); se sigue el flujo de ramas y PR. `git fetch --prune` limpia las ramas remotas borradas.
 
-## Comprobaciones (31 oct, inicio ASCII)
+## Comprobaciones (31 oct, rediseño terminal)
 
-- Ejecutadas por Claude: `npm run check` → 0 errores; `npm run build` → 2 páginas (Three.js en chunk diferido); Chrome con `astro preview`: escritorio, móvil 375 px sin scroll horizontal y `prefers-reduced-motion` (3D estático, sin descifrado). Revisión de Codex aplicada: el 3D no se carga por debajo de 768 px, el bucle se cancela fuera de pantalla y si cambia `prefers-reduced-motion`, el giro automático para a los 5 s (después solo responde al ratón) y sin WebGL no rompe nada.
+- Ejecutadas por Claude: `npm run check` → 0 errores; `npm run build` → 2 páginas; Chrome con `astro preview`: escritorio (partículas y cursor funcionando), móvil 375 px sin scroll horizontal y sin cursor personalizado, consola sin errores. Revisión de Codex aplicada (bucles parados fuera de pantalla, cambios de movimiento reducido, parpadeo visible, botón de CV condicional).
 
 ## Problemas conocidos
 
@@ -43,8 +43,9 @@ Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abys
 - ¿ValveDex usa Three.js / React Three Fiber? (solo afecta a `docs/HERRAMIENTAS.md`).
 - Correo público y CV.
 
-## Próximo paso concreto (modo plan)
+## Próximo paso concreto
 
-1. Paso 6 de diseño: títulos de sección con prompt (`~/proyectos $`), tarjetas con marco de terminal y cursor en bloque `█` jade (reescribir `CustomCursor`: su limpieza de eventos no se ejecuta y usa colores fijos de la paleta antigua).
-2. Revisar `src/scripts/animations.ts` (`window as any`, contra las reglas de `AGENTS.md`).
-3. Más adelante: sustituir los datos de prueba por los reales.
+1. Cuando Manuel pase el PDF: copiarlo a `public/cv/` y poner la ruta en `cvUrl` de `src/data/profile.ts`.
+2. Recargar los plugins de diseño (`/reload-plugins`) y pasar antislop e impeccable a toda la web.
+3. Revisar `src/scripts/animations.ts` (`window as any`, contra las reglas de `AGENTS.md`).
+4. Sustituir los datos de prueba por los reales.

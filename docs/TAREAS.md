@@ -30,7 +30,7 @@
 - [ ] Elegir los proyectos de la primera versión.
 - [ ] Confirmar tecnologías, aportación y estado de cada proyecto.
 - [ ] Reunir capturas y verificar los enlaces disponibles.
-- [ ] Confirmar si se publicarán correo y CV, y obtener los archivos necesarios.
+- [x] Correo público confirmado: manuelcp420@gmail.com (31 oct). CV: sección lista, falta el PDF.
 
 ## 3. Primera versión
 
@@ -48,7 +48,8 @@
 - [x] Integrar Lenis (scroll suave) respetando `prefers-reduced-motion`.
 - [x] Integrar GSAP para animaciones de secciones (en `<script>` de Astro o en islas de React, según el caso).
 - [x] Aplicar la paleta Abyss + Jade y el inicio ASCII (nudo 3D + nombre que se descifra).
-- [ ] Estilo «terminal elegante» en títulos y tarjetas, y cursor en bloque.
+- [x] Estilo «terminal elegante» en títulos y tarjetas, cursor en bloque y nombre con partículas.
+- [ ] Añadir el PDF del currículum (`public/cv/…`) y poner su ruta en `cvUrl` de `src/data/profile.ts`.
 - [ ] Elegir y adaptar componentes de React Bits con intención (revisar los actuales frente a la dirección ASCII).
 - [x] Cursor personalizado (solo `pointer: fine`, sin él en táctil ni con `prefers-reduced-motion`).
 - [ ] Comprobar rendimiento, accesibilidad y enlaces internos tras las animaciones.
