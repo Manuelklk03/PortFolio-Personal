@@ -64,24 +64,13 @@
     }
   }
 
-  /* Brillos jade y teal fijos detrás de todo el contenido */
+  /* Un solo foco de luz jade arriba a la derecha, detrás del nudo */
   body {
-    background-image:
-      radial-gradient(
-        60rem 40rem at 85% -10%,
-        rgb(62 230 193 / 0.1),
-        transparent 60%
-      ),
-      radial-gradient(
-        50rem 40rem at -10% 35%,
-        rgb(15 157 154 / 0.12),
-        transparent 60%
-      ),
-      radial-gradient(
-        40rem 30rem at 100% 90%,
-        rgb(62 230 193 / 0.06),
-        transparent 60%
-      );
+    background-image: radial-gradient(
+      60rem 40rem at 85% -10%,
+      rgb(62 230 193 / 0.1),
+      transparent 60%
+    );
     background-attachment: fixed;
   }
 
