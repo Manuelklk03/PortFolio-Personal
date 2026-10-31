@@ -9,6 +9,16 @@
   --color-muted: #8aa9a6; /* texto secundario */
   --color-accent: #3ee6c1; /* Aqua Jade: acento */
   --color-accent-2: #0f9d9a; /* teal profundo: acento secundario */
+
+  /* Parpadeo de cursor de terminal (clase animate-blink) */
+  --animate-blink: blink 1.1s steps(1, end) infinite;
+
+  /* No llega a 0: el cursor personalizado nunca desaparece del todo */
+  @keyframes blink {
+    50% {
+      opacity: 0.25;
+    }
+  }
 }
 
 @theme inline {
@@ -51,6 +61,32 @@
   @media (prefers-reduced-motion: no-preference) {
     html {
       scroll-behavior: smooth;
+    }
+  }
+
+  /* Brillos jade y teal fijos detrás de todo el contenido */
+  body {
+    background-image:
+      radial-gradient(60rem 40rem at 85% -10%, rgb(62 230 193 / 0.1), transparent 60%),
+      radial-gradient(50rem 40rem at -10% 35%, rgb(15 157 154 / 0.12), transparent 60%),
+      radial-gradient(40rem 30rem at 100% 90%, rgb(62 230 193 / 0.06), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background-color: rgb(62 230 193 / 0.3);
+    color: var(--color-foreground);
+  }
+
+  /* Con el cursor de terminal activo se oculta el del sistema */
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-blink {
+      animation: none;
     }
   }
 

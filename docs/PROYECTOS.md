@@ -12,7 +12,7 @@ Información aportada anteriormente por Manuel. Sirve como base, pero antes de p
 - Interés en seguir aprendiendo Python. No presentarlo como un conocimiento demostrado sin un proyecto o confirmación.
 - GitHub: https://github.com/Manuelklk03
 - LinkedIn: https://www.linkedin.com/in/manuel-casinos-perez/
-- Correo público y CV definitivo: pendientes de facilitar.
+- Correo público: manuelcp420@gmail.com (confirmado por Manuel el 31 de octubre de 2026). CV definitivo: pendiente de facilitar.
 
 Las prácticas en empresa deben identificarse como prácticas vinculadas a la formación. No convertirlas en experiencia laboral de un puesto contratado ni añadir años de experiencia.
 

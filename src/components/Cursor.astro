@@ -1,0 +1,65 @@
+---
+// Cursor de terminal: un bloque jade que parpadea y se convierte en [ ] sobre los enlaces.
+// Solo con ratón y sin prefers-reduced-motion; en el resto se usa el cursor del sistema.
+---
+
+<div
+  data-cursor
+  aria-hidden="true"
+  class="group pointer-events-none fixed top-0 left-0 z-[100] hidden opacity-0 transition-opacity duration-200"
+>
+  <span
+    class="animate-blink block h-5 w-2.5 -translate-y-1/2 bg-accent shadow-[0_0_16px_rgb(62_230_193/0.9)] transition-[width,height,background-color,box-shadow] duration-150 group-data-[hover=true]:h-7 group-data-[hover=true]:w-7 group-data-[hover=true]:-translate-x-1/2 group-data-[hover=true]:animate-none group-data-[hover=true]:rounded-sm group-data-[hover=true]:bg-accent/10 group-data-[hover=true]:ring-2 group-data-[hover=true]:ring-accent group-data-[pressed=true]:scale-75"
+  ></span>
+</div>
+
+<script>
+  const cursor = document.querySelector<HTMLElement>("[data-cursor]");
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  if (cursor && finePointer && !reducedMotion.matches) {
+    // Si el usuario pide menos movimiento con la página abierta, vuelve el cursor del sistema.
+    reducedMotion.addEventListener("change", () => {
+      const off = reducedMotion.matches;
+      document.documentElement.classList.toggle("has-custom-cursor", !off);
+      cursor.classList.toggle("hidden", off);
+    });
+
+    const INTERACTIVE = "a, button, [role='button'], summary, label, [data-ascii-name]";
+    const target = { x: -100, y: -100 };
+    const position = { x: -100, y: -100 };
+    let frameId: number | null = null;
+
+    document.documentElement.classList.add("has-custom-cursor");
+    cursor.classList.remove("hidden");
+
+    // Sigue al ratón con un poco de inercia y se para al alcanzarlo.
+    const follow = () => {
+      position.x += (target.x - position.x) * 0.35;
+      position.y += (target.y - position.y) * 0.35;
+      cursor.style.transform = `translate3d(${position.x}px, ${position.y}px, 0)`;
+      const settled =
+        Math.abs(target.x - position.x) < 0.1 && Math.abs(target.y - position.y) < 0.1;
+      frameId = settled ? null : requestAnimationFrame(follow);
+    };
+
+    window.addEventListener("pointermove", (event) => {
+      if (event.pointerType !== "mouse") return;
+      target.x = event.clientX;
+      target.y = event.clientY;
+      cursor.classList.add("opacity-100");
+      if (frameId === null) frameId = requestAnimationFrame(follow);
+    });
+
+    document.addEventListener("pointerover", (event) => {
+      const element = event.target instanceof Element ? event.target : null;
+      cursor.dataset.hover = element?.closest(INTERACTIVE) ? "true" : "false";
+    });
+    window.addEventListener("pointerdown", () => (cursor.dataset.pressed = "true"));
+    window.addEventListener("pointerup", () => (cursor.dataset.pressed = "false"));
+    document.documentElement.addEventListener("pointerleave", () =>
+      cursor.classList.remove("opacity-100"),
+    );
+  }
+</script>

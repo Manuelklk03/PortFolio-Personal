@@ -9,10 +9,21 @@ const { id, title } = Astro.props;
 
 <section id={id} aria-labelledby={`${id}-title`} class="scroll-mt-24 py-24">
   <div class="mx-auto max-w-5xl px-4">
-    <h2 id={`${id}-title`} class="text-3xl font-semibold tracking-tight">
+    <h2
+      id={`${id}-title`}
+      class="flex flex-wrap items-baseline gap-x-3 text-3xl font-semibold tracking-tight"
+    >
+      <span aria-hidden="true" class="font-mono text-base font-normal text-accent">
+        ~/{id} $
+      </span>
       {title}
     </h2>
-    <div class="mt-6">
+    <div
+      aria-hidden="true"
+      class="mt-4 h-px bg-gradient-to-r from-accent/70 via-accent-2/30 to-transparent"
+    >
+    </div>
+    <div class="mt-8">
       <slot />
     </div>
   </div>

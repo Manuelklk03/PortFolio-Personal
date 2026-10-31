@@ -15,56 +15,207 @@ const art = lines
   .join("\n");
 ---
 
-<pre
-  data-ascii-name
-  aria-hidden="true"
-  class="overflow-hidden font-mono text-[clamp(6px,2.5vw,14px)] leading-none text-accent"
->{art}</pre>
+<div data-ascii-name class="relative">
+  <pre
+    data-ascii-source
+    aria-hidden="true"
+    class="overflow-hidden font-mono text-[clamp(6px,2.5vw,14px)] leading-none text-accent [text-shadow:0_0_18px_rgb(62_230_193/0.45)]"
+  >{art}</pre>
+  <canvas
+    aria-hidden="true"
+    class="pointer-events-none absolute top-0 left-0 hidden [filter:drop-shadow(0_0_10px_rgb(62_230_193/0.5))]"
+  ></canvas>
+</div>
 
 <script>
-  const CHARS = "█▓▒░#%@*+=-:.";
-  const reducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
-  const randomChar = () => CHARS[Math.floor(Math.random() * CHARS.length)];
+  interface Particle {
+    char: string;
+    homeX: number;
+    homeY: number;
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    color: string;
+  }
 
-  document.querySelectorAll<HTMLElement>("[data-ascii-name]").forEach((el) => {
-    const finalText = el.textContent ?? "";
-    const lines = finalText.split("\n");
-    const width = Math.max(...lines.map((line) => line.length));
-    let running = false;
+  // Caracteres que aparecen cuando una partícula se aleja de su sitio.
+  const DUST = "▓▒░·";
+  const RADIUS = 90;
+  const PUSH = 2.4;
+  const SPRING = 0.06;
+  const DAMPING = 0.82;
 
-    // Descifra de izquierda a derecha: lo que queda a la derecha del progreso es aleatorio.
-    const scramble = () => {
-      if (reducedMotion || running) return;
-      running = true;
-      const totalFrames = 30;
-      let frame = 0;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-      const step = () => {
-        const progress = frame / totalFrames;
-        el.textContent = lines
-          .map((line) =>
-            [...line]
-              .map((ch, col) =>
-                ch === " " || col / width < progress ? ch : randomChar(),
-              )
-              .join(""),
-          )
-          .join("\n");
+  // Mezcla dos colores hex según t (0–1).
+  const mix = (a: string, b: string, t: number) => {
+    const ca = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16));
+    const cb = [1, 3, 5].map((i) => parseInt(b.slice(i, i + 2), 16));
+    const c = ca.map((v, i) => Math.round(v + ((cb[i] ?? v) - v) * t));
+    return `rgb(${c.join(",")})`;
+  };
 
-        frame++;
-        if (frame <= totalFrames) {
-          requestAnimationFrame(step);
-        } else {
-          el.textContent = finalText;
-          running = false;
-        }
-      };
-      step();
+  document.querySelectorAll<HTMLElement>("[data-ascii-name]").forEach((root) => {
+    const pre = root.querySelector<HTMLElement>("[data-ascii-source]");
+    const canvas = root.querySelector("canvas");
+    const ctx = canvas?.getContext("2d");
+    if (!pre || !canvas || !ctx) return;
+
+    const styles = getComputedStyle(document.documentElement);
+    const jade = styles.getPropertyValue("--color-accent").trim() || "#3ee6c1";
+    const teal = styles.getPropertyValue("--color-accent-2").trim() || "#0f9d9a";
+    const text = pre.textContent ?? "";
+
+    let particles: Particle[] = [];
+    let charWidth = 0;
+    let frameId: number | null = null;
+    const pointer = { x: -9999, y: -9999 };
+
+    const setup = (intro: boolean) => {
+      const computed = getComputedStyle(pre);
+      const rect = pre.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio, 2);
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.font = `${computed.fontWeight} ${computed.fontSize} ${computed.fontFamily}`;
+      ctx.textBaseline = "top";
+
+      charWidth = ctx.measureText("█").width;
+      const lineHeight = parseFloat(computed.lineHeight) || parseFloat(computed.fontSize);
+      const rows = text.split("\n");
+      const columns = Math.max(...rows.map((row) => row.length));
+
+      particles = [];
+      rows.forEach((row, rowIndex) => {
+        [...row].forEach((char, col) => {
+          if (char === " ") return;
+          const homeX = col * charWidth;
+          const homeY = rowIndex * lineHeight;
+          particles.push({
+            char,
+            homeX,
+            homeY,
+            // En la entrada las partículas llegan desde posiciones aleatorias.
+            x: intro ? homeX + (Math.random() - 0.5) * rect.width : homeX,
+            y: intro ? homeY + (Math.random() - 0.5) * rect.height * 3 : homeY,
+            vx: 0,
+            vy: 0,
+            // Degradado de izquierda a derecha: jade → teal.
+            color: mix(jade, teal, col / columns),
+          });
+        });
+      });
     };
 
-    scramble();
-    el.addEventListener("pointerenter", scramble);
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let moving = false;
+
+      for (const p of particles) {
+        const dx = p.x - pointer.x;
+        const dy = p.y - pointer.y;
+        const distance = Math.hypot(dx, dy);
+        if (distance < RADIUS && distance > 0) {
+          const force = (1 - distance / RADIUS) * PUSH;
+          p.vx += (dx / distance) * force;
+          p.vy += (dy / distance) * force;
+        }
+
+        p.vx = (p.vx + (p.homeX - p.x) * SPRING) * DAMPING;
+        p.vy = (p.vy + (p.homeY - p.y) * SPRING) * DAMPING;
+        p.x += p.vx;
+        p.y += p.vy;
+
+        const offset = Math.hypot(p.x - p.homeX, p.y - p.homeY);
+        if (offset > 0.3 || Math.abs(p.vx) + Math.abs(p.vy) > 0.05) moving = true;
+
+        // Cuanto más lejos de casa, más se "deshace" el carácter.
+        const dustIndex = Math.min(DUST.length - 1, Math.floor(offset / 14));
+        const char = offset > 4 ? (DUST[dustIndex] ?? p.char) : p.char;
+        ctx.fillStyle = offset > 4 ? "#ddf7f0" : p.color;
+        ctx.fillText(char, p.x, p.y);
+      }
+
+      // Sin movimiento, con el ratón lejos o fuera de pantalla, el bucle se para.
+      const pointerNear = pointer.x > -RADIUS && pointer.y > -RADIUS;
+      frameId = visible && (moving || pointerNear) ? requestAnimationFrame(draw) : null;
+    };
+
+    let visible = true;
+    let enabled = false;
+
+    const play = () => {
+      if (enabled && visible && frameId === null) frameId = requestAnimationFrame(draw);
+    };
+
+    const updatePointer = (event: PointerEvent) => {
+      if (!visible) return;
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const inside =
+        x > -RADIUS && y > -RADIUS && x < rect.width + RADIUS && y < rect.height + RADIUS;
+      pointer.x = inside ? x : -9999;
+      pointer.y = inside ? y : -9999;
+      if (inside) play();
+    };
+
+    // Un clic lanza una onda que empuja todos los caracteres hacia fuera.
+    const shockwave = (event: PointerEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      const ox = event.clientX - rect.left;
+      const oy = event.clientY - rect.top;
+      for (const p of particles) {
+        const dx = p.x - ox;
+        const dy = p.y - oy;
+        const distance = Math.hypot(dx, dy) || 1;
+        const force = Math.max(0, 1 - distance / (rect.width * 0.8)) * 18;
+        p.vx += (dx / distance) * force;
+        p.vy += (dy / distance) * force;
+      }
+      play();
+    };
+
+    const enable = (intro: boolean) => {
+      enabled = true;
+      setup(intro);
+      pre.style.visibility = "hidden";
+      canvas.classList.remove("hidden");
+      window.addEventListener("pointermove", updatePointer);
+      root.addEventListener("pointerdown", shockwave);
+      play();
+    };
+
+    // Vuelve al texto estático (movimiento reducido).
+    const disable = () => {
+      enabled = false;
+      if (frameId !== null) cancelAnimationFrame(frameId);
+      frameId = null;
+      canvas.classList.add("hidden");
+      pre.style.visibility = "visible";
+      window.removeEventListener("pointermove", updatePointer);
+      root.removeEventListener("pointerdown", shockwave);
+    };
+
+    new IntersectionObserver(([entry]) => {
+      visible = entry?.isIntersecting ?? false;
+      if (visible) play();
+    }).observe(root);
+
+    window.addEventListener("resize", () => {
+      if (!enabled) return;
+      setup(false);
+      play();
+    });
+    reducedMotion.addEventListener("change", () => {
+      if (reducedMotion.matches) disable();
+      else enable(false);
+    });
+
+    enable(true);
   });
 </script>
