@@ -1,0 +1,70 @@
+---
+// figlet se ejecuta al compilar: el navegador recibe el dibujo ya hecho.
+import figlet from "figlet";
+import ansiShadow from "figlet/importable-fonts/ANSI Shadow.js";
+
+interface Props {
+  lines: string[];
+}
+
+const { lines } = Astro.props;
+
+figlet.parseFont("ANSI Shadow", ansiShadow);
+const art = lines
+  .map((line) => figlet.textSync(line, { font: "ANSI Shadow" }).trimEnd())
+  .join("\n");
+---
+
+<pre
+  data-ascii-name
+  aria-hidden="true"
+  class="overflow-hidden font-mono text-[clamp(6px,2.5vw,14px)] leading-none text-accent"
+>{art}</pre>
+
+<script>
+  const CHARS = "█▓▒░#%@*+=-:.";
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  const randomChar = () => CHARS[Math.floor(Math.random() * CHARS.length)];
+
+  document.querySelectorAll<HTMLElement>("[data-ascii-name]").forEach((el) => {
+    const finalText = el.textContent ?? "";
+    const lines = finalText.split("\n");
+    const width = Math.max(...lines.map((line) => line.length));
+    let running = false;
+
+    // Descifra de izquierda a derecha: lo que queda a la derecha del progreso es aleatorio.
+    const scramble = () => {
+      if (reducedMotion || running) return;
+      running = true;
+      const totalFrames = 30;
+      let frame = 0;
+
+      const step = () => {
+        const progress = frame / totalFrames;
+        el.textContent = lines
+          .map((line) =>
+            [...line]
+              .map((ch, col) =>
+                ch === " " || col / width < progress ? ch : randomChar(),
+              )
+              .join(""),
+          )
+          .join("\n");
+
+        frame++;
+        if (frame <= totalFrames) {
+          requestAnimationFrame(step);
+        } else {
+          el.textContent = finalText;
+          running = false;
+        }
+      };
+      step();
+    };
+
+    scramble();
+    el.addEventListener("pointerenter", scramble);
+  });
+</script>

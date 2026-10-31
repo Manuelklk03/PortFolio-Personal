@@ -1,0 +1,26 @@
+---
+// Fondo 3D en ASCII. Todo ocurre en el <script>, en el navegador.
+---
+
+<div
+  data-ascii-scene
+  aria-hidden="true"
+  class="pointer-events-none absolute inset-0 -z-10 overflow-hidden font-mono text-accent/30 select-none"
+></div>
+
+<script>
+  const container = document.querySelector<HTMLElement>("[data-ascii-scene]");
+  // En móvil no se carga: el nombre en ASCII basta y se ahorra batería y datos.
+  const isLargeScreen = window.matchMedia("(min-width: 768px)").matches;
+
+  if (container && isLargeScreen) {
+    // Three.js solo se descarga cuando el inicio entra en pantalla.
+    const observer = new IntersectionObserver(async ([entry]) => {
+      if (!entry?.isIntersecting) return;
+      observer.disconnect();
+      const { startAsciiScene } = await import("../../scripts/ascii-scene");
+      startAsciiScene(container);
+    });
+    observer.observe(container);
+  }
+</script>

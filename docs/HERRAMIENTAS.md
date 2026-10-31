@@ -79,7 +79,9 @@ Base creada el 25 de octubre de 2026 (rama `chore/project-setup`). Versiones rea
 | shadcn/ui (base) | clsx ^2.1.1, tailwind-merge ^3.7.0, class-variance-authority ^0.7.1 | `components.json`, `src/lib/utils.ts`, `src/components/ui/`, variables en `global.css` | Componentes con el CLI (`npx shadcn@latest add …`); el CLI no se instala como dependencia. Alias `@/` en `tsconfig.json`. |
 | GSAP + @gsap/react | ^3.15.0 / ^2.1.2 | `src/scripts/animations.ts`, `src/scripts/scroll-trigger.ts`, islas de React | Respetan `prefers-reduced-motion`. |
 | Lenis | ^1.3.27 | `src/scripts/lenis.ts`, `<script>` del layout | Se desactiva con `prefers-reduced-motion`; sincronizado con ScrollTrigger. |
-| React Bits (copiados) | — | `src/components/react-bits/` | `CustomCursor`, `MagneticButton`, `OrbitingBalls`, `TextReveal`. |
+| React Bits (copiados) | — | `src/components/react-bits/` | `CustomCursor`, `MagneticButton` (`OrbitingBalls` y `TextReveal` se quitaron el 31 oct). |
+| three + @types/three | ^0.187.0 | `src/scripts/ascii-scene.ts`, `src/components/ascii/AsciiScene.astro` | Nudo 3D dibujado con `AsciiEffect` (`three/addons/effects/AsciiEffect.js`). Se importa con `import()` al entrar el inicio en pantalla: chunk propio (~534 KB sin comprimir); el aviso de tamaño del build es esperado. Chrome avisa de `willReadFrequently`: viene de dentro de `AsciiEffect`. |
+| figlet | ^1.12.0 | `src/components/ascii/AsciiName.astro` | Solo al compilar (frontmatter): genera el nombre en ASCII con la fuente `ANSI Shadow` (`figlet/importable-fonts/ANSI Shadow.js` + `parseFont`, sin `fs`). No llega al navegador. |
 
 `astro add` instaló `@types/react` y `@types/react-dom` en `dependencies` en vez de `devDependencies`; no afecta a la web generada. Astro recoge telemetría anónima; se desactiva con `npx astro telemetry disable` si Manuel quiere.
 
