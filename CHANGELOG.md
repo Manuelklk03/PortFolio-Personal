@@ -17,6 +17,7 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 - 2026-10-27: paleta oscura como tema de Tailwind (`@theme`) y tipografía Geist / Geist Mono servida desde la propia web con la API de fuentes de Astro.
 - 2026-10-28 a 2026-10-30: secciones con contenido de prueba, tarjetas de proyectos, SEO, página 404, shadcn/ui, Lenis, GSAP, componentes de React Bits y cursor personalizado (PR #12 a #26).
 - 2026-10-31: inicio ASCII con un nudo 3D de Three.js dibujado con caracteres que sigue al ratón y el nombre en ASCII (figlet) que se descifra; paleta Abyss + Jade.
+- 2026-10-31: el nudo 3D del fondo gira solo (ya no sigue al ratón) y tiene botón para pausarlo.
 - 2026-10-31: rediseño «terminal elegante»: nombre con partículas ASCII interactivas, cursor en bloque, títulos con prompt, tarjetas tipo ventana de terminal, sección de currículum, contacto con correo, GitHub y LinkedIn, y colores más intensos.
 
 ### Corregido
