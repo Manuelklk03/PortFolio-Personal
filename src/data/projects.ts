@@ -18,7 +18,7 @@ export const projects: Project[] = [
       "Web corporativa y catálogo de servicios para cerrajería local. Incluye formulario de contacto, galería de trabajos y sección de urgencias 24h.",
     technologies: ["Astro", "React", "Tailwind CSS", "TypeScript"],
     status: "completed",
-    image: "/projects/cerrajeria-noa.jpg",
+    image: "/projects/cerrajeria-noa.svg",
     repo: "https://github.com/Manuelklk03/cerrajeria-noa",
     demo: "https://cerrajeria-noa.example.com",
     personalContribution:
@@ -31,7 +31,7 @@ export const projects: Project[] = [
       "Plataforma de entrenamiento online con seguimiento de rutinas, progreso y nutrición. Incluye panel de usuario y área de administrador.",
     technologies: ["React", "Node.js", "PostgreSQL", "Tailwind CSS", "TypeScript"],
     status: "in-progress",
-    image: "/projects/digital-fit.jpg",
+    image: "/projects/digital-fit.svg",
     repo: "https://github.com/Manuelklk03/digital-fit",
     personalContribution:
       "Frontend principal (React + TypeScript), diseño de componentes, integración con API REST y autenticación.",
@@ -43,7 +43,7 @@ export const projects: Project[] = [
       "Pokédex interactiva de válvulas industriales con filtros avanzados, comparador y fichas técnicas detalladas.",
     technologies: ["React", "Three.js", "React Three Fiber", "Tailwind CSS", "TypeScript"],
     status: "completed",
-    image: "/projects/valvedex.jpg",
+    image: "/projects/valvedex.svg",
     repo: "https://github.com/Manuelklk03/valvedex",
     demo: "https://valvedex.example.com",
     personalContribution:

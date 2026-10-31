@@ -15,3 +15,8 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 - 2026-10-27: layout base `src/layouts/Layout.astro` (`lang="es"`, título, descripción, favicon y estilos de Tailwind) usado en la página de inicio.
 - 2026-10-27: Prettier con `prettier-plugin-astro` para formatear los `.astro` en VS Code al guardar.
 - 2026-10-27: paleta oscura como tema de Tailwind (`@theme`) y tipografía Geist / Geist Mono servida desde la propia web con la API de fuentes de Astro.
+- 2026-10-28 a 2026-10-30: secciones con contenido de prueba, tarjetas de proyectos, SEO, página 404, shadcn/ui, Lenis, GSAP, componentes de React Bits y cursor personalizado (PR #12 a #26).
+
+### Corregido
+
+- 2026-10-31: imágenes de proyectos (eran SVG con extensión `.jpg`) y paquetes sin uso eliminados.

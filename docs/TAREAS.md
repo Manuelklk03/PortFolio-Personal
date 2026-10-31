@@ -16,7 +16,7 @@
 - [x] Comprobar si ya hay código (confirmado: se empieza de cero).
 - [x] Acordar stack: Astro + React + TypeScript + Tailwind (sustituye a Next.js, 25 oct 2026).
 - [x] Confirmar gestor de paquetes: npm.
-- [ ] Acordar estructura de páginas (propuesta: una página con secciones).
+- [x] Acordar estructura de páginas (propuesta: una página con secciones).
 - [x] Acordar dirección visual: oscura y técnica.
 - [x] Aplicar paleta y tipografía como base del tema (aceptadas por Manuel; se revisan en la fase de diseño).
 - [x] Crear la base Astro + React + Tailwind en `chore/project-setup`, combinando el `.gitignore` (verificado: `astro check` y `build` sin errores).
@@ -34,25 +34,27 @@
 
 ## 3. Primera versión
 
-- [ ] Crear navegación y presentación de inicio.
-- [ ] Crear sección sobre mí.
-- [ ] Crear sección de proyectos a partir de datos locales (depende de aprobar esa propuesta en `docs/DECISIONES.md`).
+- [x] Crear navegación y presentación de inicio.
+- [x] Crear sección sobre mí.
+- [x] Crear sección de proyectos a partir de datos locales (`src/data/projects.ts`, ahora con datos de prueba).
 - [ ] Crear sección de tecnologías con niveles descritos de forma honesta.
-- [ ] Crear contacto y pie de página.
+- [x] Crear contacto y pie de página.
 - [ ] Adaptar el diseño a móvil, tablet y escritorio.
 
 ## 3b. Diseño y animación
 
 - [ ] Revisar el inventario de herramientas y activar las de diseño.
-- [ ] Instalar e integrar shadcn/ui adaptando su tema a la paleta.
-- [ ] Integrar Lenis (scroll suave) respetando `prefers-reduced-motion`.
-- [ ] Integrar GSAP para animaciones de secciones (en `<script>` de Astro o en islas de React, según el caso).
-- [ ] Elegir y adaptar componentes de React Bits con intención.
-- [ ] Cursor personalizado (solo `pointer: fine`, sin él en táctil ni con `prefers-reduced-motion`).
+- [x] Instalar e integrar shadcn/ui adaptando su tema a la paleta.
+- [x] Integrar Lenis (scroll suave) respetando `prefers-reduced-motion`.
+- [x] Integrar GSAP para animaciones de secciones (en `<script>` de Astro o en islas de React, según el caso).
+- [ ] Aplicar la paleta Abyss + Jade y la dirección ASCII interactiva (decisiones una a una).
+- [ ] Elegir y adaptar componentes de React Bits con intención (revisar los actuales frente a la dirección ASCII).
+- [x] Cursor personalizado (solo `pointer: fine`, sin él en táctil ni con `prefers-reduced-motion`).
 - [ ] Comprobar rendimiento, accesibilidad y enlaces internos tras las animaciones.
 
 ## 4. Revisión y publicación
 
+- [ ] Sustituir los datos de prueba (proyectos, enlaces, tecnologías, dominio, imágenes) por los reales de `docs/PROYECTOS.md`.
 - [ ] Revisar textos, imágenes y estados de proyectos.
 - [ ] Comprobar enlaces y navegación con teclado.
 - [ ] Revisar contraste, foco, estructura semántica y textos alternativos.
