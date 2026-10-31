@@ -41,6 +41,5 @@ Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abys
 
 ## Próximo paso concreto (modo plan)
 
-1. Preguntar a Manuel el efecto ASCII del inicio (fondo reactivo al ratón, nombre en ASCII que se descifra, marcos de terminal…) y el resto de decisiones de diseño, una a una.
-2. Aplicar la paleta Abyss + Jade en `@theme` y el primer efecto ASCII, sustituyendo `OrbitingBalls` / `TextReveal` si Manuel lo aprueba.
-3. Más adelante: sustituir los datos de prueba por los reales.
+1. Paso de diseño grande: paleta Abyss + Jade en `@theme` (y variables de shadcn), campo ASCII reactivo + nombre ASCII que se descifra en el inicio (sustituyen a `OrbitingBalls` / `TextReveal`), estilo «terminal elegante» en títulos y tarjetas, y cursor en bloque. Decisiones en `docs/DECISIONES.md` (31 oct).
+2. Más adelante: sustituir los datos de prueba por los reales.

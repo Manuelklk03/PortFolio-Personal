@@ -61,6 +61,8 @@
 | --- | --- | --- |
 | Dirección visual: ASCII art interactivo, estilo terminal elegante. Sustituye a «oscuro y técnico» genérico. | Elegido por Manuel: quiere un diseño que destaque. | Los efectos actuales (`OrbitingBalls`, `TextReveal`) se revisan para sustituirlos por efectos ASCII. Las decisiones concretas (efecto del inicio, marcos, cursor) se preguntan una a una. |
 | Paleta «Abyss + Jade»: fondo `#050A14`, superficie `#0A1626`, borde `#15304A`, texto `#DDF7F0`, secundario `#8AA9A6`, acento `#3EE6C1`, acento 2 `#0F9D9A`. | Elegida por Manuel (Midnight Abyss + Aqua Jade). Contraste del texto secundario sobre el fondo ≈ 7,7:1. | Sustituye a la paleta base del 27 oct; se aplica en `@theme` en el paso de diseño. |
+| Inicio: campo ASCII de fondo que reacciona al ratón (canvas, sutil, baja opacidad) + nombre en ASCII grande que se descifra al cargar y al pasar el ratón. | Elegido por Manuel («las dos combinadas»). | Sustituye a `OrbitingBalls` y `TextReveal`. Sin animación con `prefers-reduced-motion` (se muestra estático); el nombre real sigue como texto accesible (`h1`). |
+| Resto de la web: «terminal elegante». Marcos finos tipo `┌─┐` en tarjetas, títulos de sección con prompt (`~/proyectos $`), cursor jade en forma de bloque `█`. Los textos largos siguen en Geist. | Elegido por Manuel. | El cursor actual se adapta a esta forma; mismas condiciones de accesibilidad (`pointer: fine`, sin él con `prefers-reduced-motion`). |
 | Los proyectos, enlaces, tecnologías y el dominio `manuelcasinos.dev` que hay ahora en la web son **datos de prueba**. | Indicado por Manuel. | Deben sustituirse por los datos reales de `docs/PROYECTOS.md` antes de publicar. |
 
 ## Propuestas pendientes
