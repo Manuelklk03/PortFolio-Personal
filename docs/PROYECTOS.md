@@ -23,7 +23,7 @@ Las prácticas en empresa deben identificarse como prácticas vinculadas a la fo
 - Funcionalidades indicadas: servicios, contacto, varios idiomas, mapa de Google Maps y acceso a WhatsApp.
 - Web facilitada: https://cerrajerianoa.es/es
 - Estado indicado: publicada con dominio propio; confirmar su situación actual antes de mostrarla.
-- Repositorio público, capturas y descripción exacta de su aportación: pendientes.
+- Aportación (confirmada por Manuel, 2 nov 2026): la hizo entera (diseño, desarrollo, idiomas ES/VAL/EN, mapa, WhatsApp y publicación). Sin repositorio público. Captura tomada de la web publicada (`public/projects/cerrajeria-noa.webp`).
 
 No indicar un proveedor de alojamiento hasta confirmarlo: hay referencias anteriores a distintos proveedores. No publicar el presupuesto del cliente por defecto.
 
@@ -34,7 +34,7 @@ No indicar un proveedor de alojamiento hasta confirmarlo: hay referencias anteri
 - Funcionalidades descritas: usuarios y roles, entrenamientos, comunidad, estadísticas, historial y lugares de entrenamiento.
 - Repositorio facilitado: https://github.com/Manuelklk03/Digital-Fit-Proyecto
 - Aportación indicada por Manuel: API REST de Spring Boot, estructura de Angular y funcionamiento de la aplicación desarrollados por él. Para la integración de mapas con Leaflet se apoyó en IA.
-- Demo pública, capturas y estado actual: pendientes.
+- Estado (confirmado por Manuel, 2 nov 2026): en desarrollo. Demo pública y capturas: pendientes.
 
 No afirmar que todo está desplegado, probado o terminado sin revisar el proyecto. Leaflet se puede describir como biblioteca de mapas; no confundirlo con la API REST del backend.
 
@@ -54,13 +54,13 @@ El diseño de referencia pertenece a la práctica. No presentarlo como el portfo
 - Base prevista: React y Next.js.
 - Alcance deseado: varios juegos de Valve; comienzo planteado con Half-Life y sus expansiones.
 - Estado: en desarrollo según el contexto disponible. Avance exacto pendiente de revisar.
-- Repositorio, demo y capturas: pendientes.
+- Repositorio público: https://github.com/Manuelklk03/ValveDex (React, Next.js y TypeScript). Demo y capturas: pendientes.
 
 No mostrarla como una wiki completa ni listar funcionalidades futuras como terminadas.
 
 ## Selección propuesta
 
-Empezar por Cerrajería NOA y Digital Fit. Añadir la práctica de Figma si hay material listo para enseñar. Valvedex puede incorporarse cuando tenga una versión presentable, indicando su estado. Esta selección está pendiente de acordar con Manuel.
+Empezar por Cerrajería NOA y Digital Fit. Añadir la práctica de Figma si hay material listo para enseñar. Valvedex puede incorporarse cuando tenga una versión presentable, indicando su estado. Selección acordada el 2 nov 2026: Cerrajería NOA, Digital Fit y ValveDex (la práctica de Figma queda fuera por ahora).
 
 ## Ficha a completar por proyecto
 

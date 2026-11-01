@@ -1,3 +1,4 @@
+// Proyectos reales de Manuel (datos confirmados en docs/PROYECTOS.md y por Manuel, nov. 2026).
 export interface Project {
   id: string;
   title: string;
@@ -18,52 +19,42 @@ export const projects: Project[] = [
     title: "Cerrajería NOA",
     monogram: "NOA",
     description:
-      "Web corporativa y catálogo de servicios para cerrajería local. Incluye formulario de contacto, galería de trabajos y sección de urgencias 24h.",
-    technologies: ["Astro", "React", "Tailwind CSS", "TypeScript"],
+      "Web para una cerrajería de Valencia: servicios, trabajos, contacto, tres idiomas (español, valenciano e inglés), mapa de Google Maps y acceso directo a WhatsApp.",
+    technologies: ["Next.js", "React"],
     status: "completed",
-    image: "/projects/cerrajeria-noa.svg",
-    repo: "https://github.com/Manuelklk03/cerrajeria-noa",
-    demo: "https://cerrajeria-noa.example.com",
+    image: "/projects/cerrajeria-noa.webp",
+    demo: "https://cerrajerianoa.es/es",
     personalContribution:
-      "Desarrollo completo: arquitectura, frontend, integración de formularios y despliegue.",
+      "La hice entera: diseño, desarrollo, idiomas, mapa, WhatsApp y publicación.",
   },
   {
     id: "digital-fit",
-    title: "Digital Fit 2.0",
-    monogram: "DF2",
+    title: "Digital Fit",
+    monogram: "DF",
     description:
-      "Plataforma de entrenamiento online con seguimiento de rutinas, progreso y nutrición. Incluye panel de usuario y área de administrador.",
+      "Proyecto final de DAW: aplicación web de entrenamiento con usuarios y roles, entrenamientos, comunidad, estadísticas, historial y lugares de entrenamiento.",
     technologies: [
-      "React",
-      "Node.js",
-      "PostgreSQL",
-      "Tailwind CSS",
+      "Angular",
       "TypeScript",
+      "Java",
+      "Spring Boot",
+      "MySQL",
+      "Docker",
     ],
     status: "in-progress",
-    image: "/projects/digital-fit.svg",
-    repo: "https://github.com/Manuelklk03/digital-fit",
+    repo: "https://github.com/Manuelklk03/Digital-Fit-Proyecto",
     personalContribution:
-      "Frontend principal (React + TypeScript), diseño de componentes, integración con API REST y autenticación.",
+      "API REST con Spring Boot, estructura del frontend en Angular y funcionamiento de la aplicación. Para los mapas con Leaflet me apoyé en IA.",
   },
   {
     id: "valvedex",
     title: "ValveDex",
     monogram: "VDX",
     description:
-      "Pokédex interactiva de válvulas industriales con filtros avanzados, comparador y fichas técnicas detalladas.",
-    technologies: [
-      "React",
-      "Three.js",
-      "React Three Fiber",
-      "Tailwind CSS",
-      "TypeScript",
-    ],
-    status: "completed",
-    image: "/projects/valvedex.svg",
-    repo: "https://github.com/Manuelklk03/valvedex",
-    demo: "https://valvedex.example.com",
-    personalContribution:
-      "Arquitectura 3D con React Three Fiber, sistema de filtros, comparador y optimización de rendimiento.",
+      "Enciclopedia interactiva de los videojuegos de Valve, empezando por Half-Life y sus expansiones: armas, mapas y personajes.",
+    technologies: ["React", "Next.js", "TypeScript"],
+    status: "in-progress",
+    repo: "https://github.com/Manuelklk03/ValveDex",
+    personalContribution: "Proyecto personal que estoy desarrollando yo.",
   },
 ];

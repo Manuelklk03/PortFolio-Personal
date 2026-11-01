@@ -92,3 +92,7 @@ El 31 oct 2026 se desinstalaron paquetes sin uso: `cn` (la función `cn` está e
 Regla aprendida (31 oct 2026): en Astro, un `<script>` con cualquier atributo (incluido `type="module"`) no se procesa: los `import` de npm o con alias `@/` no se empaquetan y fallan en el navegador. Usar `<script>` sin atributos.
 
 Codex por terminal: el plugin `codex` usa Bash, que en este equipo falla al iniciar (snapshot del shell con una comilla sin cerrar). Alternativa que funciona: desde PowerShell, `Get-Content prompt.txt -Raw | codex exec --sandbox read-only --skip-git-repo-check -o salida.txt -`.
+
+Plugins nuevos (2 nov 2026):
+- **claude-seo:** usar en la fase 4, antes de publicar: `seo-technical`, `seo-page`, `seo-schema` (JSON-LD `Person`), `seo-images`, `seo-geo`/`seo-agentic` (`llms.txt`, `robots.txt`) y `seo-sitemap`. El resto (local, mapas, ecommerce, backlinks, DataForSEO de pago, clusters…) no aplica. Requiere decidir antes el dominio real.
+- **scroll-world:** descartado: genera vídeo con Higgsfield/Monid (de pago por clip) y su estética de diorama choca con la dirección ASCII.
