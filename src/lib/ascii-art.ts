@@ -60,6 +60,102 @@ export async function imageAscii(
   return lines.join("\n");
 }
 
+// Foto lista para el fondo oscuro: mismo recorte que el ASCII, fondo blanco transparente
+// y tono jade. Se devuelve como data URI WebP; null si la foto no existe.
+export async function tintedPhoto(
+  path: string,
+  outputWidth: number,
+  crop = { left: 0, top: 0, width: 1, height: 1 },
+): Promise<string | null> {
+  try {
+    const { width = 1, height = 1 } = await sharp(path).metadata();
+    const region = {
+      left: Math.round(width * crop.left),
+      top: Math.round(height * crop.top),
+      width: Math.round(width * crop.width),
+      height: Math.round(height * crop.height),
+    };
+    const { data: gray, info } = await sharp(path)
+      .extract(region)
+      .resize({ width: outputWidth })
+      .grayscale()
+      .extractChannel(0)
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+    const { width: w, height: h } = info;
+    if (info.channels !== 1) return null;
+    const pixels = w * h;
+
+    // Fondo: zona casi blanca conectada con los bordes (así los brillos de la cara no se borran).
+    const background = new Uint8Array(pixels);
+    const queue: number[] = [];
+    const isLight = (i: number) => (gray[i] ?? 0) > 225;
+    for (let x = 0; x < w; x++) queue.push(x, (h - 1) * w + x);
+    for (let y = 0; y < h; y++) queue.push(y * w, y * w + w - 1);
+    while (queue.length) {
+      const i = queue.pop() ?? 0;
+      if (background[i] || !isLight(i)) continue;
+      background[i] = 1;
+      const x = i % w;
+      if (x > 0) queue.push(i - 1);
+      if (x < w - 1) queue.push(i + 1);
+      if (i >= w) queue.push(i - w);
+      if (i < pixels - w) queue.push(i + w);
+    }
+
+    // Borde suave del recorte.
+    const mask = new Uint8Array(pixels);
+    for (let i = 0; i < pixels; i++) mask[i] = background[i] ? 0 : 255;
+    const softMask = await sharp(mask, { raw: { width: w, height: h, channels: 1 } })
+      .blur(1.2)
+      .extractChannel(0)
+      .raw()
+      .toBuffer();
+
+    // Duotono de la paleta: sombras del color del fondo, medios en teal y luces en jade claro.
+    const stops: [number, number[]][] = [
+      [0, [5, 10, 20]],
+      [0.45, [15, 157, 154]],
+      [0.8, [62, 230, 193]],
+      [1, [221, 247, 240]],
+    ];
+    const toneOf = (value: number) => {
+      for (let s = 1; s < stops.length; s++) {
+        const [end, to] = stops[s] ?? [1, [0, 0, 0]];
+        const [start, from] = stops[s - 1] ?? [0, [0, 0, 0]];
+        if (value <= end) {
+          const t = (value - start) / (end - start);
+          return from.map((c, k) => Math.round(c + ((to[k] ?? c) - c) * t));
+        }
+      }
+      return [221, 247, 240];
+    };
+
+    // Se estira el contraste usando solo la persona, no el fondo.
+    let min = 255;
+    let max = 0;
+    for (let i = 0; i < pixels; i++) {
+      if (background[i]) continue;
+      min = Math.min(min, gray[i] ?? 255);
+      max = Math.max(max, gray[i] ?? 0);
+    }
+
+    const rgba = new Uint8Array(pixels * 4);
+    for (let i = 0; i < pixels; i++) {
+      const value = Math.min(1, Math.max(0, ((gray[i] ?? 0) - min) / (max - min || 1)));
+      const [r = 0, g = 0, b = 0] = toneOf(value);
+      rgba.set([r, g, b, softMask[i] ?? 0], i * 4);
+    }
+
+    const webp = await sharp(rgba, { raw: { width: w, height: h, channels: 4 } })
+      .webp({ quality: 82, alphaQuality: 90 })
+      .toBuffer();
+    return `data:image/webp;base64,${webp.toString("base64")}`;
+  } catch {
+    return null;
+  }
+}
+
 // Franja de caracteres que se apagan hacia abajo (▓▒░·); con semilla para que salga siempre igual.
 export function dissolveBand(columns: number, rows: number, seed = 7): string {
   let state = seed;

@@ -6,20 +6,27 @@ import Cursor from "../components/Cursor.astro";
 import AsciiScene from "../components/ascii/AsciiScene.astro";
 import AsciiName from "../components/ascii/AsciiName.astro";
 import AsciiSeam from "../components/ascii/AsciiSeam.astro";
-import { blockLetters, imageAscii } from "../lib/ascii-art";
+import { blockLetters, imageAscii, tintedPhoto } from "../lib/ascii-art";
 import { projects } from "../data/projects";
 import { profile } from "../data/profile";
 import { techStack } from "../data/tech";
 
-// Retrato ASCII de Manuel para «Sobre mí», al estilo de neofetch (se genera al compilar).
-// Mientras no exista la foto se muestran sus iniciales.
-const portrait =
-  (await imageAscii("src/assets/portrait.jpg", 64, 36, {
-    left: 0.12,
-    top: 0.06,
-    width: 0.76,
-    height: 0.66,
-  })) ?? blockLetters("MC");
+// Retrato de Manuel para «Sobre mí», al estilo de neofetch (se genera al compilar):
+// primero se ve en ASCII y la foto se monta encima fila a fila. Sin foto, sus iniciales.
+// 44 filas: con caracteres de ancho 0,6 y alto 1,1 el bloque tiene la misma proporción que el recorte.
+const portraitCrop = { left: 0.12, top: 0.06, width: 0.76, height: 0.66 };
+const portraitAscii = await imageAscii(
+  "src/assets/portrait.jpg",
+  64,
+  44,
+  portraitCrop,
+);
+const portraitPhoto = await tintedPhoto(
+  "src/assets/portrait.jpg",
+  420,
+  portraitCrop,
+);
+const portrait = portraitAscii ?? blockLetters("MC");
 const swatches = [
   "text-surface",
   "text-border",
@@ -98,10 +105,20 @@ const contactLinks = [
       data-reveal
       class="grid items-start gap-x-10 gap-y-6 sm:grid-cols-[auto_1fr]"
     >
-      <pre
-        aria-hidden="true"
-        class="hidden font-mono text-[9px] leading-[1.1] text-accent select-none min-[420px]:block lg:text-[11px]"
-      >{portrait}</pre>
+      <div data-portrait class="relative w-fit">
+        <pre
+          aria-hidden="true"
+          class="font-mono text-[8px] leading-[1.1] text-accent select-none sm:text-[9px] lg:text-[10px]">{portrait}</pre>
+        {
+          portraitAscii && portraitPhoto && (
+            <img
+              src={portraitPhoto}
+              alt="Foto de Manuel Casinos Pérez"
+              class="absolute inset-0 h-full w-full [mask-image:linear-gradient(to_bottom,#000_75%,transparent)]"
+            />
+          )
+        }
+      </div>
       <div>
         <!-- prettier-ignore -->
         <p class="font-mono text-sm"><span class="text-accent">manuel</span><span class="text-muted">@</span><span class="text-accent">portfolio</span></p>
