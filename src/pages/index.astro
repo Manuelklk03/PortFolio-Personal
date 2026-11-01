@@ -13,12 +13,12 @@ import { techStack } from "../data/tech";
 
 // Retrato de Manuel para «Sobre mí», al estilo de neofetch (se genera al compilar):
 // primero se ve en ASCII y la foto se monta encima fila a fila. Sin foto, sus iniciales.
-// 44 filas: con caracteres de ancho 0,6 y alto 1,1 el bloque tiene la misma proporción que el recorte.
-const portraitCrop = { left: 0.12, top: 0.06, width: 0.76, height: 0.66 };
+// 42 filas: con caracteres de ancho 0,6 y alto 1,1 el bloque tiene la misma proporción que el recorte.
+const portraitCrop = { left: 0.02, top: 0.04, width: 0.96, height: 0.76 };
 const portraitAscii = await imageAscii(
   "src/assets/portrait.jpg",
   64,
-  44,
+  42,
   portraitCrop,
 );
 const portraitPhoto = await tintedPhoto(
@@ -114,7 +114,7 @@ const contactLinks = [
             <img
               src={portraitPhoto}
               alt="Foto de Manuel Casinos Pérez"
-              class="absolute inset-0 h-full w-full mix-blend-lighten [mask-image:radial-gradient(ellipse_52%_54%_at_50%_44%,#000_62%,transparent_100%)]"
+              class="absolute inset-0 h-full w-full [mask-image:radial-gradient(ellipse_58%_58%_at_50%_42%,#000_70%,transparent_100%)]"
             />
           )
         }
