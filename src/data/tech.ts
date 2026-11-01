@@ -1,21 +1,16 @@
-// Tecnologías de la sección «Tecnologías» (datos de prueba hasta tener los reales).
+// Tecnologías de la sección «Stack», tomadas del CV de Manuel (noviembre de 2026).
 export const techStack = {
   base: [
+    "HTML5",
+    "CSS3",
+    "JavaScript",
     "TypeScript",
-    "React",
-    "Node.js",
-    "Astro",
-    "Tailwind CSS",
-    "Git",
-    "PostgreSQL",
-    "REST APIs",
+    "Angular",
+    "Java",
+    "Spring Boot",
+    "Thymeleaf",
+    "JPA",
+    "REST / MVC",
   ],
-  learning: [
-    "Three.js / R3F",
-    "Testing (Vitest/Playwright)",
-    "Docker",
-    "CI/CD",
-    "GraphQL",
-    "Next.js",
-  ],
+  learning: ["React", "Next.js"],
 };

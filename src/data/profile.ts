@@ -16,7 +16,7 @@ export const profile: Profile = {
   email: "manuelcp420@gmail.com",
   github: "https://github.com/Manuelklk03",
   linkedin: "https://www.linkedin.com/in/manuel-casinos-perez/",
-  cvUrl: null,
+  cvUrl: "/cv/manuel-casinos-perez.pdf",
   about: [
     { key: "ubicación", value: "Valencia" },
     { key: "formación", value: "Desarrollo de Aplicaciones Web (DAW)" },

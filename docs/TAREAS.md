@@ -49,7 +49,7 @@
 - [x] Integrar GSAP para animaciones de secciones (en `<script>` de Astro o en islas de React, según el caso).
 - [x] Aplicar la paleta Abyss + Jade y el inicio ASCII (nudo 3D + nombre que se descifra).
 - [x] Estilo «terminal elegante» en títulos y tarjetas, cursor en bloque y nombre con partículas.
-- [ ] Añadir el PDF del currículum (`public/cv/…`) y poner su ruta en `cvUrl` de `src/data/profile.ts`.
+- [x] Añadir el PDF del currículum (`public/cv/manuel-casinos-perez.pdf`) y su ruta en `cvUrl`.
 - [x] Revisar los componentes de React Bits frente a la dirección ASCII (sustituidos por componentes `.astro` propios).
 - [x] Cursor personalizado (solo `pointer: fine`, sin él en táctil ni con `prefers-reduced-motion`).
 - [ ] Comprobar rendimiento, accesibilidad y enlaces internos tras las animaciones.
