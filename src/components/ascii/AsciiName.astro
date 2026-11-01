@@ -56,166 +56,183 @@ const art = lines
     return `rgb(${c.join(",")})`;
   };
 
-  document.querySelectorAll<HTMLElement>("[data-ascii-name]").forEach((root) => {
-    const pre = root.querySelector<HTMLElement>("[data-ascii-source]");
-    const canvas = root.querySelector("canvas");
-    const ctx = canvas?.getContext("2d");
-    if (!pre || !canvas || !ctx) return;
+  document
+    .querySelectorAll<HTMLElement>("[data-ascii-name]")
+    .forEach((root) => {
+      const pre = root.querySelector<HTMLElement>("[data-ascii-source]");
+      const canvas = root.querySelector("canvas");
+      const ctx = canvas?.getContext("2d");
+      if (!pre || !canvas || !ctx) return;
 
-    const styles = getComputedStyle(document.documentElement);
-    const jade = styles.getPropertyValue("--color-accent").trim() || "#3ee6c1";
-    const teal = styles.getPropertyValue("--color-accent-2").trim() || "#0f9d9a";
-    const text = pre.textContent ?? "";
+      const styles = getComputedStyle(document.documentElement);
+      const jade =
+        styles.getPropertyValue("--color-accent").trim() || "#3ee6c1";
+      const teal =
+        styles.getPropertyValue("--color-accent-2").trim() || "#0f9d9a";
+      const dust =
+        styles.getPropertyValue("--color-foreground").trim() || "#ddf7f0";
+      const text = pre.textContent ?? "";
 
-    let particles: Particle[] = [];
-    let charWidth = 0;
-    let frameId: number | null = null;
-    const pointer = { x: -9999, y: -9999 };
+      let particles: Particle[] = [];
+      let charWidth = 0;
+      let frameId: number | null = null;
+      const pointer = { x: -9999, y: -9999 };
 
-    const setup = (intro: boolean) => {
-      const computed = getComputedStyle(pre);
-      const rect = pre.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio, 2);
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      canvas.style.width = `${rect.width}px`;
-      canvas.style.height = `${rect.height}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.font = `${computed.fontWeight} ${computed.fontSize} ${computed.fontFamily}`;
-      ctx.textBaseline = "top";
+      const setup = (intro: boolean) => {
+        const computed = getComputedStyle(pre);
+        const rect = pre.getBoundingClientRect();
+        const dpr = Math.min(window.devicePixelRatio, 2);
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        canvas.style.width = `${rect.width}px`;
+        canvas.style.height = `${rect.height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.font = `${computed.fontWeight} ${computed.fontSize} ${computed.fontFamily}`;
+        ctx.textBaseline = "top";
 
-      charWidth = ctx.measureText("█").width;
-      const lineHeight = parseFloat(computed.lineHeight) || parseFloat(computed.fontSize);
-      const rows = text.split("\n");
-      const columns = Math.max(...rows.map((row) => row.length));
+        charWidth = ctx.measureText("█").width;
+        const lineHeight =
+          parseFloat(computed.lineHeight) || parseFloat(computed.fontSize);
+        const rows = text.split("\n");
+        const columns = Math.max(...rows.map((row) => row.length));
 
-      particles = [];
-      rows.forEach((row, rowIndex) => {
-        [...row].forEach((char, col) => {
-          if (char === " ") return;
-          const homeX = col * charWidth;
-          const homeY = rowIndex * lineHeight;
-          particles.push({
-            char,
-            homeX,
-            homeY,
-            // En la entrada las partículas llegan desde posiciones aleatorias.
-            x: intro ? homeX + (Math.random() - 0.5) * rect.width : homeX,
-            y: intro ? homeY + (Math.random() - 0.5) * rect.height * 3 : homeY,
-            vx: 0,
-            vy: 0,
-            // Degradado de izquierda a derecha: jade → teal.
-            color: mix(jade, teal, col / columns),
+        particles = [];
+        rows.forEach((row, rowIndex) => {
+          [...row].forEach((char, col) => {
+            if (char === " ") return;
+            const homeX = col * charWidth;
+            const homeY = rowIndex * lineHeight;
+            particles.push({
+              char,
+              homeX,
+              homeY,
+              // En la entrada las partículas llegan desde posiciones aleatorias.
+              x: intro ? homeX + (Math.random() - 0.5) * rect.width : homeX,
+              y: intro
+                ? homeY + (Math.random() - 0.5) * rect.height * 3
+                : homeY,
+              vx: 0,
+              vy: 0,
+              // Degradado de izquierda a derecha: jade → teal.
+              color: mix(jade, teal, col / columns),
+            });
           });
         });
-      });
-    };
+      };
 
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      let moving = false;
+      const draw = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let moving = false;
 
-      for (const p of particles) {
-        const dx = p.x - pointer.x;
-        const dy = p.y - pointer.y;
-        const distance = Math.hypot(dx, dy);
-        if (distance < RADIUS && distance > 0) {
-          const force = (1 - distance / RADIUS) * PUSH;
+        for (const p of particles) {
+          const dx = p.x - pointer.x;
+          const dy = p.y - pointer.y;
+          const distance = Math.hypot(dx, dy);
+          if (distance < RADIUS && distance > 0) {
+            const force = (1 - distance / RADIUS) * PUSH;
+            p.vx += (dx / distance) * force;
+            p.vy += (dy / distance) * force;
+          }
+
+          p.vx = (p.vx + (p.homeX - p.x) * SPRING) * DAMPING;
+          p.vy = (p.vy + (p.homeY - p.y) * SPRING) * DAMPING;
+          p.x += p.vx;
+          p.y += p.vy;
+
+          const offset = Math.hypot(p.x - p.homeX, p.y - p.homeY);
+          if (offset > 0.3 || Math.abs(p.vx) + Math.abs(p.vy) > 0.05)
+            moving = true;
+
+          // Cuanto más lejos de casa, más se "deshace" el carácter.
+          const dustIndex = Math.min(DUST.length - 1, Math.floor(offset / 14));
+          const char = offset > 4 ? (DUST[dustIndex] ?? p.char) : p.char;
+          ctx.fillStyle = offset > 4 ? dust : p.color;
+          ctx.fillText(char, p.x, p.y);
+        }
+
+        // Sin movimiento, con el ratón lejos o fuera de pantalla, el bucle se para.
+        const pointerNear = pointer.x > -RADIUS && pointer.y > -RADIUS;
+        frameId =
+          visible && (moving || pointerNear)
+            ? requestAnimationFrame(draw)
+            : null;
+      };
+
+      let visible = true;
+      let enabled = false;
+
+      const play = () => {
+        if (enabled && visible && frameId === null)
+          frameId = requestAnimationFrame(draw);
+      };
+
+      const updatePointer = (event: PointerEvent) => {
+        if (!visible) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        const inside =
+          x > -RADIUS &&
+          y > -RADIUS &&
+          x < rect.width + RADIUS &&
+          y < rect.height + RADIUS;
+        pointer.x = inside ? x : -9999;
+        pointer.y = inside ? y : -9999;
+        if (inside) play();
+      };
+
+      // Un clic lanza una onda que empuja todos los caracteres hacia fuera.
+      const shockwave = (event: PointerEvent) => {
+        const rect = canvas.getBoundingClientRect();
+        const ox = event.clientX - rect.left;
+        const oy = event.clientY - rect.top;
+        for (const p of particles) {
+          const dx = p.x - ox;
+          const dy = p.y - oy;
+          const distance = Math.hypot(dx, dy) || 1;
+          const force = Math.max(0, 1 - distance / (rect.width * 0.8)) * 18;
           p.vx += (dx / distance) * force;
           p.vy += (dy / distance) * force;
         }
+        play();
+      };
 
-        p.vx = (p.vx + (p.homeX - p.x) * SPRING) * DAMPING;
-        p.vy = (p.vy + (p.homeY - p.y) * SPRING) * DAMPING;
-        p.x += p.vx;
-        p.y += p.vy;
+      const enable = (intro: boolean) => {
+        enabled = true;
+        setup(intro);
+        pre.style.visibility = "hidden";
+        canvas.classList.remove("hidden");
+        window.addEventListener("pointermove", updatePointer);
+        root.addEventListener("pointerdown", shockwave);
+        play();
+      };
 
-        const offset = Math.hypot(p.x - p.homeX, p.y - p.homeY);
-        if (offset > 0.3 || Math.abs(p.vx) + Math.abs(p.vy) > 0.05) moving = true;
+      // Vuelve al texto estático (movimiento reducido).
+      const disable = () => {
+        enabled = false;
+        if (frameId !== null) cancelAnimationFrame(frameId);
+        frameId = null;
+        canvas.classList.add("hidden");
+        pre.style.visibility = "visible";
+        window.removeEventListener("pointermove", updatePointer);
+        root.removeEventListener("pointerdown", shockwave);
+      };
 
-        // Cuanto más lejos de casa, más se "deshace" el carácter.
-        const dustIndex = Math.min(DUST.length - 1, Math.floor(offset / 14));
-        const char = offset > 4 ? (DUST[dustIndex] ?? p.char) : p.char;
-        ctx.fillStyle = offset > 4 ? "#ddf7f0" : p.color;
-        ctx.fillText(char, p.x, p.y);
-      }
+      new IntersectionObserver(([entry]) => {
+        visible = entry?.isIntersecting ?? false;
+        if (visible) play();
+      }).observe(root);
 
-      // Sin movimiento, con el ratón lejos o fuera de pantalla, el bucle se para.
-      const pointerNear = pointer.x > -RADIUS && pointer.y > -RADIUS;
-      frameId = visible && (moving || pointerNear) ? requestAnimationFrame(draw) : null;
-    };
+      window.addEventListener("resize", () => {
+        if (!enabled) return;
+        setup(false);
+        play();
+      });
+      reducedMotion.addEventListener("change", () => {
+        if (reducedMotion.matches) disable();
+        else enable(false);
+      });
 
-    let visible = true;
-    let enabled = false;
-
-    const play = () => {
-      if (enabled && visible && frameId === null) frameId = requestAnimationFrame(draw);
-    };
-
-    const updatePointer = (event: PointerEvent) => {
-      if (!visible) return;
-      const rect = canvas.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      const inside =
-        x > -RADIUS && y > -RADIUS && x < rect.width + RADIUS && y < rect.height + RADIUS;
-      pointer.x = inside ? x : -9999;
-      pointer.y = inside ? y : -9999;
-      if (inside) play();
-    };
-
-    // Un clic lanza una onda que empuja todos los caracteres hacia fuera.
-    const shockwave = (event: PointerEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      const ox = event.clientX - rect.left;
-      const oy = event.clientY - rect.top;
-      for (const p of particles) {
-        const dx = p.x - ox;
-        const dy = p.y - oy;
-        const distance = Math.hypot(dx, dy) || 1;
-        const force = Math.max(0, 1 - distance / (rect.width * 0.8)) * 18;
-        p.vx += (dx / distance) * force;
-        p.vy += (dy / distance) * force;
-      }
-      play();
-    };
-
-    const enable = (intro: boolean) => {
-      enabled = true;
-      setup(intro);
-      pre.style.visibility = "hidden";
-      canvas.classList.remove("hidden");
-      window.addEventListener("pointermove", updatePointer);
-      root.addEventListener("pointerdown", shockwave);
-      play();
-    };
-
-    // Vuelve al texto estático (movimiento reducido).
-    const disable = () => {
-      enabled = false;
-      if (frameId !== null) cancelAnimationFrame(frameId);
-      frameId = null;
-      canvas.classList.add("hidden");
-      pre.style.visibility = "visible";
-      window.removeEventListener("pointermove", updatePointer);
-      root.removeEventListener("pointerdown", shockwave);
-    };
-
-    new IntersectionObserver(([entry]) => {
-      visible = entry?.isIntersecting ?? false;
-      if (visible) play();
-    }).observe(root);
-
-    window.addEventListener("resize", () => {
-      if (!enabled) return;
-      setup(false);
-      play();
+      enable(true);
     });
-    reducedMotion.addEventListener("change", () => {
-      if (reducedMotion.matches) disable();
-      else enable(false);
-    });
-
-    enable(true);
-  });
 </script>

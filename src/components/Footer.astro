@@ -11,15 +11,17 @@ const socialLinks = [
 
 <footer class="border-t border-border">
   <div class="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
-    <p class="font-mono">© {year} {profile.name} <span class="text-accent-2">· hecho con Astro</span></p>
-    <ul class="flex gap-5">
+    <p class="font-mono">
+      © {year} {profile.name}
+    </p>
+    <ul class="flex gap-5 font-mono">
       {socialLinks.map((link) => (
         <li>
           <a
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            class="transition-colors hover:text-accent"
+            class="term-select -mx-1 inline-flex min-h-11 items-center px-1 sm:min-h-0"
           >
             {link.label}
           </a>

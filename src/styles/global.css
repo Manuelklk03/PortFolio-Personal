@@ -26,6 +26,50 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Hover y foco como texto seleccionado en una terminal: fondo jade y texto oscuro */
+@utility term-select {
+  transition:
+    background-color 80ms,
+    color 80ms;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-accent);
+    color: var(--color-background);
+  }
+
+  &:hover *,
+  &:focus-visible * {
+    color: inherit;
+  }
+}
+
+/* Barra de progreso de scroll de la cabecera (solo navegadores con animation-timeline) */
+@utility scroll-progress {
+  display: none;
+
+  @supports (animation-timeline: scroll()) {
+    display: inline-grid;
+
+    & > [data-fill] {
+      animation: scroll-fill linear both;
+      /* Con una línea de tiempo de scroll la duración debe ser auto (el atajo la pone a 0). */
+      animation-duration: auto;
+      animation-timeline: scroll(root);
+      animation-timing-function: steps(16, end);
+    }
+  }
+}
+
+@keyframes scroll-fill {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 /* Variables de shadcn/ui apuntando a la paleta del @theme */
 @layer base {
   :root {
@@ -48,7 +92,7 @@
     --border: var(--color-border);
     --input: var(--color-border);
     --ring: var(--color-accent);
-    --radius: 0.5rem; /* 8px */
+    --radius: 0; /* estilo terminal: sin esquinas redondeadas */
   }
 }
 

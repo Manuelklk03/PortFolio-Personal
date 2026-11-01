@@ -17,26 +17,58 @@ const links = [
     aria-label="Principal"
     class="mx-auto flex max-w-5xl flex-col gap-2 px-4 py-4 sm:flex-row sm:items-center sm:justify-between"
   >
-    <a
-      href="#inicio"
-      class="font-mono text-sm"
-      aria-label="Manuel Casinos Pérez, ir al inicio"
-    >
-      <!-- prettier-ignore -->
-      <span class="text-accent">manuel</span><span class="text-muted">@portfolio:</span><span class="text-accent-2">~</span><span class="text-muted">$</span><span aria-hidden="true" class="animate-blink text-accent">_</span>
-    </a>
-    <ul class="flex flex-wrap gap-x-5 font-mono text-sm text-muted">
+    <div class="flex items-center gap-6">
+      <a
+        href="#inicio"
+        class="term-select -mx-1 px-1 font-mono text-sm"
+        aria-label="Manuel Casinos Pérez, ir al inicio"
+      >
+        <!-- prettier-ignore -->
+        <span><span class="text-accent">manuel</span><span class="text-muted">@portfolio:</span><span data-prompt-path class="text-accent-2">~</span><span class="text-muted">$</span><span aria-hidden="true" class="animate-blink text-accent">_</span></span>
+      </a>
+      <!-- Progreso de lectura: se llena al bajar (solo escritorio y navegadores compatibles). -->
+      <span
+        aria-hidden="true"
+        class="scroll-progress font-mono text-xs text-border max-lg:hidden!"
+      >
+        <span class="col-start-1 row-start-1">░░░░░░░░░░░░░░░░</span>
+        <span data-fill class="col-start-1 row-start-1 text-accent">
+          ████████████████
+        </span>
+      </span>
+    </div>
+    <ul class="flex flex-wrap gap-x-3 font-mono text-sm text-muted">
       {links.map((link) => (
         <li>
           <a
             href={link.href}
-            class="inline-flex min-h-11 items-center transition-colors hover:text-accent sm:min-h-0"
+            class="term-select inline-flex min-h-11 items-center px-1.5 sm:min-h-0"
           >
             <!-- prettier-ignore -->
-            <span aria-hidden="true" class="text-accent-2">./</span>{link.label}
+            <span><span aria-hidden="true" class="text-accent-2 max-sm:hidden">./</span>{link.label}</span>
           </a>
         </li>
       ))}
     </ul>
   </nav>
 </header>
+
+<script>
+  const path = document.querySelector<HTMLElement>("[data-prompt-path]");
+  const sections = document.querySelectorAll<HTMLElement>("main section[id]");
+
+  if (path && sections.length) {
+    // La sección que cruza la mitad de la pantalla marca la ruta del prompt.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const id = entry.target.id;
+          path.textContent = id === "inicio" ? "~" : `~/${id}`;
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    sections.forEach((section) => observer.observe(section));
+  }
+</script>

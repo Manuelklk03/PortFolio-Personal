@@ -1,0 +1,11 @@
+---
+// Final del inicio: una franja de caracteres que se deshace hacia la página. Se genera al compilar.
+import { dissolveBand } from "../../lib/ascii-art";
+
+const band = dissolveBand(320, 4);
+---
+
+<pre
+  aria-hidden="true"
+  class="pointer-events-none overflow-hidden font-mono text-[11px] leading-[1.15] whitespace-pre text-accent/15 select-none"
+>{band}</pre>
