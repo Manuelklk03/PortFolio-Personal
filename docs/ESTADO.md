@@ -23,7 +23,7 @@ Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abys
 
 ## Git
 
-- `main` al día hasta la PR de `feature/portrait-assemble` (1 nov).
+- `main` al día hasta la PR de `feature/portrait-blend` (1 nov).
 - Sin protección de `main` en GitHub (decisión de Manuel); se sigue el flujo de ramas y PR. `git fetch --prune` limpia las ramas remotas borradas.
 
 ## Comprobaciones (31 oct, revisión de UI)
@@ -48,3 +48,4 @@ Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abys
 
 1. Cuando Manuel pase el PDF: copiarlo a `public/cv/` y poner la ruta en `cvUrl` de `src/data/profile.ts`.
 2. Sustituir los datos de prueba por los reales (`src/data/projects.ts`, `src/data/tech.ts`, proyectos y tecnologías; «Sobre mí» ya usa datos confirmados).
+3. Más adelante: ESLint + `npm run lint` y análisis con SonarQube (ver `docs/TAREAS.md`).

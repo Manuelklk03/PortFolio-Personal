@@ -107,7 +107,7 @@ export async function tintedPhoto(
     const mask = new Uint8Array(pixels);
     for (let i = 0; i < pixels; i++) mask[i] = background[i] ? 0 : 255;
     const softMask = await sharp(mask, { raw: { width: w, height: h, channels: 1 } })
-      .blur(1.2)
+      .blur(2)
       .extractChannel(0)
       .raw()
       .toBuffer();
@@ -140,10 +140,24 @@ export async function tintedPhoto(
       max = Math.max(max, gray[i] ?? 0);
     }
 
+    // Color real de la foto, que se mezcla con el duotono para que no quede todo jade.
+    const { data: original, info: originalInfo } = await sharp(path)
+      .extract(region)
+      .resize({ width: outputWidth })
+      .removeAlpha()
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+    const channels = originalInfo.channels;
+    const realColor = 0.45;
+
     const rgba = new Uint8Array(pixels * 4);
     for (let i = 0; i < pixels; i++) {
       const value = Math.min(1, Math.max(0, ((gray[i] ?? 0) - min) / (max - min || 1)));
-      const [r = 0, g = 0, b = 0] = toneOf(value);
+      const tone = toneOf(value);
+      const [r = 0, g = 0, b = 0] = tone.map((c, k) => {
+        const real = original[i * channels + (channels >= 3 ? k : 0)] ?? c;
+        return Math.round(c * (1 - realColor) + real * realColor);
+      });
       rgba.set([r, g, b, softMask[i] ?? 0], i * 4);
     }
 

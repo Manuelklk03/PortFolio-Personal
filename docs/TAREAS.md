@@ -62,6 +62,7 @@
 - [ ] Revisar contraste, foco, estructura semántica y textos alternativos.
 - [ ] Configurar título, descripción e icono de la web.
 - [ ] Ejecutar los scripts de comprobación disponibles y resolver errores.
+- [ ] Configurar ESLint (con el plugin de Astro) y un script `npm run lint`, y analizar el proyecto con SonarQube (pedido por Manuel, 1 nov 2026).
 - [ ] Elegir alojamiento y publicar cuando Manuel lo indique.
 - [ ] Comprobar la URL publicada y actualizar la documentación.
 

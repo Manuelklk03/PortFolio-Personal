@@ -28,3 +28,4 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 - 2026-11-01: ASCII en toda la página: franja de transición del inicio, prompt vivo y barra de scroll en la cabecera, «Sobre mí» estilo neofetch con retrato ASCII, firmas de proyecto en ANSI Shadow, hover de selección de terminal, contacto en filas, 404 de terminal y sin esquinas redondeadas.
 - 2026-11-01: retrato ASCII de Manuel en «Sobre mí», generado al compilar desde su foto.
 - 2026-11-01: el retrato empieza en ASCII y la foto (sin fondo y en tonos jade) se monta fila a fila al llegar a «Sobre mí».
+- 2026-11-01: el retrato mezcla el color real de la foto con el tono jade y se funde con el fondo (bordes ovalados difuminados y modo de fusión «lighten»).
