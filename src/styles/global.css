@@ -193,6 +193,13 @@
     }
   }
 
+  /* Vista previa del CV: la página se "imprime" de arriba abajo en 30 pasos */
+  @media (prefers-reduced-motion: no-preference) {
+    .cv-print {
+      animation: portrait-photo-in 1.6s steps(30, end) both;
+    }
+  }
+
   /* Foco visible al navegar con teclado */
   :focus-visible {
     outline: 2px solid var(--color-accent);

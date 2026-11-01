@@ -1,0 +1,78 @@
+---
+// Vista previa del CV integrada en el estilo terminal: la página se "imprime" línea a línea.
+interface Props {
+  url: string;
+  name: string;
+}
+
+const { url, name } = Astro.props;
+---
+
+<div data-cv-preview data-url={url} class="font-mono">
+  <div class="border border-border bg-surface/60">
+    <p
+      class="flex flex-wrap items-baseline justify-between gap-2 border-b border-border px-4 py-2.5 text-xs text-muted"
+    >
+      <span><span class="text-accent-2">$</span> cat curriculum.pdf</span>
+      <span aria-hidden="true">1 página · PDF</span>
+    </p>
+    <!-- Se muestra la parte de arriba del CV y se funde con el fondo; el documento entero, con «abrir PDF». -->
+    <div
+      class="relative max-h-[30rem] overflow-hidden p-3 [mask-image:linear-gradient(to_bottom,#000_60%,transparent)] sm:max-h-[34rem] sm:p-6"
+    >
+      <!-- Mientras pdf.js carga (o si falla) se muestra un aviso en lugar de un hueco vacío. -->
+      <p data-cv-status class="px-1 py-10 text-sm text-muted">
+        <span class="text-accent-2">&gt;</span> cargando curriculum.pdf…
+      </p>
+      <canvas
+        role="img"
+        aria-label={`Vista previa del currículum de ${name}`}
+        class="hidden opacity-90 shadow-[0_0_0_1px_var(--color-border)]"></canvas>
+    </div>
+  </div>
+  <div class="mt-4 flex flex-wrap gap-3 text-sm">
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="term-select inline-flex items-center gap-2 border border-accent/50 px-5 py-3 text-accent"
+    >
+      <span aria-hidden="true">↗</span> abrir PDF
+    </a>
+    <a
+      href={url}
+      download
+      class="term-select inline-flex items-center gap-2 border border-border px-5 py-3 text-foreground"
+    >
+      <span aria-hidden="true">↓</span> descargar
+    </a>
+  </div>
+</div>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-cv-preview]");
+  const canvas = root?.querySelector("canvas");
+  const status = root?.querySelector<HTMLElement>("[data-cv-status]");
+  const url = root?.dataset.url;
+
+  if (root && canvas && status && url) {
+    // pdf.js solo se descarga cuando la sección del CV se acerca a la pantalla.
+    const observer = new IntersectionObserver(
+      async ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        observer.disconnect();
+        const { renderCvPreview } = await import("../scripts/cv-preview");
+        const ok = await renderCvPreview(canvas, url);
+        if (ok) {
+          status.remove();
+          canvas.classList.remove("hidden");
+          canvas.classList.add("cv-print");
+        } else {
+          status.textContent = "> no se pudo mostrar la vista previa; usa «abrir PDF».";
+        }
+      },
+      { rootMargin: "300px 0px" },
+    );
+    observer.observe(root);
+  }
+</script>

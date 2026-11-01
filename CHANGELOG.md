@@ -31,3 +31,4 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 - 2026-11-01: el retrato mezcla el color real de la foto con el tono jade y se funde con el fondo (bordes ovalados difuminados y modo de fusión «lighten»).
 - 2026-11-01: el retrato muestra más torso y más color real (70 %), para que se vea como una foto y no como una cara estampada.
 - 2026-11-01: currículum en PDF con visor y descarga, y sección Stack con las tecnologías reales del CV.
+- 2026-11-01: vista previa del CV integrada en el diseño (pdf.js) en lugar del visor de PDF del navegador.
