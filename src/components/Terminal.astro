@@ -1,0 +1,63 @@
+---
+// Terminal escribible con información del portfolio (ver src/scripts/terminal.ts).
+import type { TerminalData } from "../scripts/terminal";
+
+interface Props {
+  data: TerminalData;
+}
+
+const { data } = Astro.props;
+---
+
+<div
+  data-terminal
+  class="border border-border bg-surface/60 font-mono text-sm transition-colors focus-within:border-accent"
+>
+  <p
+    class="flex justify-between border-b border-border px-4 py-2.5 text-xs text-muted"
+  >
+    <span>bash — manuel@portfolio</span>
+    <span aria-hidden="true">escribe <span class="text-accent">help</span></span>
+  </p>
+  <div class="p-4">
+    <ol
+      data-terminal-output
+      role="log"
+      aria-live="polite"
+      aria-label="Salida de la terminal"
+      class="max-h-72 space-y-1 overflow-y-auto break-words whitespace-pre-wrap"
+    >
+      <li class="text-muted">
+        Bienvenido. Escribe <span class="text-accent">help</span> para ver los comandos.
+      </li>
+    </ol>
+    <form class="mt-2 flex items-center gap-2" autocomplete="off">
+      <label for="terminal-input" class="shrink-0 text-accent">
+        <span class="sr-only">Comando</span>
+        <span aria-hidden="true">~ $</span>
+      </label>
+      <input
+        id="terminal-input"
+        name="command"
+        type="text"
+        spellcheck="false"
+        autocapitalize="off"
+        class="min-w-0 flex-1 bg-transparent text-foreground caret-accent outline-none placeholder:text-border"
+        placeholder="help"
+      />
+    </form>
+  </div>
+</div>
+
+<script is:inline type="application/json" data-terminal-data set:html={JSON.stringify(data)} />
+
+<script>
+  import { initTerminal, type TerminalData } from "../scripts/terminal";
+
+  const root = document.querySelector<HTMLElement>("[data-terminal]");
+  const json = document.querySelector("[data-terminal-data]")?.textContent;
+  if (root && json) {
+    const data: TerminalData = JSON.parse(json);
+    initTerminal(root, data);
+  }
+</script>

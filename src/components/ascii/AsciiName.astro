@@ -182,20 +182,29 @@ const art = lines
       };
 
       // Un clic lanza una onda que empuja todos los caracteres hacia fuera.
-      const shockwave = (event: PointerEvent) => {
+      const blast = (ox: number, oy: number, strength: number) => {
         const rect = canvas.getBoundingClientRect();
-        const ox = event.clientX - rect.left;
-        const oy = event.clientY - rect.top;
         for (const p of particles) {
           const dx = p.x - ox;
           const dy = p.y - oy;
           const distance = Math.hypot(dx, dy) || 1;
-          const force = Math.max(0, 1 - distance / (rect.width * 0.8)) * 18;
+          const force =
+            Math.max(0, 1 - distance / (rect.width * 0.8)) * strength;
           p.vx += (dx / distance) * force;
           p.vy += (dy / distance) * force;
         }
         play();
       };
+      const shockwave = (event: PointerEvent) => {
+        const rect = canvas.getBoundingClientRect();
+        blast(event.clientX - rect.left, event.clientY - rect.top, 18);
+      };
+      // Easter egg: el código Konami hace explotar el nombre desde el centro.
+      window.addEventListener("konami", () => {
+        if (!enabled) return;
+        const rect = canvas.getBoundingClientRect();
+        blast(rect.width / 2, rect.height / 2, 60);
+      });
 
       const enable = (intro: boolean) => {
         enabled = true;

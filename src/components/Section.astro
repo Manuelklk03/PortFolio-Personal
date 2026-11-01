@@ -17,11 +17,12 @@ const { id, title, command } = Astro.props;
   <div class="mx-auto max-w-5xl px-4">
     <h2
       id={`${id}-title`}
-      class="font-mono text-2xl tracking-tight sm:text-3xl"
+      data-scramble-trigger
+      class="w-fit font-mono text-2xl tracking-tight sm:text-3xl"
     >
       <span class="sr-only">{title}</span>
       <!-- prettier-ignore -->
-      <span aria-hidden="true"><span class="text-accent">~/{id}</span> <span class="text-muted">$</span> <span class="text-foreground">{command}</span></span>
+      <span aria-hidden="true"><span class="text-accent" data-scramble>~/{id}</span> <span class="text-muted">$</span> <span class="text-foreground" data-scramble>{command}</span></span>
     </h2>
     <div class="mt-8">
       <slot />
