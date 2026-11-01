@@ -174,7 +174,7 @@
     clip-path: inset(100% 0 0 0);
   }
 
-  /* Con movimiento: empieza en ASCII y la foto se monta fila a fila (44 filas) al entrar en pantalla */
+  /* Con movimiento: empieza en ASCII y la foto se monta fila a fila (42 filas) al entrar en pantalla */
   @media (prefers-reduced-motion: no-preference) {
     .js-reveal [data-portrait]:has(img) pre {
       clip-path: inset(0 0 0 0);
@@ -185,11 +185,11 @@
     }
 
     .js-reveal .is-visible [data-portrait] pre {
-      animation: portrait-ascii-out 2.2s steps(44, end) 0.9s both;
+      animation: portrait-ascii-out 2.2s steps(42, end) 0.9s both;
     }
 
     .js-reveal .is-visible [data-portrait] img {
-      animation: portrait-photo-in 2.2s steps(44, end) 0.9s both;
+      animation: portrait-photo-in 2.2s steps(42, end) 0.9s both;
     }
   }
 

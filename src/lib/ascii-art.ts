@@ -112,9 +112,9 @@ export async function tintedPhoto(
       .raw()
       .toBuffer();
 
-    // Duotono de la paleta: sombras del color del fondo, medios en teal y luces en jade claro.
+    // Duotono de la paleta: sombras del color de las superficies, medios en teal y luces en jade claro.
     const stops: [number, number[]][] = [
-      [0, [5, 10, 20]],
+      [0, [10, 22, 38]],
       [0.45, [15, 157, 154]],
       [0.8, [62, 230, 193]],
       [1, [221, 247, 240]],
@@ -148,7 +148,7 @@ export async function tintedPhoto(
       .raw()
       .toBuffer({ resolveWithObject: true });
     const channels = originalInfo.channels;
-    const realColor = 0.45;
+    const realColor = 0.7;
 
     const rgba = new Uint8Array(pixels * 4);
     for (let i = 0; i < pixels; i++) {
