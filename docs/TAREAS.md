@@ -56,7 +56,8 @@
 
 ## 4. Revisión y publicación
 
-- [ ] Sustituir los datos de prueba (proyectos, enlaces, tecnologías, dominio, imágenes) por los reales de `docs/PROYECTOS.md`.
+- [x] Sustituir los proyectos, enlaces, tecnologías e imágenes de prueba por los reales (2 nov 2026).
+- [ ] Decidir dominio y alojamiento y cambiar `siteUrl` de `src/layouts/Layout.astro` (ahora `manuelcasinos.dev`, de prueba).
 - [ ] Revisar textos, imágenes y estados de proyectos.
 - [ ] Comprobar enlaces y navegación con teclado.
 - [ ] Revisar contraste, foco, estructura semántica y textos alternativos.

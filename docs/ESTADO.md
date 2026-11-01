@@ -5,7 +5,7 @@
 
 ## Resumen del estado real
 
-La web tiene la estructura completa de una página: cabecera, inicio, sobre mí, proyectos (tarjetas desde `src/data/projects.ts`), tecnologías, contacto, pie y página 404, con SEO básico. En la fase de diseño ya se integraron shadcn/ui, Lenis, GSAP con ScrollTrigger, componentes de React Bits y un cursor personalizado. **Todo el contenido es de prueba** (proyectos, enlaces, tecnologías, dominio `manuelcasinos.dev`): hay que sustituirlo por los datos reales de `docs/PROYECTOS.md` antes de publicar.
+La web tiene la estructura completa de una página: cabecera, inicio, sobre mí, proyectos (tarjetas desde `src/data/projects.ts`), tecnologías, contacto, pie y página 404, con SEO básico. En la fase de diseño ya se integraron shadcn/ui, Lenis, GSAP con ScrollTrigger, componentes de React Bits y un cursor personalizado. El contenido ya es real (proyectos, Stack, «Sobre mí», CV y contacto). Solo queda de prueba el dominio `manuelcasinos.dev` de `src/layouts/Layout.astro`.
 
 Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abyss + Jade** (ver `docs/DECISIONES.md`). Aplicado: paleta e inicio (nudo 3D en ASCII con Three.js + nombre ASCII con figlet que se descifra). Después, rediseño «terminal elegante»: nombre con partículas que se apartan del ratón, cursor en bloque (`src/components/Cursor.astro`), títulos con prompt, tarjetas tipo ventana, sección de currículum (falta el PDF) y contacto con correo, GitHub y LinkedIn (`src/data/profile.ts`). Ya no hay islas de React en uso, ni GSAP (entradas con `src/scripts/reveal.ts`). Interacción (2 nov): terminal escribible (`#terminal`), proyectos desplegables, títulos que se descifran, retrato en mosaico y easter eggs (Konami, comandos ocultos, copiar colores).
 
@@ -23,7 +23,7 @@ Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abys
 
 ## Git
 
-- `main` al día hasta la PR de `feature/interactive` (2 nov).
+- `main` al día hasta la PR de `feature/real-projects` (2 nov).
 - Sin protección de `main` en GitHub (decisión de Manuel); se sigue el flujo de ramas y PR. `git fetch --prune` limpia las ramas remotas borradas.
 
 ## Comprobaciones (31 oct, revisión de UI)
@@ -45,6 +45,6 @@ Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abys
 
 ## Próximo paso concreto
 
-1. Sustituir los proyectos de prueba de `src/data/projects.ts` por los reales de `docs/PROYECTOS.md` (Stack y «Sobre mí» ya usan datos del CV).
-2. Para actualizar el CV: sustituir `public/cv/manuel-casinos-perez.pdf` (mismo nombre).
-3. Más adelante: ESLint + `npm run lint` y análisis con SonarQube (ver `docs/TAREAS.md`).
+1. Decidir dominio y alojamiento; después, pasada de SEO con claude-seo (ver `docs/HERRAMIENTAS.md`).
+2. ESLint + `npm run lint` y análisis con SonarQube (ver `docs/TAREAS.md`).
+3. Capturas de Digital Fit y ValveDex cuando Manuel las tenga (`public/projects/` + campo `image`).
