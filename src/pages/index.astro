@@ -5,9 +5,24 @@ import ProjectEntry from "../components/ProjectEntry.astro";
 import Cursor from "../components/Cursor.astro";
 import AsciiScene from "../components/ascii/AsciiScene.astro";
 import AsciiName from "../components/ascii/AsciiName.astro";
+import AsciiSeam from "../components/ascii/AsciiSeam.astro";
+import { blockLetters, imageAscii } from "../lib/ascii-art";
 import { projects } from "../data/projects";
 import { profile } from "../data/profile";
 import { techStack } from "../data/tech";
+
+// Retrato ASCII de Manuel para «Sobre mí», al estilo de neofetch (se genera al compilar).
+// Mientras no exista la foto se muestran sus iniciales.
+const portrait =
+  (await imageAscii("src/assets/portrait.jpg", 40, 24)) ?? blockLetters("MC");
+const swatches = [
+  "text-surface",
+  "text-border",
+  "text-muted",
+  "text-accent-2",
+  "text-accent",
+  "text-foreground",
+];
 
 const contactLinks = [
   {
@@ -43,13 +58,13 @@ const contactLinks = [
     <AsciiScene />
     <div class="mx-auto max-w-5xl px-4 py-24 sm:py-32">
       <!-- prettier-ignore -->
-      <p class="font-mono text-sm text-muted"><span class="text-accent">~/portfolio</span> $ whoami<span aria-hidden="true" class="animate-blink text-accent">█</span></p>
+      <p class="font-mono text-sm text-muted"><span class="text-accent">~</span> <span class="text-muted">$</span> whoami<span aria-hidden="true" class="animate-blink text-accent">█</span></p>
       <h1 class="sr-only">Manuel Casinos Pérez</h1>
       <div class="mt-6">
         <AsciiName lines={["MANUEL", "CASINOS"]} />
       </div>
       <p class="mt-8 max-w-xl text-lg text-foreground">
-        Desarrollador FullStack en Valencia.
+        Desarrollador full stack en Valencia.
       </p>
       <p class="mt-2 font-mono text-sm text-accent-2">
         Java · Spring Boot · Angular · TypeScript · React
@@ -57,32 +72,52 @@ const contactLinks = [
       <div class="mt-10 flex flex-wrap gap-3">
         <a
           href="#proyectos"
-          class="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 font-mono text-sm font-medium text-background transition hover:bg-foreground"
+          class="inline-flex items-center gap-2 bg-accent px-5 py-3 font-mono text-sm font-medium text-background transition hover:bg-foreground"
         >
           <span aria-hidden="true">$</span> ls proyectos
         </a>
         <a
           href={profile.cvUrl ? "#cv" : "#contacto"}
-          class="inline-flex items-center gap-2 rounded-md border border-accent/50 px-5 py-3 font-mono text-sm text-accent transition hover:border-accent hover:bg-accent/10"
+          class="term-select inline-flex items-center gap-2 border border-accent/50 px-5 py-3 font-mono text-sm text-accent"
         >
           <span aria-hidden="true">$</span>
-          {profile.cvUrl ? "cat cv.pdf" : "mail contacto"}
+          {profile.cvUrl ? "cat cv.pdf" : "cd contacto"}
         </a>
       </div>
     </div>
+    <AsciiSeam />
   </section>
 
   <Section id="sobre-mi" title="Sobre mí" command="cat perfil">
-    <div data-reveal class="max-w-3xl">
-      <dl class="grid gap-x-8 gap-y-3 font-mono text-sm sm:grid-cols-[9rem_1fr] sm:text-base">
-        {profile.about.map((row) => (
-          <Fragment>
-            <dt class="text-accent-2">{row.key}</dt>
-            <dd class="text-foreground">{row.value}</dd>
-          </Fragment>
-        ))}
-      </dl>
-      <p class="mt-8 max-w-2xl text-muted">{profile.aboutNote}</p>
+    <div
+      data-reveal
+      class="grid items-start gap-x-10 gap-y-6 sm:grid-cols-[auto_1fr]"
+    >
+      <pre
+        aria-hidden="true"
+        class="hidden font-mono text-[9px] leading-[1.1] text-accent/80 select-none min-[420px]:block sm:text-[11px]"
+      >{portrait}</pre>
+      <div>
+        <!-- prettier-ignore -->
+        <p class="font-mono text-sm"><span class="text-accent">manuel</span><span class="text-muted">@</span><span class="text-accent">portfolio</span></p>
+        <p aria-hidden="true" class="font-mono text-sm text-border select-none">
+          ──────────────────
+        </p>
+        <dl class="mt-3 grid gap-x-8 gap-y-2 font-mono text-sm sm:grid-cols-[9rem_1fr] sm:text-base">
+          {profile.about.map((row) => (
+            <Fragment>
+              <dt class="text-accent-2">{row.key}</dt>
+              <dd class="text-foreground">{row.value}</dd>
+            </Fragment>
+          ))}
+        </dl>
+        <p class="mt-6 max-w-xl text-muted">{profile.aboutNote}</p>
+        <p aria-hidden="true" class="mt-6 flex gap-1 font-mono select-none">
+          {swatches.map((color) => (
+            <span class={color}>███</span>
+          ))}
+        </p>
+      </div>
     </div>
   </Section>
 
@@ -128,7 +163,7 @@ const contactLinks = [
   {profile.cvUrl && (
     <Section id="cv" title="Currículum" command="open curriculum.pdf">
       <div data-reveal>
-        <div class="overflow-hidden rounded-lg border border-border bg-surface/80">
+        <div class="overflow-hidden border border-border bg-surface/80">
           <object
             data={profile.cvUrl}
             type="application/pdf"
@@ -147,7 +182,7 @@ const contactLinks = [
         <a
           href={profile.cvUrl}
           download
-          class="mt-4 inline-flex items-center gap-2 rounded-md border border-accent/50 px-5 py-3 font-mono text-sm text-accent transition hover:border-accent hover:bg-accent/10"
+          class="term-select mt-4 inline-flex items-center gap-2 border border-accent/50 px-5 py-3 font-mono text-sm text-accent"
         >
           <span aria-hidden="true">↓</span> descargar PDF
         </a>
@@ -156,31 +191,26 @@ const contactLinks = [
   )}
 
   <Section id="contacto" title="Contacto" command="ping manuel">
-    <div data-reveal>
-      <p class="max-w-xl text-muted">
-        Escríbeme por correo o revisa mi trabajo en GitHub y LinkedIn.
-      </p>
-      <ul class="mt-8 grid gap-3 sm:grid-cols-3">
-        {contactLinks.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              {...(link.external
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-              class="group flex h-full flex-col gap-2 rounded-lg border border-border bg-surface/70 p-5 font-mono transition-colors duration-200 hover:border-accent hover:bg-accent/5"
-            >
-              <span class="text-xs text-muted">
-                <span class="text-accent-2">$</span> {link.command}
-              </span>
-              <span class="break-all text-accent transition-colors group-hover:text-foreground">
-                {link.label}
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul data-reveal class="border-t border-border font-mono">
+      {contactLinks.map((link) => (
+        <li class="border-b border-border">
+          <a
+            href={link.href}
+            {...(link.external
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+            class="term-select flex flex-wrap items-baseline gap-x-6 gap-y-1 px-1 py-4 sm:px-4"
+          >
+            <span class="w-36 text-sm text-muted">
+              <span class="text-accent-2">$</span> {link.command}
+            </span>
+            <span class="text-accent [overflow-wrap:anywhere]">
+              {link.label}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
   </Section>
 
   <script>

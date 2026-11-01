@@ -1,6 +1,8 @@
 export interface Project {
   id: string;
   title: string;
+  // Siglas que se dibujan en letras de bloque junto al proyecto (2-4 caracteres).
+  monogram: string;
   description: string;
   technologies: string[];
   status: "completed" | "in-progress" | "planned";
@@ -14,6 +16,7 @@ export const projects: Project[] = [
   {
     id: "cerrajeria-noa",
     title: "Cerrajería NOA",
+    monogram: "NOA",
     description:
       "Web corporativa y catálogo de servicios para cerrajería local. Incluye formulario de contacto, galería de trabajos y sección de urgencias 24h.",
     technologies: ["Astro", "React", "Tailwind CSS", "TypeScript"],
@@ -27,9 +30,16 @@ export const projects: Project[] = [
   {
     id: "digital-fit",
     title: "Digital Fit 2.0",
+    monogram: "DF2",
     description:
       "Plataforma de entrenamiento online con seguimiento de rutinas, progreso y nutrición. Incluye panel de usuario y área de administrador.",
-    technologies: ["React", "Node.js", "PostgreSQL", "Tailwind CSS", "TypeScript"],
+    technologies: [
+      "React",
+      "Node.js",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "TypeScript",
+    ],
     status: "in-progress",
     image: "/projects/digital-fit.svg",
     repo: "https://github.com/Manuelklk03/digital-fit",
@@ -39,9 +49,16 @@ export const projects: Project[] = [
   {
     id: "valvedex",
     title: "ValveDex",
+    monogram: "VDX",
     description:
       "Pokédex interactiva de válvulas industriales con filtros avanzados, comparador y fichas técnicas detalladas.",
-    technologies: ["React", "Three.js", "React Three Fiber", "Tailwind CSS", "TypeScript"],
+    technologies: [
+      "React",
+      "Three.js",
+      "React Three Fiber",
+      "Tailwind CSS",
+      "TypeScript",
+    ],
     status: "completed",
     image: "/projects/valvedex.svg",
     repo: "https://github.com/Manuelklk03/valvedex",

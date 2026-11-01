@@ -82,9 +82,12 @@ Base creada el 25 de octubre de 2026 (rama `chore/project-setup`). Versiones rea
 | React Bits (copiados) | — | `src/components/react-bits/` | Ninguno en uso: `OrbitingBalls`, `TextReveal`, `CustomCursor` y `MagneticButton` se sustituyeron el 31 oct por componentes `.astro` con `<script>` (efectos ASCII y `Cursor.astro`). También se quitó `src/components/ui/button.tsx`, que no aplicaba estilos con `asChild`. |
 | three + @types/three | ^0.187.0 | `src/scripts/ascii-scene.ts`, `src/components/ascii/AsciiScene.astro` | Nudo 3D dibujado con `AsciiEffect` (`three/addons/effects/AsciiEffect.js`). Se importa con `import()` al entrar el inicio en pantalla: chunk propio (~534 KB sin comprimir); el aviso de tamaño del build es esperado. Chrome avisa de `willReadFrequently`: viene de dentro de `AsciiEffect`. |
 | figlet | ^1.12.0 | `src/components/ascii/AsciiName.astro` | Solo al compilar (frontmatter): genera el nombre en ASCII con la fuente `ANSI Shadow` (`figlet/importable-fonts/ANSI Shadow.js` + `parseFont`, sin `fs`). No llega al navegador. |
+| sharp | ^0.35.5 (dev) | `src/lib/ascii-art.ts` | Ya venía con Astro; se declara explícitamente. Convierte `src/assets/portrait.jpg` en ASCII al compilar (el fondo casi blanco queda vacío). |
 
 `astro add` instaló `@types/react` y `@types/react-dom` en `dependencies` en vez de `devDependencies`; no afecta a la web generada. Astro recoge telemetría anónima; se desactiva con `npx astro telemetry disable` si Manuel quiere.
 
 El 31 oct 2026 se desinstalaron paquetes sin uso: `cn` (la función `cn` está en `src/lib/utils.ts`), `@fontsource-variable/geist` (las fuentes van por la API de Astro), `@base-ui/react`, `tw-animate-css`, `lucide-react` y `shadcn` (se usa con `npx`). Si un componente de shadcn los necesita, el CLI los vuelve a instalar.
 
 Regla aprendida (31 oct 2026): en Astro, un `<script>` con cualquier atributo (incluido `type="module"`) no se procesa: los `import` de npm o con alias `@/` no se empaquetan y fallan en el navegador. Usar `<script>` sin atributos.
+
+Codex por terminal: el plugin `codex` usa Bash, que en este equipo falla al iniciar (snapshot del shell con una comilla sin cerrar). Alternativa que funciona: desde PowerShell, `Get-Content prompt.txt -Raw | codex exec --sandbox read-only --skip-git-repo-check -o salida.txt -`.
