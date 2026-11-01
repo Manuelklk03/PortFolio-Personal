@@ -14,7 +14,12 @@ import { techStack } from "../data/tech";
 // Retrato ASCII de Manuel para «Sobre mí», al estilo de neofetch (se genera al compilar).
 // Mientras no exista la foto se muestran sus iniciales.
 const portrait =
-  (await imageAscii("src/assets/portrait.jpg", 40, 24)) ?? blockLetters("MC");
+  (await imageAscii("src/assets/portrait.jpg", 64, 36, {
+    left: 0.12,
+    top: 0.06,
+    width: 0.76,
+    height: 0.66,
+  })) ?? blockLetters("MC");
 const swatches = [
   "text-surface",
   "text-border",
@@ -95,7 +100,7 @@ const contactLinks = [
     >
       <pre
         aria-hidden="true"
-        class="hidden font-mono text-[9px] leading-[1.1] text-accent/80 select-none min-[420px]:block sm:text-[11px]"
+        class="hidden font-mono text-[9px] leading-[1.1] text-accent select-none min-[420px]:block lg:text-[11px]"
       >{portrait}</pre>
       <div>
         <!-- prettier-ignore -->

@@ -12,18 +12,29 @@ export function blockLetters(text: string): string {
 
 // Convierte una foto en caracteres: las zonas claras usan caracteres densos (la web es oscura)
 // y el fondo casi blanco de la foto se deja vacío. Devuelve null si la foto todavía no existe.
+// `crop` recorta la foto en fracciones (0–1) para quedarse con la cabeza y los hombros.
 export async function imageAscii(
   path: string,
   columns: number,
   rows: number,
+  crop = { left: 0, top: 0, width: 1, height: 1 },
 ): Promise<string | null> {
   const ramp = " .:-=+*#%@";
   // Los caracteres son el doble de altos que de anchos: se leen dos filas de píxeles por línea.
   let data: Uint8Array;
   try {
+    const { width = 1, height = 1 } = await sharp(path).metadata();
     ({ data } = await sharp(path)
-      .resize(columns, rows * 2, { fit: "cover", position: "top" })
+      .extract({
+        left: Math.round(width * crop.left),
+        top: Math.round(height * crop.top),
+        width: Math.round(width * crop.width),
+        height: Math.round(height * crop.height),
+      })
       .grayscale()
+      .normalise()
+      .resize(columns, rows * 2, { fit: "fill" })
+      .sharpen()
       .raw()
       .toBuffer({ resolveWithObject: true }));
   } catch {
@@ -38,7 +49,7 @@ export async function imageAscii(
       const bottom = data[(row * 2 + 1) * columns + col] ?? 0;
       const brightness = (top + bottom) / 2 / 255;
       line +=
-        brightness > 0.9
+        brightness > 0.93
           ? " "
           : ramp[
               Math.min(ramp.length - 1, Math.floor(brightness * ramp.length))
