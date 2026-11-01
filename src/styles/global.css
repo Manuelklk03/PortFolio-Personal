@@ -70,15 +70,6 @@
   }
 }
 
-@keyframes portrait-ascii-out {
-  from {
-    clip-path: inset(0 0 0 0);
-  }
-  to {
-    clip-path: inset(100% 0 0 0);
-  }
-}
-
 @keyframes scroll-fill {
   from {
     clip-path: inset(0 100% 0 0);
@@ -174,22 +165,23 @@
     clip-path: inset(100% 0 0 0);
   }
 
-  /* Con movimiento: empieza en ASCII y la foto se monta fila a fila (42 filas) al entrar en pantalla */
+  /* Con movimiento: empieza en ASCII y src/scripts/portrait-mosaic.ts lo convierte en la foto */
   @media (prefers-reduced-motion: no-preference) {
     .js-reveal [data-portrait]:has(img) pre {
       clip-path: inset(0 0 0 0);
     }
 
     .js-reveal [data-portrait] img {
-      clip-path: inset(0 0 100% 0);
+      opacity: 0;
     }
 
-    .js-reveal .is-visible [data-portrait] pre {
-      animation: portrait-ascii-out 2.2s steps(42, end) 0.9s both;
+    .js-reveal [data-portrait].mosaic-done:has(img) pre {
+      clip-path: inset(100% 0 0 0);
     }
 
-    .js-reveal .is-visible [data-portrait] img {
-      animation: portrait-photo-in 2.2s steps(42, end) 0.9s both;
+    .js-reveal [data-portrait].mosaic-done img {
+      opacity: 1;
+      transition: opacity 0.4s ease-out;
     }
   }
 

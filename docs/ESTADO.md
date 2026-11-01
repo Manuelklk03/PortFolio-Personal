@@ -7,7 +7,7 @@
 
 La web tiene la estructura completa de una página: cabecera, inicio, sobre mí, proyectos (tarjetas desde `src/data/projects.ts`), tecnologías, contacto, pie y página 404, con SEO básico. En la fase de diseño ya se integraron shadcn/ui, Lenis, GSAP con ScrollTrigger, componentes de React Bits y un cursor personalizado. **Todo el contenido es de prueba** (proyectos, enlaces, tecnologías, dominio `manuelcasinos.dev`): hay que sustituirlo por los datos reales de `docs/PROYECTOS.md` antes de publicar.
 
-Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abyss + Jade** (ver `docs/DECISIONES.md`). Aplicado: paleta e inicio (nudo 3D en ASCII con Three.js + nombre ASCII con figlet que se descifra). Después, rediseño «terminal elegante»: nombre con partículas que se apartan del ratón, cursor en bloque (`src/components/Cursor.astro`), títulos con prompt, tarjetas tipo ventana, sección de currículum (falta el PDF) y contacto con correo, GitHub y LinkedIn (`src/data/profile.ts`). Ya no hay islas de React en uso, ni GSAP (entradas con `src/scripts/reveal.ts`).
+Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abyss + Jade** (ver `docs/DECISIONES.md`). Aplicado: paleta e inicio (nudo 3D en ASCII con Three.js + nombre ASCII con figlet que se descifra). Después, rediseño «terminal elegante»: nombre con partículas que se apartan del ratón, cursor en bloque (`src/components/Cursor.astro`), títulos con prompt, tarjetas tipo ventana, sección de currículum (falta el PDF) y contacto con correo, GitHub y LinkedIn (`src/data/profile.ts`). Ya no hay islas de React en uso, ni GSAP (entradas con `src/scripts/reveal.ts`). Interacción (2 nov): terminal escribible (`#terminal`), proyectos desplegables, títulos que se descifran, retrato en mosaico y easter eggs (Konami, comandos ocultos, copiar colores).
 
 ## Modo de trabajo
 
@@ -23,7 +23,7 @@ Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abys
 
 ## Git
 
-- `main` al día hasta la PR de `feature/cv-preview` (1 nov).
+- `main` al día hasta la PR de `feature/interactive` (2 nov).
 - Sin protección de `main` en GitHub (decisión de Manuel); se sigue el flujo de ramas y PR. `git fetch --prune` limpia las ramas remotas borradas.
 
 ## Comprobaciones (31 oct, revisión de UI)

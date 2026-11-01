@@ -4,6 +4,7 @@ import Section from "../components/Section.astro";
 import ProjectEntry from "../components/ProjectEntry.astro";
 import Cursor from "../components/Cursor.astro";
 import CvPreview from "../components/CvPreview.astro";
+import Terminal from "../components/Terminal.astro";
 import AsciiScene from "../components/ascii/AsciiScene.astro";
 import AsciiName from "../components/ascii/AsciiName.astro";
 import AsciiSeam from "../components/ascii/AsciiSeam.astro";
@@ -28,14 +29,46 @@ const portraitPhoto = await tintedPhoto(
   portraitCrop,
 );
 const portrait = portraitAscii ?? blockLetters("MC");
+// Muestras de la paleta: al hacer clic se copia el color (easter egg).
 const swatches = [
-  "text-surface",
-  "text-border",
-  "text-muted",
-  "text-accent-2",
-  "text-accent",
-  "text-foreground",
+  { className: "text-surface", hex: "#0a1626" },
+  { className: "text-border", hex: "#15304a" },
+  { className: "text-muted", hex: "#8aa9a6" },
+  { className: "text-accent-2", hex: "#0f9d9a" },
+  { className: "text-accent", hex: "#3ee6c1" },
+  { className: "text-foreground", hex: "#ddf7f0" },
 ];
+
+// Datos para la terminal escribible.
+const statusText = {
+  completed: "completado",
+  "in-progress": "en desarrollo",
+  planned: "planificado",
+} as const;
+const terminalData = {
+  name: profile.name,
+  role: "Desarrollador full stack en Valencia",
+  email: profile.email,
+  github: profile.github,
+  linkedin: profile.linkedin,
+  cvUrl: profile.cvUrl,
+  about: profile.about,
+  stack: techStack,
+  projects: projects.map((project) => ({
+    id: project.id,
+    title: project.title,
+    status: statusText[project.status],
+    description: project.description,
+  })),
+  sections: [
+    "sobre-mi",
+    "proyectos",
+    "stack",
+    "terminal",
+    ...(profile.cvUrl ? ["cv"] : []),
+    "contacto",
+  ],
+};
 
 const contactLinks = [
   {
@@ -135,9 +168,17 @@ const contactLinks = [
           ))}
         </dl>
         <p class="mt-6 max-w-xl text-muted">{profile.aboutNote}</p>
-        <p aria-hidden="true" class="mt-6 flex gap-1 font-mono select-none">
-          {swatches.map((color) => (
-            <span class={color}>███</span>
+        <p class="mt-6 flex gap-1 font-mono select-none">
+          {swatches.map((swatch) => (
+            <button
+              type="button"
+              data-copy-color={swatch.hex}
+              aria-label={`Copiar el color ${swatch.hex}`}
+              title={swatch.hex}
+              class={`${swatch.className} transition-transform hover:-translate-y-0.5`}
+            >
+              ███
+            </button>
           ))}
         </p>
       </div>
@@ -183,6 +224,12 @@ const contactLinks = [
     </div>
   </Section>
 
+  <Section id="terminal" title="Terminal" command="bash">
+    <div data-reveal class="max-w-3xl">
+      <Terminal data={terminalData} />
+    </div>
+  </Section>
+
   {profile.cvUrl && (
     <Section id="cv" title="Currículum" command="open curriculum.pdf">
       <div data-reveal class="max-w-3xl">
@@ -214,8 +261,23 @@ const contactLinks = [
     </ul>
   </Section>
 
+  <!-- Mensajes breves de los easter eggs -->
+  <p
+    data-toast
+    role="status"
+    class="pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2 border border-accent/50 bg-background px-4 py-2 font-mono text-sm text-accent opacity-0 transition-opacity duration-300"
+  >
+  </p>
+
   <script>
     import { initReveal } from "@/scripts/reveal";
+    import { initScramble } from "@/scripts/scramble";
+    import { initEasterEggs } from "@/scripts/easter-eggs";
+    import { initPortraitMosaic } from "@/scripts/portrait-mosaic";
+    initScramble();
+    initEasterEggs();
+    const portraitRoot = document.querySelector<HTMLElement>("[data-portrait]");
+    if (portraitRoot) initPortraitMosaic(portraitRoot);
     // La entrada del inicio la hacen las partículas del nombre; aquí solo las secciones.
     initReveal();
   </script>
