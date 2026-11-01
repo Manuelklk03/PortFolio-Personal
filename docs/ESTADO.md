@@ -23,7 +23,7 @@ Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abys
 
 ## Git
 
-- `main` al día hasta la PR de `feature/cv-and-stack` (1 nov).
+- `main` al día hasta la PR de `feature/cv-preview` (1 nov).
 - Sin protección de `main` en GitHub (decisión de Manuel); se sigue el flujo de ramas y PR. `git fetch --prune` limpia las ramas remotas borradas.
 
 ## Comprobaciones (31 oct, revisión de UI)

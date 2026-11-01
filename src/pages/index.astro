@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
 import ProjectEntry from "../components/ProjectEntry.astro";
 import Cursor from "../components/Cursor.astro";
+import CvPreview from "../components/CvPreview.astro";
 import AsciiScene from "../components/ascii/AsciiScene.astro";
 import AsciiName from "../components/ascii/AsciiName.astro";
 import AsciiSeam from "../components/ascii/AsciiSeam.astro";
@@ -184,30 +185,8 @@ const contactLinks = [
 
   {profile.cvUrl && (
     <Section id="cv" title="Currículum" command="open curriculum.pdf">
-      <div data-reveal>
-        <div class="overflow-hidden border border-border bg-surface/80">
-          <object
-            data={profile.cvUrl}
-            type="application/pdf"
-            class="h-[80vh] w-full"
-            aria-label={`Currículum de ${profile.name} en PDF`}
-          >
-            <p class="p-6 text-muted">
-              Tu navegador no puede mostrar el PDF aquí.{" "}
-              <a href={profile.cvUrl} class="text-accent underline">
-                Ábrelo o descárgalo
-              </a>
-              .
-            </p>
-          </object>
-        </div>
-        <a
-          href={profile.cvUrl}
-          download
-          class="term-select mt-4 inline-flex items-center gap-2 border border-accent/50 px-5 py-3 font-mono text-sm text-accent"
-        >
-          <span aria-hidden="true">↓</span> descargar PDF
-        </a>
+      <div data-reveal class="max-w-3xl">
+        <CvPreview url={profile.cvUrl} name={profile.name} />
       </div>
     </Section>
   )}
