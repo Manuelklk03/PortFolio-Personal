@@ -170,49 +170,6 @@ export async function tintedPhoto(
   }
 }
 
-// Convierte un dibujo SVG en ASCII: lo transparente queda vacío y los tonos claros usan
-// caracteres más densos (la web es oscura). Sin uso por ahora: Morfeo pasó a silueta sólida.
-export async function svgAscii(
-  svg: string,
-  columns: number,
-  rows: number,
-): Promise<string> {
-  const ramp = " .:-=+*#%@";
-  const { data } = await sharp(new TextEncoder().encode(svg))
-    .resize(columns, rows * 2, { fit: "fill" })
-    .ensureAlpha()
-    .raw()
-    .toBuffer({ resolveWithObject: true });
-
-  const pixel = (x: number, y: number) => {
-    const i = (y * columns + x) * 4;
-    const alpha = (data[i + 3] ?? 0) / 255;
-    const light =
-      ((data[i] ?? 0) * 0.299 +
-        (data[i + 1] ?? 0) * 0.587 +
-        (data[i + 2] ?? 0) * 0.114) /
-      255;
-    return { alpha, light };
-  };
-
-  const lines: string[] = [];
-  for (let row = 0; row < rows; row++) {
-    let line = "";
-    for (let col = 0; col < columns; col++) {
-      const top = pixel(col, row * 2);
-      const bottom = pixel(col, row * 2 + 1);
-      const alpha = (top.alpha + bottom.alpha) / 2;
-      const light = (top.light + bottom.light) / 2;
-      line +=
-        alpha < 0.35
-          ? " "
-          : (ramp[Math.min(ramp.length - 1, 1 + Math.floor(light * (ramp.length - 1)))] ?? " ");
-    }
-    lines.push(line.trimEnd());
-  }
-  return lines.join("\n");
-}
-
 // Franja de caracteres que se apagan hacia abajo (▓▒░·); con semilla para que salga siempre igual.
 export function dissolveBand(columns: number, rows: number, seed = 7): string {
   let state = seed;

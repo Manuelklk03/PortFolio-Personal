@@ -8,7 +8,7 @@
 La web tiene la estructura completa de una página con diseño ASCII art y terminal elegante: cabecera con navegación, nudo 3D ASCII, partículas del nombre interactivas, sobre mí con retrato ASCII + mosaico enfocado, proyectos reales desplegables (`<details name="projects">`), stack técnico, terminal interactiva ejecutable con comandos, visor de CV en PDF integrado y contacto.
 
 **Nueva funcionalidad (3 nov):**
-- **Morfeo en silueta** (dibujo SVG propio en `src/lib/morpheus.ts`, sombra negra con borde verde) sobre una lluvia de código de Matrix, con dos **píldoras en cápsula CSS** en las palmas, en un `<dialog>` accesible.
+- **Morfeo en estarcido** (imagen generada por Codex para Manuel, `public/intro/morpheus.webp`, con el negro convertido en transparencia) sobre una lluvia de código de Matrix, con dos **píldoras en cápsula CSS** en las palmas: caen con rebote al abrir, flotan y laten, la que se apunta crece y la otra se atenúa, y al elegir su color inunda la pantalla antes de cambiar el tema.
 - **Sin tema hasta elegir:** la web arranca en modo neutro (grises, `data-theme="neutral"`); omitir o Esc aplica la píldora azul.
 - **Tema Matrix Phosphor (Píldora Roja):** activa la realidad verde fósforo de terminal (`#00FF66`, fondos `#030804`, bordes `#133a18`, brillo y luz radial verde).
 - **Tema Abyss + Jade (Píldora Azul):** mantiene el tema base azul abismo y jade cian.
@@ -23,7 +23,7 @@ La web tiene la estructura completa de una página con diseño ASCII art y termi
 
 ## Git
 
-- `main` al día hasta la PR de `feature/morpheus-v2` (3 nov).
+- `main` al día hasta la PR de `feature/morpheus-stencil` (3 nov).
 
 ## Comprobaciones (3 nov)
 
