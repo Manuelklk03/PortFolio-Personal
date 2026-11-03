@@ -38,7 +38,11 @@ export function initEasterEggs(): void {
     .querySelectorAll<HTMLButtonElement>("[data-copy-color]")
     .forEach((button) => {
       button.addEventListener("click", async () => {
-        const color = button.dataset.copyColor ?? "";
+        // Se lee la variable del tema activo: cada píldora tiene su propia paleta.
+        const variable = button.dataset.copyColor ?? "";
+        const color = getComputedStyle(document.documentElement)
+          .getPropertyValue(variable)
+          .trim();
         try {
           await navigator.clipboard.writeText(color);
           toast(`copiado ${color}`);

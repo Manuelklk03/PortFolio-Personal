@@ -32,10 +32,13 @@ const ogImage = image ? `${siteUrl}${image}` : `${siteUrl}/og-default.jpg`;
 
     <!-- Inicialización temprana del tema visual para evitar parpadeos -->
     <script is:inline>
+      // Sin píldora elegida, la web arranca en modo neutro (sin color) hasta que se elige.
       try {
         const theme = localStorage.getItem("portfolio-theme");
         if (theme === "matrix") {
           document.documentElement.dataset.theme = "matrix";
+        } else if (theme !== "abyss") {
+          document.documentElement.dataset.theme = "neutral";
         }
       } catch {}
     </script>

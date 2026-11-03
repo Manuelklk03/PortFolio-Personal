@@ -1,185 +1,200 @@
 ---
-// Modal introductorio interactivo: Morfeo de Matrix en ASCII art ofreciendo la píldora roja o azul.
-// Permite alternar entre el tema clásico Matrix Phosphor (roja) y el tema Abyss + Jade (azul).
+// Diálogo de entrada: Morfeo en ASCII ofrece la píldora roja (tema Matrix) o la azul (Abyss + Jade).
+// Hasta que se elige, la web se ve en modo neutro. La silueta de Morfeo es un SVG propio.
+import { MORPHEUS_SVG, PALMS } from "../lib/morpheus";
 ---
 
 <dialog
   data-matrix-dialog
-  class="fixed inset-0 z-50 m-0 h-full w-full max-h-none max-w-none border-none bg-background/95 p-4 backdrop-blur-md backdrop:bg-black/80 open:flex open:flex-col open:items-center open:justify-center"
-  aria-label="Elección de Morfeo: Píldora Roja o Píldora Azul"
+  aria-labelledby="matrix-title"
+  class="fixed inset-0 z-50 m-0 h-full max-h-none w-full max-w-none overflow-y-auto border-none bg-[#020402] p-4 backdrop:bg-black open:flex open:flex-col open:items-center open:justify-center"
 >
+  <!-- Lluvia de código de Matrix detrás de Morfeo -->
+  <canvas
+    data-matrix-rain
+    aria-hidden="true"
+    class="pointer-events-none fixed inset-0 h-full w-full opacity-60"></canvas>
+
   <div
-    class="relative mx-auto flex w-full max-w-3xl flex-col items-center justify-center border border-border bg-surface/90 p-4 sm:p-8 font-mono shadow-2xl"
+    class="relative mx-auto flex w-full max-w-3xl flex-col items-center border border-[#1f3a24] bg-black/70 p-4 font-mono backdrop-blur-sm sm:p-8"
   >
-    <!-- Marco de terminal superior -->
     <div
-      class="mb-4 flex w-full items-center justify-between border-b border-border pb-3 text-xs text-muted"
+      class="mb-4 flex w-full items-center justify-between border-b border-[#1f3a24] pb-3 text-xs text-[#7fbf8a]"
     >
-      <div class="flex items-center gap-2">
-        <span class="inline-block h-2.5 w-2.5 bg-accent"></span>
-        <span class="font-bold text-foreground">morpheus@matrix:~$ ./choose_pill.sh</span>
-      </div>
+      <span>morpheus@matrix:~$ ./choose_pill.sh</span>
       <button
         type="button"
         data-pill-skip
-        class="term-select -mx-1 px-2 py-0.5 text-xs text-muted hover:text-accent focus-visible:outline-accent"
-        title="Omitir y cerrar diálogo (Esc)"
+        class="px-2 py-0.5 text-xs text-[#7fbf8a] hover:bg-[#d6ffe0] hover:text-black focus-visible:bg-[#d6ffe0] focus-visible:text-black"
       >
-        [ Omitir / Esc ]
+        [ omitir · Esc ]
       </button>
     </div>
 
-    <!-- Cita de Morfeo -->
-    <div class="my-2 max-w-xl text-center">
-      <p class="text-xs sm:text-sm text-foreground/90 italic">
-        «Esta es tu última oportunidad. Después de esto, no hay vuelta atrás.»
-      </p>
-      <p class="mt-1 text-[11px] sm:text-xs text-muted">
-        Elige tu píldora para definir la realidad visual de este portfolio.
-      </p>
-    </div>
+    <h2 id="matrix-title" class="max-w-xl text-center text-sm text-[#d6ffe0] sm:text-base">
+      «Esta es tu última oportunidad. Después de esto, no hay vuelta atrás.»
+    </h2>
+    <p class="mt-1 text-center text-[11px] text-[#7fbf8a] sm:text-xs">
+      Elige una píldora para decidir cómo ves este portfolio.
+    </p>
 
-    <!-- Arte ASCII de Morfeo con las manos extendidas -->
-    <div class="relative my-4 flex w-full justify-center overflow-x-auto select-none py-1">
-      <pre
-        aria-hidden="true"
-        class="font-mono text-[8px] sm:text-[11px] md:text-[13px] leading-[1.1] text-accent/90 [text-shadow:0_0_12px_var(--color-accent)]"
-      >{`                     ▄▄██████▄▄
-                   ▄████████████▄
-                  ████████████████
-                 ▐████████████████▌
-                 ▐███ ▄▄▄  ▄▄▄ ███▌
-                 ▐███ █▓▓  █▓▓ ███▌
-                  ███ ▀▀▀  ▀▀▀ ███
-                  ▀███▄  ▄▄  ▄███▀
-                    ▀██████████▀
-                   ▄▄██████████▄▄
-                ▄██████████████████▄
-              ▄██████████████████████▄
-             ██████████████████████████
-            ████████████████████████████
-   ▄▄▄▄▄   ▐████████████████████████████▌   ▄▄▄▄▄
- ▄███████▄  ████████████████████████████  ▄███████▄
-███████████  ▀████████████████████████▀  ███████████
-▐███ [🔴] ███▌                           ▐███ [🔵] ███▌
-███████████                               ███████████
- ▀███████▀                                 ▀███████▀`}</pre>
-    </div>
-
-    <!-- Botones interactivos de píldora -->
-    <div class="mt-2 grid w-full max-w-lg grid-cols-1 gap-4 sm:grid-cols-2">
-      <!-- Píldora Roja -->
+    <!-- Morfeo con una píldora en cada mano -->
+    <div class="relative my-4 w-full max-w-lg select-none">
+      <div aria-hidden="true" set:html={MORPHEUS_SVG} />
       <button
         type="button"
         data-pill-choice="matrix"
-        class="group relative flex flex-col items-center justify-center border-2 border-red-500/70 bg-red-950/30 p-4 transition-all hover:scale-102 hover:border-red-400 hover:bg-red-900/40 hover:shadow-[0_0_20px_rgba(239,68,68,0.5)] focus-visible:outline-red-400"
+        tabindex="-1"
+        aria-hidden="true"
+        class="pill-float absolute -translate-x-1/2 -translate-y-full text-[11px] sm:text-[15px]"
+        style={`left:${PALMS.left.x}%; top:${PALMS.left.y}%`}
       >
-        <span class="mb-1 text-2xl" aria-hidden="true">🔴</span>
-        <span class="font-bold tracking-wider text-red-300 group-hover:text-red-100">
-          PÍLDORA ROJA
-        </span>
-        <span class="mt-1 text-[11px] text-red-400/80 group-hover:text-red-200">
-          Matrix Phosphor (Verde Terminal)
-        </span>
-        <span class="mt-2 text-[10px] text-red-400/60 text-center">
-          «Te quedas en el País de las Maravillas y ves qué tan profundo es el agujero.»
-        </span>
+        <span class="pill pill--red -rotate-12"></span>
       </button>
-
-      <!-- Píldora Azul -->
       <button
         type="button"
         data-pill-choice="abyss"
-        class="group relative flex flex-col items-center justify-center border-2 border-cyan-500/70 bg-cyan-950/30 p-4 transition-all hover:scale-102 hover:border-cyan-400 hover:bg-cyan-900/40 hover:shadow-[0_0_20px_rgba(62,230,193,0.5)] focus-visible:outline-cyan-400"
+        tabindex="-1"
+        aria-hidden="true"
+        class="pill-float absolute -translate-x-1/2 -translate-y-full text-[11px] sm:text-[15px] [animation-delay:-1.4s]"
+        style={`left:${PALMS.right.x}%; top:${PALMS.right.y}%`}
       >
-        <span class="mb-1 text-2xl" aria-hidden="true">🔵</span>
-        <span class="font-bold tracking-wider text-cyan-300 group-hover:text-cyan-100">
-          PÍLDORA AZUL
+        <span class="pill pill--blue rotate-12"></span>
+      </button>
+    </div>
+
+    <!-- Opciones con texto (las que usan el teclado y los lectores de pantalla) -->
+    <div class="grid w-full max-w-lg grid-cols-1 gap-3 sm:grid-cols-2">
+      <button
+        type="button"
+        data-pill-choice="matrix"
+        class="group flex items-center gap-3 border border-red-500/50 px-4 py-3 text-left transition-colors hover:border-red-400 hover:bg-red-500/10 focus-visible:border-red-400 focus-visible:bg-red-500/10"
+      >
+        <span class="pill pill--red shrink-0 text-[13px]" aria-hidden="true"></span>
+        <span>
+          <span class="block font-bold tracking-wider text-red-300">píldora roja</span>
+          <span class="block text-[11px] text-red-200/70">ver hasta dónde llega la madriguera · tema Matrix</span>
         </span>
-        <span class="mt-1 text-[11px] text-cyan-400/80 group-hover:text-cyan-200">
-          Abyss + Jade (Azul Abismo)
-        </span>
-        <span class="mt-2 text-[10px] text-cyan-400/60 text-center">
-          «La historia termina, despiertas en tu cama y crees lo que quieras creer.»
+      </button>
+      <button
+        type="button"
+        data-pill-choice="abyss"
+        class="group flex items-center gap-3 border border-sky-500/50 px-4 py-3 text-left transition-colors hover:border-sky-400 hover:bg-sky-500/10 focus-visible:border-sky-400 focus-visible:bg-sky-500/10"
+      >
+        <span class="pill pill--blue shrink-0 text-[13px]" aria-hidden="true"></span>
+        <span>
+          <span class="block font-bold tracking-wider text-sky-300">píldora azul</span>
+          <span class="block text-[11px] text-sky-200/70">despertar en tu cama · tema Abyss + Jade</span>
         </span>
       </button>
     </div>
 
-    <!-- Atajos de teclado en el pie del diálogo -->
-    <div class="mt-6 flex flex-wrap items-center justify-center gap-4 text-[11px] text-muted">
-      <span>Atajos: <kbd class="border border-border px-1 py-0.5">R</kbd> Roja</span>
-      <span><kbd class="border border-border px-1 py-0.5">A</kbd> o <kbd class="border border-border px-1 py-0.5">B</kbd> Azul</span>
-      <span><kbd class="border border-border px-1 py-0.5">Esc</kbd> Salir</span>
-    </div>
+    <p class="mt-5 text-center text-[11px] text-[#7fbf8a]">
+      <kbd class="border border-[#1f3a24] px-1">R</kbd> roja ·
+      <kbd class="border border-[#1f3a24] px-1">A</kbd> azul ·
+      <kbd class="border border-[#1f3a24] px-1">Esc</kbd> omitir (tema azul)
+    </p>
   </div>
 </dialog>
 
 <script>
-  import { applyTheme } from "../scripts/theme";
+  import { applyTheme, getSavedTheme, type Theme } from "../scripts/theme";
 
   const dialog = document.querySelector<HTMLDialogElement>("[data-matrix-dialog]");
-  const skipButton = dialog?.querySelector<HTMLButtonElement>("[data-pill-skip]");
-  const redButton = dialog?.querySelector<HTMLButtonElement>('[data-pill-choice="matrix"]');
-  const blueButton = dialog?.querySelector<HTMLButtonElement>('[data-pill-choice="abyss"]');
+  const canvas = dialog?.querySelector<HTMLCanvasElement>("[data-matrix-rain]");
 
-  if (dialog) {
-    const HAS_CHOSEN_KEY = "matrix_pill_has_chosen";
+  // Lluvia de caracteres: columnas que caen dejando una estela que se apaga.
+  const startRain = (target: HTMLCanvasElement) => {
+    const ctx = target.getContext("2d");
+    if (!ctx || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return () => {};
+    }
+    const glyphs = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄ0123456789<>/=+*#%@";
+    const size = 16;
+    let drops: number[] = [];
+    const resize = () => {
+      target.width = window.innerWidth;
+      target.height = window.innerHeight;
+      drops = Array.from({ length: Math.ceil(target.width / size) }, () =>
+        Math.floor(Math.random() * -40),
+      );
+    };
+    resize();
+    window.addEventListener("resize", resize);
 
-    const closeDialog = () => {
+    let frameId = 0;
+    let last = 0;
+    const tick = (now: number) => {
+      frameId = requestAnimationFrame(tick);
+      if (now - last < 50) return;
+      last = now;
+      ctx.fillStyle = "rgb(2 4 2 / 0.12)";
+      ctx.fillRect(0, 0, target.width, target.height);
+      ctx.font = `${size}px monospace`;
+      drops.forEach((y, i) => {
+        const char = glyphs[Math.floor(Math.random() * glyphs.length)] ?? "0";
+        ctx.fillStyle = Math.random() > 0.96 ? "#d6ffe0" : "#00ff66";
+        ctx.fillText(char, i * size, y * size);
+        drops[i] = y * size > target.height && Math.random() > 0.975 ? 0 : y + 1;
+      });
+    };
+    frameId = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(frameId);
+      window.removeEventListener("resize", resize);
+    };
+  };
+
+  if (dialog && canvas) {
+    let stopRain = () => {};
+
+    const close = () => {
+      stopRain();
       dialog.close();
       document.body.classList.remove("overflow-hidden");
     };
 
-    const openDialog = () => {
+    const open = () => {
+      if (dialog.open) return;
       dialog.showModal();
       document.body.classList.add("overflow-hidden");
-      // Foco inicial en la píldora roja
-      redButton?.focus();
+      stopRain = startRain(canvas);
+      dialog.querySelector<HTMLButtonElement>('button[data-pill-choice="matrix"]:not([tabindex])')?.focus();
     };
 
-    const choose = (theme: "matrix" | "abyss") => {
+    const choose = (theme: Theme) => {
       applyTheme(theme);
-      localStorage.setItem(HAS_CHOSEN_KEY, "true");
-      closeDialog();
+      close();
     };
 
-    redButton?.addEventListener("click", () => choose("matrix"));
-    blueButton?.addEventListener("click", () => choose("abyss"));
-    skipButton?.addEventListener("click", () => {
-      localStorage.setItem(HAS_CHOSEN_KEY, "true");
-      closeDialog();
+    dialog.querySelectorAll<HTMLButtonElement>("[data-pill-choice]").forEach((button) => {
+      button.addEventListener("click", () =>
+        choose(button.dataset.pillChoice === "matrix" ? "matrix" : "abyss"),
+      );
     });
 
-    // Cerrar con Escape nativo de dialog
-    dialog.addEventListener("cancel", () => {
-      localStorage.setItem(HAS_CHOSEN_KEY, "true");
-      document.body.classList.remove("overflow-hidden");
+    // Omitir (botón o Esc) también elige: la píldora azul, el tema por defecto.
+    dialog.querySelector("[data-pill-skip]")?.addEventListener("click", () => choose("abyss"));
+    dialog.addEventListener("cancel", (event) => {
+      event.preventDefault();
+      choose("abyss");
     });
 
-    // Atajos de teclado R y A/B
-    window.addEventListener("keydown", (e) => {
+    window.addEventListener("keydown", (event) => {
       if (!dialog.open) return;
-      if (e.key === "r" || e.key === "R") {
-        e.preventDefault();
+      const key = event.key.toLowerCase();
+      if (key === "r") {
+        event.preventDefault();
         choose("matrix");
-      } else if (e.key === "a" || e.key === "A" || e.key === "b" || e.key === "B") {
-        e.preventDefault();
+      } else if (key === "a" || key === "b") {
+        event.preventDefault();
         choose("abyss");
       }
     });
 
-    // Abrir automáticamente solo en la primera visita o si no se ha elegido aún
-    const hasChosen = localStorage.getItem(HAS_CHOSEN_KEY);
-    if (!hasChosen) {
-      // Pequeño retardo para que la página cargue primero
-      setTimeout(() => {
-        openDialog();
-      }, 400);
-    }
+    // Se abre solo si todavía no se ha elegido ninguna píldora.
+    if (!getSavedTheme()) setTimeout(open, 400);
 
-    // Escuchar peticiones externas para reabrir el diálogo
-    window.addEventListener("open-matrix-pill", () => {
-      openDialog();
-    });
+    window.addEventListener("open-matrix-pill", open);
   }
 </script>

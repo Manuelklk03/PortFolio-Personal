@@ -37,6 +37,17 @@ html[data-theme="matrix"] {
   --color-accent-2: #10b981;
 }
 
+/* Antes de elegir píldora: realidad sin color, en grises */
+html[data-theme="neutral"] {
+  --color-background: #070707;
+  --color-surface: #101010;
+  --color-border: #262626;
+  --color-foreground: #e6e6e6;
+  --color-muted: #8f8f8f;
+  --color-accent: #f2f2f2;
+  --color-accent-2: #a3a3a3;
+}
+
 /* Hover y foco como texto seleccionado en una terminal: fondo jade y texto oscuro */
 @utility term-select {
   transition:
@@ -78,6 +89,68 @@ html[data-theme="matrix"] {
   }
   to {
     clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Píldoras: cápsulas de dos mitades con volumen, brillo y halo de su color */
+.pill {
+  position: relative;
+  display: inline-block;
+  width: 3.2em;
+  height: 1.25em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--pill-a) 0 50%, var(--pill-b) 50% 100%);
+  box-shadow:
+    inset 0 -0.28em 0.4em rgb(0 0 0 / 0.4),
+    inset 0 0.18em 0.3em rgb(255 255 255 / 0.35),
+    0 0 1.4em var(--pill-glow);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.pill::after {
+  content: "";
+  position: absolute;
+  top: 16%;
+  left: 12%;
+  right: 12%;
+  height: 22%;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.6);
+}
+
+.pill--red {
+  --pill-a: #ff5a5a;
+  --pill-b: #b0001e;
+  --pill-glow: rgb(255 40 60 / 0.55);
+}
+
+.pill--blue {
+  --pill-a: #5aaaff;
+  --pill-b: #0033b0;
+  --pill-glow: rgb(60 140 255 / 0.55);
+}
+
+button:hover > .pill,
+button:focus-visible > .pill {
+  box-shadow:
+    inset 0 -0.28em 0.4em rgb(0 0 0 / 0.4),
+    inset 0 0.18em 0.3em rgb(255 255 255 / 0.35),
+    0 0 2.4em var(--pill-glow);
+  transform: scale(1.12);
+}
+
+/* Las píldoras de las manos flotan un poco sobre las palmas */
+@media (prefers-reduced-motion: no-preference) {
+  .pill-float {
+    animation: pill-float 2.8s ease-in-out infinite;
+  }
+}
+
+@keyframes pill-float {
+  50% {
+    translate: 0 -0.35em;
   }
 }
 
@@ -146,6 +219,29 @@ html[data-theme="matrix"] {
     );
   }
 
+  html[data-theme="neutral"] body {
+    background-image: none;
+  }
+
+  /* El retrato está teñido de jade al compilar: en cada tema se ajusta su tono */
+  html[data-theme="matrix"] [data-portrait] img,
+  html[data-theme="matrix"] [data-portrait] canvas {
+    filter: hue-rotate(-25deg) saturate(1.2);
+  }
+
+  html[data-theme="neutral"] [data-portrait] img,
+  html[data-theme="neutral"] [data-portrait] canvas {
+    filter: grayscale(1);
+  }
+
+  /* Al cambiar de píldora los colores se funden en lugar de saltar */
+  body,
+  header {
+    transition:
+      background-color 0.6s ease,
+      color 0.6s ease;
+  }
+
   ::selection {
     background-color: rgb(62 230 193 / 0.3);
     color: var(--color-foreground);
@@ -154,6 +250,10 @@ html[data-theme="matrix"] {
   html[data-theme="matrix"] ::selection {
     background-color: rgb(0 255 102 / 0.35);
     color: #030804;
+  }
+
+  html[data-theme="neutral"] ::selection {
+    background-color: rgb(255 255 255 / 0.25);
   }
 
   /* Con el cursor de terminal activo se oculta el del sistema */
