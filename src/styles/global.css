@@ -341,6 +341,16 @@ button:focus-visible > .pill {
     cursor: none;
   }
 
+  /* El diálogo de Morfeo se abre por encima del cursor de bloque: dentro se usa el del sistema */
+  html.has-custom-cursor dialog[open],
+  html.has-custom-cursor dialog[open] * {
+    cursor: auto;
+  }
+
+  html.has-custom-cursor dialog[open] button {
+    cursor: pointer;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .animate-blink {
       animation: none;
