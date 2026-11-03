@@ -165,7 +165,7 @@ export function initTerminal(root: HTMLElement, data: TerminalData): void {
         return;
       case "theme": {
         if (!arg) {
-          const current = getSavedTheme();
+          const current = getSavedTheme() ?? "sin elegir";
           print([`tema actual: ${current}. Opciones: 'theme matrix' | 'theme abyss' | 'pill'`]);
           return;
         }

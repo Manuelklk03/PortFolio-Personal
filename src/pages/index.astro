@@ -29,14 +29,14 @@ const portraitPhoto = await tintedPhoto(
   portraitCrop,
 );
 const portrait = portraitAscii ?? blockLetters("MC");
-// Muestras de la paleta: al hacer clic se copia el color (easter egg).
+// Muestras de la paleta del tema activo: al hacer clic se copia el color (easter egg).
 const swatches = [
-  { className: "text-surface", hex: "#0a1626" },
-  { className: "text-border", hex: "#15304a" },
-  { className: "text-muted", hex: "#8aa9a6" },
-  { className: "text-accent-2", hex: "#0f9d9a" },
-  { className: "text-accent", hex: "#3ee6c1" },
-  { className: "text-foreground", hex: "#ddf7f0" },
+  "surface",
+  "border",
+  "muted",
+  "accent-2",
+  "accent",
+  "foreground",
 ];
 
 // Datos para la terminal escribible.
@@ -169,13 +169,14 @@ const contactLinks = [
         </dl>
         <p class="mt-6 max-w-xl text-muted">{profile.aboutNote}</p>
         <p class="mt-6 flex gap-1 font-mono select-none">
-          {swatches.map((swatch) => (
+          {swatches.map((name) => (
             <button
               type="button"
-              data-copy-color={swatch.hex}
-              aria-label={`Copiar el color ${swatch.hex}`}
-              title={swatch.hex}
-              class={`${swatch.className} transition-transform hover:-translate-y-0.5`}
+              data-copy-color={`--color-${name}`}
+              aria-label={`Copiar el color ${name} del tema`}
+              title={name}
+              style={`color: var(--color-${name})`}
+              class="transition-transform hover:-translate-y-0.5"
             >
               ███
             </button>
