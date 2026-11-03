@@ -19,11 +19,11 @@ const art = lines
   <pre
     data-ascii-source
     aria-hidden="true"
-    class="overflow-hidden font-mono text-[clamp(6px,2.5vw,14px)] leading-none text-accent [text-shadow:0_0_18px_rgb(62_230_193/0.45)]"
+    class="overflow-hidden font-mono text-[clamp(6px,2.5vw,14px)] leading-none text-accent [text-shadow:0_0_18px_var(--color-accent)]"
   >{art}</pre>
   <canvas
     aria-hidden="true"
-    class="pointer-events-none absolute top-0 left-0 hidden [filter:drop-shadow(0_0_10px_rgb(62_230_193/0.5))]"
+    class="pointer-events-none absolute top-0 left-0 hidden [filter:drop-shadow(0_0_10px_var(--color-accent))]"
   ></canvas>
 </div>
 
@@ -48,12 +48,16 @@ const art = lines
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  // Mezcla dos colores hex según t (0–1).
+  // Mezcla dos colores hex o rgb según t (0–1).
   const mix = (a: string, b: string, t: number) => {
-    const ca = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16));
-    const cb = [1, 3, 5].map((i) => parseInt(b.slice(i, i + 2), 16));
-    const c = ca.map((v, i) => Math.round(v + ((cb[i] ?? v) - v) * t));
-    return `rgb(${c.join(",")})`;
+    // Soporte para #hex
+    if (a.startsWith("#") && b.startsWith("#")) {
+      const ca = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16));
+      const cb = [1, 3, 5].map((i) => parseInt(b.slice(i, i + 2), 16));
+      const c = ca.map((v, i) => Math.round(v + ((cb[i] ?? v) - v) * t));
+      return `rgb(${c.join(",")})`;
+    }
+    return t < 0.5 ? a : b;
   };
 
   document
@@ -64,21 +68,22 @@ const art = lines
       const ctx = canvas?.getContext("2d");
       if (!pre || !canvas || !ctx) return;
 
-      const styles = getComputedStyle(document.documentElement);
-      const jade =
-        styles.getPropertyValue("--color-accent").trim() || "#3ee6c1";
-      const teal =
-        styles.getPropertyValue("--color-accent-2").trim() || "#0f9d9a";
-      const dust =
-        styles.getPropertyValue("--color-foreground").trim() || "#ddf7f0";
       const text = pre.textContent ?? "";
-
       let particles: Particle[] = [];
       let charWidth = 0;
       let frameId: number | null = null;
       const pointer = { x: -9999, y: -9999 };
+      let dustColor = "#ddf7f0";
 
       const setup = (intro: boolean) => {
+        const styles = getComputedStyle(document.documentElement);
+        const jade =
+          styles.getPropertyValue("--color-accent").trim() || "#3ee6c1";
+        const teal =
+          styles.getPropertyValue("--color-accent-2").trim() || "#0f9d9a";
+        dustColor =
+          styles.getPropertyValue("--color-foreground").trim() || "#ddf7f0";
+
         const computed = getComputedStyle(pre);
         const rect = pre.getBoundingClientRect();
         const dpr = Math.min(window.devicePixelRatio, 2);
@@ -113,7 +118,7 @@ const art = lines
                 : homeY,
               vx: 0,
               vy: 0,
-              // Degradado de izquierda a derecha: jade → teal.
+              // Degradado de izquierda a derecha
               color: mix(jade, teal, col / columns),
             });
           });
@@ -146,7 +151,7 @@ const art = lines
           // Cuanto más lejos de casa, más se "deshace" el carácter.
           const dustIndex = Math.min(DUST.length - 1, Math.floor(offset / 14));
           const char = offset > 4 ? (DUST[dustIndex] ?? p.char) : p.char;
-          ctx.fillStyle = offset > 4 ? dust : p.color;
+          ctx.fillStyle = offset > 4 ? dustColor : p.color;
           ctx.fillText(char, p.x, p.y);
         }
 
@@ -158,55 +163,44 @@ const art = lines
             : null;
       };
 
-      let visible = true;
-      let enabled = false;
-
       const play = () => {
-        if (enabled && visible && frameId === null)
-          frameId = requestAnimationFrame(draw);
+        if (frameId === null) frameId = requestAnimationFrame(draw);
       };
 
       const updatePointer = (event: PointerEvent) => {
-        if (!visible) return;
         const rect = canvas.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        const inside =
-          x > -RADIUS &&
-          y > -RADIUS &&
-          x < rect.width + RADIUS &&
-          y < rect.height + RADIUS;
-        pointer.x = inside ? x : -9999;
-        pointer.y = inside ? y : -9999;
-        if (inside) play();
+        pointer.x = event.clientX - rect.left;
+        pointer.y = event.clientY - rect.top;
+        play();
       };
 
-      // Un clic lanza una onda que empuja todos los caracteres hacia fuera.
-      const blast = (ox: number, oy: number, strength: number) => {
+      // Clic sobre el nombre: onda expansiva que empuja las partículas hacia fuera.
+      const shockwave = (event: MouseEvent) => {
         const rect = canvas.getBoundingClientRect();
+        const originX = event.clientX - rect.left;
+        const originY = event.clientY - rect.top;
         for (const p of particles) {
-          const dx = p.x - ox;
-          const dy = p.y - oy;
-          const distance = Math.hypot(dx, dy) || 1;
-          const force =
-            Math.max(0, 1 - distance / (rect.width * 0.8)) * strength;
-          p.vx += (dx / distance) * force;
-          p.vy += (dy / distance) * force;
+          const dx = p.x - originX;
+          const dy = p.y - originY;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 180 && dist > 0) {
+            const power = (1 - dist / 180) * 14;
+            p.vx += (dx / dist) * power;
+            p.vy += (dy / dist) * power;
+          }
         }
         play();
       };
-      const shockwave = (event: PointerEvent) => {
-        const rect = canvas.getBoundingClientRect();
-        blast(event.clientX - rect.left, event.clientY - rect.top, 18);
-      };
-      // Easter egg: el código Konami hace explotar el nombre desde el centro.
-      window.addEventListener("konami", () => {
-        if (!enabled) return;
-        const rect = canvas.getBoundingClientRect();
-        blast(rect.width / 2, rect.height / 2, 60);
-      });
+
+      let visible = true;
+      let enabled = false;
 
       const enable = (intro: boolean) => {
+        if (reducedMotion.matches) {
+          pre.style.visibility = "visible";
+          canvas.classList.add("hidden");
+          return;
+        }
         enabled = true;
         setup(intro);
         pre.style.visibility = "hidden";
@@ -237,6 +231,13 @@ const art = lines
         setup(false);
         play();
       });
+
+      window.addEventListener("themechange", () => {
+        if (!enabled) return;
+        setup(false);
+        play();
+      });
+
       reducedMotion.addEventListener("change", () => {
         if (reducedMotion.matches) disable();
         else enable(false);

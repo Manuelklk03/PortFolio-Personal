@@ -1,43 +1,40 @@
 # Estado actual y relevo
 
-Última actualización: 31 de octubre de 2026.
-Última sesión: Claude Code, con revisión de Codex (plugin `codex`).
+Última actualización: 3 de noviembre de 2026.
+Última sesión: Antigravity (Google DeepMind) con revisión y comprobaciones locales.
 
 ## Resumen del estado real
 
-La web tiene la estructura completa de una página: cabecera, inicio, sobre mí, proyectos (tarjetas desde `src/data/projects.ts`), tecnologías, contacto, pie y página 404, con SEO básico. En la fase de diseño ya se integraron shadcn/ui, Lenis, GSAP con ScrollTrigger, componentes de React Bits y un cursor personalizado. El contenido ya es real (proyectos, Stack, «Sobre mí», CV y contacto). Solo queda de prueba el dominio `manuelcasinos.dev` de `src/layouts/Layout.astro`.
+La web tiene la estructura completa de una página con diseño ASCII art y terminal elegante: cabecera con navegación, nudo 3D ASCII, partículas del nombre interactivas, sobre mí con retrato ASCII + mosaico enfocado, proyectos reales desplegables (`<details name="projects">`), stack técnico, terminal interactiva ejecutable con comandos, visor de CV en PDF integrado y contacto.
 
-Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abyss + Jade** (ver `docs/DECISIONES.md`). Aplicado: paleta e inicio (nudo 3D en ASCII con Three.js + nombre ASCII con figlet que se descifra). Después, rediseño «terminal elegante»: nombre con partículas que se apartan del ratón, cursor en bloque (`src/components/Cursor.astro`), títulos con prompt, tarjetas tipo ventana, sección de currículum (falta el PDF) y contacto con correo, GitHub y LinkedIn (`src/data/profile.ts`). Ya no hay islas de React en uso, ni GSAP (entradas con `src/scripts/reveal.ts`). Interacción (2 nov): terminal escribible (`#terminal`), proyectos desplegables, títulos que se descifran, retrato en mosaico y easter eggs (Konami, comandos ocultos, copiar colores).
+**Nueva funcionalidad (3 nov):**
+- **Morfeo de Matrix en arte ASCII** con las dos manos extendidas ofreciendo la **Píldora Roja** (`🔴`) o la **Píldora Azul** (`🔵`) en un modal accesible (`<dialog>`).
+- **Tema Matrix Phosphor (Píldora Roja):** activa la realidad verde fósforo de terminal (`#00FF66`, fondos `#030804`, bordes `#133a18`, brillo y luz radial verde).
+- **Tema Abyss + Jade (Píldora Azul):** mantiene el tema base azul abismo y jade cian.
+- **Persistencia y reactividad:** elección guardada en `localStorage`, script inline temprano en `<head>` para evitar parpadeos (FOUC), eventos reactivos para sincronizar las partículas del nombre en vivo, enlace `./pill` en la cabecera y comandos `pill`, `matrix` y `theme` en la terminal.
 
 ## Modo de trabajo
 
-- **Modo plan:** cada paso o bloque grande se explica en texto (qué, por qué, archivos, comprobación); Manuel escribe el código guiado y confirma antes de avanzar.
-- **Es la primera vez que Manuel usa Astro y Vite:** explica cada concepto nuevo antes de usarlo (componentes `.astro`, frontmatter `---`, islas y directivas `client:*`, rutas en `src/pages`, layouts, qué hace Vite) y entrega los archivos nuevos completos y comentados.
+- **Modo plan:** cada paso o bloque grande se explica en texto (qué, por qué, archivos, comprobación).
 - **Modo auto:** solo documentación o lo que Manuel pida expresamente.
 - Terminal: **Git Bash**.
-- Codex colabora según la sección «Coordinación con Codex» de `CLAUDE.md`.
-- grill-me es un cuestionario sobre el código: ofrécelo a Manuel después de cada paso con código, para practicar.
-- Pasos grandes: agrupa cambios relacionados en un mismo paso (p. ej. tipografía + estructura de una sección completa), con el mensaje de commit y los comandos al final del paso. Se presenta el siguiente cuando Manuel lo pide.
-
-- **Desde el 31 oct:** los scripts, efectos, animaciones, configuración y limpiezas los implementa la IA directamente (verifica, revisión de Codex, commit, PR y merge) y solo informa en pocas líneas. Manuel ya entiende la estructura de componentes de Astro; el aprendizaje paso a paso queda para otro proyecto. Las decisiones de diseño se le siguen preguntando una a una.
+- Flujo de GitHub: ramas de feature, Conventional Commits y PR.
 
 ## Git
 
-- `main` al día hasta la PR de `feature/real-projects` (2 nov).
-- Sin protección de `main` en GitHub (decisión de Manuel); se sigue el flujo de ramas y PR. `git fetch --prune` limpia las ramas remotas borradas.
+- Rama actual: `feature/matrix-pill-intro`.
+- Lista para commit, push, PR y merge a `main`.
 
-## Comprobaciones (31 oct, revisión de UI)
+## Comprobaciones (3 nov)
 
-- Revisión con el agente ui-reviewer (antislop + criterios de impeccable): contraste AA correcto con la paleta, foco, semántica y movimiento reducido bien; arreglados los fallos rápidos.
-- Ejecutadas por Claude: `npm run check` → 0 errores; `npm run build` → 2 páginas, sin imports `@/` sin empaquetar; Chrome: Lenis activo, las secciones entran y siguen visibles al volver arriba, consola sin errores; móvil 390 px: cabecera estática, enlaces de 44 px, sin scroll horizontal.
+- `npm run check` (diagnóstico Astro y TypeScript) → 0 errores, 0 warnings, 0 hints.
+- `npm run build` → 2 páginas estáticas (`/index.html` y `/404.html`) compiladas limpiamente en 3.57s.
+- Accesibilidad: `<dialog>` nativo, atajos de teclado (`R` roja, `A`/`B` azul, `Esc` salir), botón omitir, foco atrapado y bloqueo de scroll de fondo mientras el diálogo está abierto.
 
 ## Problemas conocidos
 
 - No editar archivos con `Set-Content` de PowerShell 5.1: añade BOM y puede romper el frontmatter de Astro.
-
-- `create-astro` no crea el proyecto en una carpeta con archivos: se creó en `../portfolio-base` y se copió (ver `docs/HERRAMIENTAS.md`).
-- Si un `.astro` sale sin colores en VS Code, comprobar primero que el código del frontmatter está entre las dos líneas `---` (fuera de ellas es texto HTML). La extensión de Astro está instalada pero no aparece en `code --list-extensions`: probablemente está en otro perfil de VS Code.
-- `npm run check` no detecta clases de Tailwind mal escritas (p. ej. `max-w-3x1`); la extensión Tailwind CSS IntelliSense las marca.
+- En Windows PowerShell, invocar `npm.cmd` en lugar del alias `.ps1` si las execution policies del sistema bloquean scripts locales.
 
 ## Datos o decisiones pendientes de Manuel
 
@@ -45,6 +42,8 @@ Nueva dirección visual (31 oct): **ASCII art interactivo** con la paleta **Abys
 
 ## Próximo paso concreto
 
-1. Decidir dominio y alojamiento; después, pasada de SEO con claude-seo (ver `docs/HERRAMIENTAS.md`).
-2. ESLint + `npm run lint` y análisis con SonarQube (ver `docs/TAREAS.md`).
-3. Capturas de Digital Fit y ValveDex cuando Manuel las tenga (`public/projects/` + campo `image`).
+1. Hacer commit de la rama `feature/matrix-pill-intro`, subirla, abrir PR y fusionar a `main`.
+2. Probar en el navegador el efecto en vivo abriendo `npm run dev`.
+3. Decidir dominio y alojamiento; después, pasada de SEO con claude-seo (ver `docs/HERRAMIENTAS.md`).
+4. ESLint + `npm run lint` y análisis con SonarQube (ver `docs/TAREAS.md`).
+5. Capturas de Digital Fit y ValveDex cuando Manuel las tenga (`public/projects/` + campo `image`).

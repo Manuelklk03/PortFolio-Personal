@@ -77,13 +77,19 @@
 | Más interacción (2 nov): retrato en mosaico que se enfoca (cada carácter pasa a bloque de color desde la cara y luego se enfoca), terminal escribible con comandos, proyectos desplegables (`<details name="projects">`, uno abierto a la vez), títulos que se descifran al pasar el ratón y easter eggs (código Konami, `sudo`/`rm`/`exit`/`vim` en la terminal, copiar colores de la paleta). | Elegido por Manuel: quería una página más interactiva y una animación de la foto menos genérica. | `portrait-mosaic.ts`, `terminal.ts` + `Terminal.astro`, `scramble.ts`, `easter-eggs.ts`. Todo respeta `prefers-reduced-motion` y es accesible con teclado. |
 | Los proyectos, enlaces, tecnologías y el dominio `manuelcasinos.dev` que hay ahora en la web son **datos de prueba**. | Indicado por Manuel. | Deben sustituirse por los datos reales de `docs/PROYECTOS.md` antes de publicar. |
 
+## Confirmado — 3 de noviembre de 2026 (sesión interactiva)
+
+| Decisión | Motivo | Consecuencias |
+| --- | --- | --- |
+| Introducción de Morfeo (Matrix) en arte ASCII con selector de píldora roja vs azul para cambiar el tema visual. | Pedido expreso de Manuel: potenciar la identidad ASCII art con una referencia icónica e interactiva. | Modal de terminal accesible (`<dialog>`) con Morfeo en arte ASCII. Píldora Roja activa el tema Matrix Phosphor (`#00FF66`), Píldora Azul mantiene Abyss + Jade. Persistencia en `localStorage`, atajos de teclado (`R`, `A`, `B`, `Esc`), enlace `./pill` en cabecera y comandos `pill`, `matrix` y `theme` en la terminal interactiva. Las partículas del nombre reaccionan al cambio de tema en vivo. |
+
 ## Propuestas pendientes
 
 | Propuesta | Estado |
 | --- | --- |
 | Paleta: fondo `#0B0F14`, superficie `#121821`, borde `#1F2937`, texto `#E6EDF3`, texto secundario `#8B949E`, acento `#22D3EE`. | Aplicada como base (27 oct 2026, tema `@theme`); se revisa en la fase de diseño. |
 | Tipografía: Geist (texto) y Geist Mono (detalles técnicos). | Aplicada como base (27 oct 2026) con la API de fuentes de Astro y Fontsource; se revisa en la fase de diseño. |
-| Solo tema oscuro en la primera versión. | Propuesta; tema claro queda como ampliación. |
+| Solo tema oscuro en la primera versión. | Propuesta; ampliado con variantes de tema Matrix y Abyss. |
 | Primera versión con una página y secciones. | Aplicada (estructura de PR #11 en adelante). |
 | Proyectos en un archivo de datos local, sin backend. | Pendiente de acordar. |
 | Cerrajería NOA y Digital Fit como proyectos principales. | Pendiente de revisar material y selección. |
@@ -103,5 +109,3 @@
 ## Cómo registrar nuevas decisiones
 
 Añade fecha, decisión, motivo y consecuencias relevantes. Identifica si está acordada, propuesta o sustituida. Cuando Manuel cambie una decisión, marca la anterior como sustituida y registra la nueva para que las siguientes IA no la recuperen por error.
-
-No registres como decisión aprobada una preferencia de la IA que Manuel no haya confirmado.

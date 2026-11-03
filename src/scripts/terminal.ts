@@ -1,5 +1,7 @@
 // Terminal escribible: el visitante teclea comandos y la web responde y navega.
 // Todo se escribe con textContent o elementos creados a mano: nunca se inserta HTML del usuario.
+import { applyTheme, getSavedTheme, openPillModal } from "./theme";
+
 export interface TerminalData {
   name: string;
   role: string;
@@ -24,6 +26,9 @@ const COMMANDS = [
   "stack",
   "cv",
   "contacto",
+  "pill",
+  "matrix",
+  "theme",
   "clear",
   "history",
   "date",
@@ -68,7 +73,7 @@ export function initTerminal(root: HTMLElement, data: TerminalData): void {
 
   const openProject = (id: string) => {
     const details = root.ownerDocument.querySelector<HTMLDetailsElement>(
-      `details[data-project="${CSS.escape(id)}"]`,
+      `details[data-project-id="${id}"]`,
     );
     if (!details) return false;
     details.open = true;
@@ -77,24 +82,25 @@ export function initTerminal(root: HTMLElement, data: TerminalData): void {
   };
 
   const run = (raw: string) => {
-    const [command = "", ...args] = raw.trim().split(/\s+/);
+    const trimmed = raw.trim();
+    if (!trimmed) return;
+    const [command = "", ...args] = trimmed.split(/\s+/);
     const arg = args.join(" ");
 
     switch (command) {
-      case "":
-        return;
       case "help":
         print([
-          "help          esta ayuda",
-          "whoami        quién soy",
-          "ls            proyectos",
-          "cat <id>      abre un proyecto (p. ej. cat " +
-            (data.projects[0]?.id ?? "proyecto") +
-            ")",
-          "stack         tecnologías",
+          "comandos disponibles:",
+          "whoami        quién es Manuel y qué hace",
+          "ls            listar los proyectos",
+          "cat <id>      ver un proyecto y abrirlo en la web",
+          "stack         tecnologías base y en aprendizaje",
           "cd <sección>  ir a sobre-mi, proyectos, stack, cv, contacto o ~",
           "cv            abrir el currículum",
           "contacto      correo, GitHub y LinkedIn",
+          "pill          abrir la elección de Morfeo (Píldora Roja vs Azul)",
+          "matrix        activar directamente el tema Matrix",
+          "theme [modo]  ver o cambiar el tema (matrix / abyss)",
           "clear         limpiar la pantalla",
         ]);
         return;
@@ -147,6 +153,30 @@ export function initTerminal(root: HTMLElement, data: TerminalData): void {
           { text: "linkedin", href: data.linkedin },
         ]);
         return;
+      case "pill":
+      case "pildora":
+      case "morpheus":
+        print(["Abriendo el enlace con Morfeo..."], "text-accent");
+        openPillModal();
+        return;
+      case "matrix":
+        print(["«Despierta, Neo...» Activando realidad Matrix."], "text-accent");
+        applyTheme("matrix");
+        return;
+      case "theme": {
+        if (!arg) {
+          const current = getSavedTheme();
+          print([`tema actual: ${current}. Opciones: 'theme matrix' | 'theme abyss' | 'pill'`]);
+          return;
+        }
+        if (arg === "matrix" || arg === "abyss") {
+          applyTheme(arg);
+          print([`tema cambiado a: ${arg}`], "text-accent");
+        } else {
+          print([`tema desconocido: ${arg}. Usa 'matrix' o 'abyss'.`]);
+        }
+        return;
+      }
       case "clear":
         output.replaceChildren();
         return;

@@ -19,6 +19,7 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 - 2026-10-31: inicio ASCII con un nudo 3D de Three.js dibujado con caracteres que sigue al ratón y el nombre en ASCII (figlet) que se descifra; paleta Abyss + Jade.
 - 2026-10-31: el nudo 3D del fondo gira solo (ya no sigue al ratón) y tiene botón para pausarlo.
 - 2026-10-31: rediseño «terminal elegante»: nombre con partículas ASCII interactivas, cursor en bloque, títulos con prompt, tarjetas tipo ventana de terminal, sección de currículum, contacto con correo, GitHub y LinkedIn, y colores más intensos.
+- 2026-11-03: modal interactivo con Morfeo de Matrix en arte ASCII que ofrece la píldora roja (tema Matrix Phosphor) o azul (tema Abyss + Jade), accesible con teclado, atajos R/A/B/Esc, persistencia en localStorage, enlace ./pill en cabecera y comandos pill/matrix/theme en la terminal.
 
 ### Corregido
 
