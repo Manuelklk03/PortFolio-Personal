@@ -52,6 +52,7 @@
 - [x] Añadir el PDF del currículum (`public/cv/manuel-casinos-perez.pdf`) y su ruta en `cvUrl`.
 - [x] Revisar los componentes de React Bits frente a la dirección ASCII (sustituidos por componentes `.astro` propios).
 - [x] Cursor personalizado (solo `pointer: fine`, sin él en táctil ni con `prefers-reduced-motion`).
+- [x] Introducción de Morfeo en ASCII art con selector de píldora (Matrix verde phosphor vs Abyss azul jade), atajos de teclado y sincronización de tema (3 nov 2026).
 - [ ] Comprobar rendimiento, accesibilidad y enlaces internos tras las animaciones.
 
 ## 4. Revisión y publicación

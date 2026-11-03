@@ -37,7 +37,7 @@ const links = [
         </span>
       </span>
     </div>
-    <ul class="flex flex-wrap gap-x-3 font-mono text-sm text-muted">
+    <ul class="flex flex-wrap items-center gap-x-3 font-mono text-sm text-muted">
       {links.map((link) => (
         <li>
           <a
@@ -49,6 +49,17 @@ const links = [
           </a>
         </li>
       ))}
+      <li>
+        <button
+          type="button"
+          data-open-pill-modal
+          class="term-select inline-flex min-h-11 items-center px-1.5 sm:min-h-0 text-accent font-bold"
+          title="Elegir píldora de Morfeo (Matrix / Abyss)"
+        >
+          <!-- prettier-ignore -->
+          <span><span aria-hidden="true" class="text-accent-2 max-sm:hidden">./</span>pill</span>
+        </button>
+      </li>
     </ul>
   </nav>
 </header>
@@ -56,6 +67,11 @@ const links = [
 <script>
   const path = document.querySelector<HTMLElement>("[data-prompt-path]");
   const sections = document.querySelectorAll<HTMLElement>("main section[id]");
+  const pillBtn = document.querySelector<HTMLButtonElement>("[data-open-pill-modal]");
+
+  pillBtn?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("open-matrix-pill"));
+  });
 
   if (path && sections.length) {
     // La sección que cruza la mitad de la pantalla marca la ruta del prompt.
@@ -69,6 +85,7 @@ const links = [
       },
       { rootMargin: "-45% 0px -50% 0px" },
     );
-    sections.forEach((section) => observer.observe(section));
+
+    for (const section of sections) observer.observe(section);
   }
 </script>

@@ -26,6 +26,17 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Tema alternativo: Píldora Roja (Matrix Phosphor) */
+html[data-theme="matrix"] {
+  --color-background: #030804;
+  --color-surface: #071408;
+  --color-border: #133a18;
+  --color-foreground: #d2fed4;
+  --color-muted: #6ea874;
+  --color-accent: #00ff66;
+  --color-accent-2: #10b981;
+}
+
 /* Hover y foco como texto seleccionado en una terminal: fondo jade y texto oscuro */
 @utility term-select {
   transition:
@@ -127,9 +138,22 @@
     background-attachment: fixed;
   }
 
+  html[data-theme="matrix"] body {
+    background-image: radial-gradient(
+      60rem 40rem at 85% -10%,
+      rgb(0 255 102 / 0.12),
+      transparent 60%
+    );
+  }
+
   ::selection {
     background-color: rgb(62 230 193 / 0.3);
     color: var(--color-foreground);
+  }
+
+  html[data-theme="matrix"] ::selection {
+    background-color: rgb(0 255 102 / 0.35);
+    color: #030804;
   }
 
   /* Con el cursor de terminal activo se oculta el del sistema */
