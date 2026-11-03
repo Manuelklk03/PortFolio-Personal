@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "bounce-easing",
+        "value": "cubic-bezier(0.3, 1.5, 0.5, 1)",
+        "createdAt": "2026-11-03T21:55:55.092Z",
+        "reason": "Claude: rebote literal de la píldora al caer en la palma de Morfeo; animación anunciada a Manuel antes de implementarla"
+      }
+    ]
+  }
+}

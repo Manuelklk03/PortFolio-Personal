@@ -23,7 +23,7 @@ La web tiene la estructura completa de una página con diseño ASCII art y termi
 
 ## Git
 
-- `main` al día hasta la PR de `feature/morpheus-stencil` (3 nov).
+- `main` al día hasta la PR de `feature/contact-and-field` (4 nov).
 
 ## Comprobaciones (3 nov)
 

@@ -96,3 +96,8 @@ Codex por terminal: el plugin `codex` usa Bash, que en este equipo falla al inic
 Plugins nuevos (2 nov 2026):
 - **claude-seo:** usar en la fase 4, antes de publicar: `seo-technical`, `seo-page`, `seo-schema` (JSON-LD `Person`), `seo-images`, `seo-geo`/`seo-agentic` (`llms.txt`, `robots.txt`) y `seo-sitemap`. El resto (local, mapas, ecommerce, backlinks, DataForSEO de pago, clusters…) no aplica. Requiere decidir antes el dominio real.
 - **scroll-world:** descartado: genera vídeo con Higgsfield/Monid (de pago por clip) y su estética de diorama choca con la dirección ASCII.
+
+Skills nuevas (4 nov 2026, en Claude y en Codex):
+- **Se usan:** `threejs` (mejoras y rendimiento del nudo 3D del inicio, `src/scripts/ascii-scene.ts`) y `frontend-design` (dirección visual; ya lideraba esa parte vía frontend-stack).
+- **Para más adelante, si hace falta:** `scroll-scrubbed-visual-sequence` (transiciones de sección ligadas al scroll, reversibles).
+- **No se usan:** `build-threejs-scroll-worlds` y `scroll-world-storytelling` (convierten toda la web en un mundo 3D o en una historia de scroll: cambio de dirección y peso excesivo), `cinematic-scroll-storytelling` (pilas fijas y textos cinematográficos con GSAP, que no encajan con el estilo terminal) y las skills `gsap-*` de Codex (GSAP se quitó el 31 oct).
