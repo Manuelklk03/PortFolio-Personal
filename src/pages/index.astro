@@ -5,6 +5,7 @@ import ProjectEntry from "../components/ProjectEntry.astro";
 import Cursor from "../components/Cursor.astro";
 import CvPreview from "../components/CvPreview.astro";
 import Terminal from "../components/Terminal.astro";
+import ContactMail from "../components/ContactMail.astro";
 import AsciiScene from "../components/ascii/AsciiScene.astro";
 import AsciiName from "../components/ascii/AsciiName.astro";
 import AsciiSeam from "../components/ascii/AsciiSeam.astro";
@@ -142,16 +143,15 @@ const contactLinks = [
       <div data-portrait class="relative w-fit">
         <pre
           aria-hidden="true"
-          class="font-mono text-[8px] leading-[1.1] text-accent select-none sm:text-[9px] lg:text-[10px]">{portrait}</pre>
-        {
-          portraitAscii && portraitPhoto && (
-            <img
-              src={portraitPhoto}
-              alt="Foto de Manuel Casinos Pérez"
-              class="absolute inset-0 h-full w-full [mask-image:radial-gradient(ellipse_58%_58%_at_50%_42%,#000_70%,transparent_100%)]"
-            />
-          )
-        }
+          class="font-mono text-[8px] leading-[1.1] text-accent select-none sm:text-[9px] lg:text-[10px]"
+        >{portrait}</pre>
+        {portraitAscii && portraitPhoto && (
+          <img
+            src={portraitPhoto}
+            alt="Foto de Manuel Casinos Pérez"
+            class="absolute inset-0 h-full w-full [mask-image:radial-gradient(ellipse_58%_58%_at_50%_42%,#000_70%,transparent_100%)]"
+          />
+        )}
       </div>
       <div>
         <!-- prettier-ignore -->
@@ -240,26 +240,29 @@ const contactLinks = [
   )}
 
   <Section id="contacto" title="Contacto" command="ping manuel">
-    <ul data-reveal class="border-t border-border font-mono">
-      {contactLinks.map((link) => (
-        <li class="border-b border-border">
-          <a
-            href={link.href}
-            {...(link.external
-              ? { target: "_blank", rel: "noopener noreferrer" }
-              : {})}
-            class="term-select flex flex-wrap items-baseline gap-x-6 gap-y-1 px-1 py-4 sm:px-4"
-          >
-            <span class="w-36 text-sm text-muted">
-              <span class="text-accent-2">$</span> {link.command}
-            </span>
-            <span class="text-accent [overflow-wrap:anywhere]">
-              {link.label}
-            </span>
-          </a>
-        </li>
-      ))}
-    </ul>
+    <div data-reveal class="grid gap-8 lg:grid-cols-[1fr_20rem]">
+      <ContactMail email={profile.email} />
+      <ul class="self-start border-t border-border font-mono">
+        {contactLinks.map((link) => (
+          <li class="border-b border-border">
+            <a
+              href={link.href}
+              {...(link.external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              class="term-select flex flex-col gap-1 px-1 py-4 sm:px-4"
+            >
+              <span class="w-36 text-sm text-muted">
+                <span class="text-accent-2">$</span> {link.command}
+              </span>
+              <span class="text-accent [overflow-wrap:anywhere]">
+                {link.label}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   </Section>
 
   <!-- Mensajes breves de los easter eggs -->
@@ -267,8 +270,7 @@ const contactLinks = [
     data-toast
     role="status"
     class="pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2 border border-accent/50 bg-background px-4 py-2 font-mono text-sm text-accent opacity-0 transition-opacity duration-300"
-  >
-  </p>
+  ></p>
 
   <script>
     import { initReveal } from "@/scripts/reveal";

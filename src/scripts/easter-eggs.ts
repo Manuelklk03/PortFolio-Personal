@@ -13,7 +13,7 @@ const KONAMI = [
 ];
 
 // Mensaje breve en la esquina, también anunciado a lectores de pantalla.
-function toast(text: string): void {
+export function toast(text: string): void {
   const element = document.querySelector<HTMLElement>("[data-toast]");
   if (!element) return;
   element.textContent = text;

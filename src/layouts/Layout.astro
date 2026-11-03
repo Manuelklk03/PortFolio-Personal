@@ -62,6 +62,11 @@ const ogImage = image ? `${siteUrl}${image}` : `${siteUrl}/og-default.jpg`;
     <link rel="canonical" href={pageUrl} />
   </head>
   <body class="bg-background text-foreground antialiased">
+    <!-- Fondo de toda la página: rejilla ASCII que reacciona al ratón (src/scripts/ascii-field.ts) -->
+    <canvas
+      data-ascii-field
+      aria-hidden="true"
+      class="pointer-events-none fixed inset-0 -z-10 h-full w-full"></canvas>
     <a
       href="#contenido"
       class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-20 focus:bg-surface focus:px-4 focus:py-2"
@@ -76,7 +81,10 @@ const ogImage = image ? `${siteUrl}${image}` : `${siteUrl}/og-default.jpg`;
     <MatrixIntro />
     <script>
       import { initLenis } from "@/scripts/lenis";
+      import { initAsciiField } from "@/scripts/ascii-field";
       initLenis();
+      const field = document.querySelector<HTMLCanvasElement>("[data-ascii-field]");
+      if (field) initAsciiField(field);
     </script>
   </body>
 </html>

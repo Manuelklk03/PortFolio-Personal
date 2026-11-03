@@ -1,0 +1,144 @@
+---
+// Contacto como una terminal de correo: se rellena línea a línea y al enviar se abre el programa
+// de correo del visitante con todo escrito (enlace mailto:, sin servidor).
+interface Props {
+  email: string;
+}
+
+const { email } = Astro.props;
+---
+
+<form
+  data-contact-mail
+  data-email={email}
+  novalidate
+  class="border border-border bg-surface/60 font-mono text-sm transition-colors focus-within:border-accent"
+>
+  <p class="flex flex-wrap justify-between gap-2 border-b border-border px-4 py-2.5 text-xs text-muted">
+    <span>
+      <span class="text-accent-2">$</span> mail --to manuel
+    </span>
+    <span aria-hidden="true">↵ para pasar de línea</span>
+  </p>
+
+  <div class="space-y-3 p-4">
+    <label class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3">
+      <span class="w-24 shrink-0 text-accent-2">nombre:</span>
+      <input
+        name="name"
+        type="text"
+        autocomplete="name"
+        spellcheck="false"
+        class="min-w-0 flex-1 border-b border-transparent bg-transparent py-1 text-foreground caret-accent outline-none placeholder:text-border focus:border-accent"
+        placeholder="tu nombre"
+      />
+    </label>
+    <label class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3">
+      <span class="w-24 shrink-0 text-accent-2">asunto:</span>
+      <input
+        name="subject"
+        type="text"
+        class="min-w-0 flex-1 border-b border-transparent bg-transparent py-1 text-foreground caret-accent outline-none placeholder:text-border focus:border-accent"
+        placeholder="oferta, proyecto, saludo…"
+      />
+    </label>
+    <label class="flex flex-col gap-1 sm:flex-row sm:gap-3">
+      <span class="w-24 shrink-0 pt-1 text-accent-2">mensaje:</span>
+      <textarea
+        name="message"
+        rows="4"
+        required
+        aria-describedby="contact-mail-status"
+        class="min-w-0 flex-1 resize-y border-b border-transparent bg-transparent py-1 text-foreground caret-accent outline-none placeholder:text-border focus:border-accent"
+        placeholder="escribe aquí tu mensaje"
+      ></textarea>
+    </label>
+
+    <p
+      id="contact-mail-status"
+      data-status
+      role="status"
+      class="min-h-5 text-muted"
+    ></p>
+
+    <div class="flex flex-wrap gap-3">
+      <button
+        type="submit"
+        class="term-select inline-flex items-center gap-2 border border-accent/50 px-5 py-3 text-accent"
+      >
+        <span aria-hidden="true">↵</span> enviar
+      </button>
+      <button
+        type="button"
+        data-copy-email
+        class="term-select inline-flex items-center gap-2 border border-border px-5 py-3 text-foreground"
+      >
+        <span aria-hidden="true">⧉</span> copiar correo
+      </button>
+    </div>
+  </div>
+</form>
+
+<script>
+  import { toast } from "../scripts/easter-eggs";
+
+  const form = document.querySelector<HTMLFormElement>("[data-contact-mail]");
+  const status = form?.querySelector<HTMLElement>("[data-status]");
+  const email = form?.dataset.email;
+
+  if (form && status && email) {
+    const fields = [
+      ...form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
+        "input, textarea",
+      ),
+    ];
+
+    // Enter en una línea pasa a la siguiente, como en un programa de terminal.
+    fields.forEach((field, index) => {
+      if (field instanceof HTMLTextAreaElement) return;
+      field.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter") return;
+        event.preventDefault();
+        fields[index + 1]?.focus();
+      });
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const name = String(data.get("name") ?? "").trim();
+      const subject = String(data.get("subject") ?? "").trim();
+      const message = String(data.get("message") ?? "").trim();
+
+      if (!message) {
+        status.textContent = "> error: el mensaje está vacío.";
+        status.className = "min-h-5 text-red-400";
+        form.querySelector("textarea")?.focus();
+        return;
+      }
+
+      const body = name ? `${message}\n\n— ${name}` : message;
+      const params = new URLSearchParams({
+        subject:
+          subject ||
+          (name ? `Contacto de ${name}` : "Contacto desde el portfolio"),
+        body,
+      });
+      status.textContent = "> abriendo tu programa de correo…";
+      status.className = "min-h-5 text-accent";
+      // URLSearchParams codifica los espacios como "+": en mailto deben ir como %20.
+      window.location.href = `mailto:${email}?${params.toString().replace(/\+/g, "%20")}`;
+    });
+
+    form
+      .querySelector("[data-copy-email]")
+      ?.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(email);
+          toast(`copiado ${email}`);
+        } catch {
+          toast(email);
+        }
+      });
+  }
+</script>
