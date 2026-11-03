@@ -1,7 +1,12 @@
 ---
-// Diálogo de entrada: Morfeo en ASCII ofrece la píldora roja (tema Matrix) o la azul (Abyss + Jade).
-// Hasta que se elige, la web se ve en modo neutro. La silueta de Morfeo es un SVG propio.
-import { MORPHEUS_SVG, PALMS } from "../lib/morpheus";
+// Diálogo de entrada: Morfeo ofrece la píldora roja (tema Matrix) o la azul (Abyss + Jade).
+// Hasta que se elige, la web se ve en modo neutro. El estarcido de Morfeo lo generó Codex para Manuel
+// (public/intro/morpheus.webp, con el negro convertido en transparencia para que se vea la lluvia).
+// Centro de las píldoras del dibujo, medido sobre la imagen (en %).
+const PILLS = {
+  red: { x: 24.2, y: 54.2 },
+  blue: { x: 75.5, y: 54.2 },
+};
 ---
 
 <dialog
@@ -38,28 +43,41 @@ import { MORPHEUS_SVG, PALMS } from "../lib/morpheus";
       Elige una píldora para decidir cómo ves este portfolio.
     </p>
 
-    <!-- Morfeo con una píldora en cada mano -->
-    <div class="relative my-4 w-full max-w-lg select-none">
-      <div aria-hidden="true" set:html={MORPHEUS_SVG} />
+    <!-- Morfeo con una píldora en cada mano: caen a las palmas al abrir y flotan -->
+    <div
+      data-pill-stage
+      class="relative my-3 w-full max-w-[17rem] select-none sm:max-w-[21rem]"
+    >
+      <img
+        src="/intro/morpheus.webp"
+        alt="Morfeo tendiendo las manos con una píldora roja y otra azul"
+        width="640"
+        height="787"
+        class="block h-auto w-full [filter:drop-shadow(0_0_10px_rgb(0_255_102/0.35))]"
+      />
       <button
         type="button"
         data-pill-choice="matrix"
         tabindex="-1"
         aria-hidden="true"
-        class="pill-float absolute -translate-x-1/2 -translate-y-full text-[11px] sm:text-[15px]"
-        style={`left:${PALMS.left.x}%; top:${PALMS.left.y}%`}
+        class="absolute -translate-x-1/2 -translate-y-1/2 p-2 text-[8px] sm:text-[10px]"
+        style={`left:${PILLS.red.x}%; top:${PILLS.red.y}%`}
       >
-        <span class="pill pill--red -rotate-12"></span>
+        <span class="pill-motion pill-motion--red block" style="--pill-delay: 0.35s">
+          <span class="pill pill--red -rotate-[24deg]"></span>
+        </span>
       </button>
       <button
         type="button"
         data-pill-choice="abyss"
         tabindex="-1"
         aria-hidden="true"
-        class="pill-float absolute -translate-x-1/2 -translate-y-full text-[11px] sm:text-[15px] [animation-delay:-1.4s]"
-        style={`left:${PALMS.right.x}%; top:${PALMS.right.y}%`}
+        class="absolute -translate-x-1/2 -translate-y-1/2 p-2 text-[8px] sm:text-[10px]"
+        style={`left:${PILLS.blue.x}%; top:${PILLS.blue.y}%`}
       >
-        <span class="pill pill--blue rotate-12"></span>
+        <span class="pill-motion pill-motion--blue block" style="--pill-delay: 0.6s">
+          <span class="pill pill--blue rotate-[24deg]"></span>
+        </span>
       </button>
     </div>
 
@@ -95,22 +113,35 @@ import { MORPHEUS_SVG, PALMS } from "../lib/morpheus";
       <kbd class="border border-[#1f3a24] px-1">Esc</kbd> omitir (tema azul)
     </p>
   </div>
+  <div data-pill-flash aria-hidden="true" class="pill-flash"></div>
 </dialog>
+<div data-pill-flash-page aria-hidden="true" class="pill-flash"></div>
 
 <script>
   import { applyTheme, getSavedTheme, type Theme } from "../scripts/theme";
 
   const dialog = document.querySelector<HTMLDialogElement>("[data-matrix-dialog]");
   const canvas = dialog?.querySelector<HTMLCanvasElement>("[data-matrix-rain]");
+  const stage = dialog?.querySelector<HTMLElement>("[data-pill-stage]");
+  const flash = dialog?.querySelector<HTMLElement>("[data-pill-flash]");
+  const pageFlash = document.querySelector<HTMLElement>("[data-pill-flash-page]");
+  const reducedMotion = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  interface Rain {
+    stop: () => void;
+    setInterval: (ms: number) => void;
+  }
 
   // Lluvia de caracteres: columnas que caen dejando una estela que se apaga.
-  const startRain = (target: HTMLCanvasElement) => {
+  const startRain = (target: HTMLCanvasElement): Rain => {
     const ctx = target.getContext("2d");
-    if (!ctx || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return () => {};
-    }
+    if (!ctx || reducedMotion()) return { stop: () => {}, setInterval: () => {} };
+
     const glyphs = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄ0123456789<>/=+*#%@";
     const size = 16;
+    let interval = 50;
     let drops: number[] = [];
     const resize = () => {
       target.width = window.innerWidth;
@@ -126,7 +157,7 @@ import { MORPHEUS_SVG, PALMS } from "../lib/morpheus";
     let last = 0;
     const tick = (now: number) => {
       frameId = requestAnimationFrame(tick);
-      if (now - last < 50) return;
+      if (now - last < interval) return;
       last = now;
       ctx.fillStyle = "rgb(2 4 2 / 0.12)";
       ctx.fillRect(0, 0, target.width, target.height);
@@ -139,35 +170,82 @@ import { MORPHEUS_SVG, PALMS } from "../lib/morpheus";
       });
     };
     frameId = requestAnimationFrame(tick);
-    return () => {
-      cancelAnimationFrame(frameId);
-      window.removeEventListener("resize", resize);
+    return {
+      stop: () => {
+        cancelAnimationFrame(frameId);
+        window.removeEventListener("resize", resize);
+      },
+      setInterval: (ms) => {
+        interval = ms;
+      },
     };
   };
 
-  if (dialog && canvas) {
-    let stopRain = () => {};
+  if (dialog && canvas && stage && flash && pageFlash) {
+    let rain: Rain = { stop: () => {}, setInterval: () => {} };
+    let choosing = false;
 
     const close = () => {
-      stopRain();
+      rain.stop();
       dialog.close();
       document.body.classList.remove("overflow-hidden");
     };
 
     const open = () => {
       if (dialog.open) return;
+      choosing = false;
+      delete stage.dataset.focus;
+      delete stage.dataset.chosen;
+      flash.classList.remove("is-on");
+      // Reinicia la caída de las píldoras cada vez que se abre.
+      stage.classList.remove("is-dropping");
+      void stage.offsetWidth;
+      stage.classList.add("is-dropping");
       dialog.showModal();
       document.body.classList.add("overflow-hidden");
-      stopRain = startRain(canvas);
-      dialog.querySelector<HTMLButtonElement>('button[data-pill-choice="matrix"]:not([tabindex])')?.focus();
+      rain = startRain(canvas);
+      dialog
+        .querySelector<HTMLButtonElement>('button[data-pill-choice="matrix"]:not([tabindex])')
+        ?.focus();
     };
 
-    const choose = (theme: Theme) => {
+    // Elegir: la píldora crece, su color inunda la pantalla y el tema cambia por debajo.
+    const choose = async (theme: Theme) => {
+      if (choosing) return;
+      choosing = true;
+      if (reducedMotion()) {
+        applyTheme(theme);
+        close();
+        return;
+      }
+      const color = theme === "matrix" ? "red" : "blue";
+      stage.dataset.chosen = color;
+      flash.dataset.color = color;
+      pageFlash.dataset.color = color;
+      if (theme === "matrix") rain.setInterval(12);
+      await wait(380);
+      flash.classList.add("is-on");
+      await wait(420);
+      pageFlash.classList.add("is-on");
       applyTheme(theme);
       close();
+      await wait(60);
+      pageFlash.classList.remove("is-on");
     };
 
     dialog.querySelectorAll<HTMLButtonElement>("[data-pill-choice]").forEach((button) => {
+      const color = button.dataset.pillChoice === "matrix" ? "red" : "blue";
+      // Al apuntar a una píldora (con ratón o teclado) la otra se atenúa.
+      const focus = () => {
+        if (!choosing) stage.dataset.focus = color;
+      };
+      const blur = () => {
+        if (!choosing) delete stage.dataset.focus;
+      };
+      button.addEventListener("pointerenter", focus);
+      button.addEventListener("focus", focus);
+      button.addEventListener("pointerleave", blur);
+      button.addEventListener("blur", blur);
       button.addEventListener("click", () =>
         choose(button.dataset.pillChoice === "matrix" ? "matrix" : "abyss"),
       );

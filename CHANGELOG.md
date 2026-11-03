@@ -36,3 +36,4 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 - 2026-11-02: retrato en mosaico que se enfoca, terminal escribible, proyectos desplegables, títulos que se descifran y easter eggs.
 - 2026-11-02: proyectos reales (Cerrajería NOA, Digital Fit y ValveDex) con sus enlaces, estado y aportación; captura de Cerrajería NOA.
 - 2026-11-03: Morfeo en silueta con lluvia de Matrix y píldoras en cápsula; modo neutro hasta elegir píldora; retrato y colores copiables adaptados a cada tema.
+- 2026-11-03: Morfeo en estarcido con fondo transparente y nueva animación de las píldoras (caída, flotación, foco y destello al elegir).
