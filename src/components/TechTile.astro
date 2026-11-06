@@ -1,0 +1,43 @@
+---
+// Una tecnología como logo de una tinta que flota. `index` desfasa el movimiento de cada una.
+import { getTechIcon } from "@/lib/tech-icons";
+
+interface Props {
+  name: string;
+  index: number;
+  // Las tecnologías en aprendizaje van más tenues, con borde discontinuo.
+  learning?: boolean;
+}
+
+const { name, index, learning = false } = Astro.props;
+const icon = getTechIcon(name);
+
+// Cada tile con su propia duración y fase para que no floten a la vez.
+const style = `--float-duration: ${(3.4 + (index % 4) * 0.55).toFixed(2)}s; --float-delay: -${(index * 0.9).toFixed(2)}s;`;
+---
+
+<li
+  class:list={[
+    "tech-tile group flex flex-col items-center gap-3 border px-2 py-5 text-center transition-colors hover:border-accent hover:text-accent",
+    learning
+      ? "border-dashed border-border text-accent-2"
+      : "border-border text-foreground",
+  ]}
+  style={style}
+>
+  <span
+    aria-hidden="true"
+    class="tech-icon flex size-10 items-center justify-center transition-[filter] group-hover:[filter:drop-shadow(0_0_8px_var(--color-accent))]"
+  >
+    {
+      icon.kind === "path" ? (
+        <svg viewBox="0 0 24 24" fill="currentColor" class="size-full">
+          <path d={icon.path} />
+        </svg>
+      ) : (
+        <span class="font-mono text-lg font-bold">{icon.glyph}</span>
+      )
+    }
+  </span>
+  <span class="font-mono text-xs">{name}</span>
+</li>
