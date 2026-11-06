@@ -19,7 +19,7 @@ const art = lines
   <pre
     data-ascii-source
     aria-hidden="true"
-    class="overflow-hidden font-mono text-[clamp(6px,2.5vw,14px)] leading-none text-accent [text-shadow:0_0_6px_color-mix(in_srgb,var(--color-accent)_35%,transparent)]"
+    class="overflow-hidden font-mono text-[clamp(6px,2.5vw,14px)] leading-none text-accent"
   >{art}</pre>
   <canvas
     aria-hidden="true"
@@ -80,7 +80,7 @@ const art = lines
         const jade =
           styles.getPropertyValue("--color-accent").trim() || "#3ee6c1";
         const teal =
-          styles.getPropertyValue("--color-accent-2").trim() || "#0f9d9a";
+          styles.getPropertyValue("--color-accent-2").trim() || "#13a9a3";
         dustColor =
           styles.getPropertyValue("--color-foreground").trim() || "#ddf7f0";
 

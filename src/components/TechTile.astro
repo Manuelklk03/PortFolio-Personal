@@ -40,7 +40,7 @@ const style = `--float-duration: ${(3.4 + (index % 4) * 0.55).toFixed(2)}s; --fl
         "tech-icon flex items-center justify-center",
         compact ? "size-7" : "size-10",
       ]}
-      class="transition-[color,filter] group-hover:text-(--brand) group-hover:[filter:drop-shadow(0_0_10px_var(--brand))] group-aria-pressed:text-(--brand) group-aria-pressed:[filter:drop-shadow(0_0_10px_var(--brand))]"
+      class="transition-colors group-hover:text-(--brand) group-aria-pressed:text-(--brand)"
     >
       {
         icon.kind === "path" ? (
