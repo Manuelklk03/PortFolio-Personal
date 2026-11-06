@@ -101,3 +101,10 @@ Skills nuevas (4 nov 2026, en Claude y en Codex):
 - **Se usan:** `threejs` (mejoras y rendimiento del nudo 3D del inicio, `src/scripts/ascii-scene.ts`) y `frontend-design` (dirección visual; ya lideraba esa parte vía frontend-stack).
 - **Para más adelante, si hace falta:** `scroll-scrubbed-visual-sequence` (transiciones de sección ligadas al scroll, reversibles).
 - **No se usan:** `build-threejs-scroll-worlds` y `scroll-world-storytelling` (convierten toda la web en un mundo 3D o en una historia de scroll: cambio de dirección y peso excesivo), `cinematic-scroll-storytelling` (pilas fijas y textos cinematográficos con GSAP, que no encajan con el estilo terminal) y las skills `gsap-*` de Codex (GSAP se quitó el 31 oct).
+
+Skills usadas el 6 nov 2026:
+- `unslop` (nueva): revisión en modo pulido de la pasada de coherencia visual (halos, paleta, fondo, franja y logos). Encontró cuatro rastros: resplandor de color en los logos, resplandor en el cursor, zoom de imagen en las tarjetas y un respaldo de color desfasado; los cuatro corregidos. Copy sin exclamaciones ni palabras de relleno.
+- `frontend-design`: dirección de la página de detalle de proyecto (portada y ficha lateral).
+- `threejs`: sin cambios en el nudo 3D; solo se bajó su opacidad en el CSS.
+- Pendiente: `scroll-scrubbed-visual-sequence` (solo si se quieren transiciones ligadas al scroll).
+

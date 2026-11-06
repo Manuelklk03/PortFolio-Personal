@@ -45,3 +45,4 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 - 2026-11-06: página de detalle de proyecto rediseñada (portada, ficha lateral con stack y enlaces, navegación entre proyectos).
 - 2026-11-06: sección del CV más elegante (hoja elevada, halo, degradado inferior, botón de descarga destacado) y la hoja se adapta al ancho.
 - 2026-11-06: la foto de Sobre mí se monta con caracteres que vuelan y encajan en su sitio antes de enfocarse.
+- 2026-11-06: temas más coherentes y con menos ruido (tokens alineados, una luz ambiental por tema, sin resplandores en texto, cursor y logos), nudo del inicio más tenue y campo ASCII más sobrio.

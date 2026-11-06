@@ -1,7 +1,7 @@
 // Fondo de toda la página: una rejilla muy tenue de caracteres que se "despiertan" cerca del ratón
 // (cambian a caracteres más densos y brillan) y se apagan poco a poco al alejarse.
 const CELL = 18;
-const RADIUS = 150;
+const RADIUS = 130;
 const RAMP = " .:-=+*#%@";
 
 export function initAsciiField(canvas: HTMLCanvasElement): void {
@@ -34,7 +34,7 @@ export function initAsciiField(canvas: HTMLCanvasElement): void {
     if (!baseCtx) return;
     baseCtx.font = `12px monospace`;
     baseCtx.fillStyle = color;
-    baseCtx.globalAlpha = 0.07;
+    baseCtx.globalAlpha = 0.045;
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < columns; x++) {
         baseCtx.fillText(
@@ -94,7 +94,7 @@ export function initAsciiField(canvas: HTMLCanvasElement): void {
         value > 0.5 && Math.random() < 0.08
           ? (RAMP[Math.floor(Math.random() * RAMP.length)] ?? char)
           : char;
-      ctx.globalAlpha = Math.min(0.55, value * 0.6);
+      ctx.globalAlpha = Math.min(0.32, value * 0.38);
       ctx.fillText(
         shown,
         (i % columns) * CELL,
