@@ -7,6 +7,7 @@ import CvPreview from "../components/CvPreview.astro";
 import Terminal from "../components/Terminal.astro";
 import ContactMail from "../components/ContactMail.astro";
 import TechTile from "../components/TechTile.astro";
+import WhatIDo from "../components/WhatIDo.astro";
 import AsciiScene from "../components/ascii/AsciiScene.astro";
 import AsciiName from "../components/ascii/AsciiName.astro";
 import AsciiSeam from "../components/ascii/AsciiSeam.astro";
@@ -164,17 +165,7 @@ const contactLinks = [
           />
         )}
       </div>
-      <div class="mt-8">
-        <h3 class="font-mono text-sm text-accent-2">$ ls que-hago/</h3>
-        <ul class="mt-3 grid gap-2 text-sm text-muted">
-          {profile.whatIDo.map((item) => (
-            <li class="flex gap-3">
-              <span aria-hidden="true" class="font-mono text-accent">&gt;</span>
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <WhatIDo class="mt-8 hidden sm:block" />
       </div>
       <div>
         <!-- prettier-ignore -->
@@ -193,6 +184,7 @@ const contactLinks = [
             </Fragment>
           ))}
         </dl>
+        <WhatIDo class="mt-8 sm:hidden" />
         <p class="mt-6 flex gap-1 font-mono select-none">
           {swatches.map((name) => (
             <button
