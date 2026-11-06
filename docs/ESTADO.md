@@ -5,7 +5,7 @@
 
 ## Resumen del estado real
 
-La web tiene la estructura completa de una página con diseño ASCII art y terminal elegante: cabecera con navegación, nudo 3D ASCII, partículas del nombre interactivas, sobre mí con retrato ASCII + mosaico enfocado, proyectos reales desplegables (`<details name="projects">`), stack técnico, terminal interactiva ejecutable con comandos, visor de CV en PDF integrado y contacto.
+La web tiene la estructura completa de una página con diseño ASCII art y terminal elegante: cabecera con navegación, nudo 3D ASCII, partículas del nombre interactivas, sobre mí con retrato ASCII + mosaico enfocado, proyectos reales como tarjetas que enlazan a su página de detalle (`/proyectos/<id>`), stack técnico, terminal interactiva ejecutable con comandos, visor de CV en PDF integrado y contacto.
 
 **Nueva funcionalidad (3 nov):**
 - **Morfeo en estarcido** (imagen generada por Codex para Manuel, `public/intro/morpheus.webp`, con el negro convertido en transparencia) sobre una lluvia de código de Matrix, con dos **píldoras en cápsula CSS** en las palmas: caen con rebote al abrir, flotan y laten, la que se apunta crece y la otra se atenúa, y al elegir su color inunda la pantalla antes de cambiar el tema.
@@ -23,7 +23,7 @@ La web tiene la estructura completa de una página con diseño ASCII art y termi
 
 ## Git
 
-- `main` al día hasta la PR de `feature/contact-and-field` (4 nov).
+- `main` al día hasta la PR de `feature/contact-and-field` (4 nov). Rama en curso: `feature/project-pages` (páginas de detalle y tarjetas hechas; falta el footer).
 
 ## Comprobaciones (3 nov)
 

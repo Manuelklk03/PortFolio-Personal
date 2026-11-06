@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import { blockLetters } from "@/lib/ascii-art";
 import { projects } from "@/data/projects";
 import type { Project } from "@/data/projects";
+import { statusLabel, statusColor } from "@/lib/project-status";
 
 export function getStaticPaths() {
   return projects.map((project) => ({
@@ -16,18 +17,6 @@ interface Props {
 }
 
 const { project } = Astro.props;
-
-const statusLabel: Record<Project["status"], string> = {
-  completed: "completado",
-  "in-progress": "en desarrollo",
-  planned: "planificado",
-};
-
-const statusColor: Record<Project["status"], string> = {
-  completed: "text-accent",
-  "in-progress": "text-accent-2",
-  planned: "text-muted",
-};
 
 const signature = blockLetters(project.monogram);
 
