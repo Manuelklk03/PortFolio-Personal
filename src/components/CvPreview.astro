@@ -1,11 +1,12 @@
 ---
-// Vista previa del CV integrada en el estilo terminal: la página se "imprime" línea a línea.
+// Vista previa del CV integrada en el estilo terminal: la página se "imprime" al entrar en pantalla.
 interface Props {
   url: string;
   name: string;
 }
 
 const { url, name } = Astro.props;
+const fileName = url.split("/").pop() ?? "curriculum.pdf";
 ---
 
 <div data-cv-preview data-url={url} class="font-mono">
@@ -13,39 +14,52 @@ const { url, name } = Astro.props;
     <p
       class="flex flex-wrap items-baseline justify-between gap-2 border-b border-border px-4 py-2.5 text-xs text-muted"
     >
-      <span><span class="text-accent-2">$</span> cat curriculum.pdf</span>
-      <span aria-hidden="true">1 página · PDF</span>
+      <span><span class="text-accent-2">$</span> cat {fileName}</span>
+      <span aria-hidden="true">PDF</span>
     </p>
-    <!-- Se muestra la parte de arriba del CV y se funde con el fondo; el documento entero, con «abrir PDF». -->
+
+    <!-- Escenario: un halo suave detrás y la hoja elevada, que se funde con el fondo por abajo. -->
     <div
-      class="relative max-h-[30rem] overflow-hidden p-3 [mask-image:linear-gradient(to_bottom,#000_60%,transparent)] sm:max-h-[34rem] sm:p-6"
+      class="relative isolate max-h-[30rem] overflow-hidden px-3 pt-6 [mask-image:linear-gradient(to_bottom,#000_62%,transparent)] sm:max-h-[34rem] sm:px-10 sm:pt-10"
     >
-      <!-- Mientras pdf.js carga (o si falla) se muestra un aviso en lugar de un hueco vacío. -->
-      <p data-cv-status class="px-1 py-10 text-sm text-muted">
-        <span class="text-accent-2">&gt;</span> cargando curriculum.pdf…
-      </p>
-      <canvas
-        role="img"
-        aria-label={`Vista previa del currículum de ${name}`}
-        class="hidden opacity-90 shadow-[0_0_0_1px_var(--color-border)]"></canvas>
+      <div
+        aria-hidden="true"
+        class="absolute inset-x-0 top-0 -z-10 h-full bg-[radial-gradient(ellipse_at_50%_20%,color-mix(in_srgb,var(--color-accent)_14%,transparent),transparent_65%)]"
+      >
+      </div>
+      <div>
+        <!-- Mientras pdf.js carga (o si falla) se muestra un aviso en lugar de un hueco vacío. -->
+        <p data-cv-status class="px-1 py-10 text-sm text-muted">
+          <span class="text-accent-2">&gt;</span> cargando {fileName}…
+        </p>
+        <canvas
+          role="img"
+          aria-label={`Vista previa del currículum de ${name}`}
+          class="mx-auto hidden shadow-[0_30px_60px_-24px_rgb(0_0_0/0.75),0_0_0_1px_var(--color-border)]"
+        ></canvas>
+      </div>
     </div>
-  </div>
-  <div class="mt-4 flex flex-wrap gap-3 text-sm">
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="term-select inline-flex items-center gap-2 border border-accent/50 px-5 py-3 text-accent"
+
+    <div
+      class="flex flex-wrap items-center gap-3 border-t border-border px-4 py-4 text-sm"
     >
-      <span aria-hidden="true">↗</span> abrir PDF
-    </a>
-    <a
-      href={url}
-      download
-      class="term-select inline-flex items-center gap-2 border border-border px-5 py-3 text-foreground"
-    >
-      <span aria-hidden="true">↓</span> descargar
-    </a>
+      <a
+        href={url}
+        download
+        class="inline-flex min-h-11 items-center gap-2 bg-accent px-5 py-2 font-medium text-background transition hover:bg-foreground sm:min-h-0"
+      >
+        <span aria-hidden="true">↓</span> descargar CV
+      </a>
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="term-select inline-flex min-h-11 items-center gap-2 border border-accent/50 px-5 py-2 text-accent sm:min-h-0"
+      >
+        <span aria-hidden="true">↗</span> abrir completo
+        <span class="sr-only">(se abre en una pestaña nueva)</span>
+      </a>
+    </div>
   </div>
 </div>
 
@@ -68,7 +82,8 @@ const { url, name } = Astro.props;
           canvas.classList.remove("hidden");
           canvas.classList.add("cv-print");
         } else {
-          status.textContent = "> no se pudo mostrar la vista previa; usa «abrir PDF».";
+          status.textContent =
+            "> no se pudo mostrar la vista previa; usa «abrir completo».";
         }
       },
       { rootMargin: "300px 0px" },
