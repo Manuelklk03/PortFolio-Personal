@@ -8,14 +8,10 @@ interface Profile {
   cvUrl: string | null;
   // Filas de «Sobre mí» (datos confirmados en docs/PROYECTOS.md).
   about: { key: string; value: string }[];
-  // Mensaje personal de «Sobre mí» (borrador: Manuel lo ajusta con sus palabras).
-  aboutNote: string;
+  // Texto personal de «Sobre mí», en párrafos (borrador con lo que Manuel pidió contar: Manuel ajustará las palabras).
+  aboutText: string[];
   // «¿Qué hago?»: cosas concretas de su CV, no adjetivos.
   whatIDo: string[];
-  // Enfoque: cómo le gusta hacer las webs (borrador formal que Manuel ajustará).
-  pillars: { title: string; text: string }[];
-  // Método de trabajo, en prosa.
-  method: string;
 }
 
 export const profile: Profile = {
@@ -47,28 +43,15 @@ export const profile: Profile = {
       value: "React · Next.js · Astro · PostgreSQL · Express.js · Python",
     },
   ],
-  aboutNote:
-    "Me dedico al desarrollo web con un criterio claro: construir sitios cuidados en su diseño, optimizados en su rendimiento y útiles para quien los utiliza. Soy desarrollador web junior, recién titulado en DAW, y prefiero un proyecto acotado que funcione y que sea capaz de explicar a uno extenso que no domine.",
+  aboutText: [
+    "Soy Manuel, soy de Valencia y acabo de terminar el ciclo de Desarrollo de Aplicaciones Web. Me gusta hacer webs bonitas, que carguen rápido y que de verdad sirvan a quien las usa.",
+    "Antes de escribir código me gusta entender lo que estoy construyendo y por qué. Trabajo paso a paso, comprobando cada cosa antes de seguir, y aprendo haciendo proyectos. Uso la IA como apoyo, pero entender cada paso y decidir es cosa mía.",
+    "Ahora quiero empezar mi trayectoria profesional como desarrollador web y seguir aprendiendo en proyectos reales.",
+  ],
   whatIDo: [
     "APIs REST con Java y Spring Boot",
     "Interfaces con Angular y TypeScript",
     "Vistas con Thymeleaf y persistencia con JPA",
     "Webs con React y Next.js (aprendiendo)",
   ],
-  pillars: [
-    {
-      title: "cuidadas",
-      text: "Presto atención al diseño, a la jerarquía visual y a los detalles de interacción, procurando que el efecto nunca estorbe al contenido.",
-    },
-    {
-      title: "optimizadas",
-      text: "Cargo únicamente lo necesario, cuido el peso de las imágenes y la accesibilidad, y respeto la preferencia de movimiento reducido del usuario.",
-    },
-    {
-      title: "útiles",
-      text: "Parto de lo que necesita quien va a usar la web y compruebo que se entienda, que funcione en el móvil y que pueda manejarse con el teclado.",
-    },
-  ],
-  method:
-    "Trabajo por pasos pequeños y verificables: una rama y una pull request por cada cambio, comprobación de tipos y compilación antes de integrarlo, una segunda revisión del código y documentación de cada decisión. Utilizo asistentes de IA como apoyo, conservando siempre la decisión final y la comprensión de cada paso; cuando una parte se ha resuelto con su ayuda, lo indico.",
 };
