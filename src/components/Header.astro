@@ -3,11 +3,11 @@ import { profile } from "../data/profile";
 
 // El enlace al CV solo aparece cuando hay PDF.
 const links = [
-  { href: "#sobre-mi", label: "Sobre mí" },
-  { href: "#proyectos", label: "Proyectos" },
-  { href: "#stack", label: "Stack" },
-  ...(profile.cvUrl ? [{ href: "#cv", label: "CV" }] : []),
-  { href: "#contacto", label: "Contacto" },
+  { href: "/#sobre-mi", label: "Sobre mí" },
+  { href: "/#proyectos", label: "Proyectos" },
+  { href: "/#stack", label: "Stack" },
+  ...(profile.cvUrl ? [{ href: "/#cv", label: "CV" }] : []),
+  { href: "/#contacto", label: "Contacto" },
 ];
 ---
 
@@ -19,7 +19,7 @@ const links = [
   >
     <div class="flex items-center gap-6">
       <a
-        href="#inicio"
+        href="/"
         class="term-select -mx-1 px-1 font-mono text-sm"
         aria-label="Manuel Casinos Pérez, ir al inicio"
       >

@@ -11,6 +11,8 @@ export interface Project {
   repo?: string;
   demo?: string;
   personalContribution: string;
+  // Funcionalidades que se listan en la página de detalle (opcional).
+  features?: string[];
 }
 
 export const projects: Project[] = [
@@ -26,6 +28,12 @@ export const projects: Project[] = [
     demo: "https://cerrajerianoa.es/es",
     personalContribution:
       "La hice entera: diseño, desarrollo, idiomas, mapa, WhatsApp y publicación.",
+    features: [
+      "Páginas de servicios, trabajos realizados y contacto",
+      "Tres idiomas: español, valenciano e inglés",
+      "Mapa de Google Maps con la ubicación",
+      "Botón de acceso directo a WhatsApp",
+    ],
   },
   {
     id: "digital-fit",
@@ -45,6 +53,13 @@ export const projects: Project[] = [
     repo: "https://github.com/Manuelklk03/Digital-Fit-Proyecto",
     personalContribution:
       "API REST con Spring Boot, estructura del frontend en Angular y funcionamiento de la aplicación. Para los mapas con Leaflet me apoyé en IA.",
+    features: [
+      "Usuarios con roles",
+      "Creación y seguimiento de entrenamientos",
+      "Comunidad entre usuarios",
+      "Estadísticas e historial de entrenamientos",
+      "Mapa de lugares de entrenamiento con Leaflet",
+    ],
   },
   {
     id: "valvedex",
@@ -56,5 +71,9 @@ export const projects: Project[] = [
     status: "in-progress",
     repo: "https://github.com/Manuelklk03/ValveDex",
     personalContribution: "Proyecto personal que estoy desarrollando yo.",
+    features: [
+      "Fichas de armas, mapas y personajes",
+      "Empieza por Half-Life y sus expansiones",
+    ],
   },
 ];

@@ -71,16 +71,6 @@ export function initTerminal(root: HTMLElement, data: TerminalData): void {
   const goTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
-  const openProject = (id: string) => {
-    const details = root.ownerDocument.querySelector<HTMLDetailsElement>(
-      `details[data-project-id="${id}"]`,
-    );
-    if (!details) return false;
-    details.open = true;
-    details.scrollIntoView({ behavior: "smooth", block: "center" });
-    return true;
-  };
-
   const run = (raw: string) => {
     const trimmed = raw.trim();
     if (!trimmed) return;
@@ -93,7 +83,7 @@ export function initTerminal(root: HTMLElement, data: TerminalData): void {
           "comandos disponibles:",
           "whoami        quién es Manuel y qué hace",
           "ls            listar los proyectos",
-          "cat <id>      ver un proyecto y abrirlo en la web",
+          "cat <id>      ver un proyecto y su enlace de detalle",
           "stack         tecnologías base y en aprendizaje",
           "cd <sección>  ir a sobre-mi, proyectos, stack, cv, contacto o ~",
           "cv            abrir el currículum",
@@ -119,10 +109,16 @@ export function initTerminal(root: HTMLElement, data: TerminalData): void {
         if (!arg) return print(["uso: cat <proyecto>  (prueba 'ls')"]);
         if (arg === "cv" || arg === "curriculum.pdf") return run("cv");
         const project = data.projects.find((p) => p.id === arg);
-        if (!project || !openProject(project.id)) {
+        if (!project) {
           return print([`cat: ${arg}: no existe el archivo o directorio`]);
         }
-        print([`${project.title}: ${project.description}`]);
+        print([
+          `${project.title}: ${project.description}`,
+          {
+            text: `abrir /proyectos/${project.id}`,
+            href: `/proyectos/${project.id}`,
+          },
+        ]);
         return;
       }
       case "stack":

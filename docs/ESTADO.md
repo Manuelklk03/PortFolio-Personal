@@ -5,7 +5,7 @@
 
 ## Resumen del estado real
 
-La web tiene la estructura completa de una página con diseño ASCII art y terminal elegante: cabecera con navegación, nudo 3D ASCII, partículas del nombre interactivas, sobre mí con retrato ASCII + mosaico enfocado, proyectos reales desplegables (`<details name="projects">`), stack técnico, terminal interactiva ejecutable con comandos, visor de CV en PDF integrado y contacto.
+La web tiene la estructura completa de una página con diseño ASCII art y terminal elegante: cabecera con navegación, nudo 3D ASCII, partículas del nombre interactivas, sobre mí con retrato ASCII + mosaico enfocado, proyectos reales como tarjetas que enlazan a su página de detalle (`/proyectos/<id>`), stack técnico, terminal interactiva ejecutable con comandos, visor de CV en PDF integrado y contacto.
 
 **Nueva funcionalidad (3 nov):**
 - **Morfeo en estarcido** (imagen generada por Codex para Manuel, `public/intro/morpheus.webp`, con el negro convertido en transparencia) sobre una lluvia de código de Matrix, con dos **píldoras en cápsula CSS** en las palmas: caen con rebote al abrir, flotan y laten, la que se apunta crece y la otra se atenúa, y al elegir su color inunda la pantalla antes de cambiar el tema.
@@ -23,7 +23,7 @@ La web tiene la estructura completa de una página con diseño ASCII art y termi
 
 ## Git
 
-- `main` al día hasta la PR de `feature/contact-and-field` (4 nov).
+- `main` al día hasta la PR de `feature/contact-and-field` (4 nov). Rama en curso: `feature/project-pages` (páginas de detalle, tarjetas y footer).
 
 ## Comprobaciones (3 nov)
 
@@ -42,6 +42,7 @@ La web tiene la estructura completa de una página con diseño ASCII art y termi
 
 ## Próximo paso concreto
 
+0. Stack con logos de una tinta que flotan (`simple-icons` como dependencia; JPA y REST/MVC con glifo ASCII propio; sin animación con movimiento reducido). Decidido con Manuel el 5 nov; va en una rama nueva tras fusionar `feature/project-pages`.
 1. Decidir dominio y alojamiento; después, pasada de SEO con claude-seo (ver `docs/HERRAMIENTAS.md`).
 2. ESLint + `npm run lint` y análisis con SonarQube (ver `docs/TAREAS.md`).
 3. Capturas de Digital Fit y ValveDex cuando Manuel las tenga (`public/projects/` + campo `image`).
