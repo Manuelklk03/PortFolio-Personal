@@ -28,8 +28,10 @@ export async function renderCvPreview(
 
     canvas.width = viewport.width;
     canvas.height = viewport.height;
+    // Alto automático y ancho máximo: si la ventana se estrecha después, la hoja se encoge sin salirse.
     canvas.style.width = `${cssWidth}px`;
-    canvas.style.height = `${viewport.height / dpr}px`;
+    canvas.style.maxWidth = "100%";
+    canvas.style.height = "auto";
 
     await page.render({ canvas, viewport }).promise;
     return true;

@@ -43,3 +43,4 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 - 2026-11-05: Stack con logos de una tinta que flotan (simple-icons), con glifos ASCII para JPA y REST / MVC.
 - 2026-11-06: logos del Stack con color de marca al seleccionarlos, stack con logos en la página de detalle de proyecto, nombre del inicio más nítido y franja de transición sin ruido.
 - 2026-11-06: página de detalle de proyecto rediseñada (portada, ficha lateral con stack y enlaces, navegación entre proyectos).
+- 2026-11-06: sección del CV más elegante (hoja elevada, halo, degradado inferior, botón de descarga destacado) y la hoja se adapta al ancho.
