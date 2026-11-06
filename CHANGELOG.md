@@ -47,3 +47,4 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 - 2026-11-06: la foto de Sobre mí se monta con caracteres que vuelan y encajan en su sitio antes de enfocarse.
 - 2026-11-06: temas más coherentes y con menos ruido (tokens alineados, una luz ambiental por tema, sin resplandores en texto, cursor y logos), nudo del inicio más tenue y campo ASCII más sobrio.
 - 2026-11-06: datos completados (formación, prácticas e idiomas; Git, GitHub, Astro, PostgreSQL, Express.js y Python en el Stack; Leaflet en Digital Fit) y SEO técnico base (robots.txt, sitemap, datos estructurados) con la URL del sitio en un único sitio.
+- 2026-11-06: SEO técnico revisado con claude-seo: imagen social real (la anterior era un SVG con extensión jpg), metas sociales completas, datos estructurados de perfil y de proyecto, y carga diferida de three.js.
