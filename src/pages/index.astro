@@ -14,6 +14,7 @@ import { blockLetters, imageAscii, tintedPhoto } from "../lib/ascii-art";
 import { projects } from "../data/projects";
 import { profile } from "../data/profile";
 import { techStack } from "../data/tech";
+import { workflow, workNote } from "../data/work";
 import { profilePageSchema } from "../lib/schema";
 
 // Retrato de Manuel para «Sobre mí», al estilo de neofetch (se genera al compilar):
@@ -68,6 +69,7 @@ const terminalData = {
   })),
   sections: [
     "sobre-mi",
+    "trabajo",
     "proyectos",
     "stack",
     "terminal",
@@ -194,6 +196,33 @@ const contactLinks = [
         </p>
       </div>
     </div>
+  </Section>
+
+  <Section id="trabajo" title="Trabajo" command="cat metodo.md">
+    <ol
+      data-reveal
+      class="grid gap-px border border-border bg-border font-mono sm:grid-cols-2 lg:grid-cols-3"
+    >
+      {workflow.map((step, index) => (
+        <li class="bg-background p-5">
+          <span aria-hidden="true" class="text-xs text-accent">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <h3 class="mt-2 text-foreground">{step.title}</h3>
+          <p class="mt-2 font-sans text-sm leading-relaxed text-muted">
+            {step.text}
+          </p>
+        </li>
+      ))}
+      <!-- La postura sobre la IA va aparte: es una nota, no un paso del proceso. -->
+      <li class="bg-background p-5">
+        <span aria-hidden="true" class="text-xs text-accent-2">nota</span>
+        <h3 class="mt-2 text-accent-2">{workNote.title}</h3>
+        <p class="mt-2 font-sans text-sm leading-relaxed text-muted">
+          {workNote.text}
+        </p>
+      </li>
+    </ol>
   </Section>
 
   <Section id="proyectos" title="Proyectos" command="ls -l">

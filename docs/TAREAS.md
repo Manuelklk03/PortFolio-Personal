@@ -76,3 +76,5 @@
 - Formulario de contacto con envío real, si se decide que hace falta.
 
 Estas ampliaciones no están aprobadas ni deben retrasar la primera versión.
+- Estudio de caso por proyecto (cuando haya proyectos publicados y capturas): en `/proyectos/<id>`, galería con varias capturas y pie de foto, problema que resuelve, arquitectura y estructura de carpetas, decisiones técnicas, retos, cómo ejecutarlo, demo y repositorio. Previsto como campos opcionales (`gallery`, `sections`) en `projects.ts`, como `features`. Texto curado por Manuel, sin traer el README de GitHub automáticamente (dependería de la red al compilar). Propuesto por Manuel el 6 nov 2026.
+
