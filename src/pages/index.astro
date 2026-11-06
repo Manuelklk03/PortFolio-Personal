@@ -210,9 +210,9 @@ const contactLinks = [
   </Section>
 
   <Section id="proyectos" title="Proyectos" command="ls -l">
-    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {projects.map((project) => (
-        <ProjectEntry project={project} />
+    <ul class="space-y-14 sm:space-y-20">
+      {projects.map((project, index) => (
+        <ProjectEntry project={project} index={index} />
       ))}
     </ul>
   </Section>

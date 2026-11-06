@@ -77,5 +77,5 @@
 
 Estas ampliaciones no están aprobadas ni deben retrasar la primera versión.
 - Estudio de caso por proyecto (cuando haya proyectos publicados y capturas): en `/proyectos/<id>`, galería con varias capturas y pie de foto, problema que resuelve, arquitectura y estructura de carpetas, decisiones técnicas, retos, cómo ejecutarlo, demo y repositorio. Previsto como campos opcionales (`gallery`, `sections`) en `projects.ts`, como `features`. Texto curado por Manuel, sin traer el README de GitHub automáticamente (dependería de la red al compilar). Propuesto por Manuel el 6 nov 2026.
-- Proyectos de la home como bloques grandes (idea tomada de una web de referencia que Manuel mostró el 6 nov 2026): una zona visual por proyecto, una frase, el stack y dos acciones («Abrir página» y «Más detalle»), con el estudio de caso extenso en `/proyectos/<id>`. Hoy solo Cerrajería NOA tiene captura; Digital Fit y ValveDex usan su firma ASCII hasta que haya imágenes. Pendiente de decidir con Manuel el diseño del bloque.
+- Proyectos de la home como bloques grandes: hecho el 6 nov 2026 (idea tomada de una web de referencia que mostró Manuel). Pendiente: capturas de Digital Fit y ValveDex (`public/projects/` + campo `image`) para sustituir su firma ASCII, y el estudio de caso extenso en `/proyectos/<id>`.
 

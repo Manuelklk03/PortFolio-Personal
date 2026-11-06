@@ -50,3 +50,4 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 - 2026-11-06: SEO técnico revisado con claude-seo: imagen social real (la anterior era un SVG con extensión jpg), metas sociales completas, datos estructurados de perfil y de proyecto, y carga diferida de three.js.
 - 2026-11-06: sección «Trabajo» con el método de trabajo de Manuel (5 pasos y una nota sobre la IA), enlazada desde el footer y la terminal.
 - 2026-11-06: la sección «Trabajo» se sustituye por un mensaje personal en Sobre mí y la lista «¿Qué hago?» (borrador que Manuel ajustará).
+- 2026-11-06: los proyectos de la home pasan de tarjetas a bloques grandes alternados con stack con logos y las acciones «Abrir web»/«Ver código» y «Más detalle».
