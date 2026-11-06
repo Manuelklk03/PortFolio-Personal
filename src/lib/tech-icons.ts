@@ -3,8 +3,10 @@
 import {
   siAngular,
   siCss,
+  siDocker,
   siHtml5,
   siJavascript,
+  siMysql,
   siNextdotjs,
   siOpenjdk,
   siReact,
@@ -14,12 +16,29 @@ import {
 } from "simple-icons";
 
 export type TechIcon =
-  | { kind: "path"; path: string }
+  | { kind: "path"; path: string; brand: string }
   | { kind: "glyph"; glyph: string };
 
-const logo = (icon: { path: string }): TechIcon => ({
+// Color de marca legible sobre fondo oscuro: si el original es muy oscuro
+// (Next.js, CSS, Thymeleaf…) se mezcla con blanco hasta que se distinga.
+function readableBrand(hex: string): string {
+  const [r = 0, g = 0, b = 0] = [0, 2, 4].map((i) =>
+    parseInt(hex.slice(i, i + 2), 16),
+  );
+  const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+  if (luminance >= 0.3) return `#${hex}`;
+  const lift = (value: number) => Math.round(value + (255 - value) * 0.6);
+  return `rgb(${lift(r)} ${lift(g)} ${lift(b)})`;
+}
+
+// `brand` fuerza el color cuando el hex de simple-icons no es el que se reconoce (Angular).
+const logo = (
+  icon: { path: string; hex: string },
+  brand?: string,
+): TechIcon => ({
   kind: "path",
   path: icon.path,
+  brand: brand ?? readableBrand(icon.hex),
 });
 
 const icons: Record<string, TechIcon> = {
@@ -27,7 +46,7 @@ const icons: Record<string, TechIcon> = {
   CSS3: logo(siCss),
   JavaScript: logo(siJavascript),
   TypeScript: logo(siTypescript),
-  Angular: logo(siAngular),
+  Angular: logo(siAngular, "#dd0031"),
   // simple-icons ya no incluye el logo de Java: se usa el de OpenJDK, su implementación libre.
   Java: logo(siOpenjdk),
   "Spring Boot": logo(siSpringboot),
@@ -36,6 +55,8 @@ const icons: Record<string, TechIcon> = {
   "REST / MVC": { kind: "glyph", glyph: "{ }" },
   React: logo(siReact),
   "Next.js": logo(siNextdotjs),
+  MySQL: logo(siMysql),
+  Docker: logo(siDocker),
 };
 
 // Sin icono conocido, el glifo es la inicial: la tecnología nunca queda sin marca.

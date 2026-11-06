@@ -1,5 +1,6 @@
 ---
-// Una tecnología como logo de una tinta que flota. `index` desfasa el movimiento de cada una.
+// Una tecnología como logo de una tinta que flota. Con el ratón encima, con foco o al
+// pulsarla (queda seleccionada) el logo toma su color de marca.
 import { getTechIcon } from "@/lib/tech-icons";
 
 interface Props {
@@ -11,33 +12,54 @@ interface Props {
 
 const { name, index, learning = false } = Astro.props;
 const icon = getTechIcon(name);
+const brand = icon.kind === "path" ? icon.brand : "var(--color-accent)";
 
 // Cada tile con su propia duración y fase para que no floten a la vez.
-const style = `--float-duration: ${(3.4 + (index % 4) * 0.55).toFixed(2)}s; --float-delay: -${(index * 0.9).toFixed(2)}s;`;
+const style = `--float-duration: ${(3.4 + (index % 4) * 0.55).toFixed(2)}s; --float-delay: -${(index * 0.9).toFixed(2)}s; --brand: ${brand};`;
 ---
 
-<li
-  class:list={[
-    "tech-tile group flex flex-col items-center gap-3 border px-2 py-5 text-center transition-colors hover:border-accent hover:text-accent",
-    learning
-      ? "border-dashed border-border text-accent-2"
-      : "border-border text-foreground",
-  ]}
-  style={style}
->
-  <span
-    aria-hidden="true"
-    class="tech-icon flex size-10 items-center justify-center transition-[filter] group-hover:[filter:drop-shadow(0_0_8px_var(--color-accent))]"
+<li class="tech-tile" style={style}>
+  <button
+    type="button"
+    aria-pressed="false"
+    data-tech-toggle
+    class:list={[
+      "group flex w-full flex-col items-center gap-3 border px-2 py-5 text-center transition-colors",
+      "hover:border-(--brand) aria-pressed:border-(--brand) aria-pressed:bg-(--brand)/5",
+      learning
+        ? "border-dashed border-border text-accent-2"
+        : "border-border text-foreground",
+    ]}
   >
-    {
-      icon.kind === "path" ? (
-        <svg viewBox="0 0 24 24" fill="currentColor" class="size-full">
-          <path d={icon.path} />
-        </svg>
-      ) : (
-        <span class="font-mono text-lg font-bold">{icon.glyph}</span>
-      )
-    }
-  </span>
-  <span class="font-mono text-xs">{name}</span>
+    <span
+      aria-hidden="true"
+      class="tech-icon flex size-10 items-center justify-center transition-[color,filter] group-hover:text-(--brand) group-hover:[filter:drop-shadow(0_0_10px_var(--brand))] group-aria-pressed:text-(--brand) group-aria-pressed:[filter:drop-shadow(0_0_10px_var(--brand))]"
+    >
+      {
+        icon.kind === "path" ? (
+          <svg viewBox="0 0 24 24" fill="currentColor" class="size-full">
+            <path d={icon.path} />
+          </svg>
+        ) : (
+          <span class="font-mono text-lg font-bold">{icon.glyph}</span>
+        )
+      }
+    </span>
+    <span
+      class="font-mono text-xs transition-colors group-hover:text-(--brand) group-aria-pressed:text-(--brand)"
+      >{name}</span
+    >
+  </button>
 </li>
+
+<script>
+  // Pulsar un logo lo deja seleccionado en color; volver a pulsarlo lo apaga.
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-tech-toggle]")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        const pressed = button.getAttribute("aria-pressed") === "true";
+        button.setAttribute("aria-pressed", String(!pressed));
+      });
+    });
+</script>

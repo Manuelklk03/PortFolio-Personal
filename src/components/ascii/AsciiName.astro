@@ -19,11 +19,11 @@ const art = lines
   <pre
     data-ascii-source
     aria-hidden="true"
-    class="overflow-hidden font-mono text-[clamp(6px,2.5vw,14px)] leading-none text-accent [text-shadow:0_0_18px_var(--color-accent)]"
+    class="overflow-hidden font-mono text-[clamp(6px,2.5vw,14px)] leading-none text-accent [text-shadow:0_0_6px_color-mix(in_srgb,var(--color-accent)_35%,transparent)]"
   >{art}</pre>
   <canvas
     aria-hidden="true"
-    class="pointer-events-none absolute top-0 left-0 hidden [filter:drop-shadow(0_0_10px_var(--color-accent))]"
+    class="pointer-events-none absolute top-0 left-0 hidden"
   ></canvas>
 </div>
 
@@ -87,10 +87,13 @@ const art = lines
         const computed = getComputedStyle(pre);
         const rect = pre.getBoundingClientRect();
         const dpr = Math.min(window.devicePixelRatio, 2);
-        canvas.width = rect.width * dpr;
-        canvas.height = rect.height * dpr;
-        canvas.style.width = `${rect.width}px`;
-        canvas.style.height = `${rect.height}px`;
+        // Tamaño en píxeles de dispositivo enteros: un canvas con medidas fraccionarias se reescala y se ve borroso.
+        const pixelWidth = Math.round(rect.width * dpr);
+        const pixelHeight = Math.round(rect.height * dpr);
+        canvas.width = pixelWidth;
+        canvas.height = pixelHeight;
+        canvas.style.width = `${pixelWidth / dpr}px`;
+        canvas.style.height = `${pixelHeight / dpr}px`;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         ctx.font = `${computed.fontWeight} ${computed.fontSize} ${computed.fontFamily}`;
         ctx.textBaseline = "top";
@@ -152,7 +155,8 @@ const art = lines
           const dustIndex = Math.min(DUST.length - 1, Math.floor(offset / 14));
           const char = offset > 4 ? (DUST[dustIndex] ?? p.char) : p.char;
           ctx.fillStyle = offset > 4 ? dustColor : p.color;
-          ctx.fillText(char, p.x, p.y);
+          // En reposo se dibuja sobre píxeles enteros para que los bloques queden nítidos.
+          ctx.fillText(char, Math.round(p.x), Math.round(p.y));
         }
 
         // Sin movimiento, con el ratón lejos o fuera de pantalla, el bucle se para.

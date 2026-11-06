@@ -171,31 +171,27 @@ export async function tintedPhoto(
 }
 
 // Franja de caracteres que se apagan hacia abajo (▓▒░·); con semilla para que salga siempre igual.
-export function dissolveBand(columns: number, rows: number, seed = 7): string {
-  let state = seed;
-  const random = () => {
-    state = (state + 0x6d2b79f5) | 0;
-    let t = Math.imul(state ^ (state >>> 15), 1 | state);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
 
+export function dissolveBand(columns: number, rows: number): string {
+  // Tramado ordenado (matriz de Bayer 4x4): el degradado queda limpio y regular,
+  // sin el ruido aleatorio de bloques que parecía una línea de píxeles rotos.
+  const bayer = [
+    [0, 8, 2, 10],
+    [12, 4, 14, 6],
+    [3, 11, 1, 9],
+    [15, 7, 13, 5],
+  ];
+  const ramp = " .:-=+";
   const lines: string[] = [];
   for (let row = 0; row < rows; row++) {
+    const fade = 1 - row / rows;
     let line = "";
     for (let col = 0; col < columns; col++) {
-      // Más denso arriba y con huecos al azar, para que parezca que se deshace.
-      const density = (1 - row / rows) * random() * 1.1;
-      line +=
-        density > 0.75
-          ? "▓"
-          : density > 0.55
-            ? "▒"
-            : density > 0.35
-              ? "░"
-              : density > 0.2
-                ? "·"
-                : " ";
+      // Ondas suaves a lo ancho: la franja respira en vez de ser uniforme.
+      const wave = 0.55 + 0.45 * Math.sin(col / 9) * Math.cos(col / 31);
+      const threshold = ((bayer[row % 4]?.[col % 4] ?? 0) + 0.5) / 16;
+      const level = Math.floor(wave * fade * (ramp.length - 1) + threshold);
+      line += ramp[Math.min(ramp.length - 1, level)] ?? " ";
     }
     lines.push(line);
   }

@@ -41,3 +41,4 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 - 2026-11-05: página de detalle de cada proyecto (`/proyectos/<id>`) y tarjetas de proyecto en la home; `cat <id>` de la terminal enlaza al detalle (antes no encontraba el proyecto) y la cabecera funciona desde cualquier página.
 - 2026-11-05: footer como cierre de terminal (secciones, perfiles, `exit` con cursor y botón de volver arriba).
 - 2026-11-05: Stack con logos de una tinta que flotan (simple-icons), con glifos ASCII para JPA y REST / MVC.
+- 2026-11-06: logos del Stack con color de marca al seleccionarlos, stack con logos en la página de detalle de proyecto, nombre del inicio más nítido y franja de transición sin ruido.
