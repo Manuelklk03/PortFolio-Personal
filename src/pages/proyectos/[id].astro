@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import TechTile from "@/components/TechTile.astro";
 import { blockLetters } from "@/lib/ascii-art";
 import { projects } from "@/data/projects";
 import type { Project } from "@/data/projects";
@@ -77,15 +78,13 @@ const links = [
     )}
 
     <div class="mt-12 grid gap-10 text-sm sm:grid-cols-2">
-      <section aria-labelledby="stack-title">
+      <section aria-labelledby="stack-title" class="sm:col-span-2">
         <h2 id="stack-title" class="text-accent-2">
           $ cat stack
         </h2>
-        <ul class="mt-3 flex flex-wrap gap-2">
-          {project.technologies.map((tech) => (
-            <li class="border border-border px-3 py-1 text-foreground">
-              {tech}
-            </li>
+        <ul class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-6">
+          {project.technologies.map((tech, index) => (
+            <TechTile name={tech} {index} />
           ))}
         </ul>
       </section>
