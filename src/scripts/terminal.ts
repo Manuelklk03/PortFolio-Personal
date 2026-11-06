@@ -85,7 +85,7 @@ export function initTerminal(root: HTMLElement, data: TerminalData): void {
           "ls            listar los proyectos",
           "cat <id>      ver un proyecto y su enlace de detalle",
           "stack         tecnologías base y en aprendizaje",
-          "cd <sección>  ir a sobre-mi, proyectos, stack, cv, contacto o ~",
+          "cd <sección>  ir a sobre-mi, stack, proyectos, cv, contacto o ~",
           "cv            abrir el currículum",
           "contacto      correo, GitHub y LinkedIn",
           "pill          abrir la elección de Morfeo (Píldora Roja vs Azul)",

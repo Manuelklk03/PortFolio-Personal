@@ -4,8 +4,8 @@ import { profile } from "../data/profile";
 // El enlace al CV solo aparece cuando hay PDF.
 const links = [
   { href: "/#sobre-mi", label: "Sobre mí" },
-  { href: "/#proyectos", label: "Proyectos" },
   { href: "/#stack", label: "Stack" },
+  { href: "/#proyectos", label: "Proyectos" },
   ...(profile.cvUrl ? [{ href: "/#cv", label: "CV" }] : []),
   { href: "/#contacto", label: "Contacto" },
 ];

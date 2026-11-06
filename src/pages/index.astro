@@ -69,8 +69,8 @@ const terminalData = {
   })),
   sections: [
     "sobre-mi",
-    "proyectos",
     "stack",
+    "proyectos",
     "terminal",
     ...(profile.cvUrl ? ["cv"] : []),
     "contacto",
@@ -203,14 +203,6 @@ const contactLinks = [
     </div>
   </Section>
 
-  <Section id="proyectos" title="Proyectos" command="ls -l">
-    <ul class="space-y-14 sm:space-y-20">
-      {projects.map((project, index) => (
-        <ProjectEntry project={project} index={index} />
-      ))}
-    </ul>
-  </Section>
-
   <Section id="stack" title="Stack" command="stack --list">
     <div data-reveal class="grid gap-10 font-mono text-sm lg:grid-cols-[2fr_1fr]">
       <div>
@@ -234,6 +226,14 @@ const contactLinks = [
         </ul>
       </div>
     </div>
+  </Section>
+
+  <Section id="proyectos" title="Proyectos" command="ls -l">
+    <ul class="space-y-14 sm:space-y-20">
+      {projects.map((project, index) => (
+        <ProjectEntry project={project} index={index} />
+      ))}
+    </ul>
   </Section>
 
   <Section id="terminal" title="Terminal" command="bash">
