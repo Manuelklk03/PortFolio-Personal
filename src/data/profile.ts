@@ -34,14 +34,6 @@ export const profile: Profile = {
       key: "idiomas",
       value: "Español nativo · Inglés lector y conversación sencilla",
     },
-    {
-      key: "base",
-      value: "Java · JavaScript · TypeScript · Angular · Spring Boot",
-    },
-    {
-      key: "aprendiendo",
-      value: "React · Next.js · Astro · PostgreSQL · Express.js · Python",
-    },
   ],
   aboutText: [
     "Soy Manuel, soy de Valencia y acabo de terminar el ciclo de Desarrollo de Aplicaciones Web. Me gusta hacer webs bonitas, que carguen rápido y que de verdad sirvan a quien las usa.",
