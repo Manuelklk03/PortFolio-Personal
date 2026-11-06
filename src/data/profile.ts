@@ -8,7 +8,10 @@ interface Profile {
   cvUrl: string | null;
   // Filas de «Sobre mí» (datos confirmados en docs/PROYECTOS.md).
   about: { key: string; value: string }[];
+  // Mensaje personal de «Sobre mí» (borrador: Manuel lo ajusta con sus palabras).
   aboutNote: string;
+  // «¿Qué hago?»: cosas concretas de su CV, no adjetivos.
+  whatIDo: string[];
 }
 
 export const profile: Profile = {
@@ -41,5 +44,11 @@ export const profile: Profile = {
     },
   ],
   aboutNote:
-    "Me interesa seguir aprendiendo, mejorar mis proyectos y empezar mi trayectoria profesional como desarrollador web.",
+    "Soy desarrollador web junior, recién titulado en DAW. Prefiero un proyecto pequeño que funcione y que sepa explicar a uno enorme que no entienda. Aprendo construyendo: ramas, revisiones y documentación en cada cambio, y la IA como apoyo, sin dejar de decidir yo.",
+  whatIDo: [
+    "APIs REST con Java y Spring Boot",
+    "Interfaces con Angular y TypeScript",
+    "Vistas con Thymeleaf y persistencia con JPA",
+    "Webs con React y Next.js (aprendiendo)",
+  ],
 };
