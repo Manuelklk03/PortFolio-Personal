@@ -52,3 +52,4 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 - 2026-11-06: la sección «Trabajo» se sustituye por un mensaje personal en Sobre mí y la lista «¿Qué hago?» (borrador que Manuel ajustará).
 - 2026-11-06: los proyectos de la home pasan de tarjetas a bloques grandes alternados con stack con logos y las acciones «Abrir web»/«Ver código» y «Más detalle».
 - 2026-11-06: Sobre mí con enfoque (tres pilares) y método de trabajo en tono formal; en los bloques de proyecto, «Más detalle» pasa a ser la acción principal.
+- 2026-11-06: Sobre mí con un texto personal en primera persona («Soy Manuel, soy de Valencia…») en lugar de los bloques de enfoque y método; «¿Qué hago?» pasa bajo la foto.
