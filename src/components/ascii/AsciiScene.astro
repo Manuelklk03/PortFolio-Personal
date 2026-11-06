@@ -30,6 +30,14 @@
     const observer = new IntersectionObserver(async ([entry]) => {
       if (!entry?.isIntersecting) return;
       observer.disconnect();
+      // El nombre del inicio es lo primero que importa: three.js espera a que el navegador esté libre.
+      await new Promise<void>((resolve) => {
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(() => resolve(), { timeout: 1500 });
+        } else {
+          setTimeout(resolve, 300);
+        }
+      });
       const { startAsciiScene } = await import("../../scripts/ascii-scene");
       const controls = startAsciiScene(container);
       if (!controls) return;

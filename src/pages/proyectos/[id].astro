@@ -7,6 +7,7 @@ import { blockLetters } from "@/lib/ascii-art";
 import { projects } from "@/data/projects";
 import type { Project } from "@/data/projects";
 import { statusLabel, statusColor } from "@/lib/project-status";
+import { projectSchema } from "@/lib/schema";
 
 // Cada página recibe también el proyecto anterior y el siguiente (circular).
 export function getStaticPaths() {
@@ -29,6 +30,7 @@ interface Props {
 const { project, previous, next } = Astro.props;
 
 const signature = blockLetters(project.monogram);
+const jsonLd = projectSchema(project, Astro.site);
 
 const permissions: Record<Project["status"], string> = {
   completed: "drwxr-xr-x",
@@ -54,8 +56,10 @@ const neighbours = [
 <Layout
   title={`${project.title} · Manuel Casinos Pérez`}
   description={project.description}
-  image={project.image ?? "/og-default.jpg"}
+  image={project.ogImage ?? "/og-default.jpg"}
+  imageAlt={project.ogImage ? `Captura de ${project.title}` : undefined}
   url={`/proyectos/${project.id}`}
+  jsonLd={jsonLd}
 >
   <article class="mx-auto max-w-5xl px-4 py-12 font-mono sm:py-16">
     <a
@@ -77,6 +81,9 @@ const neighbours = [
             <img
               src={project.image}
               alt={`Captura de ${project.title}`}
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
               class="absolute inset-0 h-full w-full object-cover object-top"
             />
           ) : (

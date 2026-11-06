@@ -107,4 +107,5 @@ Skills usadas el 6 nov 2026:
 - `frontend-design`: dirección de la página de detalle de proyecto (portada y ficha lateral).
 - `threejs`: sin cambios en el nudo 3D; solo se bajó su opacidad en el CSS.
 - Pendiente: `scroll-scrubbed-visual-sequence` (solo si se quieren transiciones ligadas al scroll).
+- `claude-seo` (agente `seo-technical`): primera auditoría técnica el 6 nov 2026, en solo lectura sobre `dist/` y `src/`. Su Bash no devolvió salida, así que no midió el peso de las imágenes ni las cabeceras: el fallo de `og-default.jpg` (SVG con extensión jpg) lo encontró la comprobación manual con sharp. Lo que dice un agente se verifica antes de aplicarlo. Pendiente con dominio y hosting: redirecciones y barra final, cabeceras de seguridad, compresión, Core Web Vitals reales y Search Console.
 
