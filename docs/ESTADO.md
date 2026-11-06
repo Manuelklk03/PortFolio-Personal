@@ -23,7 +23,7 @@ La web tiene la estructura completa de una página con diseño ASCII art y termi
 
 ## Git
 
-- `main` al día hasta la PR de `feature/contact-and-field` (4 nov). Rama en curso: `feature/project-pages` (páginas de detalle, tarjetas y footer).
+- `main` al día hasta la PR #53 (5 nov). Rama en curso: `feature/stack-icons` (Stack con logos que flotan).
 
 ## Comprobaciones (3 nov)
 
@@ -42,7 +42,6 @@ La web tiene la estructura completa de una página con diseño ASCII art y termi
 
 ## Próximo paso concreto
 
-0. Stack con logos de una tinta que flotan (`simple-icons` como dependencia; JPA y REST/MVC con glifo ASCII propio; sin animación con movimiento reducido). Decidido con Manuel el 5 nov; va en una rama nueva tras fusionar `feature/project-pages`.
 1. Decidir dominio y alojamiento; después, pasada de SEO con claude-seo (ver `docs/HERRAMIENTAS.md`).
 2. ESLint + `npm run lint` y análisis con SonarQube (ver `docs/TAREAS.md`).
 3. Capturas de Digital Fit y ValveDex cuando Manuel las tenga (`public/projects/` + campo `image`).

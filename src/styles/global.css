@@ -202,6 +202,24 @@ button:focus-visible > .pill {
   }
 }
 
+/* Logos del Stack: flotan despacio y fuera de fase; con el ratón encima se detienen. */
+@keyframes tech-float {
+  50% {
+    translate: 0 -0.45rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tech-icon {
+    animation: tech-float var(--float-duration, 4s) ease-in-out
+      var(--float-delay, 0s) infinite;
+  }
+
+  .tech-tile:hover .tech-icon {
+    animation-play-state: paused;
+  }
+}
+
 @keyframes pill-glow {
   to {
     box-shadow:
