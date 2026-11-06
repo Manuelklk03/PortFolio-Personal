@@ -8,9 +8,11 @@ interface Props {
   index: number;
   // Las tecnologías en aprendizaje van más tenues, con borde discontinuo.
   learning?: boolean;
+  // Versión pequeña para la ficha lateral del detalle de proyecto.
+  compact?: boolean;
 }
 
-const { name, index, learning = false } = Astro.props;
+const { name, index, learning = false, compact = false } = Astro.props;
 const icon = getTechIcon(name);
 const brand = icon.kind === "path" ? icon.brand : "var(--color-accent)";
 
@@ -24,7 +26,8 @@ const style = `--float-duration: ${(3.4 + (index % 4) * 0.55).toFixed(2)}s; --fl
     aria-pressed="false"
     data-tech-toggle
     class:list={[
-      "group flex w-full flex-col items-center gap-3 border px-2 py-5 text-center transition-colors",
+      "group flex h-full w-full flex-col items-center border text-center transition-colors",
+      compact ? "gap-2 px-1 py-3" : "gap-3 px-2 py-5",
       "hover:border-(--brand) aria-pressed:border-(--brand) aria-pressed:bg-(--brand)/5",
       learning
         ? "border-dashed border-border text-accent-2"
@@ -33,7 +36,11 @@ const style = `--float-duration: ${(3.4 + (index % 4) * 0.55).toFixed(2)}s; --fl
   >
     <span
       aria-hidden="true"
-      class="tech-icon flex size-10 items-center justify-center transition-[color,filter] group-hover:text-(--brand) group-hover:[filter:drop-shadow(0_0_10px_var(--brand))] group-aria-pressed:text-(--brand) group-aria-pressed:[filter:drop-shadow(0_0_10px_var(--brand))]"
+      class:list={[
+        "tech-icon flex items-center justify-center",
+        compact ? "size-7" : "size-10",
+      ]}
+      class="transition-[color,filter] group-hover:text-(--brand) group-hover:[filter:drop-shadow(0_0_10px_var(--brand))] group-aria-pressed:text-(--brand) group-aria-pressed:[filter:drop-shadow(0_0_10px_var(--brand))]"
     >
       {
         icon.kind === "path" ? (
