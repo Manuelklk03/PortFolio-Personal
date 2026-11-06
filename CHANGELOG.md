@@ -49,3 +49,4 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 - 2026-11-06: datos completados (formación, prácticas e idiomas; Git, GitHub, Astro, PostgreSQL, Express.js y Python en el Stack; Leaflet en Digital Fit) y SEO técnico base (robots.txt, sitemap, datos estructurados) con la URL del sitio en un único sitio.
 - 2026-11-06: SEO técnico revisado con claude-seo: imagen social real (la anterior era un SVG con extensión jpg), metas sociales completas, datos estructurados de perfil y de proyecto, y carga diferida de three.js.
 - 2026-11-06: sección «Trabajo» con el método de trabajo de Manuel (5 pasos y una nota sobre la IA), enlazada desde el footer y la terminal.
+- 2026-11-06: la sección «Trabajo» se sustituye por un mensaje personal en Sobre mí y la lista «¿Qué hago?» (borrador que Manuel ajustará).
