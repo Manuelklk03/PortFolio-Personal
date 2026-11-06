@@ -8,6 +8,8 @@ export interface Project {
   technologies: string[];
   status: "completed" | "in-progress" | "planned";
   image?: string;
+  // Imagen para compartir en redes (JPG de 1200x630); sin ella se usa la general del sitio.
+  ogImage?: string;
   repo?: string;
   demo?: string;
   personalContribution: string;
@@ -25,6 +27,7 @@ export const projects: Project[] = [
     technologies: ["Next.js", "React"],
     status: "completed",
     image: "/projects/cerrajeria-noa.webp",
+    ogImage: "/projects/cerrajeria-noa-og.jpg",
     demo: "https://cerrajerianoa.es/es",
     personalContribution:
       "La hice entera: diseño, desarrollo, idiomas, mapa, WhatsApp y publicación.",
