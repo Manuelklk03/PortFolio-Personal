@@ -12,6 +12,10 @@ interface Profile {
   aboutNote: string;
   // «¿Qué hago?»: cosas concretas de su CV, no adjetivos.
   whatIDo: string[];
+  // Enfoque: cómo le gusta hacer las webs (borrador formal que Manuel ajustará).
+  pillars: { title: string; text: string }[];
+  // Método de trabajo, en prosa.
+  method: string;
 }
 
 export const profile: Profile = {
@@ -44,11 +48,27 @@ export const profile: Profile = {
     },
   ],
   aboutNote:
-    "Soy desarrollador web junior, recién titulado en DAW. Prefiero un proyecto pequeño que funcione y que sepa explicar a uno enorme que no entienda. Aprendo construyendo: ramas, revisiones y documentación en cada cambio, y la IA como apoyo, sin dejar de decidir yo.",
+    "Me dedico al desarrollo web con un criterio claro: construir sitios cuidados en su diseño, optimizados en su rendimiento y útiles para quien los utiliza. Soy desarrollador web junior, recién titulado en DAW, y prefiero un proyecto acotado que funcione y que sea capaz de explicar a uno extenso que no domine.",
   whatIDo: [
     "APIs REST con Java y Spring Boot",
     "Interfaces con Angular y TypeScript",
     "Vistas con Thymeleaf y persistencia con JPA",
     "Webs con React y Next.js (aprendiendo)",
   ],
+  pillars: [
+    {
+      title: "cuidadas",
+      text: "Presto atención al diseño, a la jerarquía visual y a los detalles de interacción, procurando que el efecto nunca estorbe al contenido.",
+    },
+    {
+      title: "optimizadas",
+      text: "Cargo únicamente lo necesario, cuido el peso de las imágenes y la accesibilidad, y respeto la preferencia de movimiento reducido del usuario.",
+    },
+    {
+      title: "útiles",
+      text: "Parto de lo que necesita quien va a usar la web y compruebo que se entienda, que funcione en el móvil y que pueda manejarse con el teclado.",
+    },
+  ],
+  method:
+    "Trabajo por pasos pequeños y verificables: una rama y una pull request por cada cambio, comprobación de tipos y compilación antes de integrarlo, una segunda revisión del código y documentación de cada decisión. Utilizo asistentes de IA como apoyo, conservando siempre la decisión final y la comprensión de cada paso; cuando una parte se ha resuelto con su ayuda, lo indico.",
 };
