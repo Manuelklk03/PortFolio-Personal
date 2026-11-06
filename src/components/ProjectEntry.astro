@@ -1,6 +1,6 @@
 ---
 // Un proyecto como bloque grande: visual a un lado (captura o firma ASCII) y a otro el texto,
-// el stack y dos acciones. Los bloques alternan de lado. El detalle vive en /proyectos/<id>.
+// el stack y dos acciones («Más detalle» como principal y la salida externa como secundaria). Los bloques alternan de lado. El detalle vive en /proyectos/<id>.
 import type { Project } from "@/data/projects";
 import { blockLetters } from "@/lib/ascii-art";
 import { getTechIcon } from "@/lib/tech-icons";
@@ -24,8 +24,8 @@ const permissions: Record<Project["status"], string> = {
 const signature = blockLetters(project.monogram);
 const detailUrl = `/proyectos/${project.id}`;
 
-// Acción principal: la web si existe; si no, el código.
-const primary = project.demo
+// Salida externa: la web si existe; si no, el código.
+const external = project.demo
   ? { href: project.demo, label: "Abrir web" }
   : project.repo
     ? { href: project.repo, label: "Ver código" }
@@ -108,33 +108,28 @@ const reversed = index % 2 === 1;
       </ul>
 
       <div class="mt-7 flex flex-wrap gap-3 text-sm">
-        {
-          primary && (
-            <a
-              href={primary.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex min-h-11 items-center gap-2 bg-accent px-5 py-2 font-medium text-background transition hover:bg-foreground sm:min-h-0"
-            >
-              {primary.label}
-              <span aria-hidden="true">↗</span>
-              <span class="sr-only">de {project.title} (pestaña nueva)</span>
-            </a>
-          )
-        }
         <a
           href={detailUrl}
-          class:list={[
-            "term-select inline-flex min-h-11 items-center gap-2 px-5 py-2 sm:min-h-0",
-            primary
-              ? "border border-accent/50 text-accent"
-              : "bg-accent font-medium text-background",
-          ]}
+          class="inline-flex min-h-11 items-center gap-2 bg-accent px-5 py-2 font-medium text-background transition hover:bg-foreground sm:min-h-0"
         >
           Más detalle
           <span aria-hidden="true">→</span>
           <span class="sr-only">de {project.title}</span>
         </a>
+        {
+          external && (
+            <a
+              href={external.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="term-select inline-flex min-h-11 items-center gap-2 border border-accent/50 px-5 py-2 text-accent sm:min-h-0"
+            >
+              {external.label}
+              <span aria-hidden="true">↗</span>
+              <span class="sr-only">de {project.title} (pestaña nueva)</span>
+            </a>
+          )
+        }
       </div>
     </div>
   </article>

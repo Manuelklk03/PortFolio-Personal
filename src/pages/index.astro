@@ -207,6 +207,25 @@ const contactLinks = [
         </p>
       </div>
     </div>
+
+    <div data-reveal class="mt-16 border-t border-border pt-10">
+      <h3 class="font-mono text-sm text-accent-2">$ cat enfoque.md</h3>
+      <ul class="mt-6 grid gap-px border border-border bg-border sm:grid-cols-3">
+        {profile.pillars.map((pillar, index) => (
+          <li class="bg-background p-5">
+            <span aria-hidden="true" class="font-mono text-xs text-accent">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <h4 class="mt-2 font-mono text-foreground">{pillar.title}</h4>
+            <p class="mt-2 text-sm leading-relaxed text-muted">
+              {pillar.text}
+            </p>
+          </li>
+        ))}
+      </ul>
+      <h3 class="mt-10 font-mono text-sm text-accent-2">$ cat metodo.md</h3>
+      <p class="mt-4 max-w-3xl leading-relaxed text-muted">{profile.method}</p>
+    </div>
   </Section>
 
   <Section id="proyectos" title="Proyectos" command="ls -l">
