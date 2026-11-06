@@ -1,0 +1,27 @@
+---
+// Lista «¿Qué hago?» de Sobre mí. Se usa dos veces con clases distintas: bajo la foto en
+// pantallas anchas y tras el texto en móvil, para que el orden de lectura tenga sentido.
+import { profile } from "@/data/profile";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class={className}>
+  <h3 class="font-mono text-sm text-accent-2">$ ls que-hago/</h3>
+  <ul class="mt-3 grid gap-2 text-sm text-muted">
+    {
+      profile.whatIDo.map((item) => (
+        <li class="flex gap-3">
+          <span aria-hidden="true" class="font-mono text-accent">
+            &gt;
+          </span>
+          {item}
+        </li>
+      ))
+    }
+  </ul>
+</div>
