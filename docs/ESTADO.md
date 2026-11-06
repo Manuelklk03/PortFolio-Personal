@@ -1,11 +1,11 @@
 # Estado actual y relevo
 
-Última actualización: 3 de noviembre de 2026.
-Última sesión: Antigravity (Google DeepMind) con revisión y comprobaciones locales.
+Última actualización: 6 de noviembre de 2026.
+Última sesión: Claude Code (Opus/Sonnet) con revisión de Codex y capturas en Chromium de Playwright.
 
 ## Resumen del estado real
 
-La web tiene la estructura completa de una página con diseño ASCII art y terminal elegante: cabecera con navegación, nudo 3D ASCII, partículas del nombre interactivas, sobre mí con retrato ASCII + mosaico enfocado, proyectos reales como tarjetas que enlazan a su página de detalle (`/proyectos/<id>`), stack técnico, terminal interactiva ejecutable con comandos, visor de CV en PDF integrado y contacto.
+La web tiene la estructura completa de una página con diseño ASCII art y terminal elegante: cabecera con navegación, nudo 3D ASCII, partículas del nombre interactivas, sobre mí con retrato ASCII + mosaico enfocado, proyectos reales como tarjetas que enlazan a su página de detalle (`/proyectos/<id>`), stack técnico con logos flotantes que toman su color de marca al seleccionarlos, terminal interactiva ejecutable con comandos, visor de CV en PDF integrado y contacto.
 
 **Nueva funcionalidad (3 nov):**
 - **Morfeo en estarcido** (imagen generada por Codex para Manuel, `public/intro/morpheus.webp`, con el negro convertido en transparencia) sobre una lluvia de código de Matrix, con dos **píldoras en cápsula CSS** en las palmas: caen con rebote al abrir, flotan y laten, la que se apunta crece y la otra se atenúa, y al elegir su color inunda la pantalla antes de cambiar el tema.
@@ -23,16 +23,18 @@ La web tiene la estructura completa de una página con diseño ASCII art y termi
 
 ## Git
 
-- `main` al día hasta la PR #53 (5 nov). Rama en curso: `feature/stack-icons` (Stack con logos que flotan).
+- `main` al día hasta la PR #59 (6 nov). Sin ramas en curso.
 
-## Comprobaciones (3 nov)
+## Comprobaciones (6 nov)
 
 - `npm run check` (diagnóstico Astro y TypeScript) → 0 errores, 0 warnings, 0 hints.
-- `npm run build` → 2 páginas estáticas (`/index.html` y `/404.html`) compiladas limpiamente en 3.57s.
+- `npm run build` → 5 páginas estáticas (`/`, `/404` y `/proyectos/<id>` ×3) compiladas limpiamente.
 - Accesibilidad: `<dialog>` nativo, atajos de teclado (`R` roja, `A`/`B` azul, `Esc` salir), botón omitir, foco atrapado y bloqueo de scroll de fondo mientras el diálogo está abierto.
 
 ## Problemas conocidos
 
+- Chrome no está instalado en este equipo: las capturas se hacen con el Chromium de Playwright (`npx playwright install chromium`; script en el scratchpad con `chromium.launch()`).
+- El proyecto no tiene tipos de Node (`@types/node`): no se puede importar `node:fs` en componentes.
 - No editar archivos con `Set-Content` de PowerShell 5.1: añade BOM y puede romper el frontmatter de Astro.
 - En Windows PowerShell, invocar `npm.cmd` en lugar del alias `.ps1` si las execution policies del sistema bloquean scripts locales.
 
