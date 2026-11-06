@@ -4,6 +4,9 @@ import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
+  // URL pública del sitio: PROVISIONAL hasta elegir dominio. Es el único sitio donde se cambia
+  // (canonical, Open Graph, robots.txt, sitemap y datos estructurados la leen de aquí).
+  site: "https://manuelcasinos.dev",
   integrations: [react()],
   vite: { plugins: [tailwindcss()] },
   // Astro descarga estas fuentes al compilar y las sirve desde la propia web.

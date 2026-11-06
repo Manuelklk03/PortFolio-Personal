@@ -10,10 +10,15 @@ interface Props {
   description: string;
   image?: string;
   url?: string;
+  // Datos estructurados (schema.org) de la página, si los tiene.
+  jsonLd?: Record<string, unknown>;
+  // Páginas que no deben indexarse (404).
+  noindex?: boolean;
 }
 
-const { title, description, image, url } = Astro.props;
-const siteUrl = "https://manuelcasinos.dev";
+const { title, description, image, url, jsonLd, noindex } = Astro.props;
+// Sale de `site` en astro.config.mjs.
+const siteUrl = Astro.site?.origin ?? "";
 const pageUrl = url ? `${siteUrl}${url}` : siteUrl;
 const ogImage = image ? `${siteUrl}${image}` : `${siteUrl}/og-default.jpg`;
 ---
@@ -60,6 +65,12 @@ const ogImage = image ? `${siteUrl}${image}` : `${siteUrl}/og-default.jpg`;
 
     <!-- Canonical -->
     <link rel="canonical" href={pageUrl} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {
+      jsonLd && (
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+      )
+    }
   </head>
   <body class="bg-background text-foreground antialiased">
     <!-- Fondo de toda la página: rejilla ASCII que reacciona al ratón (src/scripts/ascii-field.ts) -->
