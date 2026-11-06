@@ -19,12 +19,26 @@ export const profile: Profile = {
   cvUrl: "/cv/manuel-casinos-perez.pdf",
   about: [
     { key: "ubicación", value: "Valencia" },
-    { key: "formación", value: "Desarrollo de Aplicaciones Web (DAW)" },
+    {
+      key: "formación",
+      value: "CFGS Desarrollo de Aplicaciones Web · IES Conselleria Campanar · 2024-2026",
+    },
+    {
+      key: "prácticas",
+      value: "Bonatel (distribuidor Vodafone), prácticas del ciclo · curso 2025-2026",
+    },
+    {
+      key: "idiomas",
+      value: "Español nativo · Inglés lector y conversación sencilla",
+    },
     {
       key: "base",
       value: "Java · JavaScript · TypeScript · Angular · Spring Boot",
     },
-    { key: "aprendiendo", value: "React · Next.js" },
+    {
+      key: "aprendiendo",
+      value: "React · Next.js · Astro · PostgreSQL · Express.js · Python",
+    },
   ],
   aboutNote:
     "Me interesa seguir aprendiendo, mejorar mis proyectos y empezar mi trayectoria profesional como desarrollador web.",

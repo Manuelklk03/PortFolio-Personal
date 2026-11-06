@@ -44,6 +44,6 @@ La web tiene la estructura completa de una página con diseño ASCII art y termi
 
 ## Próximo paso concreto
 
-1. Decidir dominio y alojamiento; después, pasada de SEO con claude-seo (ver `docs/HERRAMIENTAS.md`).
+1. Decidir dominio y alojamiento: solo hay que cambiar `site` en `astro.config.mjs` (hoy `https://manuelcasinos.dev`, provisional) y comprobar `og-default.jpg`; después, pasada de SEO de contenido con claude-seo (ver `docs/HERRAMIENTAS.md`).
 2. ESLint + `npm run lint` y análisis con SonarQube (ver `docs/TAREAS.md`).
 3. Capturas de Digital Fit y ValveDex cuando Manuel las tenga (`public/projects/` + campo `image`).

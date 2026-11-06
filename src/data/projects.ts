@@ -48,6 +48,7 @@ export const projects: Project[] = [
       "Spring Boot",
       "MySQL",
       "Docker",
+      "Leaflet",
     ],
     status: "in-progress",
     repo: "https://github.com/Manuelklk03/Digital-Fit-Proyecto",

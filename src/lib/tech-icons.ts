@@ -2,13 +2,20 @@
 // conceptos y no tienen logo: llevan un glifo ASCII propio. Solo se usa al compilar.
 import {
   siAngular,
+  siAstro,
   siCss,
   siDocker,
+  siExpress,
+  siGit,
+  siGithub,
   siHtml5,
   siJavascript,
+  siLeaflet,
   siMysql,
   siNextdotjs,
   siOpenjdk,
+  siPostgresql,
+  siPython,
   siReact,
   siSpringboot,
   siThymeleaf,
@@ -57,6 +64,13 @@ const icons: Record<string, TechIcon> = {
   "Next.js": logo(siNextdotjs),
   MySQL: logo(siMysql),
   Docker: logo(siDocker),
+  Leaflet: logo(siLeaflet),
+  Git: logo(siGit),
+  GitHub: logo(siGithub),
+  Astro: logo(siAstro),
+  PostgreSQL: logo(siPostgresql),
+  "Express.js": logo(siExpress),
+  Python: logo(siPython),
 };
 
 // Sin icono conocido, el glifo es la inicial: la tecnología nunca queda sin marca.

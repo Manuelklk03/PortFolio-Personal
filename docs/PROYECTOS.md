@@ -8,11 +8,13 @@ Información aportada anteriormente por Manuel. Sirve como base, pero antes de p
 - Ubicación: Valencia, España.
 - Formación: DAW finalizado en junio de 2026, según la información aportada.
 - Conocimientos base: Java, JavaScript, TypeScript, Angular, Spring Boot, HTML, CSS y Git/GitHub.
-- Aprendizaje por cuenta propia: React y Next.js.
-- Interés en seguir aprendiendo Python. No presentarlo como un conocimiento demostrado sin un proyecto o confirmación.
+- Aprendizaje por cuenta propia: React y Next.js. Confirmado por Manuel el 6 nov 2026: también Astro, PostgreSQL, Express.js y Python (se muestran como «aprendiendo», no como dominio).
+- Python figura en «aprendiendo» desde el 6 nov 2026 por indicación de Manuel. No presentarlo como un conocimiento demostrado sin un proyecto.
 - GitHub: https://github.com/Manuelklk03
 - LinkedIn: https://www.linkedin.com/in/manuel-casinos-perez/
 - Correo público: manuelcp420@gmail.com (confirmado por Manuel el 31 de octubre de 2026). CV publicado en `public/cv/manuel-casinos-perez.pdf` (1 nov 2026, con teléfono: decisión de Manuel). Conocimientos según el CV: HTML5, CSS3, JavaScript, TypeScript, Angular, Java, Spring Boot, Thymeleaf, JPA y REST/MVC; en aprendizaje, React y Next.js.
+
+Datos del CV mostrados en «Sobre mí» (6 nov 2026): CFGS DAW en el IES Conselleria Campanar (2024-2026); prácticas del ciclo en Bonatel, distribuidor de Vodafone (curso 2025-2026); idiomas: español nativo e inglés lector con conversación sencilla. Git y GitHub salen en el Stack como conocimiento base.
 
 Las prácticas en empresa deben identificarse como prácticas vinculadas a la formación. No convertirlas en experiencia laboral de un puesto contratado ni añadir años de experiencia.
 
@@ -33,7 +35,7 @@ No indicar un proveedor de alojamiento hasta confirmarlo: hay referencias anteri
 - Tecnologías indicadas: Angular, TypeScript, Java, Spring Boot, MySQL y Docker.
 - Funcionalidades descritas: usuarios y roles, entrenamientos, comunidad, estadísticas, historial y lugares de entrenamiento.
 - Repositorio facilitado: https://github.com/Manuelklk03/Digital-Fit-Proyecto
-- Aportación indicada por Manuel: API REST de Spring Boot, estructura de Angular y funcionamiento de la aplicación desarrollados por él. Para la integración de mapas con Leaflet se apoyó en IA.
+- Aportación indicada por Manuel: API REST de Spring Boot, estructura de Angular y funcionamiento de la aplicación desarrollados por él. Para la integración de mapas con Leaflet se apoyó en IA. Leaflet figura entre sus tecnologías (6 nov 2026).
 - Estado (confirmado por Manuel, 2 nov 2026): en desarrollo. Demo pública y capturas: pendientes.
 
 No afirmar que todo está desplegado, probado o terminado sin revisar el proyecto. Leaflet se puede describir como biblioteca de mapas; no confundirlo con la API REST del backend.
@@ -56,7 +58,7 @@ El diseño de referencia pertenece a la práctica. No presentarlo como el portfo
 - Estado: en desarrollo según el contexto disponible. Avance exacto pendiente de revisar.
 - Repositorio público: https://github.com/Manuelklk03/ValveDex (React, Next.js y TypeScript). Demo y capturas: pendientes.
 
-No mostrarla como una wiki completa ni listar funcionalidades futuras como terminadas.
+No mostrarla como una wiki completa ni listar funcionalidades futuras como terminadas. En la web, los proyectos no completados titulan su lista como «alcance previsto».
 
 ## Selección propuesta
 

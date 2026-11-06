@@ -11,6 +11,8 @@ export const techStack = {
     "Thymeleaf",
     "JPA",
     "REST / MVC",
+    "Git",
+    "GitHub",
   ],
-  learning: ["React", "Next.js"],
+  learning: ["React", "Next.js", "Astro", "PostgreSQL", "Express.js", "Python"],
 };
