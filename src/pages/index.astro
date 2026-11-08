@@ -71,9 +71,9 @@ const terminalData = {
     "sobre-mi",
     "stack",
     "proyectos",
-    "terminal",
     ...(profile.cvUrl ? ["cv"] : []),
     "contacto",
+    "terminal",
   ],
 };
 
@@ -101,7 +101,7 @@ const contactLinks = [
 
 <Layout
   title="Manuel Casinos Pérez · Desarrollador full stack en Valencia"
-  description="Portfolio de Manuel Casinos Pérez, desarrollador FullStack en Valencia: proyectos, stack y contacto."
+  description="Portfolio de Manuel Casinos Pérez, desarrollador full stack en Valencia: proyectos, stack y contacto."
   image="/og-default.jpg"
   url="/"
   jsonLd={personLd}
@@ -123,18 +123,18 @@ const contactLinks = [
         Desarrollador full stack en Valencia.
       </p>
       <p class="mt-2 font-mono text-sm text-accent-2">
-        Java · Spring Boot · Angular · TypeScript · React · Next.js
+        Java · Spring Boot · Angular · TypeScript
       </p>
       <div class="mt-10 flex flex-wrap gap-3">
         <a
           href="#proyectos"
-          class="inline-flex items-center gap-2 bg-accent px-5 py-3 font-mono text-sm font-medium text-background transition hover:bg-foreground"
+          class="term-select inline-flex items-center gap-2 border border-accent/50 px-5 py-3 font-mono text-sm text-accent"
         >
           <span aria-hidden="true">$</span> ls proyectos
         </a>
         <a
           href={profile.cvUrl ? "#cv" : "#contacto"}
-          class="term-select inline-flex items-center gap-2 border border-accent/50 px-5 py-3 font-mono text-sm text-accent"
+          class="inline-flex items-center gap-2 bg-accent px-5 py-3 font-mono text-sm font-medium text-background transition hover:bg-foreground"
         >
           <span aria-hidden="true">$</span>{" "}
           {profile.cvUrl ? "cat cv.pdf" : "cd contacto"}
@@ -236,12 +236,6 @@ const contactLinks = [
     </ul>
   </Section>
 
-  <Section id="terminal" title="Terminal" command="bash">
-    <div data-reveal class="max-w-3xl">
-      <Terminal data={terminalData} />
-    </div>
-  </Section>
-
   {profile.cvUrl && (
     <Section id="cv" title="Currículum" command="open curriculum.pdf">
       <div data-reveal class="max-w-3xl">
@@ -273,6 +267,12 @@ const contactLinks = [
           </li>
         ))}
       </ul>
+    </div>
+  </Section>
+
+  <Section id="terminal" title="Terminal" command="bash">
+    <div data-reveal class="max-w-3xl">
+      <Terminal data={terminalData} />
     </div>
   </Section>
 
