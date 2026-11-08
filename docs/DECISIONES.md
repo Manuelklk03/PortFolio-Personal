@@ -104,6 +104,18 @@
 | --- | --- | --- |
 | Introducción de Morfeo (Matrix) en arte ASCII con selector de píldora roja vs azul para cambiar el tema visual. | Pedido expreso de Manuel: potenciar la identidad ASCII art con una referencia icónica e interactiva. | Modal de terminal accesible (`<dialog>`) con Morfeo en arte ASCII. Píldora Roja activa el tema Matrix Phosphor (`#00FF66`), Píldora Azul mantiene Abyss + Jade. Persistencia en `localStorage`, atajos de teclado (`R`, `A`, `B`, `Esc`), enlace `./pill` en cabecera y comandos `pill`, `matrix` y `theme` en la terminal interactiva. Las partículas del nombre reaccionan al cambio de tema en vivo. |
 
+## Confirmado — 8 de noviembre de 2026 (sesión con Claude Code)
+
+| Decisión | Motivo | Consecuencias |
+| --- | --- | --- |
+| Orden final: inicio, sobre mí, stack, proyectos, currículum, contacto y terminal al final. | Manuel (8 nov 2026): el CV y el contacto son lo que busca un reclutador; la terminal es un extra. | Sustituye al orden del 6 nov. Cambiado en `index.astro` y en la lista de secciones de la terminal. |
+| La intro de Morfeo se sigue abriendo sola al entrar. | Manuel quiere que el visitante elija tema nada más llegar. | Un revisor la señaló como riesgo de primera impresión; se mitiga con el botón de omitir y Esc. |
+| React y Next.js siguen como «aprendiendo» (no en el hero). | Manuel (8 nov 2026): aún no los domina como el resto. | Hero: Java, Spring Boot, Angular y TypeScript. Sobre mí: base en Java, Spring Boot y Angular; aprende React, Next.js, PostgreSQL y Express.js. |
+| Prácticas en una sola fila de Sobre mí: Bonatel (2025-2026) y App Informática, Patraix (2023-2024); no se mencionan en el texto personal. | Indicado por Manuel (8 nov 2026). | Nombre exacto del ciclo de 2023-2024 pendiente. |
+| Hosting en Vercel con el dominio `manuelcasinos.dev`, URLs sin barra final y cabeceras en `vercel.json`. | Elegido por Manuel (8 nov 2026). | `trailingSlash: "never"` en `astro.config.mjs`. Sin CSP por ahora (el script inline del tema la complica). Falta conectar el repositorio y el DNS. |
+| Páginas de proyecto: título, portada entera y, al final a todo el ancho, un carrusel de capturas (`gallery` en `projects.ts`) que no se muestra si está vacío. | Manuel: las capturas del carrusel serán de secciones distintas a la portada. | Solo Cerrajería NOA lo tiene relleno. Digital Fit y ValveDex, vacíos hasta tener capturas. |
+| Digital Fit usa PostgreSQL, no MySQL. | Lo dice el README del repositorio. | Corregido en `projects.ts` y en `docs/PROYECTOS.md`. |
+
 ## Propuestas pendientes
 
 | Propuesta | Estado |
