@@ -1,0 +1,145 @@
+---
+// Galería de capturas de un proyecto: carrusel con desplazamiento por imanes (scroll-snap).
+// Funciona sin JavaScript (se desliza con el dedo, el ratón o el teclado); el script solo
+// añade los botones anterior/siguiente y el contador. No se pinta si el proyecto no tiene capturas.
+import type { ProjectImage } from "@/data/projects";
+
+interface Props {
+  title: string;
+  images: ProjectImage[];
+}
+
+const { title, images } = Astro.props;
+---
+
+{
+  images.length > 0 && (
+    <section
+      data-gallery
+      data-reveal
+      aria-roledescription="carrusel"
+      aria-labelledby="gallery-title"
+      class="mt-12"
+    >
+      <div class="flex items-end justify-between gap-4">
+        <h2 id="gallery-title" class="text-sm text-accent-2">
+          $ ls capturas/
+        </h2>
+        <div class="flex items-center gap-2 text-sm" hidden data-gallery-controls>
+          <span class="text-muted" aria-live="polite" data-gallery-count />
+          <button
+            type="button"
+            data-gallery-prev
+            class="term-select inline-flex min-h-11 min-w-11 items-center justify-center border border-border px-3 text-accent disabled:opacity-40 sm:min-h-9 sm:min-w-9"
+          >
+            <span aria-hidden="true">←</span>
+            <span class="sr-only">Captura anterior de {title}</span>
+          </button>
+          <button
+            type="button"
+            data-gallery-next
+            class="term-select inline-flex min-h-11 min-w-11 items-center justify-center border border-border px-3 text-accent disabled:opacity-40 sm:min-h-9 sm:min-w-9"
+          >
+            <span aria-hidden="true">→</span>
+            <span class="sr-only">Captura siguiente de {title}</span>
+          </button>
+        </div>
+      </div>
+
+      <ul
+        data-gallery-track
+        tabindex="0"
+        aria-label={`Capturas de ${title}`}
+        class="gallery-track mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto"
+      >
+        {images.map((image, index) => (
+          <li
+            class="w-[92%] shrink-0 snap-center sm:w-[85%]"
+            aria-roledescription="diapositiva"
+            aria-label={`${index + 1} de ${images.length}`}
+          >
+            <a
+              href={image.src}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="term-select block border border-border bg-surface/60"
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                width="1200"
+                height="750"
+                loading="lazy"
+                decoding="async"
+                class="aspect-[16/10] w-full object-cover object-top"
+              />
+              <span class="sr-only">(abre la captura a tamaño completo en otra pestaña)</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .gallery-track {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .gallery-track {
+      scroll-behavior: smooth;
+    }
+  }
+</style>
+
+<script>
+  const gallery = document.querySelector<HTMLElement>("[data-gallery]");
+  const track = gallery?.querySelector<HTMLElement>("[data-gallery-track]");
+  const controls = gallery?.querySelector<HTMLElement>("[data-gallery-controls]");
+  const prev = gallery?.querySelector<HTMLButtonElement>("[data-gallery-prev]");
+  const next = gallery?.querySelector<HTMLButtonElement>("[data-gallery-next]");
+  const count = gallery?.querySelector<HTMLElement>("[data-gallery-count]");
+
+  if (gallery && track && controls && prev && next && count) {
+    const slides = Array.from(track.children) as HTMLElement[];
+
+    // Con una sola captura no hay nada que desplazar.
+    if (slides.length > 1) {
+      controls.hidden = false;
+
+      const current = () => {
+        const left = track.scrollLeft + track.clientWidth / 2;
+        const index = slides.findIndex((slide) => slide.offsetLeft + slide.offsetWidth > left);
+        return index === -1 ? slides.length - 1 : index;
+      };
+
+      const update = () => {
+        const index = current();
+        count.textContent = `${String(index + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+        prev.disabled = index === 0;
+        next.disabled = index === slides.length - 1;
+      };
+
+      const goTo = (index: number) => {
+        const slide = slides[Math.max(0, Math.min(slides.length - 1, index))];
+        if (slide) track.scrollTo({ left: slide.offsetLeft - track.offsetLeft });
+      };
+
+      prev.addEventListener("click", () => goTo(current() - 1));
+      next.addEventListener("click", () => goTo(current() + 1));
+      track.addEventListener("scroll", update, { passive: true });
+      track.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          goTo(current() - 1);
+        } else if (event.key === "ArrowRight") {
+          event.preventDefault();
+          goTo(current() + 1);
+        }
+      });
+      update();
+    }
+  }
+</script>

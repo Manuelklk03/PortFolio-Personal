@@ -3,6 +3,7 @@
 // Astro genera una por proyecto al compilar (getStaticPaths).
 import Layout from "@/layouts/Layout.astro";
 import TechTile from "@/components/TechTile.astro";
+import ProjectGallery from "@/components/ProjectGallery.astro";
 import { blockLetters } from "@/lib/ascii-art";
 import { projects } from "@/data/projects";
 import type { Project } from "@/data/projects";
@@ -70,45 +71,55 @@ const neighbours = [
       <span class="sr-only">Volver a proyectos</span>
     </a>
 
-    <!-- Portada: la captura, o la firma ASCII del proyecto en grande. -->
+    <!-- Portada: título y, debajo, la captura entera; sin captura, la firma ASCII del proyecto. -->
     <header
       data-reveal
       class="relative mt-6 overflow-hidden border border-border bg-surface/60"
     >
-      <div class="relative flex aspect-[16/9] items-center justify-center sm:aspect-[21/9]">
-        {
-          project.image ? (
+      {
+        project.image ? (
+          <>
+            <div class="p-5 sm:p-8">
+              <p aria-hidden="true" class="text-sm text-muted">
+                $ cd proyectos/<span class="text-accent-2">{project.id}</span>
+              </p>
+              <h1 class="mt-2 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+                {project.title}
+              </h1>
+            </div>
             <img
               src={project.image}
               alt={`Captura de ${project.title}`}
+              width="1200"
+              height="750"
               loading="eager"
               fetchpriority="high"
               decoding="async"
-              class="absolute inset-0 h-full w-full object-cover object-top"
+              class="aspect-[16/10] w-full border-t border-border object-cover object-top"
             />
-          ) : (
+          </>
+        ) : (
+          <div class="relative flex aspect-[16/9] items-center justify-center sm:aspect-[21/9]">
             <pre
               aria-hidden="true"
               class="pb-16 font-mono text-[clamp(9px,2.4vw,20px)] leading-none text-accent select-none"
             >{signature}</pre>
-          )
-        }
-        <div
-          aria-hidden="true"
-          class="absolute inset-0 bg-gradient-to-t from-background from-20% via-background/85 via-45% to-transparent"
-        >
-        </div>
-        <div class="absolute inset-x-0 bottom-0 p-5 sm:p-8">
-          <p aria-hidden="true" class="text-sm text-muted">
-            $ cd proyectos/<span class="text-accent-2">{project.id}</span>
-          </p>
-          <h1
-            class="mt-2 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl"
-          >
-            {project.title}
-          </h1>
-        </div>
-      </div>
+            <div
+              aria-hidden="true"
+              class="absolute inset-0 bg-gradient-to-t from-background from-20% via-background/85 via-45% to-transparent"
+            >
+            </div>
+            <div class="absolute inset-x-0 bottom-0 p-5 sm:p-8">
+              <p aria-hidden="true" class="text-sm text-muted">
+                $ cd proyectos/<span class="text-accent-2">{project.id}</span>
+              </p>
+              <h1 class="mt-2 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+                {project.title}
+              </h1>
+            </div>
+          </div>
+        )
+      }
     </header>
 
     <div class="mt-10 grid gap-10 lg:grid-cols-[1fr_20rem]">
@@ -199,6 +210,8 @@ const neighbours = [
         }
       </aside>
     </div>
+
+    <ProjectGallery title={project.title} images={project.gallery ?? []} />
 
     {
       neighbours.length > 0 && (
