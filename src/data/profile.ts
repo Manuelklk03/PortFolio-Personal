@@ -28,7 +28,8 @@ export const profile: Profile = {
     },
     {
       key: "prácticas",
-      value: "Bonatel (distribuidor Vodafone), prácticas del ciclo · curso 2025-2026",
+      value:
+        "Bonatel (distribuidor Vodafone), curso 2025-2026 · App Informática (Patraix), curso 2023-2024",
     },
     {
       key: "idiomas",
@@ -36,14 +37,15 @@ export const profile: Profile = {
     },
   ],
   aboutText: [
-    "Soy Manuel, soy de Valencia y acabo de terminar el ciclo de Desarrollo de Aplicaciones Web. Me gusta hacer webs bonitas, que carguen rápido y que de verdad sirvan a quien las usa.",
-    "Antes de escribir código me gusta entender lo que estoy construyendo y por qué. Trabajo paso a paso, comprobando cada cosa antes de seguir, y aprendo haciendo proyectos. Uso la IA como apoyo, pero entender cada paso y decidir es cosa mía.",
-    "Ahora quiero empezar mi trayectoria profesional como desarrollador web y seguir aprendiendo en proyectos reales.",
+    "Soy Manuel, de Valencia. Acabo de terminar el ciclo de Desarrollo de Aplicaciones Web en el IES Conselleria Campanar.",
+    "Aprendo construyendo. Digital Fit (Angular y Spring Boot) y ValveDex (Next.js) son, por ahora, mis dos proyectos personales, y los dos siguen en camino. Uso la IA como apoyo, pero lo que entra en el código lo reviso y lo decido yo.",
+    "Ya tengo una base con Java, Spring Boot y Angular, y ahora estoy aprendiendo React y Next.js. Me gusta innovar y aprender tecnologías distintas cada día. Busco mi primer puesto como desarrollador web.",
   ],
   whatIDo: [
-    "APIs REST con Java y Spring Boot",
-    "Interfaces con Angular y TypeScript",
-    "Vistas con Thymeleaf y persistencia con JPA",
-    "Webs con React y Next.js (aprendiendo)",
+    "Webs responsive, cuidadas y útiles",
+    "APIs RESTful con Java y Spring Boot, con datos en JPA",
+    "Interfaces con Angular y TypeScript, y vistas de servidor con Thymeleaf",
+    "Webs para clientes reales, del diseño a la publicación",
+    "Aprendiendo React, Next.js, PostgreSQL y Express.js",
   ],
 };

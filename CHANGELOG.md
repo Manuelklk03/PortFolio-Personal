@@ -21,7 +21,14 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 - 2026-10-31: rediseño «terminal elegante»: nombre con partículas ASCII interactivas, cursor en bloque, títulos con prompt, tarjetas tipo ventana de terminal, sección de currículum, contacto con correo, GitHub y LinkedIn, y colores más intensos.
 - 2026-11-03: modal interactivo con Morfeo de Matrix en arte ASCII que ofrece la píldora roja (tema Matrix Phosphor) o azul (tema Abyss + Jade), accesible con teclado, atajos R/A/B/Esc, persistencia en localStorage, enlace ./pill en cabecera y comandos pill/matrix/theme en la terminal.
 
+- 2026-11-08: «Sobre mí» con textos nuevos y las prácticas de Bonatel y App Informática en una sola fila; «ls que-hago/» reescrito; el CV va antes del contacto y la terminal queda al final.
+- 2026-11-08: páginas de proyecto con la portada entera, carrusel de capturas a todo el ancho (relleno en Cerrajería NOA), textos y descripciones nuevos, y portadas de Digital Fit y ValveDex.
+- 2026-11-08: configuración de Vercel (`vercel.json` con cabeceras de seguridad y caché) y `trailingSlash: "never"`.
+- 2026-11-08: textos de las píldoras que explican qué cambia en cada tema, botón principal del CV en el inicio y imagen de Morfeo con prioridad de carga.
+
 ### Corregido
+
+- 2026-11-08: Digital Fit figuraba con MySQL; usa PostgreSQL.
 
 - 2026-10-31: imágenes de proyectos (eran SVG con extensión `.jpg`) y paquetes sin uso eliminados.
 - 2026-10-31: revisión de UI: los scripts del layout y de la página ahora se empaquetan (antes `type="module"` los dejaba sin procesar), entradas de sección sin GSAP que ya no ocultan contenido al volver hacia arriba, cabecera no fija y enlaces de 44 px en móvil, CV solo cuando hay PDF, botón de pausa más claro, sin `console.log` ni `window as any`.
