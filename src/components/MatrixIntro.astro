@@ -39,7 +39,7 @@ const PILLS = {
     <h2 id="matrix-title" class="max-w-xl text-center text-sm text-[#d6ffe0] sm:text-base">
       «Esta es tu última oportunidad. Después de esto, no hay vuelta atrás.»
     </h2>
-    <p class="mt-1 text-center text-[11px] text-[#7fbf8a] sm:text-xs">
+    <p class="mt-1 text-center text-xs text-[#7fbf8a] sm:text-xs">
       Elige una píldora para decidir cómo ves este portfolio.
     </p>
 
@@ -53,6 +53,8 @@ const PILLS = {
         alt="Morfeo tendiendo las manos con una píldora roja y otra azul"
         width="640"
         height="787"
+        fetchpriority="high"
+        decoding="async"
         class="block h-auto w-full [filter:drop-shadow(0_0_10px_rgb(0_255_102/0.35))]"
       />
       <button
@@ -91,7 +93,7 @@ const PILLS = {
         <span class="pill pill--red shrink-0 text-[13px]" aria-hidden="true"></span>
         <span>
           <span class="block font-bold tracking-wider text-red-300">píldora roja</span>
-          <span class="block text-[11px] text-red-200/70">ver hasta dónde llega la madriguera · tema Matrix</span>
+          <span class="block text-xs text-red-200/70">entra en la madriguera · la web en verde fósforo (Matrix)</span>
         </span>
       </button>
       <button
@@ -102,12 +104,12 @@ const PILLS = {
         <span class="pill pill--blue shrink-0 text-[13px]" aria-hidden="true"></span>
         <span>
           <span class="block font-bold tracking-wider text-sky-300">píldora azul</span>
-          <span class="block text-[11px] text-sky-200/70">despertar en tu cama · tema Abyss + Jade</span>
+          <span class="block text-xs text-sky-200/70">despierta en tu cama · la web en azul abismo y jade</span>
         </span>
       </button>
     </div>
 
-    <p class="mt-5 text-center text-[11px] text-[#7fbf8a]">
+    <p class="mt-5 text-center text-xs text-[#7fbf8a]">
       <kbd class="border border-[#1f3a24] px-1">R</kbd> roja ·
       <kbd class="border border-[#1f3a24] px-1">A</kbd> azul ·
       <kbd class="border border-[#1f3a24] px-1">Esc</kbd> omitir (tema azul)
