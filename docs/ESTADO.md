@@ -52,5 +52,5 @@ La web tiene la estructura completa de una página con diseño ASCII art y termi
 1. Fusionar la PR de `feature/textos-que-hago-practicas` (Manuel decide).
 2. Publicar en Vercel: importar el repositorio (Astro, `npm run build`, salida `dist`), añadir el dominio `manuelcasinos.dev` y poner el DNS que indique Vercel. Después, abrir la web en el móvil y comprobar cabeceras y URLs sin barra final.
 3. Capturas por secciones de Digital Fit y ValveDex (`gallery` en `src/data/projects.ts`) cuando haya demo o capturas.
-4. Datos pendientes de Manuel: nombre exacto del ciclo de las prácticas de 2023-2024 y concretar «Apps híbridas» de «ls que-hago/».
+4. Dato pendiente de Manuel: nombre exacto del ciclo de las prácticas de 2023-2024.
 5. ESLint + `npm run lint` y SonarQube; pasada de SEO de contenido con claude-seo.

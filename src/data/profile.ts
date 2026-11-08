@@ -45,7 +45,7 @@ export const profile: Profile = {
     "Webs responsive, cuidadas y útiles",
     "APIs RESTful con Java y Spring Boot, con datos en JPA",
     "Interfaces con Angular y TypeScript, y vistas de servidor con Thymeleaf",
-    "Apps híbridas",
+    "Webs para clientes reales, del diseño a la publicación",
     "Aprendiendo React, Next.js, PostgreSQL y Express.js",
   ],
 };
