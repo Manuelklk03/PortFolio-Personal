@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   // URL pública del sitio (dominio de Manuel, alojado en Vercel). Es el único sitio donde se cambia
   // (canonical, Open Graph, robots.txt, sitemap y datos estructurados la leen de aquí).
-  site: "https://manuelcasinos.dev",
+  site: "https://manuelcasinos.es",
   // Sin barra final, igual que `trailingSlash: false` de vercel.json: una sola URL por página.
   trailingSlash: "never",
   integrations: [react()],

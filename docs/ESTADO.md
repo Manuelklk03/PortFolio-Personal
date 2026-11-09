@@ -1,7 +1,9 @@
 # Estado actual y relevo
 
-Última actualización: 8 de noviembre de 2026.
-Última sesión: Claude Code (opusplan) con revisiones de subagentes (UI, SEO técnico, rendimiento, seguridad) y capturas en Chromium de Playwright.
+Última actualización: 9 de noviembre de 2026.
+Última sesión: corrección de la URL canónica de `manuelcasinos.dev` a `manuelcasinos.es`.
+
+**Dominio:** `manuelcasinos.es` figura como «Valid Configuration» en Vercel y está conectado a Production. OVH conserva el DNS; el registro A de `@` apunta a `216.198.79.1`. `www` todavía apunta a OVH (`213.186.33.5`): para usarlo, añadir `www.manuelcasinos.es` al proyecto de Vercel y sustituir ese A por el CNAME exacto que muestre Vercel. La nueva URL de Astro se publicará cuando esta rama se integre y Vercel despliegue el cambio.
 
 ## Resumen del estado real
 
@@ -50,7 +52,7 @@ La web tiene la estructura completa de una página con diseño ASCII art y termi
 ## Próximo paso concreto
 
 1. Fusionar la PR de `feature/textos-que-hago-practicas` (Manuel decide).
-2. Publicar en Vercel: importar el repositorio (Astro, `npm run build`, salida `dist`), añadir el dominio `manuelcasinos.dev` y poner el DNS que indique Vercel. Después, abrir la web en el móvil y comprobar cabeceras y URLs sin barra final.
+2. Integrar el cambio de dominio `.es`, configurar `www` en Vercel y OVH y comprobar HTTPS, redirección a la raíz y URLs canónicas tras el despliegue.
 3. Capturas por secciones de Digital Fit y ValveDex (`gallery` en `src/data/projects.ts`) cuando haya demo o capturas.
 4. Dato pendiente de Manuel: nombre exacto del ciclo de las prácticas de 2023-2024.
 5. ESLint + `npm run lint` y SonarQube; pasada de SEO de contenido con claude-seo.

@@ -116,6 +116,12 @@
 | Páginas de proyecto: título, portada entera y, al final a todo el ancho, un carrusel de capturas (`gallery` en `projects.ts`) que no se muestra si está vacío. | Manuel: las capturas del carrusel serán de secciones distintas a la portada. | Solo Cerrajería NOA lo tiene relleno. Digital Fit y ValveDex, vacíos hasta tener capturas. |
 | Digital Fit usa PostgreSQL, no MySQL. | Lo dice el README del repositorio. | Corregido en `projects.ts` y en `docs/PROYECTOS.md`. |
 
+## Confirmado — 9 de noviembre de 2026 (dominio público)
+
+| Decisión | Motivo | Consecuencias |
+| --- | --- | --- |
+| Usar `https://manuelcasinos.es` como URL pública, sustituyendo la decisión anterior sobre `.dev`. Mantener la raíz como URL canónica y redirigir `www` hacia ella. | Manuel compró el dominio `.es` en OVH y lo conectó al proyecto de Vercel. | `site` en `astro.config.mjs` genera canonical, Open Graph, robots.txt, sitemap y datos estructurados con `.es`. El DNS de `www` se configura en OVH con el valor que indique Vercel. |
+
 ## Propuestas pendientes
 
 | Propuesta | Estado |

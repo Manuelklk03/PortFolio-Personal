@@ -8,6 +8,7 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 
 ### Añadido
 
+- 2026-11-09: URL pública de Astro actualizada a `manuelcasinos.es` para canonical, metadatos sociales, robots.txt y sitemap.
 - 2026-10-24: documentación inicial del proyecto (`AGENTS.md`, `CLAUDE.md`, `docs/`), modo de trabajo, flujo de GitHub y criterios para elegir plugins de Claude Code.
 - 2026-10-24: `.claude/settings.json` con los plugins del proyecto, inventario en `docs/HERRAMIENTAS.md` y `.gitignore`.
 - 2026-10-25: base del proyecto con Astro 7, React 19, Tailwind 4 y TypeScript estricto; comprobación de tipos con `npm run check`.
