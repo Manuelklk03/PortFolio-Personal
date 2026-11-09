@@ -58,7 +58,9 @@
 ## 4. Revisión y publicación
 
 - [x] Sustituir los proyectos, enlaces, tecnologías e imágenes de prueba por los reales (2 nov 2026).
-- [x] Decidir dominio y alojamiento: Vercel con `manuelcasinos.dev` (8 nov 2026). Falta conectar el repositorio en Vercel y el DNS del dominio.
+- [x] Decidir dominio y alojamiento: Vercel con `manuelcasinos.es` (9 nov 2026). El dominio raíz ya figura con configuración válida en Vercel.
+- [ ] Conectar `www.manuelcasinos.es` a Vercel con el CNAME exacto indicado en el proyecto y comprobar la redirección a la raíz.
+- [ ] Confirmar tras el despliegue que canonical, Open Graph, robots.txt y sitemap usan `manuelcasinos.es`.
 - [ ] Revisar textos, imágenes y estados de proyectos.
 - [ ] Comprobar enlaces y navegación con teclado.
 - [ ] Revisar contraste, foco, estructura semántica y textos alternativos.

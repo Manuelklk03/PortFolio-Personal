@@ -120,6 +120,7 @@
 
 | Decisión | Motivo | Consecuencias |
 | --- | --- | --- |
+| Usar `https://manuelcasinos.es` como URL pública, sustituyendo la decisión anterior sobre `.dev`. Mantener la raíz como URL canónica y redirigir `www` hacia ella. | Manuel compró el dominio `.es` en OVH y lo conectó al proyecto de Vercel. | `site` en `astro.config.mjs` genera canonical, Open Graph, robots.txt, sitemap y datos estructurados con `.es`. El DNS de `www` se configura en OVH con el valor que indique Vercel. |
 | Sustituir el favicon genérico de verificación por una figura de Neo con gafas y abrigo en la paleta Matrix. | Manuel pidió un favicon personal inspirado en el repositorio y propuso a Neo como referencia. | `favicon.svg` es la fuente vectorial; `favicon.ico` y `apple-touch-icon.png` llevan el mismo diseño para navegadores y móviles. |
 
 ## Propuestas pendientes
