@@ -6,6 +6,10 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 
 ## Sin publicar
 
+### Corregido
+
+- 2026-11-09: con el tema Matrix, las letras animadas del nombre salían apagadas hasta pulsar: el CSS compilado acorta `#00ff66` a `#0f6` y las partículas no lo entendían.
+
 ## [1.0.0] - 2026-11-09
 
 Primera versión pública del portfolio en https://manuelcasinos.es (Astro, React y Tailwind, desplegado en Vercel).
