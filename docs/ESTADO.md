@@ -1,6 +1,6 @@
 # Estado actual y relevo
 
-Última actualización: 9 de noviembre de 2026. **Versión 1.0.0** (tag `v1.0.0`).
+Última actualización: 9 de noviembre de 2026. **Versión 1.0.1** (tag `v1.0.1`).
 Última sesión: favicon de Neo y corrección de la URL canónica de `manuelcasinos.dev` a `manuelcasinos.es`.
 
 **Dominio:** `manuelcasinos.es` figura como «Valid Configuration» en Vercel y está conectado a Production. OVH conserva el DNS; el registro A de `@` apunta a `216.198.79.1`. `www` todavía apunta a OVH (`213.186.33.5`): para usarlo, añadir `www.manuelcasinos.es` al proyecto de Vercel y sustituir ese A por el CNAME exacto que muestre Vercel. La nueva URL de Astro se publicará tras el despliegue del cambio.
