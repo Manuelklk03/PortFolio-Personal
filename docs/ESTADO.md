@@ -1,11 +1,13 @@
 # Estado actual y relevo
 
-Última actualización: 8 de noviembre de 2026.
-Última sesión: Claude Code (opusplan) con revisiones de subagentes (UI, SEO técnico, rendimiento, seguridad) y capturas en Chromium de Playwright.
+Última actualización: 9 de noviembre de 2026.
+Última sesión: Codex, rama `feature/favicon-neo`: favicon de Neo para el portfolio.
 
 ## Resumen del estado real
 
 La web tiene la estructura completa de una página con diseño ASCII art y terminal elegante: cabecera con navegación, nudo 3D ASCII, partículas del nombre interactivas, sobre mí con retrato ASCII + mosaico enfocado, proyectos reales como tarjetas que enlazan a su página de detalle (`/proyectos/<id>`), stack técnico con logos flotantes que toman su color de marca al seleccionarlos, terminal interactiva ejecutable con comandos, visor de CV en PDF integrado y contacto.
+
+**Cambio del 9 nov:** `public/favicon.svg`, `public/favicon.ico` y `public/apple-touch-icon.png` comparten un retrato vectorial de Neo simplificado para leerse a 16 px. El layout ya enlazaba los tres archivos, así que no necesitó cambios.
 
 **Cambios del 8 nov (rama `feature/textos-que-hago-practicas`):** textos de «Sobre mí» y «ls que-hago/» nuevos; prácticas de Bonatel y App Informática (Patraix, 2023-2024) en una fila; orden final inicio, sobre mí, stack, proyectos, CV, contacto y terminal; páginas de proyecto con portada entera y carrusel de capturas a todo el ancho (solo Cerrajería NOA lo tiene relleno); portadas de Digital Fit y ValveDex; textos de proyecto nuevos y Digital Fit con PostgreSQL; `vercel.json` y `trailingSlash: "never"`.
 
@@ -25,14 +27,15 @@ La web tiene la estructura completa de una página con diseño ASCII art y termi
 
 ## Git
 
-- `main` al día hasta la PR #59 (6 nov). Rama en curso: `feature/textos-que-hago-practicas` con PR abierta (sin fusionar).
+- La PR #70 (`feature/textos-que-hago-practicas`) ya está fusionada en `main`. El favicon se ha trabajado en `feature/favicon-neo`.
 
-## Comprobaciones (8 nov)
+## Comprobaciones (8-9 nov)
 
 - `npm run check` (diagnóstico Astro y TypeScript) → 0 errores, 0 warnings, 0 hints.
 - Lighthouse sobre el build (móvil / escritorio): inicio rendimiento 97 / 99, accesibilidad 100, SEO 100; Cerrajería NOA 97 / 100. LCP móvil 2,4-2,5 s (al límite). Sin desbordamiento horizontal a 1440, 768 y 390 px. Sin secretos ni vulnerabilidades (`npm audit` 0).
 - `npm run build` → 5 páginas estáticas (`/`, `/404` y `/proyectos/<id>` ×3) compiladas limpiamente.
 - Accesibilidad: `<dialog>` nativo, atajos de teclado (`R` roja, `A`/`B` azul, `Esc` salir), botón omitir, foco atrapado y bloqueo de scroll de fondo mientras el diálogo está abierto.
+- Favicon (9 nov): inspección visual a 16, 32 y 512 px; `npm run check` sin diagnósticos; `npm run build` completo con las 6 fuentes descargadas. Persiste el aviso conocido del chunk de Three.js superior a 500 KB.
 
 ## Problemas conocidos
 
@@ -49,8 +52,7 @@ La web tiene la estructura completa de una página con diseño ASCII art y termi
 
 ## Próximo paso concreto
 
-1. Fusionar la PR de `feature/textos-que-hago-practicas` (Manuel decide).
-2. Publicar en Vercel: importar el repositorio (Astro, `npm run build`, salida `dist`), añadir el dominio `manuelcasinos.dev` y poner el DNS que indique Vercel. Después, abrir la web en el móvil y comprobar cabeceras y URLs sin barra final.
-3. Capturas por secciones de Digital Fit y ValveDex (`gallery` en `src/data/projects.ts`) cuando haya demo o capturas.
-4. Dato pendiente de Manuel: nombre exacto del ciclo de las prácticas de 2023-2024.
-5. ESLint + `npm run lint` y SonarQube; pasada de SEO de contenido con claude-seo.
+1. Publicar en Vercel: importar el repositorio (Astro, `npm run build`, salida `dist`), añadir el dominio `manuelcasinos.dev` y poner el DNS que indique Vercel. Después, abrir la web en el móvil y comprobar cabeceras y URLs sin barra final.
+2. Capturas por secciones de Digital Fit y ValveDex (`gallery` en `src/data/projects.ts`) cuando haya demo o capturas.
+3. Dato pendiente de Manuel: nombre exacto del ciclo de las prácticas de 2023-2024.
+4. ESLint + `npm run lint` y SonarQube; pasada de SEO de contenido con claude-seo.
