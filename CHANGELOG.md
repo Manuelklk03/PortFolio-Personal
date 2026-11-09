@@ -6,6 +6,10 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 
 ## Sin publicar
 
+### Cambiado
+
+- 2026-11-09: favicon y Apple Touch Icon propios con una figura de Neo en verde Matrix, legible a tamaño de pestaña.
+
 ### Añadido
 
 - 2026-11-09: URL pública de Astro actualizada a `manuelcasinos.es` para canonical, metadatos sociales, robots.txt y sitemap.

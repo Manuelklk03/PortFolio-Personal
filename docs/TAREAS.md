@@ -64,7 +64,7 @@
 - [ ] Revisar textos, imágenes y estados de proyectos.
 - [ ] Comprobar enlaces y navegación con teclado.
 - [ ] Revisar contraste, foco, estructura semántica y textos alternativos.
-- [ ] Configurar título, descripción e icono de la web.
+- [ ] Revisar título y descripción de la web antes de publicar (favicon de Neo integrado el 9 nov 2026).
 - [x] Ejecutar los scripts de comprobación disponibles y resolver errores (8 nov 2026: `check` y `build` limpios; Lighthouse 97-100).
 - [ ] Configurar ESLint (con el plugin de Astro) y un script `npm run lint`, y analizar el proyecto con SonarQube (pedido por Manuel, 1 nov 2026).
 - [ ] Elegir alojamiento y publicar cuando Manuel lo indique.

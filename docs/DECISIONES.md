@@ -116,11 +116,12 @@
 | Páginas de proyecto: título, portada entera y, al final a todo el ancho, un carrusel de capturas (`gallery` en `projects.ts`) que no se muestra si está vacío. | Manuel: las capturas del carrusel serán de secciones distintas a la portada. | Solo Cerrajería NOA lo tiene relleno. Digital Fit y ValveDex, vacíos hasta tener capturas. |
 | Digital Fit usa PostgreSQL, no MySQL. | Lo dice el README del repositorio. | Corregido en `projects.ts` y en `docs/PROYECTOS.md`. |
 
-## Confirmado — 9 de noviembre de 2026 (dominio público)
+## Confirmado — 9 de noviembre de 2026 (sesión con Codex)
 
 | Decisión | Motivo | Consecuencias |
 | --- | --- | --- |
 | Usar `https://manuelcasinos.es` como URL pública, sustituyendo la decisión anterior sobre `.dev`. Mantener la raíz como URL canónica y redirigir `www` hacia ella. | Manuel compró el dominio `.es` en OVH y lo conectó al proyecto de Vercel. | `site` en `astro.config.mjs` genera canonical, Open Graph, robots.txt, sitemap y datos estructurados con `.es`. El DNS de `www` se configura en OVH con el valor que indique Vercel. |
+| Sustituir el favicon genérico de verificación por una figura de Neo con gafas y abrigo en la paleta Matrix. | Manuel pidió un favicon personal inspirado en el repositorio y propuso a Neo como referencia. | `favicon.svg` es la fuente vectorial; `favicon.ico` y `apple-touch-icon.png` llevan el mismo diseño para navegadores y móviles. |
 
 ## Propuestas pendientes
 
