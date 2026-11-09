@@ -6,6 +6,10 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 
 ## Sin publicar
 
+## [1.0.0] - 2026-11-09
+
+Primera versión pública del portfolio en https://manuelcasinos.es (Astro, React y Tailwind, desplegado en Vercel).
+
 ### Cambiado
 
 - 2026-11-09: favicon y Apple Touch Icon propios con una figura de Neo en verde Matrix, legible a tamaño de pestaña.
