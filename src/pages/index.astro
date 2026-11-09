@@ -288,10 +288,12 @@ const contactLinks = [
     import { initScramble } from "@/scripts/scramble";
     import { initEasterEggs } from "@/scripts/easter-eggs";
     import { initPortraitMosaic } from "@/scripts/portrait-mosaic";
+    import { whenIntroDone } from "@/scripts/intro-gate";
     initScramble();
     initEasterEggs();
     const portraitRoot = document.querySelector<HTMLElement>("[data-portrait]");
-    if (portraitRoot) initPortraitMosaic(portraitRoot);
+    // El retrato se anima cuando ya se ha elegido píldora y se entra en la página.
+    if (portraitRoot) whenIntroDone(() => initPortraitMosaic(portraitRoot));
     // La entrada del inicio la hacen las partículas del nombre; aquí solo las secciones.
     initReveal();
   </script>

@@ -17,6 +17,8 @@
 </button>
 
 <script>
+  import { whenIntroDone } from "../../scripts/intro-gate";
+
   const container = document.querySelector<HTMLElement>("[data-ascii-scene]");
   const toggle = document.querySelector<HTMLButtonElement>(
     "[data-ascii-toggle]",
@@ -56,6 +58,7 @@
         controls.setPaused(paused);
       });
     });
-    observer.observe(container);
+    // Tampoco se observa hasta que se haya elegido una píldora.
+    whenIntroDone(() => observer.observe(container));
   }
 </script>
