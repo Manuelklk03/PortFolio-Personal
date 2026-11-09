@@ -173,7 +173,10 @@ const art = lines
         if (frameId === null) frameId = requestAnimationFrame(draw);
       };
 
+      // Solo el ratón empuja las partículas: con el dedo, el puntero se quedaba "pegado" al
+      // levantarlo y el bucle seguía empujando sin parar.
       const updatePointer = (event: PointerEvent) => {
+        if (event.pointerType !== "mouse") return;
         const rect = canvas.getBoundingClientRect();
         pointer.x = event.clientX - rect.left;
         pointer.y = event.clientY - rect.top;
@@ -198,8 +201,14 @@ const art = lines
         play();
       };
 
+      const releasePointer = () => {
+        pointer.x = -9999;
+        pointer.y = -9999;
+      };
+
       let visible = true;
       let enabled = false;
+      let lastWidth = window.innerWidth;
 
       const enable = (intro: boolean) => {
         if (reducedMotion.matches) {
@@ -212,7 +221,8 @@ const art = lines
         pre.style.visibility = "hidden";
         canvas.classList.remove("hidden");
         window.addEventListener("pointermove", updatePointer);
-        root.addEventListener("pointerdown", shockwave);
+        document.documentElement.addEventListener("pointerleave", releasePointer);
+        root.addEventListener("click", shockwave);
         play();
       };
 
@@ -224,7 +234,8 @@ const art = lines
         canvas.classList.add("hidden");
         pre.style.visibility = "visible";
         window.removeEventListener("pointermove", updatePointer);
-        root.removeEventListener("pointerdown", shockwave);
+        document.documentElement.removeEventListener("pointerleave", releasePointer);
+        root.removeEventListener("click", shockwave);
       };
 
       new IntersectionObserver(([entry]) => {
@@ -234,6 +245,10 @@ const art = lines
 
       window.addEventListener("resize", () => {
         if (!enabled) return;
+        // En móvil la barra del navegador cambia la altura al hacer scroll: solo se rehace
+        // el dibujo si cambia el ancho, para que las partículas no se reinicien en pleno scroll.
+        if (window.innerWidth === lastWidth) return;
+        lastWidth = window.innerWidth;
         setup(false);
         play();
       });
