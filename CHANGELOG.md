@@ -33,6 +33,7 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 
 ### Corregido
 
+- 2026-11-09: en móvil, la pantalla de Morfeo ya no se corta por arriba (se centra solo si cabe y se puede desplazar si no) y el efecto de partículas del nombre solo reacciona al ratón, no se reinicia al hacer scroll y la onda expansiva se dispara con un toque.
 - 2026-11-09: al entrar ya no aparece la píldora roja resaltada (el foco empieza en el diálogo) y el nudo 3D, las partículas del nombre y el retrato no arrancan hasta elegir píldora.
 - 2026-11-08: Digital Fit figuraba con MySQL; usa PostgreSQL.
 
