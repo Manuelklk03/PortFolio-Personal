@@ -28,6 +28,8 @@ const art = lines
 </div>
 
 <script>
+  import { whenIntroDone } from "../../scripts/intro-gate";
+
   interface Particle {
     char: string;
     homeX: number;
@@ -247,6 +249,7 @@ const art = lines
         else enable(false);
       });
 
-      enable(true);
+      // Las partículas esperan a que se elija píldora; así también nacen ya con los colores del tema.
+      whenIntroDone(() => enable(true));
     });
 </script>

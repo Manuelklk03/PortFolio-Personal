@@ -33,6 +33,7 @@ Sigue la organización de [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 
 ### Corregido
 
+- 2026-11-09: al entrar ya no aparece la píldora roja resaltada (el foco empieza en el diálogo) y el nudo 3D, las partículas del nombre y el retrato no arrancan hasta elegir píldora.
 - 2026-11-08: Digital Fit figuraba con MySQL; usa PostgreSQL.
 
 - 2026-10-31: imágenes de proyectos (eran SVG con extensión `.jpg`) y paquetes sin uso eliminados.

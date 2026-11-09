@@ -12,7 +12,8 @@ const PILLS = {
 <dialog
   data-matrix-dialog
   aria-labelledby="matrix-title"
-  class="fixed inset-0 z-50 m-0 h-full max-h-none w-full max-w-none overflow-y-auto border-none bg-[#020402] p-4 backdrop:bg-black open:flex open:flex-col open:items-center open:justify-center"
+  tabindex="-1"
+  class="fixed inset-0 z-50 outline-none m-0 h-full max-h-none w-full max-w-none overflow-y-auto border-none bg-[#020402] p-4 backdrop:bg-black open:flex open:flex-col open:items-center open:justify-center"
 >
   <!-- Lluvia de código de Matrix detrás de Morfeo -->
   <canvas
@@ -121,6 +122,7 @@ const PILLS = {
 
 <script>
   import { applyTheme, getSavedTheme, type Theme } from "../scripts/theme";
+  import { markIntroDone } from "../scripts/intro-gate";
 
   const dialog = document.querySelector<HTMLDialogElement>("[data-matrix-dialog]");
   const canvas = dialog?.querySelector<HTMLCanvasElement>("[data-matrix-rain]");
@@ -191,6 +193,7 @@ const PILLS = {
       rain.stop();
       dialog.close();
       document.body.classList.remove("overflow-hidden");
+      markIntroDone();
     };
 
     const open = () => {
@@ -206,9 +209,9 @@ const PILLS = {
       dialog.showModal();
       document.body.classList.add("overflow-hidden");
       rain = startRain(canvas);
-      dialog
-        .querySelector<HTMLButtonElement>('button[data-pill-choice="matrix"]:not([tabindex])')
-        ?.focus();
+      // El foco empieza en el propio diálogo, no en una píldora: así ninguna aparece ya
+      // seleccionada al entrar. Con teclado, Tab recorre «omitir» y las dos píldoras.
+      dialog.focus();
     };
 
     // Elegir: la píldora crece, su color inunda la pantalla y el tema cambia por debajo.
