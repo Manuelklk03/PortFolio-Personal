@@ -1,75 +1,63 @@
-# 👨‍💻 Portfolio de Manuel Casinos Pérez
+# Portfolio de Manuel Casinos Pérez
 
-Mi portfolio personal como desarrollador web: un espacio para presentar mis proyectos, explicar qué he desarrollado en cada uno y compartir las tecnologías con las que trabajo.
+Portfolio personal como desarrollador web en Valencia. Presenta mi perfil, los proyectos en los que trabajo y las tecnologías que utilizo.
 
-🚧 **En desarrollo.** Iré actualizando este repositorio a medida que avance con el diseño y la implementación.
+**Web publicada:** [manuelcasinos.es](https://manuelcasinos.es/)
 
-## 🎯 Objetivo
+El portfolio está disponible y continúa en desarrollo: iré mejorando el contenido y la experiencia conforme avancen mis proyectos.
 
-Reunir mis trabajos en una web que permita conocer mi perfil, ver ejemplos de lo que hago y acceder a los repositorios y demos disponibles.
+## Qué encontrarás
 
-También quiero seguir practicando desarrollo frontend y cuidar la estructura del código, el diseño responsive y la accesibilidad.
+- Una presentación con dos temas visuales inspirados en Matrix.
+- Mi formación, prácticas y tecnologías.
+- Proyectos con páginas de detalle, capturas y enlaces cuando hay una demo o un repositorio público.
+- Mi currículum para consultar o descargar.
+- Una terminal interactiva y formas de contacto.
 
-## 🧩 Secciones previstas
+## Proyectos destacados
 
-- **Inicio:** presentación y acceso a los proyectos destacados.
-- **Sobre mí:** formación, conocimientos y objetivos.
-- **Proyectos:** descripción, tecnologías, mi aportación y enlaces disponibles.
-- **Tecnologías:** herramientas y lenguajes con los que trabajo o que estoy aprendiendo.
-- **Contacto:** enlaces a mis perfiles profesionales.
+| Proyecto | Estado | Descripción | Enlace |
+| --- | --- | --- | --- |
+| Cerrajería NOA | Publicado | Web para un cliente real, con servicios, trabajos, tres idiomas y contacto directo. | [Abrir web](https://cerrajerianoa.es/es) |
+| Digital Fit | En desarrollo | Aplicación de entrenamiento creada como proyecto final de DAW y en renovación. Usa Angular, Spring Boot, PostgreSQL y Leaflet. | [Ver repositorio](https://github.com/Manuelklk03/Digital-Fit-Proyecto) |
+| ValveDex | En desarrollo | Enciclopedia interactiva de los videojuegos de Valve creada con Next.js, React y TypeScript. | [Ver repositorio](https://github.com/Manuelklk03/ValveDex) |
 
-Estas secciones forman parte de la planificación inicial y se irán incorporando durante el desarrollo.
+Cada proyecto tiene más información en [el portfolio](https://manuelcasinos.es/#proyectos).
 
-## 🚀 Proyectos que quiero mostrar
+## Tecnologías del portfolio
 
-| Proyecto | Descripción | Tecnologías |
-| --- | --- | --- |
-| 🔐 Cerrajería NOA | Web de servicios y contacto desarrollada para una cerrajería. | Next.js y React |
-| 🏋️ Digital Fit | Proyecto final de DAW: aplicación web de entrenamiento y actividad física. | Angular, TypeScript, Java, Spring Boot y MySQL |
-| 🎨 Web basada en Figma | Práctica de maquetación responsive a partir de un diseño de referencia. | HTML y CSS |
-| 🎮 Valvedex | Wiki sobre los videojuegos de Valve, en desarrollo. | Base prevista: React y Next.js |
+- [Astro](https://astro.build/) genera las páginas estáticas.
+- React y TypeScript implementan las partes interactivas.
+- Tailwind CSS define los estilos y los temas visuales.
+- Three.js se usa en la escena ASCII del inicio.
+- Vercel aloja la web; el dominio está registrado y su DNS se gestiona en OVHcloud.
 
-La selección se irá actualizando según los proyectos y el material disponible para enseñarlos.
+## Desarrollo local
 
-## 🛠️ Tecnologías del portfolio
-
-- [Astro](https://astro.build/) (sobre Vite) para generar la web como HTML estático.
-- React para las partes interactivas.
-- TypeScript en modo estricto.
-- Tailwind CSS para los estilos.
-
-## 💻 Desarrollo local
-
-Requiere Node.js 22.23.4 o superior.
+Necesitas Node.js 22.23.4 o superior y npm.
 
 ```bash
-npm install
-npm run dev      # servidor de desarrollo en http://localhost:4321
-npm run check    # comprobación de tipos
-npm run build    # genera la web en dist/
-npm run preview  # sirve la versión generada
+npm ci
+npm run dev      # abre el servidor local
+npm run check    # comprueba Astro y TypeScript
+npm run build    # genera la versión estática en dist/
+npm run preview  # previsualiza la versión generada
 ```
 
-## 📚 Documentación del proyecto
+## Documentación
 
-El proyecto tiene documentación para mantener el contexto entre sesiones con Claude, ChatGPT o Codex:
+- [`AGENTS.md`](AGENTS.md): forma de trabajar y convenciones del proyecto.
+- [`docs/ESTADO.md`](docs/ESTADO.md): estado actual y siguiente paso.
+- [`docs/DECISIONES.md`](docs/DECISIONES.md): decisiones y motivos.
+- [`docs/TAREAS.md`](docs/TAREAS.md): tareas pendientes.
+- [`CHANGELOG.md`](CHANGELOG.md): cambios completados.
 
-- `AGENTS.md`: instrucciones compartidas para trabajar en el proyecto.
-- `CLAUDE.md`: entrada para Claude Code.
-- `LEEME.md`: guía de uso de esta documentación.
-- `docs/`: estado, contexto, decisiones, tareas, proyectos y herramientas.
-- `CHANGELOG.md`: cambios completados.
+## Sobre mí
 
-## 👋 Sobre mí
+Soy Manuel Casinos Pérez, titulado en Desarrollo de Aplicaciones Web. Tengo una base en Java, Spring Boot y Angular, y estoy aprendiendo React y Next.js. Busco mi primer puesto como desarrollador web.
 
-Soy Manuel Casinos Pérez, titulado en Desarrollo de Aplicaciones Web y ubicado en Valencia. Tengo conocimientos de Java, JavaScript, TypeScript, Angular y Spring Boot, y sigo formándome por cuenta propia en React y Next.js.
+## Enlaces
 
-Me interesa seguir aprendiendo, mejorar mis proyectos y empezar mi trayectoria profesional como desarrollador web.
-
-## 🔗 Enlaces
-
+- [Portfolio](https://manuelcasinos.es/)
 - [GitHub](https://github.com/Manuelklk03)
 - [LinkedIn](https://www.linkedin.com/in/manuel-casinos-perez/)
-- [Cerrajería NOA](https://cerrajerianoa.es/es)
-- [Repositorio de Digital Fit](https://github.com/Manuelklk03/Digital-Fit-Proyecto)
-- 🌐 Portfolio: pendiente de publicación.
