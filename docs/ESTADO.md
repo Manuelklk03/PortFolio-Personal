@@ -29,7 +29,7 @@ La web tiene la estructura completa de una página con diseño ASCII art y termi
 
 ## Git
 
-- Las PR #70 (`feature/textos-que-hago-practicas`) y #71 (`feature/favicon-neo`) están fusionadas en `main`. El cambio de dominio se trabaja en la PR #72 (`fix/dominio-es`).
+- Las PR #70 (`feature/textos-que-hago-practicas`) y #71 (`feature/favicon-neo`) están fusionadas en `main`. El cambio de dominio se trabaja en la PR #72 (`fix/dominio-es`). La PR #74 (`fix/intro-animaciones-y-foco`, 9 nov) retrasa las animaciones pesadas hasta elegir píldora (`src/scripts/intro-gate.ts`) y quita el resalte de la píldora roja al entrar.
 
 ## Comprobaciones (8-9 nov)
 
