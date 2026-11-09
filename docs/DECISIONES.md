@@ -116,6 +116,12 @@
 | Páginas de proyecto: título, portada entera y, al final a todo el ancho, un carrusel de capturas (`gallery` en `projects.ts`) que no se muestra si está vacío. | Manuel: las capturas del carrusel serán de secciones distintas a la portada. | Solo Cerrajería NOA lo tiene relleno. Digital Fit y ValveDex, vacíos hasta tener capturas. |
 | Digital Fit usa PostgreSQL, no MySQL. | Lo dice el README del repositorio. | Corregido en `projects.ts` y en `docs/PROYECTOS.md`. |
 
+## Confirmado — 9 de noviembre de 2026 (sesión con Codex)
+
+| Decisión | Motivo | Consecuencias |
+| --- | --- | --- |
+| Sustituir el favicon genérico de verificación por una figura de Neo con gafas y abrigo en la paleta Matrix. | Manuel pidió un favicon personal inspirado en el repositorio y propuso a Neo como referencia. | `favicon.svg` es la fuente vectorial; `favicon.ico` y `apple-touch-icon.png` llevan el mismo diseño para navegadores y móviles. |
+
 ## Propuestas pendientes
 
 | Propuesta | Estado |
